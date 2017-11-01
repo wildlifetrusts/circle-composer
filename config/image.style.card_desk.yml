@@ -1,0 +1,14 @@
+uuid: 2835bd92-3aab-490f-b39a-26f50f2eb5fe
+langcode: en
+status: true
+dependencies: {  }
+name: card_desk
+label: 'Card desk'
+effects:
+  4cea438c-957a-4f9f-b203-efa6d320fc16:
+    uuid: 4cea438c-957a-4f9f-b203-efa6d320fc16
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 332
+      height: 226

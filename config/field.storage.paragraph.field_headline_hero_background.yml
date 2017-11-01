@@ -1,0 +1,27 @@
+uuid: 087c9c78-1208-4460-9dd4-565211c48a60
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_headline_hero_background
+field_name: field_headline_hero_background
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: image
+      label: Image
+    -
+      value: silhouette
+      label: Silhouette
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

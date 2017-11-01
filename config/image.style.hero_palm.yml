@@ -1,0 +1,14 @@
+uuid: 5f8ff97c-ab81-4820-9a70-b2773616aa5f
+langcode: en
+status: true
+dependencies: {  }
+name: hero_palm
+label: 'Hero palm'
+effects:
+  0d47c22b-e5c4-4313-91b1-d5481f0503f0:
+    uuid: 0d47c22b-e5c4-4313-91b1-d5481f0503f0
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 767
+      height: 430

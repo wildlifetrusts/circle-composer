@@ -1,0 +1,16 @@
+uuid: 6c593e30-cf0d-4de8-bd39-e3be52612cc9
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.habitat
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.habitat
+target_entity_type_id: node
+target_bundle: habitat
+default_langcode: site_default
+language_alterable: true

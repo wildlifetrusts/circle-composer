@@ -1,0 +1,19 @@
+uuid: 2682ae24-cd1c-4d52-9985-266bee5a6836
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_habitat_distribution
+field_name: field_habitat_distribution
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

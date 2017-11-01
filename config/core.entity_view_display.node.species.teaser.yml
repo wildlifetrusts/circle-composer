@@ -1,0 +1,70 @@
+uuid: f3ab1ec3-ed4a-4e66-904e-da1d0b158aa0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.species.field_further_content
+    - field.field.node.species.field_meta_tags
+    - field.field.node.species.field_species_about
+    - field.field.node.species.field_species_conservation
+    - field.field.node.species.field_species_did_you_know
+    - field.field.node.species.field_species_distribution
+    - field.field.node.species.field_species_habitats
+    - field.field.node.species.field_species_help
+    - field.field.node.species.field_species_identify
+    - field.field.node.species.field_species_listen
+    - field.field.node.species.field_species_photos
+    - field.field.node.species.field_species_scientific_name
+    - field.field.node.species.field_species_species
+    - field.field.node.species.field_species_statistics
+    - field.field.node.species.field_species_summary
+    - field.field.node.species.field_species_watch
+    - field.field.node.species.field_species_when_to_see
+    - node.type.species
+  module:
+    - fences
+    - user
+    - wildlife_field_formatters
+id: node.species.teaser
+targetEntityType: node
+bundle: species
+mode: teaser
+content:
+  field_species_photos:
+    type: first_of_type_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: grid_teaser
+      type: any
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+hidden:
+  field_further_content: true
+  field_meta_tags: true
+  field_species_about: true
+  field_species_conservation: true
+  field_species_did_you_know: true
+  field_species_distribution: true
+  field_species_habitats: true
+  field_species_help: true
+  field_species_identify: true
+  field_species_listen: true
+  field_species_scientific_name: true
+  field_species_species: true
+  field_species_statistics: true
+  field_species_summary: true
+  field_species_watch: true
+  field_species_when_to_see: true
+  langcode: true
+  links: true
+  workbench_moderation_control: true

@@ -1,0 +1,16 @@
+uuid: 7e2982d1-68f8-4b6f-8ab9-d7cf807b8c8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.basic_landing_page
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.basic_landing_page
+target_entity_type_id: node
+target_bundle: basic_landing_page
+default_langcode: site_default
+language_alterable: true

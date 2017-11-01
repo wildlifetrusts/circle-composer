@@ -1,0 +1,14 @@
+
+# View header menu items definition
+entity.view_header.collection:
+  title: 'View headers'
+  route_name: entity.view_header.collection
+  description: 'List View header entities'
+  parent: system.admin_content
+  weight: 100
+
+view_header.admin.structure.settings:
+  title: View header settings
+  description: 'Configure View header entities'
+  route_name: view_header.settings
+  parent: wildlife_admin.custom_entities.list

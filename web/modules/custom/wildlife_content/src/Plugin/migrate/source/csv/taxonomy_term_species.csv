@@ -1,0 +1,28 @@
+tid,name,weight,image,parent
+3201,Animal,0,101,
+3202,Marine wildlife,1,102,
+3203,Plants and fungi,2,103,
+3204,Mammals,0,104,3201
+3205,Birds,1,108,3201
+3206,Amphibians,2,109,3201
+3206,Reptiles,3,110,3201
+3207,Invertebrates,4,111,3201
+3208,Freshwater fish,5,112,3201
+3209,"Seals, turtles and other marine mammals",0,113,3202
+3210,"Anemones corals and jellyfish",1,114,3202
+3211,"Bivalves",2,115,3202
+3212,"Squids and octopuses",3,116,3202
+3213,"Barnacles, crabs, shrimps and lobster",4,101,3202
+3214,"Urchins and starfish",5,102,3202
+3215,"Fish and sharks",6,103,3202
+3216,"Seaweeds and grasses",7,104,3202
+3217,"Aquatic gastropods (e.g. sea snails)",8,108,3202
+3218,Wildflowers,0,109,3203
+3219,Grasses,1,110,3203
+3220,Galls,2,111,3203
+3221,Ferns and horsetails,3,112,3203
+3222,Fungi,4,113,3203
+3223,Mosses and liverworts,5,114,3203
+3224,Trees and shrubs,6,115,3203
+3225,Wading birds,0,116,3205
+3226,Birds of prey,1,101,3205

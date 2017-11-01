@@ -1,0 +1,316 @@
+uuid: 944cec5f-3921-4c57-be65-a08316c9231c
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.node.job.field_external_link
+    - field.field.node.job.field_further_content
+    - field.field.node.job.field_header_image
+    - field.field.node.job.field_header_silhouette
+    - field.field.node.job.field_header_type
+    - field.field.node.job.field_job_application_link
+    - field.field.node.job.field_job_closing_date
+    - field.field.node.job.field_job_contact_details
+    - field.field.node.job.field_job_contract_type
+    - field.field.node.job.field_job_location
+    - field.field.node.job.field_job_reference
+    - field.field.node.job.field_job_reserve
+    - field.field.node.job.field_job_role_type
+    - field.field.node.job.field_job_salary
+    - field.field.node.job.field_job_summary
+    - field.field.node.job.field_job_working_hours
+    - field.field.node.job.field_meta_tags
+    - node.type.job
+  module:
+    - datetime
+    - entity_browser
+    - entity_browser_entity_form
+    - field_group
+    - inline_entity_form
+    - link_attributes
+    - metatag
+    - path
+    - text
+    - wildlife_admin
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_header
+        - group_main_content
+        - group_further_content
+      parent_name: ''
+      weight: 6
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_header:
+      children:
+        - field_header_type
+        - field_header_image
+        - field_header_silhouette
+      parent_name: group_tabs
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Header
+    group_main_content:
+      children:
+        - field_job_summary
+        - field_job_reference
+        - field_job_role_type
+        - group_location
+        - field_job_closing_date
+        - field_job_salary
+        - field_job_contract_type
+        - field_job_working_hours
+        - field_job_application_link
+        - field_job_contact_details
+      parent_name: group_tabs
+      weight: 9
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Main content'
+    group_further_content:
+      children:
+        - field_further_content
+      parent_name: group_tabs
+      weight: 10
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Further content'
+    group_location:
+      children:
+        - field_job_location
+        - field_job_reserve
+      parent_name: group_main_content
+      weight: 17
+      format_type: fieldset
+      format_settings:
+        label: 'Job location'
+        description: 'Choose either a Reserve or other Location.'
+        required_fields: true
+        id: job-location
+        classes: ''
+      label: 'Job location'
+id: node.job.default
+targetEntityType: node
+bundle: job
+mode: default
+content:
+  colour_scheme:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_further_content:
+    type: tweaked_entity_reference_paragraphs
+    weight: 34
+    settings:
+      title: Component
+      title_plural: Components
+      edit_mode: preview
+      add_mode: select
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_header_image:
+    weight: 10
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_header_silhouette:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_header_type:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_job_application_link:
+    weight: 22
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_job_closing_date:
+    weight: 18
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_job_contact_details:
+    weight: 23
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_job_contract_type:
+    weight: 20
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_job_location:
+    weight: 35
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
+  field_job_reference:
+    weight: 15
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_job_reserve:
+    weight: 36
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_job_role_type:
+    weight: 16
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_job_salary:
+    weight: 19
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_job_summary:
+    weight: 14
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_job_working_hours:
+    weight: 21
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_meta_tags:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden:
+  field_external_link: true
+  langcode: true

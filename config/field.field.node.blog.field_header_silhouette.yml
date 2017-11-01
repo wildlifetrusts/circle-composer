@@ -1,0 +1,28 @@
+uuid: 5d9ea679-46f0-413e-87c7-455ac0a68567
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_silhouette
+    - media_entity.bundle.silhouette
+    - node.type.blog
+id: node.blog.field_header_silhouette
+field_name: field_header_silhouette
+entity_type: node
+bundle: blog
+label: 'Header silhouette'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      silhouette: silhouette
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

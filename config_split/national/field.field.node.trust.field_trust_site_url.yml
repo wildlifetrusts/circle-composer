@@ -1,0 +1,23 @@
+uuid: 32c2e4ff-87ea-45b9-b478-a28adbb2faf7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_site_url
+    - node.type.trust
+  module:
+    - link
+id: node.trust.field_trust_site_url
+field_name: field_trust_site_url
+entity_type: node
+bundle: trust
+label: 'Site URL'
+description: 'This link will open in a new browser tab/window.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 2
+field_type: link

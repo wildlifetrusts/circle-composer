@@ -1,0 +1,27 @@
+uuid: 57ad3a66-37f1-4cc7-8f11-b0b9343e94fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_silhouette
+    - media_entity.bundle.silhouette
+  module:
+    - file
+id: media.silhouette.field_silhouette
+field_name: field_silhouette
+entity_type: media
+bundle: silhouette
+label: Silhouette
+description: 'The silhouette should be black with a transparent background. The SVG should be trimmed so the view box is the same dimensions as the silhouette image (i.e. no white space around it).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: silhouettes
+  file_extensions: svg
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

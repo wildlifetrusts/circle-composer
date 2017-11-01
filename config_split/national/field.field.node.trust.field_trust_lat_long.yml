@@ -1,0 +1,32 @@
+uuid: a8a0769c-029a-4f2c-b3cc-423b7a6d08b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_lat_long
+    - node.type.trust
+  module:
+    - geofield
+id: node.trust.field_trust_lat_long
+field_name: field_trust_lat_long
+entity_type: node
+bundle: trust
+label: Lat/Long
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: 'POINT (-2.776943 54.345341)'
+    geo_type: Point
+    lat: 54.345341
+    lon: -2.776943
+    left: -2.776943
+    top: 54.345341
+    right: -2.776943
+    bottom: 54.345341
+    geohash: gcwj0v3bs9c4
+    latlon: '54.345341,-2.776943'
+default_value_callback: ''
+settings: {  }
+field_type: geofield

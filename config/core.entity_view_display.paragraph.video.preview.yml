@@ -1,0 +1,55 @@
+uuid: 5abe02a0-15b6-4d55-99e9-6c1ddb867b8e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.video.field_video
+    - field.field.paragraph.video.field_video_accompanying_text
+    - field.field.paragraph.video.field_video_extra_wide
+    - field.field.paragraph.video.field_video_position
+    - field.field.paragraph.video.field_video_rich_text
+    - paragraphs.paragraphs_type.video
+  module:
+    - fences
+    - wildlife_field_formatters
+id: paragraph.video.preview
+targetEntityType: paragraph
+bundle: video
+mode: preview
+content:
+  field_video:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_video_rich_text:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: '140'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+hidden:
+  field_video_accompanying_text: true
+  field_video_extra_wide: true
+  field_video_position: true

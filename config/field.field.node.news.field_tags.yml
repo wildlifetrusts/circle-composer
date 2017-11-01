@@ -1,0 +1,28 @@
+uuid: e27c665b-7b82-4530-8a8e-96b459756821
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.news
+    - taxonomy.vocabulary.tag_categories
+id: node.news.field_tags
+field_name: field_tags
+entity_type: node
+bundle: news
+label: Tags
+description: 'Type to autocomplete an existing tag, or create your own. Tags should be comma separated and preferably be in sentence case, e.g. "My new tag".'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tag_categories: tag_categories
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

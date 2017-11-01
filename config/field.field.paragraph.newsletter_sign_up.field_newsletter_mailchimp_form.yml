@@ -1,0 +1,23 @@
+uuid: 471de69a-2c4e-4423-b5ff-0cae60e0698a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_newsletter_mailchimp_form
+    - paragraphs.paragraphs_type.newsletter_sign_up
+id: paragraph.newsletter_sign_up.field_newsletter_mailchimp_form
+field_name: field_newsletter_mailchimp_form
+entity_type: paragraph
+bundle: newsletter_sign_up
+label: 'Mailchimp form'
+description: 'Admin users can add new sign up forms via the <a href="/admin/config/services/mailchimp/signup">Mailchimp Signup Forms</a> page.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:mailchimp_signup'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

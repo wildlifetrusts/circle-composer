@@ -1,0 +1,33 @@
+uuid: fcfb5d29-319f-47f0-811d-06439eab0473
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.spotlight_group.field_spotlights
+    - paragraphs.paragraphs_type.spotlight_group
+  module:
+    - entity_reference_revisions
+    - fences
+id: paragraph.spotlight_group.preview
+targetEntityType: paragraph
+bundle: spotlight_group
+mode: preview
+content:
+  field_spotlights:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: preview
+      link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: ul
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_revisions_entity_view
+    region: content
+hidden: {  }

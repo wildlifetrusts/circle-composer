@@ -1,0 +1,23 @@
+uuid: d5b5e685-250a-45b8-b00e-b5effc1a1422
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_picnic_area
+    - node.type.event
+id: node.event.field_event_picnic_area
+field_name: field_event_picnic_area
+entity_type: node
+bundle: event
+label: 'Picnic area'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Picnic area'
+  off_label: 'Off'
+field_type: boolean

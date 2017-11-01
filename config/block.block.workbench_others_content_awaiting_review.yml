@@ -1,0 +1,36 @@
+uuid: 019c00d1-d009-4365-b4ae-8a869113d5d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.workbench_others_content_awaiting_review
+  module:
+    - system
+    - views
+    - wildlife_conditions
+  theme:
+    - wildlife_trust_admin
+id: workbench_others_content_awaiting_review
+theme: wildlife_trust_admin
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:workbench_others_content_awaiting_review-block_1'
+settings:
+  id: 'views_block:workbench_others_content_awaiting_review-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /admin/workbench
+    negate: false
+    context_mapping: {  }
+  node_allows_social_sharing:
+    id: node_allows_social_sharing
+    display_on_social_sharing_nodes: 0
+    negate: false
+    context_mapping: {  }

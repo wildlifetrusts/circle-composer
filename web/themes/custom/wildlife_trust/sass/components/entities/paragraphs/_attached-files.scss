@@ -1,0 +1,28 @@
+.paragraph--type--attached-files {
+  @extend %content-narrow-constrain;
+
+  ul {
+    @extend %clean-list;
+  }
+
+  .file a {
+    // Background image set in grunticon.js
+    background-position: right 15px center;
+    background-size: 22px auto;
+    display: block;
+    text-decoration: none;
+    font-weight: $font-weight-regular;
+    padding: emRhythm(7, ms(0)) 45px emRhythm(7, ms(0)) 0;
+    @include keyline();
+
+    &:hover {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    @include add-breakpoint('palm-and-up') {
+      padding-top: emRhythm(5, ms(0));
+      padding-bottom: emRhythm(5, ms(0));
+    }
+  }
+}

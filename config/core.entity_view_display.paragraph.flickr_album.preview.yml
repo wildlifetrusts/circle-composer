@@ -1,0 +1,15 @@
+uuid: 0f4023ec-d76e-4ae5-acdf-c1574d4f5fec
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.flickr_album.field_flickr_embed_code
+    - paragraphs.paragraphs_type.flickr_album
+id: paragraph.flickr_album.preview
+targetEntityType: paragraph
+bundle: flickr_album
+mode: preview
+content: {  }
+hidden:
+  field_flickr_embed_code: true

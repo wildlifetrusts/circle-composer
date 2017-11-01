@@ -1,0 +1,20 @@
+uuid: 5cc67ef9-252b-4f9a-b6df-dd749fa73411
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - wildlife_newsletters_campaign_monitor
+id: paragraph.field_newsletter_cm_form
+field_name: field_newsletter_cm_form
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: campaign_monitor_signup
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,20 @@
+uuid: 8c8c761d-0e1c-4045-98f6-87351cc4794d
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime_range
+    - node
+id: node.field_voluntary_duration
+field_name: field_voluntary_duration
+entity_type: node
+type: daterange
+settings:
+  datetime_type: date
+module: datetime_range
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

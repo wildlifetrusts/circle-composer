@@ -1,0 +1,21 @@
+uuid: a3d748ac-351a-4234-b3fd-edad5570e2fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_type
+    - node.type.job
+  module:
+    - options
+id: node.job.field_header_type
+field_name: field_header_type
+entity_type: node
+bundle: job
+label: 'Header type'
+description: 'Choose the appearance of this page''s header. If <i>None</i> is chosen, the header will be black. If <i>Colour</i> is chosen, the current colour scheme''s primary colour will be used.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

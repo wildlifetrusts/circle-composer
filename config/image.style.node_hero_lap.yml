@@ -1,0 +1,16 @@
+uuid: dbf84e82-63b5-4365-af9f-4f3659930113
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: node_hero_lap
+label: 'Node hero lap'
+effects:
+  cc085377-d3dd-4c61-ac97-746cfa5bd9cf:
+    uuid: cc085377-d3dd-4c61-ac97-746cfa5bd9cf
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1025
+      height: 300

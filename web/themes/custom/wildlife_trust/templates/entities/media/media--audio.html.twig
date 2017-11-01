@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Audio media entity theme implementation.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+<article{{ attributes }}>
+  {% if content %}
+    <figure>
+      <div class="audio__container">
+        <audio controls controlsList="nodownload nofullscreen">
+          <source src="{{ mp3 }}" type="audio/mpeg" itemprop="url" />
+          <source src="{{ ogg }}" type="audio/ogg" itemprop="url" />
+          <p>{{ 'Sorry, your browser doesn\'t support HTML5 audio.'|t }}</p>
+        </audio>
+      </div>
+
+      {{ content.field_media_caption }}
+    </figure>
+    {{ content|without('field_media_caption') }}
+  {% endif %}
+</article>

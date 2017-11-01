@@ -1,0 +1,7 @@
+name: Habitat Hierarchy
+type: module
+description: Provides blocks for sibling/children habitat relations.
+core: 8.x
+package: Wildlife
+dependencies:
+  - entity_hierarchy

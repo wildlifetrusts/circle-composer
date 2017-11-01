@@ -1,0 +1,23 @@
+uuid: adaaa53c-44c8-4dc0-80dd-8a6180c8f1a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_display_type
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - options
+id: paragraph.spotlight.field_spotlight_display_type
+field_name: field_spotlight_display_type
+entity_type: paragraph
+bundle: spotlight
+label: 'Display type'
+description: "Choose whether spotlight content should appear over the top of a background/spotlight or separate with a colour background (colour defined by current page Colour Scheme).\r\nPlease note that if one spotlight in a group has a <i>Display type</i> set to \"Overlay\", all spotlights in the group will appear full width."
+required: true
+translatable: true
+default_value:
+  -
+    value: overlay
+default_value_callback: ''
+settings: {  }
+field_type: list_string

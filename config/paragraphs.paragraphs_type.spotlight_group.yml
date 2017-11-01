@@ -1,0 +1,9 @@
+uuid: 472ebb51-42c9-459a-81be-6b4e9888d31c
+langcode: en
+status: true
+dependencies: {  }
+id: spotlight_group
+label: 'Spotlight group'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

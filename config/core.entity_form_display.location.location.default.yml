@@ -1,0 +1,151 @@
+uuid: db96f1ed-b6fa-4806-9836-0c5fca8f575a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.location.location.field_location_address
+    - field.field.location.location.field_location_county
+    - field.field.location.location.field_location_grid_ref
+    - field.field.location.location.field_location_lat_long
+    - field.field.location.location.field_location_name
+    - field.field.location.location.field_location_postcode
+    - field.field.location.location.field_location_town
+  module:
+    - field_group
+    - geofield_map
+    - wildlife_location
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_translation
+        - group_revision
+      parent_name: ''
+      weight: 8
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_translation:
+      children:
+        - translation
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Translation
+    group_revision:
+      children: {  }
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Revision
+id: location.location.default
+targetEntityType: location
+bundle: location
+mode: default
+content:
+  field_location_address:
+    weight: 2
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_location_county:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_location_grid_ref:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_location_lat_long:
+    weight: 7
+    settings:
+      map_library: gmap
+      map_type_google: roadmap
+      map_type_leaflet: OpenStreetMap_Mapnik
+      map_type_selector: '1'
+      zoom:
+        start: '5'
+        focus: '14'
+        min: '1'
+        max: '17'
+      click_to_find_marker: '1'
+      geoaddress_field:
+        field: '0'
+        disabled: '1'
+        hidden: 0
+      map_google_api_key: AIzaSyCfsYG-uXxdZdGYt0mp2i0Z4fw5VJ4uLCY
+      click_to_place_marker: 0
+      html5_geolocation: 0
+      zoom_level: 5
+      map_dimensions:
+        width: 100%
+        height: 450px
+    third_party_settings: {  }
+    type: geofield_map
+    region: content
+  field_location_name:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_location_postcode:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_location_town:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  user_id: true

@@ -1,0 +1,86 @@
+.menu-toggle {
+  width: 100px;
+  position: relative;
+  @extend %text-invisible;
+  border: 1px solid palette(mono, mid-light);
+  border-width: 0 0 0 1px;
+  background-color: transparent;
+  cursor: pointer;
+
+  @include add-breakpoint('desk-and-up') {
+    display: none;
+  }
+
+  .menu__section & {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: palette(mono, x-light);
+    border-left: 0;
+    width: 76px;
+    height: 76px;
+
+    @include add-breakpoint('desk-and-up') {
+      display: block;
+    }
+  }
+
+  &__icon {
+    width: 28px;
+    height: 21px;
+    position: absolute;
+    top: calc(50% - 10.5px);
+    left: calc(50% - 14px);
+
+    &__line {
+      width: 100%;
+      height: 3px;
+      left: 0;
+      position: absolute;
+      background-color: palette(mono, x-dark);
+
+      &--top {
+        top: 0;
+
+        .is--menu-open &,
+        .menu__section & {
+          animation: 0.2s ease-in-out menu-line--top;
+          transform: translate3d(0,9px,0) rotate(45deg);
+        }
+
+        .is--menu-closing & {
+          animation: 0.2s ease-in-out menu-line--top--reverse;
+        }
+      }
+
+      &--middle {
+        top: 9px;
+
+        .is--menu-open &,
+        .menu__section & {
+          opacity: 0;
+          transition: opacity 0.1s ease-in-out;
+        }
+
+        .is--menu-closing & {
+          transition: opacity 0.1s 0.1s ease-in-out;
+        }
+      }
+
+      &--bottom {
+        bottom: 0;
+
+        .is--menu-open &,
+        .menu__section & {
+          animation: 0.2s ease-in-out menu-line--bottom;
+          transform: translate3d(0,-9px,0) rotate(-45deg);
+        }
+
+        .is--menu-closing & {
+          animation: 0.2s ease-in-out menu-line--bottom--reverse;
+        }
+      }
+    }
+  }
+}

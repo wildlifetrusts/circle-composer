@@ -1,0 +1,16 @@
+uuid: 967be6c1-86ad-42bb-8d0f-bab966214fc7
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_quadruple_desk
+label: 'Spotlight quadruple desk'
+effects:
+  6ddc7c0b-1571-4602-aea6-0ceff423594a:
+    uuid: 6ddc7c0b-1571-4602-aea6-0ceff423594a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 600
+      height: 600

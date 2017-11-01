@@ -1,0 +1,10 @@
+uuid: 2cec221f-b9f3-422f-b280-607e7770d0c9
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.scaled_12_col
+label: 'Scaled 12 col'
+targetEntityType: media
+cache: true

@@ -1,0 +1,9 @@
+name: Location
+type: module
+description: Creates a Location entity
+core: 8.x
+package: wildlife
+dependencies:
+  - geofield
+  - geofield_map
+  - wildlife_admin

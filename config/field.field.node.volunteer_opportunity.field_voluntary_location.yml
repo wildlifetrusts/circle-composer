@@ -1,0 +1,25 @@
+uuid: a8ba43e6-50e5-4ed6-8650-0f3d274aceed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voluntary_location
+    - node.type.volunteer_opportunity
+id: node.volunteer_opportunity.field_voluntary_location
+field_name: field_voluntary_location
+entity_type: node
+bundle: volunteer_opportunity
+label: Location
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:location'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

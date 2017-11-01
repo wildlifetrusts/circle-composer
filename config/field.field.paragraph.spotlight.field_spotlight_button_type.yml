@@ -1,0 +1,23 @@
+uuid: f3b42523-6cdc-44ae-9da6-9ec246dcbab7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_button_type
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - options
+id: paragraph.spotlight.field_spotlight_button_type
+field_name: field_spotlight_button_type
+entity_type: paragraph
+bundle: spotlight
+label: 'Button colour'
+description: 'Choose a style for the button'
+required: true
+translatable: true
+default_value:
+  -
+    value: primary
+default_value_callback: ''
+settings: {  }
+field_type: list_string

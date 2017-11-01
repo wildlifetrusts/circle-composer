@@ -1,0 +1,98 @@
+follow: 0
+chosen:
+  facebook:
+    enabled: true
+    username: ''
+    weight: -20
+    label: ''
+  twitter:
+    enabled: true
+    username: ''
+    weight: -19
+    label: ''
+  googleplus:
+    enabled: true
+    username: ''
+    weight: -18
+    label: ''
+  email:
+    enabled: true
+    weight: -17
+    label: ''
+  linkedin:
+    username: ''
+    weight: -16
+    label: ''
+    enabled: false
+  pinterest:
+    username: ''
+    weight: -15
+    label: ''
+    enabled: false
+  reddit:
+    username: ''
+    weight: -14
+    label: ''
+    enabled: false
+  whatsapp:
+    weight: -13
+    label: ''
+    enabled: false
+  vk:
+    weight: -12
+    label: ''
+    enabled: false
+  tumblr:
+    username: ''
+    weight: -11
+    label: ''
+    enabled: false
+  delicious:
+    weight: -10
+    label: ''
+    enabled: false
+  print:
+    weight: -9
+    label: ''
+    enabled: false
+  pocket:
+    weight: -8
+    label: ''
+    enabled: false
+  join:
+    weight: -7
+    label: ''
+    enabled: false
+  hackernews:
+    weight: -6
+    label: ''
+    enabled: false
+  github:
+    username: ''
+    weight: -5
+    label: ''
+    enabled: false
+  instagram:
+    username: ''
+    weight: -4
+    label: ''
+    enabled: false
+  youtube:
+    username: ''
+    weight: -3
+    label: ''
+    enabled: false
+appearance:
+  size: null
+  shrink: null
+  regrow: null
+  minRows: null
+  maxRows: null
+  prefixReserve: null
+  prefixHide: null
+  alignRight: 0
+prefix: ''
+image_tokens: '[node:field_representative_image:entity:field_media_image]|[rrssbsite:logo-url]'
+test: false
+_core:
+  default_config_hash: a64yFkXZ12KN6Qpnh8sNNJdP-QLLp7VSF-ggxMuoBbc

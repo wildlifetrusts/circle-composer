@@ -1,0 +1,18 @@
+uuid: a338a6e9-4613-420d-bd46-0aaf24d53b9d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trust
+id: node.trust.changed
+field_name: changed
+entity_type: node
+bundle: trust
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

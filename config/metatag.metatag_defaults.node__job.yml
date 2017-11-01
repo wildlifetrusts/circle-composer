@@ -1,0 +1,9 @@
+uuid: 42c7defe-43e0-4ca8-88c1-6ba328127be7
+langcode: en
+status: true
+dependencies: {  }
+id: node__job
+label: 'Content: Job'
+tags:
+  description: '[node:field_job_summary]'
+  geo_position: '[node:field_job_reserve:entity:field_reserve_lat_long:latlon][node:field_job_location:entity:field_location_lat_long:latlon]'

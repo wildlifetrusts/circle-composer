@@ -1,0 +1,18 @@
+uuid: 4dea92a7-e3e9-4cdb-94fc-6b4907c12fb7
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.opportunity_type
+id: taxonomy_term.opportunity_type.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: opportunity_type
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

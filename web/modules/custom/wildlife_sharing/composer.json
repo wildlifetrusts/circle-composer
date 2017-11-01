@@ -1,0 +1,8 @@
+{
+    "name": "wt/wildlife_sharing",
+    "description": "Content sharing for Wildlife Trust",
+    "type": "drupal-module",
+    "require": {
+        "drupal/jsonapi": "^1.0"
+    }
+}

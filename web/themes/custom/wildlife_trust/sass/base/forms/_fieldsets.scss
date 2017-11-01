@@ -1,0 +1,28 @@
+.form-wrapper:not(.form-composite):not(.form-actions) {
+  @include keyline('all');
+  padding: quarter($spacing-unit-vertical) $spacing-unit-horizontal $spacing-unit-vertical;
+
+  > legend {
+    @extend .gamma;
+    margin-bottom: 0;
+  }
+
+  > .fieldset-wrapper > .description {
+    @include keyline('top');
+    padding-top: emRhythm(4, ms(-1));
+  }
+}
+
+.form-wrapper.form-composite {
+  > legend {
+    margin-bottom: emRhythm(2, ms(0));
+  }
+}
+
+.form-wrapper {
+  margin: 0;
+
+  .form-wrapper:last-child {
+    margin-bottom: 0;
+  }
+}

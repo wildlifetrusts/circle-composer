@@ -1,0 +1,23 @@
+uuid: 129de5cf-f872-4e5d-a1e6-e50ac7444c69
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_statistic_dynamic_type
+    - paragraphs.paragraphs_type.statistic_item
+  module:
+    - options
+id: paragraph.statistic_item.field_statistic_dynamic_type
+field_name: field_statistic_dynamic_type
+entity_type: paragraph
+bundle: statistic_item
+label: 'Dynamic type'
+description: "<strong>Reserves</strong>: The number of reserves associated with the current Trust site.\r\n<strong>Events</strong>: The number of upcoming events associated with the current Trust site, or, if on a Reserve page, associated with that Reserve."
+required: true
+translatable: true
+default_value:
+  -
+    value: reserves
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,261 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_local_customisation.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Access\AccessResult;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_local_customisation_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_local_customisation module.
+    case 'help.page.wildlife_local_customisation':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Local Customisation') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create().
+ */
+function wildlife_local_customisation_node_presave(EntityInterface $entity) {
+  $bundle = $entity->getType();
+
+  if (in_array($bundle, ['habitat', 'species'])) {
+    _wildlife_local_customisation_add_or_update($entity, 'presave');
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function wildlife_local_customisation_node_delete(EntityInterface $entity) {
+  $bundle = $entity->getType();
+
+  if (in_array($bundle, ['habitat', 'species'])) {
+    _wildlife_local_customisation_add_or_update($entity, 'delete');
+  }
+}
+
+/**
+ * Helper function to add new or update existing Local Customisation entity.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function _wildlife_local_customisation_add_or_update($entity, $action) {
+  $uuid = $entity->uuid();
+
+  $query = \Drupal::entityQuery('local_customisation');
+  $query->condition('node_uuid', $uuid);
+  $entity_id = $query->execute();
+
+  if (empty($entity_id)) {
+    // If an entity ID doesn't exist, create a new Local Customisation entity.
+    $data = [
+      'name' => $entity->label(),
+      'node_uuid' => $uuid,
+    ];
+
+    $local_customisation = Drupal::entityManager()
+      ->getStorage('local_customisation')
+      ->create($data);
+    $local_customisation->save();
+  }
+  else {
+    $local_customisation_id = reset($entity_id);
+    /** @var \Drupal\wildlife_local_customisation\Entity\LocalCustomisation $local_customisation */
+    $local_customisation = \Drupal::entityTypeManager()->getStorage('local_customisation')->load($local_customisation_id);
+
+    if ($action != 'delete' && ($entity->label() !== $local_customisation->label())) {
+      $local_customisation->setName($entity->label());
+      $local_customisation->setRevisionLogMessage('Automatically revised on saving of associated node.');
+      $local_customisation->save();
+    }
+    elseif ($action == 'delete') {
+      $local_customisation->delete();
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function wildlife_local_customisation_entity_extra_field_info() {
+  $extra_fields = [];
+
+  // Add a CTA local customisation extra field to Habitat nodes.
+  $extra_fields['node']['habitat']['display']['local_customisation_cta'] = [
+    'label' => t('Local customisation: Call to Action'),
+    'description' => t('The call to action local customisation.'),
+    'weight' => 0,
+  ];
+
+  // Add a In our area local customisation extra field to Habitat nodes.
+  $extra_fields['node']['habitat']['display']['local_customisation_in_our_area'] = [
+    'label' => t('Local customisation: In Our Area'),
+    'description' => t('The in our area local customisation.'),
+    'weight' => 0,
+  ];
+
+  // Add a Spotlight local customisation extra field to Habitat nodes.
+  $extra_fields['node']['habitat']['display']['local_customisation_spotlight'] = [
+    'label' => t('Local customisation: Spotlight'),
+    'description' => t('The spotlight local customisation.'),
+    'weight' => 0,
+  ];
+
+  // Add a CTA local customisation extra field to Species nodes.
+  $extra_fields['node']['species']['display']['local_customisation_cta'] = [
+    'label' => t('Local customisation: Call to Action'),
+    'description' => t('The call to action local customisation.'),
+    'weight' => 0,
+  ];
+
+  // Add a In our area local customisation extra field to Species nodes.
+  $extra_fields['node']['species']['display']['local_customisation_in_our_area'] = [
+    'label' => t('Local customisation: In Our Area'),
+    'description' => t('The in our area local customisation.'),
+    'weight' => 0,
+  ];
+
+  // Add a Spotlight local customisation extra field to Species nodes.
+  $extra_fields['node']['species']['display']['local_customisation_spotlight'] = [
+    'label' => t('Local customisation: Spotlight'),
+    'description' => t('The spotlight local customisation.'),
+    'weight' => 0,
+  ];
+
+  return $extra_fields;
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function wildlife_local_customisation_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Add the CTA field to the output.
+  _wildlife_local_customisation_entity_view('local_customisation_cta', $build, $entity, $display, $view_mode);
+  _wildlife_local_customisation_entity_view('local_customisation_in_our_area', $build, $entity, $display, $view_mode);
+  _wildlife_local_customisation_entity_view('local_customisation_spotlight', $build, $entity, $display, $view_mode);
+}
+
+/**
+ * @see wildlife_local_customisation_entity_view()
+ */
+function _wildlife_local_customisation_entity_view($component, array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Only add the field if the current display contains the extra field.
+  if (empty($display->getComponent($component))) {
+    return;
+  }
+
+  $local_customisation_id = _wildlife_local_customisation_get_local_customisation_from_node($entity->uuid());
+
+  if ($local_customisation_id) {
+    $view_mode = str_replace('local_customisation_', '', $component);
+    /** @var \Drupal\wildlife_local_customisation\Entity\LocalCustomisation $local_customisation */
+    $local_customisation = \Drupal::entityTypeManager()->getStorage('local_customisation')->load($local_customisation_id);
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder($local_customisation->getEntityTypeId());
+
+    $build[$component][] = $view_builder->view($local_customisation, $view_mode, $entity->language()->getId());
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function wildlife_local_customisation_preprocess_node(&$variables) {
+  /** @var \Drupal\node\Entity\Node $node */
+  $node = $variables['node'];
+  $content_is_blacklisted = _wildlife_local_customisation_content_is_blacklisted($node);
+  if ($content_is_blacklisted) {
+    $message_replacements = [
+      '@label' => $node->label(),
+    ];
+    $message = t('"@label" has been blacklisted. This means it won\'t display for anonymous users, users without permission to see blacklisted items, or in search listings.', $message_replacements);
+    drupal_set_message($message, 'warning');
+  }
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function wildlife_local_customisation_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  switch ($op) {
+    case 'view':
+      $content_is_blacklisted = _wildlife_local_customisation_content_is_blacklisted($node);
+      $can_view_blacklisted = $account->hasPermission('view blacklisted pages');
+
+      return AccessResult::forbiddenIf($content_is_blacklisted && !$can_view_blacklisted);
+      break;
+  }
+}
+
+/**
+ * Helper function to retrieve the Location Customisation from a given UUID.
+ *
+ * @param $uuid
+ *   The node's UUID.
+ * @return bool|mixed
+ *   Either the Location Customisation entity's ID or FALSE.
+ */
+function _wildlife_local_customisation_get_local_customisation_from_node($uuid) {
+  $query = \Drupal::entityQuery('local_customisation');
+  $query->condition('node_uuid', $uuid);
+  $entity_id = $query->execute();
+
+  if (!empty($entity_id)) {
+    return reset($entity_id);
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Helper function to determine if a node is blacklisted or not.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ * @return bool
+ */
+function _wildlife_local_customisation_content_is_blacklisted($node) {
+  $content_is_blacklisted = FALSE;
+
+  $local_customisation_id = _wildlife_local_customisation_get_local_customisation_from_node($node->uuid());
+
+  if ($local_customisation_id) {
+    /** @var \Drupal\wildlife_local_customisation\Entity\LocalCustomisationInterface $local_customisation */
+    $local_customisation = \Drupal::entityTypeManager()
+      ->getStorage('local_customisation')
+      ->load($local_customisation_id);
+
+    $content_is_blacklisted = $local_customisation->isBlacklisted();
+  }
+
+  return $content_is_blacklisted;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_local_customisation_form_local_customisation_form_alter(&$form, &$form_state, $form_id) {
+  // Add Revision and Translation information to fieldgroups.
+  $form['#fieldgroups']['group_revision']->children[] = 'new_revision';
+  $form['#fieldgroups']['group_revision']->children[] = 'revision_log_message';
+  $form['#fieldgroups']['group_revision']->children[] = 'content_translation';
+  $form['#group_children']['new_revision'] = 'group_revision';
+  $form['#group_children']['revision_log_message'] = 'group_revision';
+  $form['#group_children']['content_translation'] = 'group_translation';
+}

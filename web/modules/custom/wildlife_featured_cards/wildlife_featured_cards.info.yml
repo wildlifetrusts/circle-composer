@@ -1,0 +1,7 @@
+name: Featured Cards
+type: module
+description: Processing and admin alterations for the Featured Cards component.
+core: 8.x
+package: Wildlife
+dependencies:
+  - wildlife_paragraphs

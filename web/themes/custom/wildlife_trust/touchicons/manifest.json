@@ -1,0 +1,13 @@
+{
+    "name": "Wildlife Trust",
+    "icons": [
+        {
+            "src": "/themes/custom/wildlife_trust/touchicons/android-chrome-144x144.png?v=LbGnkRyNBN",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "display": "standalone"
+}

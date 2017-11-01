@@ -1,0 +1,16 @@
+uuid: 40799e39-61e4-4a61-9d08-c56c81453de5
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_single_lap
+label: 'Spotlight single lap'
+effects:
+  dfa68f25-04c9-4bf4-a99f-68ad9f576e49:
+    uuid: dfa68f25-04c9-4bf4-a99f-68ad9f576e49
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 512

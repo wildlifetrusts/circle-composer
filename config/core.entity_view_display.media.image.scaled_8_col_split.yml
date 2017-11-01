@@ -1,0 +1,75 @@
+uuid: b5537b02-25cb-4ab7-83c2-aac0e37d3b94
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.scaled_8_col_split
+    - field.field.media.image.field_media_caption
+    - field.field.media.image.field_media_image
+    - media_entity.bundle.image
+    - responsive_image.styles.scaled_8_col_split
+  module:
+    - fences
+    - field_group
+    - responsive_image
+    - text
+third_party_settings:
+  field_group:
+    group_figure:
+      children:
+        - field_media_image
+        - field_media_caption
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: figure
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Figure
+id: media.image.scaled_8_col_split
+targetEntityType: media
+bundle: image
+mode: scaled_8_col_split
+content:
+  field_media_caption:
+    type: text_default
+    weight: 2
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: figcaption
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_media_image:
+    weight: 1
+    label: hidden
+    settings:
+      responsive_image_style: scaled_8_col_split
+      image_link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: responsive_image
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

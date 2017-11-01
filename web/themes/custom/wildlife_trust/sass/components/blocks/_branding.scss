@@ -1,0 +1,76 @@
+$brandingLogoMaxWidth: 70px;
+$brandingNameMaxWidth: 260px;
+$brandingLogoMargin: halve($spacing-unit-horizontal);
+
+.block--wildlife-theming {
+  flex-grow: 1;
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+
+  .l-header & {
+    padding: 12px 1em;
+    height: 100px;
+  }
+
+  .l-region--footer-second & {
+    @include float-span(1);
+
+    @include add-breakpoint('lap-and-up') {
+      width: auto;
+      float: none;
+      margin: auto;
+    }
+
+    @include add-breakpoint('lap-to-desk') {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  .branding__logo,
+  .branding__strapline {
+    text-decoration: none;
+  }
+
+  .branding__logo {
+    .l-header & {
+      margin-right: $brandingLogoMargin;
+
+      img {
+        max-height: 76px;
+        max-width: $brandingLogoMaxWidth;
+      }
+
+      &--no-name {
+        img {
+          max-width: $brandingLogoMaxWidth + $brandingNameMaxWidth + $brandingLogoMargin;
+        }
+      }
+    }
+
+    img {
+      display: block;
+
+      .l-footer & {
+        max-width: 100%;
+        max-height: 127px;
+      }
+    }
+  }
+
+  .branding__strapline {
+    max-width: $brandingNameMaxWidth;
+    font-family: $adelle-font-family;
+    @include font-size(18px);
+    line-height: 1.2;
+
+    &--medium {
+      @include font-size(22px);
+    }
+
+    &--large {
+      @include font-size(24px);
+    }
+  }
+}

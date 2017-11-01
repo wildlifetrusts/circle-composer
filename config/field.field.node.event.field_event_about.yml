@@ -1,0 +1,27 @@
+uuid: e36c90cb-2a0f-437c-88d1-f7abe11702d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_about
+    - node.type.event
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.event.field_event_about
+field_name: field_event_about
+entity_type: node
+bundle: event
+label: 'About the event'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,319 @@
+From 8a36b21278d0422993ce509f8bb5b095702c292e Mon Sep 17 00:00:00 2001
+From: Nathaniel Catchpole
+Date: Fri, 11 Aug 2017 15:15:25 +0900
+Subject: Issue #2650434 by vijaycs85, anemes, duozersk, andypost, eiriksm,
+ TwoD, chipway, pguillard, dawehner, tstoeckler, vaplas, robert-os, Yogesh
+ Pawar, davidraijmakers: Clearing cache via UI in translated language resets
+ config translation of field labels to default language
+
+(cherry picked from commit 5ba1f0e147cd1f6628ecd02d684f5002800fe1a1)
+---
+ core/lib/Drupal/Core/DrupalKernel.php              |   7 +
+ core/lib/Drupal/Core/DrupalKernelInterface.php     |  10 ++
+ .../src/Tests/ConfigTranslationCacheTest.php       | 176 +++++++++++++++++++++
+ .../EventSubscriber/LanguageRequestSubscriber.php  |  36 +++--
+ 4 files changed, 219 insertions(+), 10 deletions(-)
+ create mode 100644 core/modules/config_translation/src/Tests/ConfigTranslationCacheTest.php
+
+diff --git a/core/lib/Drupal/Core/DrupalKernel.php b/core/lib/Drupal/Core/DrupalKernel.php
+index 02c97f5..260e477 100644
+--- a/core/lib/Drupal/Core/DrupalKernel.php
++++ b/core/lib/Drupal/Core/DrupalKernel.php
+@@ -916,6 +916,7 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
+     // new session into the master request if one was present before.
+     if (($request_stack = $this->container->get('request_stack', ContainerInterface::NULL_ON_INVALID_REFERENCE))) {
+       if ($request = $request_stack->getMasterRequest()) {
++        $subrequest = TRUE;
+         if ($request->hasSession()) {
+           $request->setSession($this->container->get('session'));
+         }
+@@ -928,6 +929,12 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
+ 
+     \Drupal::setContainer($this->container);
+ 
++    // Allow other parts of the codebase to react on container initialization in
++    // subrequest.
++    if (!empty($subrequest)) {
++      $this->container->get('event_dispatcher')->dispatch(self::CONTAINER_INITIALIZE_SUBREQUEST_FINISHED);
++    }
++
+     // If needs dumping flag was set, dump the container.
+     if ($this->containerNeedsDumping && !$this->cacheDrupalContainer($container_definition)) {
+       $this->container->get('logger.factory')->get('DrupalKernel')->error('Container cannot be saved to cache.');
+diff --git a/core/lib/Drupal/Core/DrupalKernelInterface.php b/core/lib/Drupal/Core/DrupalKernelInterface.php
+index c38fff5..ff065a8 100644
+--- a/core/lib/Drupal/Core/DrupalKernelInterface.php
++++ b/core/lib/Drupal/Core/DrupalKernelInterface.php
+@@ -15,6 +15,16 @@ use Symfony\Component\HttpFoundation\Request;
+ interface DrupalKernelInterface extends HttpKernelInterface, ContainerAwareInterface {
+ 
+   /**
++   * Event fired when the service container finished initializing in subrequest.
++   *
++   * This event allows you to initialize overrides such as language to the
++   * services.
++   *
++   * @var string
++   */
++  const CONTAINER_INITIALIZE_SUBREQUEST_FINISHED = 'kernel.container.finish_container_initialize_subrequest';
++
++  /**
+    * Boots the current kernel.
+    *
+    * @return $this
+diff --git a/core/modules/config_translation/src/Tests/ConfigTranslationCacheTest.php b/core/modules/config_translation/src/Tests/ConfigTranslationCacheTest.php
+new file mode 100644
+index 0000000..4abfd57
+--- /dev/null
++++ b/core/modules/config_translation/src/Tests/ConfigTranslationCacheTest.php
+@@ -0,0 +1,176 @@
++<?php
++
++namespace Drupal\config_translation\Tests;
++
++use Drupal\field\Entity\FieldConfig;
++use Drupal\field\Entity\FieldStorageConfig;
++use Drupal\filter\Entity\FilterFormat;
++use Drupal\language\Entity\ConfigurableLanguage;
++use Drupal\simpletest\WebTestBase;
++
++/**
++ * Translate settings and entities to various languages.
++ *
++ * @group config_translation
++ */
++class ConfigTranslationCacheTest extends WebTestBase {
++
++  /**
++   * Modules to enable.
++   *
++   * @var array
++   */
++  public static $modules = [
++    'block',
++    'config_translation',
++    'config_translation_test',
++    'contact',
++    'contact_test',
++    'contextual',
++    'entity_test',
++    'field_test',
++    'field_ui',
++    'filter',
++    'filter_test',
++    'node',
++    'views',
++    'views_ui',
++  ];
++
++  /**
++   * Languages to enable.
++   *
++   * @var array
++   */
++  protected $langcodes = ['fr', 'ta'];
++
++  /**
++   * Administrator user for tests.
++   *
++   * @var \Drupal\user\UserInterface
++   */
++  protected $adminUser;
++
++  /**
++   * Translator user for tests.
++   *
++   * @var \Drupal\user\UserInterface
++   */
++  protected $translatorUser;
++
++  /**
++   * String translation storage object.
++   *
++   * @var \Drupal\locale\StringStorageInterface
++   */
++  protected $localeStorage;
++
++  protected function setUp() {
++    parent::setUp();
++    $translator_permissions = [
++      'translate configuration',
++    ];
++
++    /** @var \Drupal\filter\FilterFormatInterface $filter_test_format */
++    $filter_test_format = FilterFormat::load('filter_test');
++    /** @var \Drupal\filter\FilterFormatInterface $filtered_html_format */
++    $filtered_html_format = FilterFormat::load('filtered_html');
++    /** @var \Drupal\filter\FilterFormatInterface $full_html_format */
++    $full_html_format = FilterFormat::load('full_html');
++
++    $admin_permissions = array_merge($translator_permissions, [
++      'administer languages',
++      'administer site configuration',
++      'link to any page',
++      'administer contact forms',
++      'administer filters',
++      $filtered_html_format->getPermissionName(),
++      $full_html_format->getPermissionName(),
++      $filter_test_format->getPermissionName(),
++      'access site-wide contact form',
++      'access contextual links',
++      'administer account settings',
++      'administer themes',
++      'bypass node access',
++      'administer content types',
++      'translate interface',
++      'administer entity_test fields',
++    ]);
++    // Create and login user.
++    $this->translatorUser = $this->drupalCreateUser($translator_permissions);
++    $this->adminUser = $this->drupalCreateUser($admin_permissions);
++
++    // Add languages.
++    foreach ($this->langcodes as $langcode) {
++      ConfigurableLanguage::createFromLangcode($langcode)->save();
++    }
++    $this->drupalPlaceBlock('local_tasks_block');
++    $this->drupalPlaceBlock('page_title_block');
++  }
++
++  /**
++   * Tests the translation of field and field storage configuration.
++   */
++  public function testFieldConfigTranslation() {
++    // Add a test field which has a translatable field setting and a
++    // translatable field storage setting.
++    $field_name = strtolower($this->randomMachineName());
++    $field_storage = FieldStorageConfig::create([
++      'field_name' => $field_name,
++      'entity_type' => 'entity_test',
++      'type' => 'test_field',
++    ]);
++
++    $translatable_storage_setting = $this->randomString();
++    $field_storage->setSetting('translatable_storage_setting', $translatable_storage_setting);
++    $field_storage->save();
++
++    $bundle = strtolower($this->randomMachineName());
++    entity_test_create_bundle($bundle);
++    $field = FieldConfig::create([
++      'field_name' => $field_name,
++      'entity_type' => 'entity_test',
++      'bundle' => $bundle,
++    ]);
++
++    $translatable_field_setting = $this->randomString();
++    $field->setSetting('translatable_field_setting', $translatable_field_setting);
++    $field->save();
++
++    $this->drupalLogin($this->translatorUser);
++
++    $this->drupalGet("/entity_test/structure/$bundle/fields/entity_test.$bundle.$field_name/translate");
++    $this->clickLink('Add');
++
++    $this->assertText('Translatable field setting');
++    $this->assertEscaped($translatable_field_setting);
++    $this->assertText('Translatable storage setting');
++    $this->assertEscaped($translatable_storage_setting);
++
++    // Add translation for label.
++    $field_label_fr = $this->randomString();
++    $edit = [
++      "translation[config_names][field.field.entity_test.$bundle.$field_name][label]" => $field_label_fr,
++    ];
++    $this->drupalPostForm(NULL, $edit, 'Save translation');
++    $this->drupalLogout();
++
++    // Check if the translated label appears.
++    $this->drupalLogin($this->adminUser);
++    $this->drupalGet("/fr/entity_test/structure/$bundle/fields");
++    $this->assertEscaped($field_label_fr);
++
++    // Clear cache on French version and check for translated label.
++    $this->drupalPostForm('/fr/admin/config/development/performance', [], 'Clear all caches');
++    $this->drupalGet("/fr/entity_test/structure/$bundle/fields");
++    // Check if the translation is still there.
++    $this->assertEscaped($field_label_fr);
++
++    // Clear cache on default version and check for translated label.
++    $this->drupalPostForm('/admin/config/development/performance', [], 'Clear all caches');
++    $this->drupalGet("/fr/entity_test/structure/$bundle/fields");
++    // Check if the translation is still there.
++    $this->assertEscaped($field_label_fr);
++  }
++
++}
+diff --git a/core/modules/language/src/EventSubscriber/LanguageRequestSubscriber.php b/core/modules/language/src/EventSubscriber/LanguageRequestSubscriber.php
+index 37a6048..9e5729a 100644
+--- a/core/modules/language/src/EventSubscriber/LanguageRequestSubscriber.php
++++ b/core/modules/language/src/EventSubscriber/LanguageRequestSubscriber.php
+@@ -2,6 +2,7 @@
+ 
+ namespace Drupal\language\EventSubscriber;
+ 
++use Drupal\Core\DrupalKernelInterface;
+ use Drupal\Core\Session\AccountInterface;
+ use Drupal\Core\StringTranslation\Translator\TranslatorInterface;
+ use Drupal\language\ConfigurableLanguageManagerInterface;
+@@ -64,26 +65,40 @@ class LanguageRequestSubscriber implements EventSubscriberInterface {
+   }
+ 
+   /**
+-   * Sets the default language and initializes configuration overrides.
++   * Initializes the language manager at the beginning of the request.
+    *
+    * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+    *   The Event to process.
+    */
+   public function onKernelRequestLanguage(GetResponseEvent $event) {
+     if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
+-      $this->negotiator->setCurrentUser($this->currentUser);
+-      if ($this->languageManager instanceof ConfigurableLanguageManagerInterface) {
+-        $this->languageManager->setNegotiator($this->negotiator);
+-        $this->languageManager->setConfigOverrideLanguage($this->languageManager->getCurrentLanguage());
+-      }
+-      // After the language manager has initialized, set the default langcode
+-      // for the string translations.
+-      $langcode = $this->languageManager->getCurrentLanguage()->getId();
+-      $this->translation->setDefaultLangcode($langcode);
++      $this->setLanguageOverrides();
+     }
+   }
+ 
+   /**
++   * Initializes config overrides whenever the service container is rebuilt.
++   */
++  public function onContainerInitializeSubrequestFinished() {
++    $this->setLanguageOverrides();
++  }
++
++  /**
++   * Sets the language for config overrides on the language manager.
++   */
++  private function setLanguageOverrides() {
++    $this->negotiator->setCurrentUser($this->currentUser);
++    if ($this->languageManager instanceof ConfigurableLanguageManagerInterface) {
++      $this->languageManager->setNegotiator($this->negotiator);
++      $this->languageManager->setConfigOverrideLanguage($this->languageManager->getCurrentLanguage());
++    }
++    // After the language manager has initialized, set the default langcode for
++    // the string translations.
++    $langcode = $this->languageManager->getCurrentLanguage()->getId();
++    $this->translation->setDefaultLangcode($langcode);
++  }
++
++  /**
+    * Registers the methods in this class that should be listeners.
+    *
+    * @return array
+@@ -91,6 +106,7 @@ class LanguageRequestSubscriber implements EventSubscriberInterface {
+    */
+   public static function getSubscribedEvents() {
+     $events[KernelEvents::REQUEST][] = ['onKernelRequestLanguage', 255];
++    $events[DrupalKernelInterface::CONTAINER_INITIALIZE_SUBREQUEST_FINISHED][] = ['onContainerInitializeSubrequestFinished', 255];
+ 
+     return $events;
+   }
+-- 
+cgit v1.1
+

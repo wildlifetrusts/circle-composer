@@ -1,0 +1,5 @@
+wildlife_typekit.admin:
+  title: 'Typekit'
+  description: 'Congfigure settings for Typekit.'
+  parent: system.admin_config_ui
+  route_name: 'wildlife_typekit.admin'

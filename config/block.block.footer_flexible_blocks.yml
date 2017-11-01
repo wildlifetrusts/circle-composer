@@ -1,0 +1,25 @@
+uuid: 75ca2479-6c2d-4717-b4a5-77f992aa0037
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:flexible_block:7570d67e-322e-4519-925d-15c4de33530c'
+  module:
+    - block_content
+  theme:
+    - wildlife_trust
+id: footer_flexible_blocks
+theme: wildlife_trust
+region: footer_first
+weight: 0
+provider: null
+plugin: 'block_content:7570d67e-322e-4519-925d-15c4de33530c'
+settings:
+  id: 'block_content:7570d67e-322e-4519-925d-15c4de33530c'
+  label: 'Footer flexible blocks'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

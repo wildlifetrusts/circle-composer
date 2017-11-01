@@ -1,0 +1,15 @@
+uuid: d082becf-9212-4bd6-bd91-f91d12265f80
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_8_col_split_palm
+label: 'Scaled 8 col split palm'
+effects:
+  f28c8d21-5c8e-4c36-abfe-f06665ee4356:
+    uuid: f28c8d21-5c8e-4c36-abfe-f06665ee4356
+    id: image_scale
+    weight: 1
+    data:
+      width: 267
+      height: null
+      upscale: false

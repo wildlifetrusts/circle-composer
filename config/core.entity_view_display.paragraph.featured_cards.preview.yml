@@ -1,0 +1,96 @@
+uuid: 03d010fc-b20d-42de-bcae-5541beeecee5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.featured_cards.field_cards_curated_items
+    - field.field.paragraph.featured_cards.field_cards_dynamic_term
+    - field.field.paragraph.featured_cards.field_cards_dynamic_type
+    - field.field.paragraph.featured_cards.field_cards_dynamic_vocabulary
+    - field.field.paragraph.featured_cards.field_cards_number
+    - field.field.paragraph.featured_cards.field_cards_type
+    - paragraphs.paragraphs_type.featured_cards
+  module:
+    - fences
+    - options
+id: paragraph.featured_cards.preview
+targetEntityType: paragraph
+bundle: featured_cards
+mode: preview
+content:
+  field_cards_curated_items:
+    weight: 2
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  field_cards_dynamic_term:
+    weight: 5
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  field_cards_dynamic_type:
+    weight: 3
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  field_cards_dynamic_vocabulary:
+    weight: 4
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  field_cards_number:
+    weight: 1
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_cards_type:
+    weight: 0
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden: {  }

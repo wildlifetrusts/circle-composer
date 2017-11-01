@@ -1,0 +1,449 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_maps.module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_maps_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_maps module.
+    case 'help.page.wildlife_maps':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Maps') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function wildlife_maps_entity_extra_field_info() {
+  $extra_fields = [];
+
+  // Add a static map to Reserve pages.
+  $extra_fields['node']['reserve']['display']['static_map'] = [
+    'label' => t('Static Map'),
+    'description' => t('A static map of the reserve\'s location.'),
+    'weight' => 0,
+    'visible' => FALSE,
+  ];
+
+  // Add an interactive map to Reserve pages.
+  $extra_fields['node']['reserve']['display']['interactive_map'] = [
+    'label' => t('Interactive Map'),
+    'description' => t('An interactive map of the reserve\'s location and boundary (if provided).'),
+    'weight' => 0,
+    'visible' => FALSE,
+  ];
+
+  // Add a static map to Event pages.
+  $extra_fields['node']['event']['display']['static_map'] = [
+    'label' => t('Static Map'),
+    'description' => t('A static map of the event\'s location.'),
+    'weight' => 0,
+    'visible' => FALSE,
+  ];
+
+  return $extra_fields;
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function wildlife_maps_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Provide the entity view for Static Map fields.
+  _wildlife_maps_static_map_entity_view($build, $entity, $display, $view_mode);
+
+  // Provide the entity view for the Interactive Map field.
+  _wildlife_maps_interactive_map_entity_view($build, $entity, $display, $view_mode);
+}
+
+/**
+ * Function triggered via wildlife_maps_entity_view() to provide a build value
+ * for static maps.
+ */
+function _wildlife_maps_static_map_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Only add the field if the current display contains the extra field.
+  if (empty($display->getComponent('static_map'))) {
+    return;
+  }
+
+  $type = $entity->bundle();
+  $api_key = \Drupal::config('wildlife_google_api.settings')->get('api_key');
+
+  // Set up the Markers query.
+  $markers_query = [];
+
+  // Set the icon URL.
+  $icon_url = file_create_url(drupal_get_path('module', 'wildlife_maps') . '/markers/map-marker_' . $type . '.png');
+  $markers_query[] = 'anchor:24,48';
+  $markers_query[] = 'icon:' . $icon_url;
+
+  // Set the latitude and longitude of the marker.
+  $latlon = _wildlife_maps_get_node_lat_lng($entity, 'combined');
+
+  // If the lat/lon returned is not a string (e.g. empty array), there is no
+  // point rendering the map with no marker so just return.
+  if (!is_string($latlon)) {
+    return;
+  }
+
+  $markers_query[] = $latlon;
+
+  $query = [
+    'center' => $latlon,
+    'size' => '335x250',
+    'key' => $api_key,
+    'markers' => implode('|', $markers_query),
+    'zoom' => 12,
+  ];
+
+  $uri = Url::fromUri('https://maps.googleapis.com/maps/api/staticmap');
+  $uri->setOption('query', $query);
+
+  // Set the image to use as the map.
+  $map_image =  [
+    '#theme' => 'image',
+    '#uri' => urldecode($uri->toString()),
+    '#alt' => t('A static map of @destination', ['@destination' => $entity->get('title')->getString()]),
+  ];
+
+  // Set the linked image extra field value.
+  $directions_url = 'https://www.google.com/maps/dir/?api=1&destination=' . $latlon;
+
+  $build['static_map'] = [
+    '#type' => 'link',
+    '#title' => $map_image,
+    '#url' => Url::fromUri($directions_url),
+    '#options' => array(
+      'attributes' => [
+        'target' => '_blank',
+        'title' => t('Get directions to @destination', ['@destination' => $entity->get('title')->getString()]),
+      ],
+      'html' => TRUE,
+    ),
+  ];
+
+  if ($type == 'reserve') {
+    $build['static_map']['#options']['attributes']['itemprop'] = 'hasMap';
+  }
+}
+
+/**
+ * Function triggered via wildlife_maps_entity_view() to provide a build value
+ * for static maps.
+ */
+function _wildlife_maps_interactive_map_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Only add the field if the current display contains the extra field.
+  if (empty($display->getComponent('interactive_map'))) {
+    return;
+  }
+
+  $display_map = $entity->get('field_reserve_display_map')->getString();
+
+  if ($display_map) {
+    $api_key = \Drupal::config('wildlife_google_api.settings')->get('api_key');
+    $map_settings = [];
+
+    $lat_long_value = $entity->get('field_reserve_lat_long')->getValue();
+    $map_settings['lat'] = $lat_long_value[0]['lat'];
+    $map_settings['lng'] = $lat_long_value[0]['lon'];
+
+    /** @var \Drupal\file\Plugin\Field\FieldType\FileFieldItemList $kml_field */
+    $kml_field = $entity->get('field_reserve_boundary');
+
+    if (!$kml_field->isEmpty()) {
+      $file_value = $kml_field->first()->getValue();
+      /** @var \Drupal\file\Entity\File $file */
+      $file = File::load($file_value['target_id']);
+      $uri = $file->getFileUri();
+      $map_settings['kml'] = file_create_url($uri);
+    }
+
+    $zoom_field = $entity->get('field_reserve_map_zoom')->getString();
+    $map_settings['zoom'] = is_numeric($zoom_field) ? $zoom_field : 12;
+
+    $layer_field = $entity->get('field_reserve_map_layer')->getString();
+    $map_settings['layer'] = $layer_field;
+
+    $build['interactive_map'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'div',
+      '#value' => '<div></div>',
+      '#attributes' => [
+        'class' => [
+          'reserve-interactive-map',
+        ],
+      ],
+      '#attached' => [
+        'library' => [
+          'wildlife_maps/reserve-interactive-map'
+        ],
+        'drupalSettings' => [
+          'wildlife_maps' => [
+            'api_key' => $api_key,
+            'interactive_map' => $map_settings,
+          ],
+        ],
+      ],
+    ];
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function wildlife_maps_preprocess_views_view(&$variables) {
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $variables['view'];
+  $map_views = [
+    'reserves_map',
+    'events_map',
+    'event_reserve',
+  ];
+
+  if ($view->id() === 'location_search' && in_array($view->current_display, $map_views)) {
+    $api_key = \Drupal::config('wildlife_google_api.settings')->get('api_key');
+
+    if (!empty($api_key)) {
+      $variables['view_array']['#attached']['library'][] = 'wildlife_maps/location-search-map';
+      $variables['view_array']['#attached']['drupalSettings']['wildlife_maps']['api_key'] = $api_key;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function wildlife_maps_preprocess_node(&$variables) {
+  /** @var \Drupal\node\Entity\Node $node */
+  $node = $variables['node'];
+  $bundle = $node->bundle();
+  $view_mode = $variables['view_mode'];
+
+  // Teaser view mode is used on explore more view as it should only
+  // show map points for things on the current page of results.
+  if ($view_mode == 'teaser') {
+    $lat_long = _wildlife_maps_get_node_lat_lng($node);
+
+    if (isset($lat_long['lat']) && isset($lat_long['lng'])) {
+      $variables['attributes']['data-lat'] = $lat_long['lat'];
+      $variables['attributes']['data-lng'] = $lat_long['lng'];
+      $variables['attributes']['data-type'] = $bundle;
+      $variables['attributes']['data-nid'] = $node->id();
+      $variables['attributes']['data-uuid'] = $node->uuid();
+      $variables['attributes']['data-title'] = $node->getTitle();
+    }
+  }
+
+  // GMap Point view mode is used on other location searches as these
+  // should include all results, even those not on the current page.
+  if ($view_mode == 'gmap_point') {
+    // Set simple fields.
+    $variables['latitude'] = '';
+    $variables['longitude'] = '';
+    $variables['type'] = $bundle;
+    $variables['nid'] = $node->id();
+    $variables['uuid'] = $node->uuid();
+    $variables['title'] = $node->getTitle();
+
+    $lat_long = _wildlife_maps_get_node_lat_lng($node);
+
+    if (isset($lat_long['lat']) && isset($lat_long['lng'])) {
+      $variables['latitude'] = $lat_long['lat'];
+      $variables['longitude'] = $lat_long['lng'];
+    }
+  }
+
+  // Map add image.
+  if ($view_mode == 'map') {
+    $image_fields = [
+      'event' => 'field_event_photos',
+      'reserve' => 'field_reserve_photos',
+    ];
+
+    $image_field = $image_fields[$node->bundle()];
+    $image_content = _wildlife_maps_get_remote_map_images($node, $image_field);
+
+    if (!empty($image_content)) {
+      $variables['content'][$image_field] = $variables['content'][$image_field] + $image_content;
+    }
+  }
+}
+
+/**
+ * Helper function to return the latitude and longitude for Events and Reserves.
+ *
+ * @param \Drupal\node\Entity\Node $node
+ *
+ * @param string $values
+ *   The type of value to return. Either an array of lat lng or a single value.
+ *
+ * @return array
+ *   An array containing values for latitude and longitude.
+ */
+function _wildlife_maps_get_node_lat_lng($node, $values = 'separate') {
+  $bundle = $node->bundle();
+
+  $lat_long = [];
+  $entity_type = null;
+  $entity = null;
+
+  // Special circumstances for remote rendered nodes (i.e. those that do
+  // not exist on the current site but should show in results.
+  if (!empty($node->remoteObject)) {
+    if (!empty($node->remoteObject->field_location_lat_long)) {
+      $lat_long = $node->remoteObject->field_location_lat_long;
+    }
+
+    if (!empty($node->remoteObject->field_reserve_lat_long)) {
+      $lat_long = $node->remoteObject->field_reserve_lat_long;
+    }
+
+    if (!empty($lat_long)) {
+      switch ($values) {
+        case 'combined':
+          return $lat_long;
+          break;
+
+        default:
+          list($lat, $long) = explode(',', $lat_long);
+          $lat_long = [
+            'lat' => $lat,
+            'lng' => $long,
+          ];
+          break;
+      }
+    }
+
+    return $lat_long;
+  }
+
+  switch ($bundle) {
+    case 'reserve':
+      $entity = $node;
+      $entity_type = 'reserve';
+      break;
+
+    case 'event':
+      // Get the latitude and longitude from either the Event Reserve or
+      // Location fields.
+      if (!$node->get('field_event_reserve')->isEmpty()) {
+        /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $reserve_field */
+        $reserve_field = $node->get('field_event_reserve');
+        $entity = $reserve_field->referencedEntities()[0];
+        $entity_type = 'reserve';
+      }
+      elseif (!$node->get('field_event_location')->isEmpty()) {
+        /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $location_field */
+        $location_field = $node->get('field_event_location');
+        $entity = $location_field->referencedEntities()[0];
+        $entity_type = 'location';
+      }
+      break;
+  }
+
+  if (!empty($entity) && !empty($entity_type)) {
+    // Get the latitude and longitude from the Reserve/Location Lat/Long field.
+    $lat_long_field = $entity->get('field_' . $entity_type . '_lat_long')->getValue();
+
+    if ($values == 'combined') {
+      $lat_long = $lat_long_field[0]['latlon'];
+    }
+    else {
+      $lat_long = [
+        'lat' => $lat_long_field[0]['lat'],
+        'lng' => $lat_long_field[0]['lon'],
+      ];
+    }
+  }
+
+  return $lat_long;
+}
+
+/**
+ * Implements template_preprocess_views_view_unformatted().
+ */
+function wildlife_maps_preprocess_views_view_unformatted(&$variables) {
+  $view = $variables['view'];
+  $rows = $variables['rows'];
+
+  $map_views = [
+    'events_map',
+    'reserves_map'
+  ];
+
+  if ($view->id() == 'location_search' && in_array($view->current_display, $map_views)) {
+    foreach ($rows as $id => $row) {
+      if (isset($row['content']['distance'])) {
+        $reformatted_row = [
+          '#type' => 'container',
+          'original_row' => $row['content'],
+          'distance' => $row['content']['distance'],
+        ];
+        $variables['rows'][$id]['content'] = $reformatted_row;
+      }
+    }
+  }
+}
+
+/**
+ * @param \Drupal\node\Entity\Node $node
+ * @param $image_field
+ * @return array
+ */
+function _wildlife_maps_get_remote_map_images($node, $image_field) {
+  $image_content = [];
+
+  if ($node->hasField($image_field)) {
+    $has_photos = !$node->get($image_field)->isEmpty();
+
+    if (!$has_photos) {
+      $uuid = $node->uuid();
+      $remote_field_values = \Drupal::service('wildlife_search.localapi_field_values')
+        ->getFields($uuid);
+
+      if (!empty($remote_field_values)) {
+        $item = $remote_field_values['item'];
+        $used_domain = $remote_field_values['used_domain'];
+
+        foreach ($item as $name => $value) {
+          if (strpos($name, 'map_thumb') !== FALSE) {
+            if (!empty($value)) {
+              $image_content = [
+                '#theme' => 'image',
+                '#style_name' => 'map_thumb',
+                '#uri' => $used_domain . $value,
+              ];
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return $image_content;
+}
+
+/**
+ * Implements template_preprocess_image().
+ */
+function wildlife_maps_preprocess_image(&$variables) {
+  // We need the map thumbnail to always use an absolute URL.
+  if ($variables['style_name'] == 'map_thumb') {
+    $variables['attributes']['src'] = file_create_url($variables['uri']);
+  }
+}

@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Creates signup forms integrated with Campaign Monitor.
+ */
+
+use \Drupal\wildlife_newsletters_campaign_monitor\Entity\CampaignMonitorSignup;
+
+/**
+ * Loads a single CampaignMonitorSignup entity by ID.
+ *
+ * @param int $signup_id
+ *   The ID of the CampaignMonitorSignup entity to load.
+ *
+ * @return \Drupal\wildlife_newsletters_campaign_monitor\Entity\CampaignMonitorSignup
+ *   The CampaignMonitorSignup entity.
+ */
+function wildlife_newsletters_campaign_monitor_signup_load_entity($signup_id) {
+  return CampaignMonitorSignup::load($signup_id);
+}
+
+/**
+ * Loads multiple CampaignMonitorSignup entities.
+ *
+ * @param array $signup_ids
+ *   Array of CampaignMonitorSignup entity IDs to load.
+ * @param bool $reset
+ *   TRUE to reset cache when loading CampaignMonitorSignup entities.
+ *
+ * @return \Drupal\wildlife_newsletters_campaign_monitor\Entity\CampaignMonitorSignup[]
+ *   Array of CampaignMonitorSignup entities.
+ */
+function wildlife_newsletters_campaign_monitor_signup_load_multiple($signup_ids = array(), $reset = FALSE) {
+  if (empty($signup_ids)) {
+    $signup_ids = NULL;
+  }
+
+  $controller = \Drupal::entityTypeManager()->getStorage('campaign_monitor_signup');
+
+  if ($reset) {
+    $controller->resetCache($signup_ids);
+  }
+
+  return $controller->loadMultiple($signup_ids);
+}

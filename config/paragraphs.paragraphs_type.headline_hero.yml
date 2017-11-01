@@ -1,0 +1,9 @@
+uuid: fc580982-a11b-49a1-adf4-8cafe141adf4
+langcode: en
+status: true
+dependencies: {  }
+id: headline_hero
+label: 'Headline Hero'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

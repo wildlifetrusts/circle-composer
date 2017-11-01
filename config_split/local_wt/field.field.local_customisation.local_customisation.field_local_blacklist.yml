@@ -1,0 +1,24 @@
+uuid: 8e63835e-7363-4932-acf4-96f0dc830709
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.local_customisation.field_local_blacklist
+  module:
+    - wildlife_local_customisation
+id: local_customisation.local_customisation.field_local_blacklist
+field_name: field_local_blacklist
+entity_type: local_customisation
+bundle: local_customisation
+label: Blacklist
+description: 'Check to black list this content. Blacklisted content will not be accessible for site visitors and will not be included in search results or indexed by search engines.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

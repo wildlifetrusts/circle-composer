@@ -1,0 +1,30 @@
+/// Styles a list to "quick links" style inline secondary buttons.
+@mixin quick-links-list($buttons: true) {
+  ul {
+    @extend %clean-list;
+    margin-right: -0.25em;
+    margin-left: -0.25em;
+  }
+
+  li {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 0.5em;
+    margin-right: 0.25em;
+    margin-left: 0.25em;
+  }
+
+  @if $buttons {
+    a {
+      .node__content & {
+        @extend .button;
+        @extend .button--secondary;
+        font-weight: $font-weight-semi-bold;
+      }
+    }
+  }
+}
+
+.quick-links-list {
+  @include quick-links-list;
+}

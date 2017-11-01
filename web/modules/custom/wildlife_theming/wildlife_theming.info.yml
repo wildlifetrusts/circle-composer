@@ -1,0 +1,10 @@
+type: module
+name: Wildlife Theming
+description: 'Allow custom theme variation on a site by site basis.'
+package: Wildlife
+core: 8.x
+
+dependencies:
+  - options
+  - node
+  - responsive_favicons

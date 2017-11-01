@@ -1,0 +1,7 @@
+.know-before-you-go {
+  > h2 {
+    @include add-breakpoint('lap-to-desk') {
+      padding-right: 2em;
+    }
+  }
+}

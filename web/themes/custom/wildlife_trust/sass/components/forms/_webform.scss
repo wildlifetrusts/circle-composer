@@ -1,0 +1,19 @@
+.webform-element--title-inline {
+  label {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.webform-element-help {
+  font-weight: 300;
+  width: 1.25em;
+  background-color: palette(orange);
+  border-color: palette(orange);
+
+  &:hover,
+  &:focus {
+    background-color: palette(orange, dark);
+    border-color: palette(orange, dark);
+  }
+}

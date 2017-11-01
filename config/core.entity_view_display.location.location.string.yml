@@ -1,0 +1,101 @@
+uuid: e0907ac0-dd2d-4a5f-bd7f-861d37c6135b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.location.string
+    - field.field.location.location.field_location_address
+    - field.field.location.location.field_location_county
+    - field.field.location.location.field_location_grid_ref
+    - field.field.location.location.field_location_lat_long
+    - field.field.location.location.field_location_name
+    - field.field.location.location.field_location_postcode
+    - field.field.location.location.field_location_town
+  module:
+    - fences
+    - wildlife_location
+id: location.location.string
+targetEntityType: location
+bundle: location
+mode: string
+content:
+  field_location_address:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: span
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: basic_string
+    region: content
+  field_location_county:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: span
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_location_name:
+    type: string
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: span
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_location_postcode:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: span
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_location_town:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: span
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+hidden:
+  field_location_grid_ref: true
+  field_location_lat_long: true
+  langcode: true
+  name: true
+  user_id: true

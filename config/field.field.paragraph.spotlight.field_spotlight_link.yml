@@ -1,0 +1,23 @@
+uuid: 20538356-b198-4f0a-bd62-3985d27bbaeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_link
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - link
+id: paragraph.spotlight.field_spotlight_link
+field_name: field_spotlight_link
+entity_type: paragraph
+bundle: spotlight
+label: Link
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

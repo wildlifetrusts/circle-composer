@@ -1,0 +1,169 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_newsletters.module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\wildlife_newsletters\Controller\NewsletterSignupListBuilder;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_newsletters_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_newsletters module.
+    case 'help.page.wildlife_newsletters':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Creates Campaign Monitor sign-up form entity type, adds tweaks and preprocessing for other Newsletter entities.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_newsletters_form_mailchimp_signup_form_alter(&$form, &$form_state, $form_id) {
+  // Update the title field with a new description.
+  $form['title']['#title'] = t('Admin title');
+  $form['title']['#description'] = t('The title is for administrative purposes and will be used when referencing sign-up forms in Newsletter Components.');
+
+  // Hide the description field as it isn't used.
+  $form['description']['#access'] = FALSE;
+
+  // Set block as the default mode for a new form and then hide the field.
+  $form['mode']['#type'] = 'hidden';
+  $form['mode']['#value'] = [MAILCHIMP_SIGNUP_BLOCK];
+  $form['settings']['path']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function wildlife_newsletters_entity_type_alter(array &$entity_types) {
+  $entity_types['mailchimp_signup']->setHandlerClass('list_builder', NewsletterSignupListBuilder::class);
+  $entity_types['mailchimp_signup']->set('admin_permission', 'administer mailchimp sign up forms');
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function wildlife_newsletters_field_widget_form_alter(&$element, &$form_state, $context) {
+  /** @var \Drupal\Core\Field\FieldItemList $items */
+  $items = $context['items'];
+
+  /** @var \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $parent */
+  $parent = $items->getParent();
+  $parent_entity = $parent->getValue();
+
+  if ($parent && $parent_entity->getEntityTypeId() == 'paragraph') {
+    $field_parents = $context['form']['#parents'];
+    $parent_entity_type = $parent->getValue()->getType();
+
+    if ($parent_entity_type == 'newsletter_sign_up' && is_array($field_parents)) {
+      $field_name = $items->getName();
+      $input_name = _wildlife_paragraphs_get_paragraph_name_from_parents($field_parents);
+
+      $mailchimp_only_states = [
+        'visible' => [
+          [':input[name="' . $input_name . '[field_newsletter_campaign_type]"]' => ['value' => 'mailchimp']],
+        ],
+      ];
+
+      $campaign_monitor_only_states = [
+        'visible' => [
+          [':input[name="' . $input_name . '[field_newsletter_campaign_type]"]' => ['value' => 'campaign_monitor']],
+        ],
+        'required' => [
+          [':input[name="' . $input_name . '[field_newsletter_campaign_type]"]' => ['value' => 'campaign_monitor']],
+        ],
+      ];
+
+      // Campaign type settings - check there are newsletters available.
+      if ($field_name == 'field_newsletter_campaign_type') {
+        $mailchimp_forms = mailchimp_signup_load_multiple();
+        $campaign_monitor_forms = wildlife_newsletters_campaign_monitor_signup_load_multiple();
+
+        if (empty($mailchimp_forms) && empty($campaign_monitor_forms)) {
+          $element['#disabled'] = TRUE;
+          $element['#description'] = t('You may not use this component since there are no Mailchimp or Campaign Monitor forms set up in the system.');
+        }
+        elseif (empty($mailchimp_forms)) {
+          unset($element['#options']['mailchimp']);
+          $element['#default_value'] = 'campaign_monitor';
+        }
+        elseif (empty($campaign_monitor_forms)) {
+          unset($element['#options']['campaign_monitor']);
+          $element['#default_value'] = 'mailchimp';
+        }
+      }
+
+      // Mailchimp button visibility states.
+      if ($field_name == 'field_newsletter_mailchimp_btn') {
+        $element['value']['#states'] = $mailchimp_only_states;
+      }
+
+      // Mailchimp form visibility states.
+      if ($field_name == 'field_newsletter_mailchimp_form') {
+        $element['#states'] = $mailchimp_only_states;
+        $element['#states']['required'] = [
+          [':input[name="' . $input_name . '[field_newsletter_campaign_type]"]' => ['value' => 'mailchimp']],
+        ];
+      }
+
+      // Campaign Monitor form visibility states.
+      if ($field_name == 'field_newsletter_cm_form') {
+        $element['#states'] = $campaign_monitor_only_states;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+*/
+function wildlife_newsletters_paragraph_presave(EntityInterface $entity) {
+  if ($entity->bundle() == 'newsletter_sign_up') {
+    $newsletter_type = $entity->get('field_newsletter_campaign_type')->getString();
+
+    switch ($newsletter_type) {
+      case 'mailchimp':
+        // If it's a Mailchimp field, delete the value for Campaign Monitor.
+        /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $campaign_monitor_form_value */
+        $campaign_monitor_form_value = $entity->get('field_newsletter_cm_form');
+        $campaign_monitor_form_value->setValue(NULL);
+
+        break;
+      case 'campaign_monitor':
+        // If it's a Campaign Monitor field, delete the values for Mailchimp.
+        /** @var \Drupal\Core\Field\FieldItemList $mailchimp_button_value */
+        $mailchimp_button_value = $entity->get('field_newsletter_mailchimp_btn');
+        $mailchimp_button_value->setValue('');
+
+        /** @var \Drupal\Core\Field\EntityReferenceFieldItemList $campaign_monitor_form_value */
+        $mailchimp_form_value = $entity->get('field_newsletter_mailchimp_form');
+        $mailchimp_form_value->setValue(NULL);
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function wildlife_newsletters_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  if ($entity_type->id() == 'paragraph' && $bundle == 'newsletter_sign_up') {
+    if (isset($fields['field_newsletter_mailchimp_form'])) {
+      $fields['field_newsletter_mailchimp_form']->addConstraint('Newsletter', []);
+    }
+    if (isset($fields['field_newsletter_cm_form'])) {
+      $fields['field_newsletter_cm_form']->addConstraint('Newsletter', []);
+    }
+  }
+}

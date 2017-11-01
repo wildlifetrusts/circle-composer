@@ -1,0 +1,20 @@
+uuid: 480d7b98-748d-498d-8da1-85952e0326b7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_voluntary_opportunity_type
+field_name: field_voluntary_opportunity_type
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

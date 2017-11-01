@@ -1,0 +1,33 @@
+uuid: 1c945bdb-9312-435b-93f4-eecce33782d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.js_gallery
+    - field.field.paragraph.image_gallery_item.field_gallery_image
+    - field.field.paragraph.image_gallery_item.field_gallery_image_caption
+    - paragraphs.paragraphs_type.image_gallery_item
+  module:
+    - fences
+    - wildlife_field_formatters
+id: paragraph.image_gallery_item.js_gallery
+targetEntityType: paragraph
+bundle: image_gallery_item
+mode: js_gallery
+content:
+  field_gallery_image:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: image_gallery_item
+    region: content
+hidden:
+  field_gallery_image_caption: true

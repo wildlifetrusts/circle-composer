@@ -1,0 +1,27 @@
+uuid: ccadbee4-3ee9-4c6d-acf5-79ed9246f244
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_caption
+    - media_entity.bundle.audio
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: media.audio.field_media_caption
+field_name: field_media_caption
+entity_type: media
+bundle: audio
+label: Credit/caption
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

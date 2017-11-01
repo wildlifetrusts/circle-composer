@@ -1,0 +1,23 @@
+uuid: e2948839-1ad1-43dd-a67a-9c71f7a41500
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_title_size
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - options
+id: paragraph.spotlight.field_spotlight_title_size
+field_name: field_spotlight_title_size
+entity_type: paragraph
+bundle: spotlight
+label: 'Title font size'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: small
+default_value_callback: ''
+settings: {  }
+field_type: list_string

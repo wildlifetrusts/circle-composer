@@ -1,0 +1,26 @@
+uuid: 7fc2754d-4fcd-421c-baf2-dfdf25f7e1d6
+langcode: en
+status: true
+dependencies:
+  module:
+    - rrssb
+    - wildlife_conditions
+  theme:
+    - wildlife_trust
+id: social_share
+theme: wildlife_trust
+region: content
+weight: -6
+provider: null
+plugin: rrssb_block
+settings:
+  id: rrssb_block
+  label: 'Share this content.'
+  provider: rrssb
+  label_display: '0'
+visibility:
+  node_allows_social_sharing:
+    id: node_allows_social_sharing
+    display_on_social_sharing_nodes: 1
+    negate: false
+    context_mapping: {  }

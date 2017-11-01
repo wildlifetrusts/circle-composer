@@ -1,0 +1,13 @@
+views.row.remote_search_api:
+  type: views_row
+  label: 'Search API rendered remote item'
+  mapping:
+    view_modes:
+      type: sequence
+      label: View modes for each datasource
+      sequence:
+        type: sequence
+        label: A list of all the bundles and their configured view mode
+        sequence:
+          type: string
+          label: View mode for the specific bundle

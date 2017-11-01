@@ -1,0 +1,57 @@
+.node__related {
+  @extend %constrain;
+  @include spacing('x-large', 'top');
+  text-align: center;
+
+  > h2 {
+    padding-left: emRhythm(1, ms(2));
+    padding-right: emRhythm(1, ms(2));
+    padding-bottom: emRhythm(1, ms(2));
+    @include spacing('large', 'bottom');
+    border-bottom: 2px solid palette(mono, x-dark);
+    display: inline-block;
+
+    @include add-breakpoint('lap-and-up') {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.field--related-habitats {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 0;
+  text-align: left;
+
+  .field__item {
+    @include spacing('medium', 'bottom');
+    vertical-align: top;
+    @include setType(6, 16px);
+
+    @include add-breakpoint('palm-to-lap') {
+      @include float-span(2);
+      float: none;
+
+      &:nth-child(2n) {
+        @include float-span(2, 'last');
+        float: none;
+      }
+
+      display: inline-block;
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      @include float-span(4);
+      float: none;
+
+      &:nth-child(3n) {
+        @include float-span(4, 'last');
+        float: none;
+      }
+
+      display: inline-block;
+    }
+  }
+}

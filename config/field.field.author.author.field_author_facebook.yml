@@ -1,0 +1,23 @@
+uuid: 23f0781e-0088-4d4a-bf97-c4c28e6ed7ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.author.field_author_facebook
+  module:
+    - link
+    - wildlife_author
+id: author.author.field_author_facebook
+field_name: field_author_facebook
+entity_type: author
+bundle: author
+label: 'Facebook URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

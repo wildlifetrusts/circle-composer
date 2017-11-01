@@ -1,0 +1,24 @@
+uuid: 4e5c8add-cff0-401b-90cd-6a536cc8ecdf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.statistic_item.field_statistic_dynamic_type
+    - field.field.paragraph.statistic_item.field_statistic_static_custom
+    - field.field.paragraph.statistic_item.field_statistic_static_number
+    - field.field.paragraph.statistic_item.field_statistic_static_type
+    - field.field.paragraph.statistic_item.field_statistic_type
+    - field.field.paragraph.statistic_item.field_statistic_url
+    - paragraphs.paragraphs_type.statistic_item
+id: paragraph.statistic_item.default
+targetEntityType: paragraph
+bundle: statistic_item
+mode: default
+content: {  }
+hidden:
+  field_statistic_dynamic_type: true
+  field_statistic_static_custom: true
+  field_statistic_static_number: true
+  field_statistic_static_type: true
+  field_statistic_type: true
+  field_statistic_url: true

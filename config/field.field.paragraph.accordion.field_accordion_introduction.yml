@@ -1,0 +1,27 @@
+uuid: 32096511-33b5-4e28-aaeb-8fd38f3eafcb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accordion_introduction
+    - paragraphs.paragraphs_type.accordion
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: paragraph.accordion.field_accordion_introduction
+field_name: field_accordion_introduction
+entity_type: paragraph
+bundle: accordion
+label: Introduction
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

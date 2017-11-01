@@ -1,0 +1,35 @@
+uuid: 8e43ea6b-5998-4fa0-a589-a79c68a4c749
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_conditions
+  theme:
+    - wildlife_trust
+_core:
+  default_config_hash: 8yptDf6WrXxeyevUz4nP5vfr7BtxQqCBMninhV2IJ1g
+id: wildlife_trust_page_title
+theme: wildlife_trust
+region: content
+weight: -9
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility:
+  all_pages_excluding_types:
+    id: all_pages_excluding_types
+    bundles:
+      blog: blog
+      event: event
+      habitat: habitat
+      job: job
+      news: news
+      reserve: reserve
+      species: species
+      volunteer_opportunity: volunteer_opportunity
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,17 @@
+uuid: 40d96603-2fd7-4e3c-8e5b-61160f6917a5
+langcode: en
+status: false
+dependencies: {  }
+id: lancswt
+label: 'Lancs site split'
+folder: ../config_split/lancswt
+module:
+  wildlife_local_customisation: 0
+theme: {  }
+blacklist: {  }
+graylist:
+  - system.site
+  - wildlife_trust.settings
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 5

@@ -1,0 +1,29 @@
+uuid: 6d0601fb-a3e0-494c-8b32-cda3bb712393
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: paragraph_webform_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Webform components from a CSV source to paragraphs: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/paragraph_webform_national.csv
+  header_row_count: 1
+  keys:
+    - id
+process:
+  type:
+    plugin: default_value
+    default_value: webform
+  field_webform_form/target_id: webform
+  field_webform_form/status: status
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+migration_dependencies: null

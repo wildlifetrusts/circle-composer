@@ -1,0 +1,6 @@
+wildlife_admin.custom_entities.list:
+  title: 'Custom Entities'
+  route_name: wildlife_admin.custom_entities_page
+  description: 'List custom entities'
+  parent: system.admin_structure
+  weight: 100

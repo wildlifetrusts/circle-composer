@@ -1,0 +1,30 @@
+uuid: 64e09f01-2f58-432b-b8a8-cb49fe586322
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - rrssb
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  rrssb:
+    show: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - draft
+      - needs_review
+      - ready_to_be_published
+      - unpublished
+    default_moderation_state: draft
+name: Blog
+type: blog
+description: 'Add a blog article to appear in Blog listings.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

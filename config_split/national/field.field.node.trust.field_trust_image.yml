@@ -1,0 +1,28 @@
+uuid: efab78be-8dcc-470f-ba06-9269c48a5d05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_image
+    - media_entity.bundle.image
+    - node.type.trust
+id: node.trust.field_trust_image
+field_name: field_trust_image
+entity_type: node
+bundle: trust
+label: Image
+description: 'Add a representative image for this Trust. It will be displayed when users search for a Trust.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,19 @@
+uuid: d993b125-e6cd-4394-8637-48333b162eca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_summary
+    - node.type.reserve
+id: node.reserve.field_reserve_summary
+field_name: field_reserve_summary
+entity_type: node
+bundle: reserve
+label: Summary
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

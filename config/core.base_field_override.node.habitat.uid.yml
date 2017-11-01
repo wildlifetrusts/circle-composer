@@ -1,0 +1,20 @@
+uuid: 9b91a623-042a-4ddb-9f53-2d398a455e3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.habitat
+id: node.habitat.uid
+field_name: uid
+entity_type: node
+bundle: habitat
+label: 'Authored by'
+description: 'The username of the content author.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: 'Drupal\node\Entity\Node::getCurrentUserId'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

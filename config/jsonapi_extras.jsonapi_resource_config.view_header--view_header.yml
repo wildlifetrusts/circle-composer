@@ -1,0 +1,135 @@
+uuid: 5c0bbb79-f1f7-40a8-a6b4-2de56ab3daba
+langcode: en
+status: true
+dependencies: {  }
+id: view_header--view_header
+disabled: true
+path: view_header/view_header
+resourceType: view_header--view_header
+resourceFields:
+  id:
+    fieldName: id
+    publicName: id
+    enhancer:
+      id: ''
+    disabled: false
+  uuid:
+    fieldName: uuid
+    publicName: uuid
+    enhancer:
+      id: ''
+    disabled: false
+  vid:
+    fieldName: vid
+    publicName: vid
+    enhancer:
+      id: ''
+    disabled: false
+  langcode:
+    fieldName: langcode
+    publicName: langcode
+    enhancer:
+      id: ''
+    disabled: false
+  revision_created:
+    fieldName: revision_created
+    publicName: revision_created
+    enhancer:
+      id: ''
+    disabled: false
+  revision_user:
+    fieldName: revision_user
+    publicName: revision_user
+    enhancer:
+      id: ''
+    disabled: false
+  revision_log_message:
+    fieldName: revision_log_message
+    publicName: revision_log_message
+    enhancer:
+      id: ''
+    disabled: false
+  user_id:
+    fieldName: user_id
+    publicName: user_id
+    enhancer:
+      id: ''
+    disabled: false
+  name:
+    fieldName: name
+    publicName: name
+    enhancer:
+      id: ''
+    disabled: false
+  field_view_header_title:
+    fieldName: field_view_header_title
+    publicName: field_view_header_title
+    enhancer:
+      id: ''
+    disabled: false
+  field_header_type:
+    fieldName: field_header_type
+    publicName: field_header_type
+    enhancer:
+      id: ''
+    disabled: false
+  view_id:
+    fieldName: view_id
+    publicName: view_id
+    enhancer:
+      id: ''
+    disabled: false
+  view_display_id:
+    fieldName: view_display_id
+    publicName: view_display_id
+    enhancer:
+      id: ''
+    disabled: false
+  status:
+    fieldName: status
+    publicName: status
+    enhancer:
+      id: ''
+    disabled: false
+  created:
+    fieldName: created
+    publicName: created
+    enhancer:
+      id: ''
+    disabled: false
+  changed:
+    fieldName: changed
+    publicName: changed
+    enhancer:
+      id: ''
+    disabled: false
+  revision_translation_affected:
+    fieldName: revision_translation_affected
+    publicName: revision_translation_affected
+    enhancer:
+      id: ''
+    disabled: false
+  default_langcode:
+    fieldName: default_langcode
+    publicName: default_langcode
+    enhancer:
+      id: ''
+    disabled: false
+  field_further_content:
+    fieldName: field_further_content
+    publicName: field_further_content
+    enhancer:
+      id: ''
+    disabled: false
+  field_header_image:
+    fieldName: field_header_image
+    publicName: field_header_image
+    enhancer:
+      id: ''
+    disabled: false
+  field_header_silhouette:
+    fieldName: field_header_silhouette
+    publicName: field_header_silhouette
+    enhancer:
+      id: ''
+    disabled: false

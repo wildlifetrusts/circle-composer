@@ -1,0 +1,21 @@
+uuid: e5f676a8-2cb1-4951-8e6f-62c4ddb5aa1c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voluntary_duration
+    - node.type.volunteer_opportunity
+  module:
+    - datetime_range
+id: node.volunteer_opportunity.field_voluntary_duration
+field_name: field_voluntary_duration
+entity_type: node
+bundle: volunteer_opportunity
+label: Duration
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

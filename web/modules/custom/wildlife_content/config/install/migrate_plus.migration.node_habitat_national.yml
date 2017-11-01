@@ -1,0 +1,95 @@
+uuid: c19ef52d-1388-40d9-aa21-4e1f7652e85b
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: node_habitat_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Habitat data from a CSV source to nodes: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/node_habitat_national.csv
+  header_row_count: 1
+  keys:
+    - nid
+  constants:
+    text_format: rich_text
+    mod_state: published
+process:
+  type:
+    plugin: default_value
+    default_value: habitat
+  title: title
+  moderation_state: constants/mod_state
+  field_further_content:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: further_content
+    -
+      plugin: migration
+      migration:
+        - paragraph_rich_text_national
+        - paragraph_image_national
+        - paragraph_video_national
+        - paragraph_attached_files_national
+        - paragraph_accordion_national
+        - paragraph_section_national
+        - paragraph_quick_links_national
+        - paragraph_spotlight_group_national
+        - paragraph_headline_hero_national
+      no_stub: true
+    -
+      plugin: iterator
+      process:
+        target_id: '0'
+        target_revision_id: '1'
+  field_habitat_conservation/value: conservation
+  field_habitat_conservation/format: constants/text_format
+  field_habitat_distribution/value: distribution
+  field_habitat_distribution/format: constants/text_format
+  field_habitat_parent:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: habitat
+      strict: false
+    -
+      plugin: migration
+      migration: node_habitat_national
+  field_habitat_photos:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: photos
+    -
+      plugin: migration
+      migration: media_images_national
+      no_stub: true
+  field_habitat_summary: summary
+  field_habitat_what_is_it/value: what_is_it
+  field_habitat_what_is_it/format: constants/text_format
+  field_habitat_what_to_look_for/value: what_to_look_for
+  field_habitat_what_to_look_for/format: constants/text_format
+  field_habitat_why/value: why
+  field_habitat_why/format: constants/text_format
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - media_images_national
+    - paragraph_rich_text_national
+    - paragraph_image_national
+    - paragraph_video_national
+    - paragraph_attached_files_national
+    - paragraph_accordion_national
+    - paragraph_section_national
+    - paragraph_quick_links_national
+    - paragraph_spotlight_group_national
+    - paragraph_headline_hero_national

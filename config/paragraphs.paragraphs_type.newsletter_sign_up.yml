@@ -1,0 +1,9 @@
+uuid: 53ff467e-2660-4ab2-a465-2c3737ffbac9
+langcode: en
+status: true
+dependencies: {  }
+id: newsletter_sign_up
+label: 'Newsletter sign-up'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

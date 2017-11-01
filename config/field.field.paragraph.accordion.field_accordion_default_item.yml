@@ -1,0 +1,25 @@
+uuid: 362be950-1ae8-4772-93e3-b71d76455ce1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accordion_default_item
+    - paragraphs.paragraphs_type.accordion
+id: paragraph.accordion.field_accordion_default_item
+field_name: field_accordion_default_item
+entity_type: paragraph
+bundle: accordion
+label: 'Default Open Item'
+description: 'The numeric position of the accordion item that should be open by default.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

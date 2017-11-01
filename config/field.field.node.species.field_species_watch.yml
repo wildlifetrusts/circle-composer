@@ -1,0 +1,66 @@
+uuid: 06f52433-b546-476e-bb8f-75c63d9836a8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_species_watch
+    - node.type.species
+    - paragraphs.paragraphs_type.video
+  module:
+    - entity_reference_revisions
+id: node.species.field_species_watch
+field_name: field_species_watch
+entity_type: node
+bundle: species
+label: Watch
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      video: video
+    target_bundles_drag_drop:
+      accordion:
+        weight: 14
+        enabled: false
+      accordion_item:
+        weight: 15
+        enabled: false
+      attached_files:
+        weight: 16
+        enabled: false
+      headline_hero:
+        weight: 17
+        enabled: false
+      image:
+        weight: 18
+        enabled: false
+      linked_logo_item:
+        weight: 19
+        enabled: false
+      linked_logos:
+        weight: 20
+        enabled: false
+      quick_links:
+        weight: 21
+        enabled: false
+      rich_text:
+        weight: 22
+        enabled: false
+      section:
+        weight: 23
+        enabled: false
+      spotlight:
+        weight: 24
+        enabled: false
+      spotlight_group:
+        weight: 25
+        enabled: false
+      video:
+        enabled: true
+        weight: 26
+field_type: entity_reference_revisions

@@ -1,0 +1,46 @@
+uuid: 86d9e5c5-06fd-4685-b6bd-23a0fec06121
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_document_browser
+    - field.field.paragraph.attached_files.field_attached_files_file
+    - field.field.paragraph.attached_files.field_attached_files_title
+    - paragraphs.paragraphs_type.attached_files
+  module:
+    - entity_browser
+    - workbench_moderation
+id: paragraph.attached_files.default
+targetEntityType: paragraph
+bundle: attached_files
+mode: default
+content:
+  field_attached_files_file:
+    weight: 1
+    settings:
+      entity_browser: media_document_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_attached_files_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

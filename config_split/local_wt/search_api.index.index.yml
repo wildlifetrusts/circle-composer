@@ -1,0 +1,233 @@
+uuid: 48c567c0-5d69-4890-8ca2-875c01da3be2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_basic_landing_summary
+    - field.storage.node.field_blog_summary
+    - field.storage.node.field_event_summary
+    - field.storage.node.field_voluntary_summary
+    - field.storage.node.field_species_summary
+    - field.storage.node.field_habitat_summary
+    - field.storage.node.field_job_summary
+    - field.storage.node.field_news_summary
+    - field.storage.node.field_reserve_summary
+    - field.storage.node.field_species_scientific_name
+    - search_api.server.keyword_multilingual
+  module:
+    - search_api
+    - node
+id: index
+name: 'Index (Keyword)'
+description: ''
+read_only: false
+field_settings:
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 5
+  field_basic_landing_summary:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: field_basic_landing_summary
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_basic_landing_summary
+  field_blog_summary:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: field_blog_summary
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_blog_summary
+  field_event_summary:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: field_event_summary
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_event_summary
+  field_voluntary_summary:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: field_voluntary_summary
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_voluntary_summary
+  field_species_summary:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: field_species_summary
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_species_summary
+  field_habitat_summary:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: field_habitat_summary
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_habitat_summary
+  field_job_summary:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: field_job_summary
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_job_summary
+  field_news_summary:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: field_news_summary
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_news_summary
+  field_reserve_summary:
+    label: Summary
+    datasource_id: 'entity:node'
+    property_path: field_reserve_summary
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_summary
+  status:
+    label: 'Publishing status'
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+  uuid:
+    label: UUID
+    datasource_id: 'entity:node'
+    property_path: uuid
+    type: string
+  field_species_scientific_name:
+    label: 'Scientific name'
+    datasource_id: 'entity:node'
+    property_path: field_species_scientific_name
+    type: text
+    boost: !!float 5
+    dependencies:
+      config:
+        - field.storage.node.field_species_scientific_name
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  entity_status: {  }
+  html_filter:
+    all_fields: false
+    fields:
+      - title
+      - field_basic_landing_summary
+      - field_blog_summary
+      - field_event_summary
+      - field_voluntary_summary
+      - field_species_summary
+      - field_habitat_summary
+      - field_job_summary
+      - field_news_summary
+      - field_reserve_summary
+      - field_species_scientific_name
+    title: true
+    alt: true
+    tags:
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+      b: 2
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+  ignorecase:
+    all_fields: false
+    fields:
+      - title
+      - field_basic_landing_summary
+      - field_blog_summary
+      - field_event_summary
+      - field_voluntary_summary
+      - field_species_summary
+      - field_habitat_summary
+      - field_job_summary
+      - field_news_summary
+      - field_reserve_summary
+      - field_species_scientific_name
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+  rendered_item: {  }
+  tokenizer:
+    all_fields: false
+    fields:
+      - title
+      - field_basic_landing_summary
+      - field_blog_summary
+      - field_event_summary
+      - field_voluntary_summary
+      - field_species_summary
+      - field_habitat_summary
+      - field_job_summary
+      - field_news_summary
+      - field_reserve_summary
+      - field_species_scientific_name
+    spaces: ''
+    overlap_cjk: 1
+    minimum_word_size: '3'
+    weights:
+      preprocess_index: -6
+      preprocess_query: -6
+  transliteration:
+    all_fields: false
+    fields:
+      - title
+      - field_basic_landing_summary
+      - field_blog_summary
+      - field_event_summary
+      - field_voluntary_summary
+      - field_species_summary
+      - field_habitat_summary
+      - field_job_summary
+      - field_news_summary
+      - field_reserve_summary
+      - field_species_scientific_name
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+tracker_settings:
+  default: {  }
+options:
+  index_directly: true
+  cron_limit: 50
+server: keyword_multilingual

@@ -1,0 +1,27 @@
+tid,name,weight
+3001,"Admin / Office-based",0
+3002,"Catering",1
+3003,"Cleaning",2
+3004,"Communications",3
+3005,"Conservation",4
+3006,"Digital",5
+3007,"Ecology / Consultancy",6
+3008,"Education / Schools and Children",7
+3009,"Finance",8
+3010,"Fundraising",9
+3011,"Grazier / Livestock Management",10
+3012,"Health and safety",11
+3013,"Human Resources",12
+3014,"IT",13
+3015,"Management",14
+3017,"Marketing",15
+3018,"Membership Recruitment",16
+3019,"Project Management",17
+3020,"Receptionist",18
+3021,"Reserve Officer",19
+3022,"Retail",20
+3023,"Senior Management",21
+3024,"Surveying / Monitoring",22
+3025,"Volunteer Support",23
+3026,"Warden / Ranger",24
+3027,"Other",25

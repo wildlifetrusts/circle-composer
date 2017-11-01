@@ -1,0 +1,38 @@
+uuid: 37454034-d0d7-42f8-bc4d-ddda61c6c892
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - node
+id: default
+label: Default
+description: 'The default Linkit profile.'
+attributes:
+  target:
+    id: target
+    weight: 0
+    settings:
+      widget_type: simple_checkbox
+matchers:
+  dc039752-0ef7-41c8-b0e4-42ef31f93a78:
+    uuid: dc039752-0ef7-41c8-b0e4-42ef31f93a78
+    id: 'entity:node'
+    weight: 0
+    settings:
+      result_description: ''
+      bundles: {  }
+      group_by_bundle: true
+      include_unpublished: false
+  8a22c5c5-896e-4884-8300-65d398d77706:
+    uuid: 8a22c5c5-896e-4884-8300-65d398d77706
+    id: 'entity:file'
+    weight: 0
+    settings:
+      result_description: ''
+      bundles: null
+      group_by_bundle: null
+      images:
+        show_dimensions: false
+        show_thumbnail: false
+        thumbnail_image_style: null

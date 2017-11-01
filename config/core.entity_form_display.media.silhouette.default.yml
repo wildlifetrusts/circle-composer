@@ -1,0 +1,34 @@
+uuid: a944ba13-7499-4573-af76-3ec9e6a88a38
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.silhouette.field_silhouette
+    - media_entity.bundle.silhouette
+  module:
+    - file
+    - workbench_moderation
+id: media.silhouette.default
+targetEntityType: media
+bundle: silhouette
+mode: default
+content:
+  field_silhouette:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  uid: true

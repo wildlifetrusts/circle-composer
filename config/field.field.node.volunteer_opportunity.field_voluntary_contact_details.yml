@@ -1,0 +1,27 @@
+uuid: bda1169b-8e93-4f69-9b56-79c89b617d00
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voluntary_contact_details
+    - node.type.volunteer_opportunity
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.volunteer_opportunity.field_voluntary_contact_details
+field_name: field_voluntary_contact_details
+entity_type: node
+bundle: volunteer_opportunity
+label: 'Contact details'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

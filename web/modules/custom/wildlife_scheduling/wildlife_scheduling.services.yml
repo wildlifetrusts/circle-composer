@@ -1,0 +1,4 @@
+services:
+  wildlife_scheduling.manager:
+    class: Drupal\wildlife_scheduling\WildlifeScheduler
+    arguments: ['@date.formatter', '@logger.channel.default', '@entity_type.manager', '@link_generator']

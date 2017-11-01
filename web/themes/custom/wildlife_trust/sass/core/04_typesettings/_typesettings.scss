@@ -1,0 +1,413 @@
+////
+/// @group Typesetting
+////
+@charset "UTF-8";
+
+// Vertical Rhythm
+//
+// Markup: ../../docs/kss-helpers/vertical-rhythm.hbs
+//
+// Styleguide 1.3.0
+
+// ==============================================================================
+// Typesettings
+// ==============================================================================
+// A toolkit that sets type in Rems, Ems or Px based on modular scale, vertical rhythm,
+// and responsive ratio based headlines. Oh, and pixel borders that maintain
+// rhythm.
+//
+// Based heavily on: https://github.com/ianrose/typesettings/releases
+
+//==============================================================================
+// Config Variables
+//==============================================================================
+// The config variables have default values that are just looking to be adjusted.
+// Use this variables to customize your Typesettings.
+
+// The vertical grid unit. Margin, padding, and line-height are set to multiples
+// of this value. This is the value that determines the baseline for our vertical
+// rhythm. The default value of 6px allows more fine tuned designs that still
+// obey vertical rhythm.
+$base-vertical-unit: 8px !default;
+
+// The value that multiplies the $base-vertical-unit to get the $base-line-height.
+// This gives type an ideal line-height.
+$base-line-multi: 3 !default;
+
+// Base font size in pixels.
+$base-font-size: 16px !default;
+
+// [1] Paragraph setting that you can turn on or off the indent of the first line
+// of a new paragraph.
+// [2] Paragraph setting that you can turn on or off to have your paragraphs ragged
+// right or justified.
+$paragraph-indent: true !default; // [1]
+$paragraph-justify: true !default; // [2]
+
+// You can optionally load type styles that use Typesettings.
+$load-typesetted: true !default;
+
+//==============================================================================
+// Internal Variables
+//==============================================================================
+// It's best not to adjust the internal variables directly.[Note]
+
+// Creates a handy variable for the 1em
+$base-em-font-size: 1em;
+
+// Warning text for when an integer is not used in rhythm functions
+$not-integer-txt: ' value breaks vertical rhythm. Use an integer (whole number) for $lines.';
+
+//==============================================================================
+// Helper function(s)
+//==============================================================================
+
+/// Check if value is an integer and returns true or false
+@function is-int($number) {
+  @return type-of($number) == number and floor(abs($number)) == abs($number);
+}
+
+/// Returns a number without a unit. For example 16px becomes 16
+@function stripUnits($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+/// Returns an EM value. For example 24px becomes 1.5em
+@function emCalc($target, $context: $base-font-size) {
+  @return stripUnits(($target / $context)) + 0em;
+}
+
+/// Returns an EM value that is a multiple of our defined base vertical unit.
+/// @param {String} $lines [$base-vertical-unit] - A pixel value that is the
+/// Base Vertical Unit or a multiple of it.
+/// @param {String} $font-size [$base-em-font-size] - The font size.
+/// @param {Bool} $silent [false] - Whether or not to show warnings.
+/// @return {String} - A value in EMs
+/// @example scss emRhythm
+/// emRhythm(3) // 1.5em
+@function emRhythm($lines: $base-vertical-unit, $font-size: $base-em-font-size, $silent: false) {
+  @if is-int($lines) == false and $silent == false {
+    @warn  #{$lines} + $not-integer-txt;
+  }
+  @return (stripUnits($lines) * stripUnits($base-vertical-unit)) / (stripUnits($font-size) * stripUnits($base-font-size)) + 0em;
+}
+
+/// Returns an PX value that is a multiple of our defined base vertical unit.
+/// @param {String} $lines [$base-vertical-unit] - A pixel value that is the
+/// Base Vertical Unit or a multiple of it.
+/// @param {String} $font-size [$base-em-font-size] - The font size.
+/// @param {Bool} $silent [false] - Whether or not to show warnings.
+/// @return {String} - A value in pixels
+/// @example scss pixelRhythm
+/// pixelRhythm(3) // 24px
+@function pixelRhythm($lines: $base-vertical-unit, $font-size: $base-em-font-size, $silent: false) {
+  @if is-int($lines) == false and $silent == false {
+    @warn  #{$lines} + $not-integer-txt;
+  }
+
+  @return (stripUnits($lines) * stripUnits($base-vertical-unit)) + 0px;
+}
+
+/// Returns an REM value that is a multiple of our defined base font size.
+/// @param {String} $lines [$base-vertical-unit] - A pixel value that is the
+/// Base Vertical Unit or a multiple of it.
+/// @param {String} $font-size [$base-em-font-size] - The font size.
+/// @param {Bool} $silent [false] - Whether or not to show warnings.
+/// @return {String} - A value in REMs
+/// @example scss pixelRhythm
+/// remRhythm(8px, 1em, false) // 4rem
+@function remRhythm($lines: $base-vertical-unit, $font-size: $base-em-font-size, $silent: false) {
+  @if is-int($lines) == false and $silent == false {
+    @warn  #{$lines} + $not-integer-txt;
+  }
+
+  @return (stripUnits($lines) * stripUnits($base-vertical-unit)) / stripUnits($base-font-size) + 0rem;
+}
+
+/// Returns a unitless number that is a multiple of our defined base vertical unit.
+/// @param {String} $lines [$base-vertical-unit] - A pixel value that is the
+/// Base Vertical Unit or a multiple of it.
+/// @param {String} $font-size [$base-em-font-size] - The font size.
+/// @param {Bool} $silent [false] - Whether or not to show warnings.
+/// @return {Number}
+/// @example scss unitlessRhythm
+/// unitlessRhythm(3) // 1.5
+@function unitlessRhythm($lines: $base-line-multi, $font-size: $base-em-font-size, $silent: false) {
+  @if is-int($lines) == false and $silent == false {
+    @warn #{$lines} + $not-integer-txt;
+  }
+  @return ($lines * stripUnits($base-vertical-unit)) / (stripUnits($font-size) * stripUnits($base-font-size));
+}
+
+//==============================================================================
+// Mixin(s)
+//==============================================================================
+// Finally, the tools that you can use throughout your project to set
+// all the wonderful type related stuffs.
+
+/// Sets the type in EMs and makes a vertical rhythm unitless line-height that is
+/// based on context.
+/// @param {Number} $lines [$base-line-multi] - The number of lines for the line
+/// height. This will be converted to REMs.
+/// @param {String} $font-size [$base-em-font-size] - The font size you want the
+/// text to be.
+/// @param {Bool} $silent [false] - Whether or not to show warnings.
+/// @example scss
+/// setType(3, ms(1));
+/// // font-size: 1.25rem;
+/// // line-height: 1.5rem;
+@mixin setType($lines: $base-line-multi, $font-size: $base-em-font-size, $silent: false) {
+  font-size: $font-size;
+  line-height: remRhythm($lines, $font-size, $silent);
+}
+
+/// Creates a vertical rhythm unitless line-height that is based on context
+/// @param {Number} $lines [$base-line-multi] - The number of lines for the line
+/// height.
+/// @param {String} $font-size [$base-em-font-size] - The font size you want the
+/// text to be.
+/// @param {Bool} $silent [false] - Whether or not to show warnings.
+/// @example scss
+/// setLeading(3, ms(1));
+/// // line-height: 1.2;
+@mixin setLeading($lines: $base-line-multi, $font-size: $base-em-font-size, $silent: false) {
+  line-height: unitlessRhythm($lines, $font-size, $silent);
+}
+
+/// Creates a pixel width border top with padding that is a multiple of the base
+/// vertical grid unit. You will need to set border style and color rules.
+/// @param {String} $border-width [1px] - The border width.
+/// @param {Number} $lines [$base-line-multi] - The number of lines for the line
+/// height. This will be converted to REMs.
+/// @param {String} $font-size [$base-em-font-size] - The font size you want the
+/// text to be.
+@mixin rhythmBorderTop($border-width: 1px, $lines: $base-line-multi, $font-size: $base-em-font-size) {
+  border-top-width: $border-width;
+  padding-top: (($lines * stripUnits($base-vertical-unit)) - stripUnits($border-width)) / (stripUnits($font-size) * stripUnits($base-font-size)) + 0em;
+}
+
+/// Creates a pixel width border bottom with padding that is a multiple of the base
+/// vertical grid unit. You will need to set border style and color rules.
+/// @param {String} $border-width [1px] - The border width.
+/// @param {Number} $lines [$base-line-multi] - The number of lines for the line
+/// height. This will be converted to REMs.
+/// @param {String} $font-size [$base-em-font-size] - The font size you want the
+/// text to be.
+@mixin rhythmBorderBottom($border-width: 1px, $lines: $base-line-multi, $font-size: $base-em-font-size) {
+  border-bottom-width: $border-width;
+  padding-bottom: (($lines * stripUnits($base-vertical-unit)) - stripUnits($border-width)) / (stripUnits($font-size) * stripUnits($base-font-size)) + 0em;
+}
+
+/// Creates a pixel width border with padding that is a multiple of the base
+/// vertical grid unit. You will need to set border style and color rules.
+/// @param {String} $border-width [1px] - The border width.
+/// @param {Number} $lines [$base-line-multi] - The number of lines for the line
+/// height. This will be converted to REMs.
+/// @param {String} $font-size [$base-em-font-size] - The font size you want the
+/// text to be.
+@mixin rhythmBorder($border-width: 1px, $lines: $base-line-multi, $font-size: $base-em-font-size) {
+  border-width: $border-width;
+  padding: (($lines * stripUnits($base-vertical-unit)) - stripUnits($border-width)) / (stripUnits($font-size) * stripUnits($base-font-size)) + 0em;
+}
+
+/// Creates striped baseline grid for help debugging.
+/// @param {Number} $opacity [0.2] - The opacity of the grid overlay.
+/// @param {String} $vertical-unit [$base-vertical-unit] - The base vertical
+/// unit to be used.
+/// @param {Number} $type-base-line-multi [$base-line-multi] - The base line
+/// multiplier.
+/// @param {String} $type-size [$base-em-font-size] - The base font size.
+/// @example scss
+/// body { @include debug-vertical-alignment(); }
+@mixin debug-vertical-alignment($opacity: 0.2, $vertical-unit: $base-vertical-unit, $type-base-line-multi: $base-line-multi, $type-size: $base-em-font-size) {
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    display: block;
+    pointer-events: none;
+  }
+
+  &:before {
+    z-index: 10;
+    background: linear-gradient(
+      to bottom,
+      rgba(#00ffff, $opacity),
+      rgba(#00ffff, $opacity) 50%,
+      rgba(#fff, $opacity) 50%,
+      rgba(#fff, $opacity)
+    );
+    background-size: 100% ($vertical-unit * 2);
+  }
+}
+
+// Sets the font-size of the project as a percentage. Making it easy to
+// scale up/down the whole project for specific media queries
+html {
+  font-size: ($base-font-size / 16px) * 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  @include setLeading();
+}
+
+.debug-vertical-alignment {
+  @include debug-vertical-alignment;
+}
+
+@if $load-typesetted {
+  //==============================================================================
+  // Default Type Styles
+  //==============================================================================
+
+  // Stops devices from scaling up text.
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+
+    // Base size is 16px on mobile.
+    font-size: 100%;
+    @include add-breakpoint('lap-and-up') {
+      // But 18px above that.
+      font-size: 112.5%;
+    }
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, .alpha,
+  h2, .beta,
+  h3, .gamma,
+  h4, .delta,
+  h5, .epsilon,
+  h6, .zeta {
+    margin-top: 0;
+  }
+
+  h1, .alpha {
+    @include setType(10, ms(3));
+    margin-bottom: emRhythm(15, ms(3));
+  }
+
+  h2, .beta {
+    @include setType(9, ms(2));
+    margin-bottom: emRhythm(2, ms(2));
+  }
+
+  h3, .gamma {
+    @include setType(7, ms(1));
+    margin-bottom: emRhythm(2, ms(1));
+  }
+
+  h4, .delta {
+    @include setType(6, ms(0));
+    margin-bottom: emRhythm(2, ms(0));
+  }
+
+  h5, .epsilon {
+    @include setType(6, ms(0));
+    margin-bottom: emRhythm(1, ms(0));
+  }
+
+  h6, .zeta {
+    @include setType(6, ms(0));
+    margin-bottom: emRhythm(0, ms(0));
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: emRhythm(6);
+    padding-top: 0;
+    padding-bottom: 0;
+
+    @media (min-width: 43.75em) {
+      @if $paragraph-justify {
+        text-align: justify;
+      }
+    }
+  }
+
+  @if $paragraph-indent {
+    p + p {
+      text-indent: emRhythm(6);
+    }
+  }
+
+  small,
+  .font-small {
+    @include setType(3, ms(-1));
+  }
+
+  blockquote {
+    margin: 0;
+    margin-bottom: emRhythm(4);
+    padding: 0;
+
+    p {
+      margin-bottom: emRhythm(2);
+    }
+
+    footer {
+      cite {
+        &:before {
+          content: " – ";
+        }
+      }
+    }
+  }
+
+  ol,
+  ul,
+  dl {
+    margin-top: 0;
+    margin-bottom: emRhythm(4);
+    margin-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  ul ul,
+  ol ol,
+  dl dl {
+    margin-left: 0;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  // [1] https://developer.mozilla.org/en-US/docs/CSS/font-variant
+  abbr {
+    font-variant: small-caps; // [1]
+    font-weight: 600;
+    text-transform: lowercase;
+  }
+
+  // Cursor changed to a question mark when it has a title
+  abbr[title]:hover {
+    cursor: help;
+  }
+
+  // Creates horizontal rules that obey the baseline.
+  // [1] Zero outs the user agent border
+  hr {
+    margin-top: emRhythm(4);
+    margin-bottom: 0;
+    @include rhythmBorderTop(1px, 4);
+  }
+}

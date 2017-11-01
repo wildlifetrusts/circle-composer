@@ -1,0 +1,18 @@
+uuid: a125cd27-2051-46b2-86b5-f2240b4537cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.video
+id: media.video.created
+field_name: created
+entity_type: media
+bundle: video
+label: Created
+description: 'The time that the media was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

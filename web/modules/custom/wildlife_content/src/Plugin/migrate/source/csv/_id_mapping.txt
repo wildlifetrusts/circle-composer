@@ -1,0 +1,62 @@
+// Media
+001: image file
+101: image media
+120: document file
+130: silhouette file
+202: document media
+220: video media
+230: silhouette media
+240: audio media
+
+// Nodes
+1001: basic/landing page
+1101: job
+1201: habitat
+1301: species
+1401: volunteer opportunity
+901: trust
+801: news
+701: blog
+601: reserve
+501: event
+
+// Paragraphs
+1501: rich text
+1601: image
+1701: video
+1801: attached files
+1901: quick links
+2001: section
+2101: accordion item
+2201: accordion
+2301: linked logos
+2401: linked logo items
+2501: spotlight group
+2601: spotlight
+2701: headline hero
+2801: statistics
+2901: statistic_item
+6001: image gallery
+6101: image gallery item
+6201: testimonial
+6301: html
+6401: webform
+6501: audio
+
+// Taxonomies
+3001: Job type
+3201: Species
+3301: Conservation status
+3401: Opportunity type
+3501: Environmental designation
+3601: Great for
+3701: News categories
+3801: Blog categories
+3901: Tag categories
+4001: Event type
+4101: Event theme
+4201: Local group
+
+// Misc Entities
+5001: Location
+5101: Author

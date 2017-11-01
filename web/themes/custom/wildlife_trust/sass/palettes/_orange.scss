@@ -1,0 +1,31 @@
+////
+/// @group Colours
+////
+
+/// Palette Map.
+/// Define the color scheme used on the site.
+///
+/// All colours should be defined within this Sass map, and always must include a
+/// "base" tone. Additionally the following tones can be used:
+/// - x-dark
+/// - dark (should be defined first to allow for adding intermediate tones later)
+/// - mid-dark
+/// - base (default colour - required)
+/// - mid-light
+/// - light (should defined first to allow for adding intermediate tones later)
+/// - x-light
+///
+/// @link http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+@import '_core';
+
+$orange_palettes: (
+  // Theme Palette colours.
+  primary: (
+    base: #ee5c35
+  ),
+  secondary: (
+    base: #f9a93a
+  ),
+);
+
+$palettes: map-merge($core_palettes, $orange_palettes);

@@ -1,0 +1,27 @@
+uuid: 4a73438e-c31a-4cf4-834a-2fd8d9f14a4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_habitat_distribution
+    - node.type.habitat
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.habitat.field_habitat_distribution
+field_name: field_habitat_distribution
+entity_type: node
+bundle: habitat
+label: 'Distribution in the UK'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

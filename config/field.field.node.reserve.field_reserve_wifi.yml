@@ -1,0 +1,23 @@
+uuid: eff6c0c5-7f44-4f41-b3b8-d0540313dda8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_wifi
+    - node.type.reserve
+id: node.reserve.field_reserve_wifi
+field_name: field_reserve_wifi
+entity_type: node
+bundle: reserve
+label: Wifi
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Wifi
+  off_label: 'Off'
+field_type: boolean

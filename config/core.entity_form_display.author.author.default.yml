@@ -1,0 +1,128 @@
+uuid: ffe6152b-034a-463c-88e5-82e8f023c531
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.author.author.field_author_bio
+    - field.field.author.author.field_author_facebook
+    - field.field.author.author.field_author_instagram
+    - field.field.author.author.field_author_linkedin
+    - field.field.author.author.field_author_profile_image
+    - field.field.author.author.field_author_twitter
+  module:
+    - entity_browser
+    - field_group
+    - link
+    - wildlife_author
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_translation
+        - group_revision
+      parent_name: ''
+      weight: 6
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_translation:
+      children:
+        - translation
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Translation
+    group_revision:
+      children: {  }
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Revision
+id: author.author.default
+targetEntityType: author
+bundle: author
+mode: default
+content:
+  field_author_bio:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings:
+      maxlength:
+        maxlength_js: 250
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_enforce: true
+        maxlength_js_truncate_html: false
+    type: string_textarea
+    region: content
+  field_author_facebook:
+    weight: 3
+    settings:
+      placeholder_url: 'https://www.facebook.com/'
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_author_instagram:
+    type: link_default
+    weight: 4
+    region: content
+    settings:
+      placeholder_url: 'https://www.instagram.com/'
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_author_linkedin:
+    type: link_default
+    weight: 5
+    region: content
+    settings:
+      placeholder_url: 'https://www.linkedin.com/'
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_author_profile_image:
+    weight: 0
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: profile
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_author_twitter:
+    type: link_default
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: 'https://twitter.com/'
+      placeholder_title: ''
+    third_party_settings: {  }
+  translation:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  user_id: true

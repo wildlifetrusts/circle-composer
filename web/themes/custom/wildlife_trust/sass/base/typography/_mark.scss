@@ -1,0 +1,7 @@
+mark,
+.marker {
+  padding: 0.1em 0.5em;
+  border-radius: 10px;
+  @include font-size(12px);
+  text-transform: capitalize;
+}

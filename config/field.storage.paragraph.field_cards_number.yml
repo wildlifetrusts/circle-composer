@@ -1,0 +1,33 @@
+uuid: 458f4dba-4809-43ea-ac6e-c85ec78eddc8
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_cards_number
+field_name: field_cards_number
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '3'
+      label: '3'
+    -
+      value: '6'
+      label: '6'
+    -
+      value: '9'
+      label: '9'
+    -
+      value: '12'
+      label: '12'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

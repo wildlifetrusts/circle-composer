@@ -1,0 +1,156 @@
+.paragraph--type--image-gallery {
+  @include keyline('all');
+  background-color: palette(mono, x-light);
+  padding: halve($spacing-unit-horizontal);
+
+  @include add-breakpoint('lap-and-up') {
+    padding: $spacing-unit-horizontal;
+  }
+
+  a {
+    display: block;
+  }
+}
+
+.field--name-field-gallery-items {
+  position: relative;
+
+  .slick-dots {
+    @extend %element-invisible;
+  }
+
+  .slick-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+    margin-top: -21px;
+    height: 42px;
+    width: 42px;
+    padding: 0;
+    border: none;
+    border-radius: 50px 50px 0 0;
+    background-color: palette(mono, x-light);
+    background-position: 50% 55%;
+    background-size: 20px auto;
+    text-indent: -9999px;
+    overflow: hidden;
+
+    @include add-breakpoint('lap-and-up') {
+      height: 56px;
+      width: 56px;
+      margin-top: -27px;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: palette(mono, mid-light);
+    }
+
+    &.slick-prev {
+      left: - halve($spacing-unit-horizontal);
+      transform: rotate(90deg);
+
+      @include add-breakpoint('lap-and-up') {
+        left: - $spacing-unit-horizontal;
+      }
+    }
+    &.slick-next {
+      right: - halve($spacing-unit-horizontal);
+      transform: rotate(-90deg);
+
+      @include add-breakpoint('lap-and-up') {
+        right: - $spacing-unit-horizontal;
+      }
+    }
+  }
+
+  .paragraph--view-mode--js-gallery & {
+    a {
+      margin-left: quarter($spacing-unit-horizontal);
+      margin-right: quarter($spacing-unit-horizontal);
+
+      @include add-breakpoint('lap-and-up') {
+        margin-left: halve($spacing-unit-horizontal);
+        margin-right: halve($spacing-unit-horizontal);
+      }
+    }
+  }
+
+  .paragraph--view-mode--default & {
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .field__item {
+      flex: 1 0 50%;
+      min-width: 50%;
+      max-width: 50%;
+
+      &:first-child {
+        a {
+          margin-right: quarter($spacing-unit-horizontal);
+
+          @include add-breakpoint('lap-and-up') {
+            margin-right: halve($spacing-unit-horizontal);
+          }
+        }
+      }
+
+      &:last-child {
+        a {
+          margin-left: quarter($spacing-unit-horizontal);
+
+          @include add-breakpoint('lap-and-up') {
+            margin-left: halve($spacing-unit-horizontal);
+          }
+        }
+      }
+
+      &:only-child {
+        a {
+          margin: 0;
+        }
+      }
+
+      picture, img {
+        display: block;
+      }
+    }
+  }
+}
+
+.paragraph--type--image-gallery-item {
+
+  &.paragraph--view-mode--default {
+    .node__content .slick-track & {
+      clear: none;
+    }
+
+    .field--name-field-gallery-image a {
+      display: block;
+    }
+
+    .slick-track & {
+      .field--name-field-gallery-image {
+        overflow: hidden;
+        padding-left: quarter($spacing-unit-horizontal);
+        padding-right: quarter($spacing-unit-horizontal);
+
+        @include add-breakpoint('lap-and-up') {
+          padding-left: halve($spacing-unit-horizontal);
+          padding-right: halve($spacing-unit-horizontal);
+        }
+      }
+    }
+  }
+
+  &.paragraph--view-mode--wide {
+    .field--name-field-gallery-image-caption {
+      display: table-caption;
+      caption-side: bottom;
+      width: 100%;
+      @include setType($font-size: ms(-1));
+    }
+  }
+}

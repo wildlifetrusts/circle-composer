@@ -1,0 +1,14 @@
+
+# Author menu items definition
+entity.author.collection:
+  title: 'Authors'
+  route_name: entity.author.collection
+  description: 'List Author entities'
+  parent: system.admin_content
+  weight: 100
+
+author.admin.structure.settings:
+  title: Author settings
+  description: 'Configure Author entities'
+  route_name: author.settings
+  parent: wildlife_admin.custom_entities.list

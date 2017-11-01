@@ -1,0 +1,8 @@
+.paragraph--type--rich-text {
+  @extend %content-narrow-constrain;
+
+  b,
+  strong {
+    font-weight: $font-weight-medium;
+  }
+}

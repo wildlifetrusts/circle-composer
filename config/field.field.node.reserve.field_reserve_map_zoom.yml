@@ -1,0 +1,25 @@
+uuid: 5def5218-e99f-4714-b7cc-52f1bf25ce7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_map_zoom
+    - node.type.reserve
+id: node.reserve.field_reserve_map_zoom
+field_name: field_reserve_map_zoom
+entity_type: node
+bundle: reserve
+label: 'Map zoom level'
+description: "The initial zoom to set the map to. 0 is the most zoomed out. Maximum roadmap zoom is around 18. Satellite imagery zooms vary more widely as this imagery is not generated, but directly photographed.\r\nIf a KML file is uploaded, the default zoom will be ignored and the zoom will be calculated based on fitting the entire KML and nature reserve pointer on the same screen."
+required: false
+translatable: true
+default_value:
+  -
+    value: 10
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

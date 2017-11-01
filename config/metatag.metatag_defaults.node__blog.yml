@@ -1,0 +1,9 @@
+uuid: c9a1945a-a872-4634-8a32-a5beff486ef9
+langcode: en
+status: true
+dependencies: {  }
+id: node__blog
+label: 'Content: Blog'
+tags:
+  description: '[node:field_blog_summary]'
+  image_src: '[node:field_representative_image:0:entity:field_media_image:large]'

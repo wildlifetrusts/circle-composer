@@ -1,0 +1,304 @@
+<?php
+
+use Drupal\Core\Database\Database;
+use Drupal\node\Entity\Node;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_sharing_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_sharing module.
+    case 'wildlife_sharing.config':
+      $output = '';
+      $output .= '<p>' . t('A list of sites that will share content with the national site.') . '</p>';
+      $output .= '<p>' . t('Each site must be on the shared platform and expose content at /jsonapi/*.') . '</p>';
+      $output .= '<p>' . t('Remove a site by emptying the Label and URL field for a site and saving the form.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_simple_sitemap_links_alter().
+ */
+function wildlife_sharing_simple_sitemap_links_alter(&$links) {
+  foreach ($links as $link_id => $link) {
+    // Ignore any non-node links.
+    if (empty($link['entity_info']) || $link['entity_info']['entity_type'] != 'node' || empty($link['entity_info']['id'])) {
+      continue;
+    }
+
+    $node = Node::load($link['entity_info']['id']);
+    if (wildlife_sharing_is_local($node)) {
+      unset($links[$link_id]);
+    }
+  }
+}
+
+/**
+ * Implements hook_metatags_alter().
+ */
+function wildlife_sharing_metatags_alter(array &$metatags, array $context) {
+  // Do nothing if this isn't a node page.
+  if (empty($context['entity']) || !$context['entity'] instanceof \Drupal\Core\Entity\EntityInterface) {
+    return;
+  }
+
+  /** @var \Drupal\Core\Entity\EntityInterface $entity */
+  $entity = $context['entity'];
+  if (wildlife_sharing_is_national($entity)) {
+    $config_domains = \Drupal::config('wildlife_sharing.settings')->get('domains');
+    // There should only be one national domain.
+    $domain = reset($config_domains);
+    $metatags['canonical_url'] = $domain['url'] . '[current-page:url:path]';
+  }
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function wildlife_sharing_node_access(\Drupal\node\NodeInterface $node, $op, \Drupal\Core\Session\AccountInterface $account) {
+  $allowed_ops = [
+    'update',
+    'delete',
+  ];
+  // We're only interested in altering certain ops.
+  if (!in_array($op, $allowed_ops)) {
+    return AccessResult::neutral();
+  }
+
+  $migrated = FALSE;
+  $table_name = 'migrate_map_local_' . $node->bundle();
+  $table_exists = Database::getConnection()->schema()->tableExists($table_name);
+  if ($table_exists) {
+    $query = Database::getConnection()
+      ->select($table_name, 'mm');
+    $query->condition('mm.destid1', $node->id());
+    $migrated = $query->countQuery()->execute()->fetchField();
+  }
+  if ($migrated) {
+    return AccessResult::forbidden();
+  }
+
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_entity_access().
+ */
+function wildlife_sharing_entity_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  if ($entity->getEntityTypeId() == 'taxonomy_term') {
+    return _wildlife_sharing_restrict_vocabularies($entity, $operation, $account);
+  }
+  return AccessResult::neutral();
+}
+
+/**
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ * @param $operation
+ * @param \Drupal\Core\Session\AccountInterface $account
+ *
+ * @return \Drupal\Core\Access\AccessResult
+ */
+function _wildlife_sharing_restrict_vocabularies(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  // We are not interested in restricting Viewing.
+  if ($operation == 'view') {
+    return AccessResult::neutral();
+  }
+
+  if ($entity->getEntityTypeId() == 'taxonomy_term') {
+    // Only restrict certain vocabularies on local sites.
+    $local_site = class_exists(\Drupal\wildlife_local_customisation\Entity\LocalCustomisation::class);
+    if (!$local_site) {
+      return AccessResult::neutral();
+    }
+
+    // Only restrict certain vocabularies.
+    $restrict_vocabularies = [
+      'environmental_designation',
+      'event_theme',
+      'event_type',
+      'great_for',
+      'habitat',
+      'opportunity_type',
+      'role_type',
+      'species',
+    ];
+    if (in_array($entity->bundle(), $restrict_vocabularies)) {
+      return AccessResult::forbidden();
+    }
+  }
+
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ *
+ * Convert canonical links to absolute URLs.
+ */
+function wildlife_sharing_entity_view_alter(array &$build, Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+  // Check for metatag module provided canonical link.
+  $metatag_attachments = drupal_static('metatag_attachments');
+  if (is_null($metatag_attachments)) {
+    // Load the meta tags from the route.
+    $metatag_attachments = metatag_get_tags_from_route();
+  }
+
+  if (isset($metatag_attachments['#attached']['html_head'])) {
+    foreach ($metatag_attachments['#attached']['html_head'] as &$metatag_item) {
+      if ($metatag_item[1] == 'canonical_url') {
+        _wildlife_sharing_absolutify($metatag_item[0]['#attributes']['href'], $entity);
+        break;
+      }
+    }
+  }
+
+  // Check for core provided canonical link.
+  if (!empty($build['#attached']['html_head_link'])) {
+    foreach ($build['#attached']['html_head_link'] as $key => &$item) {
+      if (isset($item[0]['rel']) && $item[0]['rel'] == 'canonical') {
+        // Remove the link rel="canonical" tag from the entity's build array.
+        _wildlife_sharing_absolutify($item[0]['href'], $entity);
+        break;
+      }
+    }
+  }
+}
+
+/**
+ * Convert a relative URL to an absolute one.
+ *
+ * @param string $uri
+ *   The URI to convert.
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The entity for this URI.
+ */
+function _wildlife_sharing_absolutify(&$uri, \Drupal\Core\Entity\EntityInterface $entity) {
+  // If the URL has a schema or is schema-less then it is already absolute.
+  if (strpos($uri, 'http') === 0 || strpos($uri, '//') === 0) {
+    return;
+  }
+
+  if (wildlife_sharing_is_national($entity)) {
+    $config_domains = \Drupal::config('wildlife_sharing.settings')->get('domains');
+    // There should only be one national domain.
+    $domain = reset($config_domains);
+    $uri = $domain['url'] . $uri;
+  }
+}
+
+/**
+ * Determine whether a entity is originally from a local site.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *
+ * @return bool
+ */
+function wildlife_sharing_is_local(\Drupal\Core\Entity\EntityInterface $entity) {
+  return wildlife_sharing_is_migrated($entity, 'local');
+}
+
+/**
+ * Determine whether a entity is originally from a national site.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *
+ * @return bool
+ */
+function wildlife_sharing_is_national(\Drupal\Core\Entity\EntityInterface $entity) {
+  return wildlife_sharing_is_migrated($entity, 'national');
+}
+
+/**
+ * Determine whether a entity is originally from a migration.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *
+ * @return bool
+ */
+function wildlife_sharing_is_migrated(\Drupal\Core\Entity\EntityInterface $entity, $type) {
+  $migrated = FALSE;
+  $table_name = 'migrate_map_' . $type . '_' . $entity->bundle();
+  $table_exists = Database::getConnection()->schema()->tableExists($table_name);
+  if ($table_exists) {
+    $query = Database::getConnection()
+      ->select($table_name, 'mm');
+    $query->condition('mm.destid1', $entity->id());
+    $migrated = $query->countQuery()->execute()->fetchField();
+  }
+
+  return (bool) $migrated;
+}
+
+/**
+ * Implements hook_search_api_views_handler_mapping_alter().
+ */
+function wildlife_sharing_search_api_views_handler_mapping_alter(array &$mapping) {
+  $mapping['entity:taxonomy_term']['filter']['id'] = 'search_api_term_remote';
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_sharing_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\node\Entity\Node $node */
+  $node = $form_state->getFormObject()->getEntity();
+
+  if ($external_link_value = _wildlife_sharing_check_for_external_link($node)) {
+    $message_args = [
+      '@title' => $node->label(),
+      '@link' => $external_link_value['uri'],
+      '@site' => $external_link_value['title'],
+    ];
+
+    drupal_set_message(t('"@title" content comes from <a href="@link">@site</a>. Do not make any changes here as they will be overridden with the next Shared Content import.', $message_args), 'warning');
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function wildlife_sharing_preprocess_node(&$variables) {
+  if ($variables['view_mode'] == 'full') {
+    /** @var \Drupal\node\Entity\Node $node */
+    $node = $variables['node'];
+
+    if ($external_link_value = _wildlife_sharing_check_for_external_link($node)) {
+      $message_args = [
+        '@title' => $node->label(),
+        '@link' => $external_link_value['uri'],
+        '@site' => $external_link_value['title'],
+      ];
+
+      drupal_set_message(t('"@title" content comes from <a href="@link">@site</a>. Site visitors will be redirected to the external site and will not access this page directly.', $message_args), 'warning');
+    }
+  }
+}
+
+/**
+ * Check if there's an external link.
+ *
+ * @param Node $node
+ *   The Node object.
+ *
+ * @return bool/array
+ *   False if there is no external link and the link array if there is one.
+ */
+function _wildlife_sharing_check_for_external_link($node) {
+  if ($node->hasField('field_external_link')) {
+    $external_link_field = $node->get('field_external_link');
+
+    if ($external_link_field->isEmpty()) {
+      return FALSE;
+    }
+    else {
+      $external_link_value = $external_link_field->first()->getValue();
+      return $external_link_value;
+    }
+  }
+}

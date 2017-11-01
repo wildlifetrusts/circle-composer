@@ -1,0 +1,76 @@
+uuid: e15349cc-163f-4c45-b594-2656b45d97d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.basic_landing_page.field_basic_landing_summary
+    - field.field.node.basic_landing_page.field_components
+    - field.field.node.basic_landing_page.field_disqus_comments
+    - field.field.node.basic_landing_page.field_disqus_comments_title
+    - field.field.node.basic_landing_page.field_hide_title
+    - field.field.node.basic_landing_page.field_meta_tags
+    - node.type.basic_landing_page
+  module:
+    - disqus
+    - entity_reference_revisions
+    - fences
+    - metatag
+    - user
+id: node.basic_landing_page.default
+targetEntityType: node
+bundle: basic_landing_page
+mode: default
+content:
+  field_components:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: is-unconstrained
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    region: content
+  field_disqus_comments:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: disqus_comment
+    region: content
+  field_disqus_comments_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: h2
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_meta_tags:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  workbench_moderation_control:
+    weight: -20
+    region: content
+hidden:
+  field_basic_landing_summary: true
+  field_hide_title: true
+  langcode: true
+  links: true

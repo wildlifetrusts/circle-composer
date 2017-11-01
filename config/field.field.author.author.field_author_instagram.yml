@@ -1,0 +1,23 @@
+uuid: 117ce465-6f17-41b5-925a-2fe87ecab699
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.author.field_author_instagram
+  module:
+    - link
+    - wildlife_author
+id: author.author.field_author_instagram
+field_name: field_author_instagram
+entity_type: author
+bundle: author
+label: 'Instagram URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

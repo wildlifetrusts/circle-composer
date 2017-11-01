@@ -1,0 +1,19 @@
+uuid: a2f23d8b-17d2-428c-a6bd-ec025521539e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_statistic_static_custom
+    - paragraphs.paragraphs_type.statistic_item
+id: paragraph.statistic_item.field_statistic_static_custom
+field_name: field_statistic_static_custom
+entity_type: paragraph
+bundle: statistic_item
+label: Label
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

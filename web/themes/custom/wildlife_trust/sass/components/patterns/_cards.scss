@@ -1,0 +1,109 @@
+// Patterns
+//
+// Styleguide 4.0.0
+
+// Cards
+//
+// Markup: ../../docs/kss-helpers/card.hbs
+//
+// Styleguide 4.1.0
+.card {
+  background-color: palette(mono, x-light);
+  @include mouseover-transition(background-color);
+
+  &:hover,
+  &:focus {
+    background-color: palette(mono, mid-light);
+  }
+
+  > a {
+    display: block;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: inherit;
+
+      .card__image {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  &__image {
+    overflow: hidden;
+    border-bottom: 5px solid palette(mono, x-dark);
+
+    img {
+      width: 100%;
+      transform: scale(1);
+      @include mouseover-transition(transform);
+      display: block;
+    }
+  }
+
+  &__details {
+    padding: ($spacing-unit-vertical * 0.75) ($spacing-unit-horizontal * 0.75);
+    @include keyline('all');
+    border-top: 0;
+
+    @include add-breakpoint('desk-and-up') {
+      padding: $spacing-unit-vertical $spacing-unit-horizontal;
+    }
+  }
+
+  &__meta {
+    display: block;
+    @include font-size(14px);
+    line-height: remRhythm(4, ((14/16) * 1em));
+    margin-bottom: emRhythm(4, ((14/16) * 1em));
+    text-transform: uppercase;
+  }
+}
+
+.card-listing {
+  @extend %clearfix;
+  max-width: 280px;
+  margin: 0 auto;
+
+  @include add-breakpoint('palm-to-lap') {
+    max-width: 580px;
+  }
+
+  @include add-breakpoint('lap-and-up') {
+    max-width: 100%;
+  }
+}
+
+.card-listing__item,
+.card.node--preview {
+  margin-bottom: $spacing-unit-vertical;
+
+  @include add-breakpoint('palm-to-lap') {
+    @include float-span(2);
+
+    &:nth-child(2n) {
+      @include float-span(2, 'last');
+    }
+  }
+
+  @include add-breakpoint('lap-and-up') {
+    @include float-span(4);
+
+    &:nth-child(3n) {
+      @include float-span(4, 'last');
+    }
+  }
+}
+
+.card.node--preview {
+  @include add-breakpoint('palm-to-lap') {
+    float: none;
+  }
+
+  @include add-breakpoint('lap-and-up') {
+    float: none;
+  }
+}

@@ -1,0 +1,16 @@
+uuid: b3ba038d-e524-45f9-933e-3fc9b9931fe4
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: map_thumb
+label: 'Map thumbnail'
+effects:
+  67b85307-a61f-485a-9e1c-36c79d29f7f9:
+    uuid: 67b85307-a61f-485a-9e1c-36c79d29f7f9
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 60
+      height: 60

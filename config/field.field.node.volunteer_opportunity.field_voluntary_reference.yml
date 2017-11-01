@@ -1,0 +1,19 @@
+uuid: 1c99ac89-e9ee-4c66-94a4-2917f5f5aa86
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voluntary_reference
+    - node.type.volunteer_opportunity
+id: node.volunteer_opportunity.field_voluntary_reference
+field_name: field_voluntary_reference
+entity_type: node
+bundle: volunteer_opportunity
+label: Reference
+description: 'The position reference for this volunteer opportunity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

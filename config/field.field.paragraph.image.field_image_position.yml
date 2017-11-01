@@ -1,0 +1,23 @@
+uuid: ec9b5454-495c-4e66-ab3d-3c33a1ad1950
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image_position
+    - paragraphs.paragraphs_type.image
+  module:
+    - options
+id: paragraph.image.field_image_position
+field_name: field_image_position
+entity_type: paragraph
+bundle: image
+label: 'Image position'
+description: "Choose the side you wish the image to appear on.\r\nNote that the image will appear above the text on viewports too narrow to accommodate text and image side by side."
+required: true
+translatable: true
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

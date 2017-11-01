@@ -1,0 +1,23 @@
+uuid: eb0bb4cd-d87d-422e-a2a2-623c6ef8a0fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image_extra_wide
+    - paragraphs.paragraphs_type.image
+id: paragraph.image.field_image_extra_wide
+field_name: field_image_extra_wide
+entity_type: paragraph
+bundle: image
+label: 'Extra wide'
+description: 'If checked, the image will "break-out" of the narrow 8 column content area and fit the full 12 column maximum content width (when the viewport width allows for this).'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

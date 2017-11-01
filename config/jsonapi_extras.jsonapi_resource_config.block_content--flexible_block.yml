@@ -1,0 +1,117 @@
+uuid: 0454ce2b-102c-4ad7-be90-ec487ea75c14
+langcode: en
+status: true
+dependencies: {  }
+id: block_content--flexible_block
+disabled: true
+path: block_content/flexible_block
+resourceType: block_content--flexible_block
+resourceFields:
+  id:
+    fieldName: id
+    publicName: id
+    enhancer:
+      id: ''
+    disabled: false
+  uuid:
+    fieldName: uuid
+    publicName: uuid
+    enhancer:
+      id: ''
+    disabled: false
+  revision_id:
+    fieldName: revision_id
+    publicName: revision_id
+    enhancer:
+      id: ''
+    disabled: false
+  langcode:
+    fieldName: langcode
+    publicName: langcode
+    enhancer:
+      id: ''
+    disabled: false
+  type:
+    fieldName: type
+    publicName: type
+    enhancer:
+      id: ''
+    disabled: false
+  info:
+    fieldName: info
+    publicName: info
+    enhancer:
+      id: ''
+    disabled: false
+  revision_log:
+    fieldName: revision_log
+    publicName: revision_log
+    enhancer:
+      id: ''
+    disabled: false
+  changed:
+    fieldName: changed
+    publicName: changed
+    enhancer:
+      id: ''
+    disabled: false
+  revision_created:
+    fieldName: revision_created
+    publicName: revision_created
+    enhancer:
+      id: ''
+    disabled: false
+  revision_user:
+    fieldName: revision_user
+    publicName: revision_user
+    enhancer:
+      id: ''
+    disabled: false
+  revision_translation_affected:
+    fieldName: revision_translation_affected
+    publicName: revision_translation_affected
+    enhancer:
+      id: ''
+    disabled: false
+  default_langcode:
+    fieldName: default_langcode
+    publicName: default_langcode
+    enhancer:
+      id: ''
+    disabled: false
+  field_flexible_block_content_1:
+    fieldName: field_flexible_block_content_1
+    publicName: field_flexible_block_content_1
+    enhancer:
+      id: ''
+    disabled: false
+  field_flexible_block_content_2:
+    fieldName: field_flexible_block_content_2
+    publicName: field_flexible_block_content_2
+    enhancer:
+      id: ''
+    disabled: false
+  field_flexible_block_content_3:
+    fieldName: field_flexible_block_content_3
+    publicName: field_flexible_block_content_3
+    enhancer:
+      id: ''
+    disabled: false
+  field_flexible_block_title_1:
+    fieldName: field_flexible_block_title_1
+    publicName: field_flexible_block_title_1
+    enhancer:
+      id: ''
+    disabled: false
+  field_flexible_block_title_2:
+    fieldName: field_flexible_block_title_2
+    publicName: field_flexible_block_title_2
+    enhancer:
+      id: ''
+    disabled: false
+  field_flexible_block_title_3:
+    fieldName: field_flexible_block_title_3
+    publicName: field_flexible_block_title_3
+    enhancer:
+      id: ''
+    disabled: false

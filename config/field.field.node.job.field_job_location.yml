@@ -1,0 +1,26 @@
+uuid: e974c7fa-9715-4316-8eb3-eef93c1e2fea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_location
+    - node.type.job
+id: node.job.field_job_location
+field_name: field_job_location
+entity_type: node
+bundle: job
+label: Location
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:location'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: name
+      direction: ASC
+    auto_create: true
+field_type: entity_reference

@@ -1,0 +1,27 @@
+uuid: 6b7602f4-d39c-4650-a51c-c2271fd7d141
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_video_rich_text
+    - paragraphs.paragraphs_type.video
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: paragraph.video.field_video_rich_text
+field_name: field_video_rich_text
+entity_type: paragraph
+bundle: video
+label: 'Rich text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

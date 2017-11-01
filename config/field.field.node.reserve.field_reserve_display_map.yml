@@ -1,0 +1,23 @@
+uuid: 1eec5a50-7039-434a-b726-c48013383813
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_display_map
+    - node.type.reserve
+id: node.reserve.field_reserve_display_map
+field_name: field_reserve_display_map
+entity_type: node
+bundle: reserve
+label: 'Display interactive map'
+description: 'If this box is checked, an interactive map will be added above the Further Content section.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

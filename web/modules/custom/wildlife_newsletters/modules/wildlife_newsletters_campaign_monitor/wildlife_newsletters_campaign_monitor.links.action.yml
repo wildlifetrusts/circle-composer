@@ -1,0 +1,5 @@
+wildlife_newsletters_campaign_monitor.add:
+  route_name: 'campaign_monitor_signup.add'
+  title: 'Add Signup Form'
+  appears_on:
+    - campaign_monitor_signup.admin

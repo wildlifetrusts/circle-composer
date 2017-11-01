@@ -1,0 +1,15 @@
+uuid: a18bbbbd-26cf-4bd7-9219-6921edc5e412
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_12_col_lap
+label: 'Scaled 12 col lap'
+effects:
+  64bd65ba-3504-4921-85a0-920d633ea8d4:
+    uuid: 64bd65ba-3504-4921-85a0-920d633ea8d4
+    id: image_scale
+    weight: 1
+    data:
+      width: 988
+      height: null
+      upscale: false

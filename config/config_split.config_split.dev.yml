@@ -1,0 +1,73 @@
+uuid: 92ce63ce-7f41-4ca9-9508-e34482b3f16b
+langcode: en
+status: true
+dependencies: {  }
+id: dev
+label: 'Dev split'
+folder: ../config_split/dev
+module:
+  dblog: 0
+  devel: 0
+  styleguide: 0
+  twig_xdebug: 0
+  wildlife_content: 0
+  wildlife_development: 0
+theme: {  }
+blacklist:
+  - migrate_plus.migration_group.example_wildlife_local1
+  - migrate_plus.migration_group.example_wildlife_national
+  - migrate_plus.migration.file_documents_national
+  - migrate_plus.migration.file_images_local1
+  - migrate_plus.migration.file_images_national
+  - migrate_plus.migration.file_silhouettes_national
+  - migrate_plus.migration.file_location_local1
+  - migrate_plus.migration.file_location_national
+  - migrate_plus.migration.media_documents_national
+  - migrate_plus.migration.media_images_local1
+  - migrate_plus.migration.media_images_national
+  - migrate_plus.migration.media_silhouettes_national
+  - migrate_plus.migration.media_videos_national
+  - migrate_plus.migration.menu_links_national
+  - migrate_plus.migration.node_basic_landing_page_national
+  - migrate_plus.migration.node_blog_national
+  - migrate_plus.migration.node_event_local1
+  - migrate_plus.migration.node_event_national
+  - migrate_plus.migration.node_habitat_national
+  - migrate_plus.migration.node_job_national
+  - migrate_plus.migration.node_news_national
+  - migrate_plus.migration.node_reserve_national
+  - migrate_plus.migration.node_species_national
+  - migrate_plus.migration.node_trust_national
+  - migrate_plus.migration.node_volunteer_opportunity_national
+  - migrate_plus.migration.paragraph_accordion_item_national
+  - migrate_plus.migration.paragraph_accordion_national
+  - migrate_plus.migration.paragraph_attached_files_national
+  - migrate_plus.migration.paragraph_headline_hero_national
+  - migrate_plus.migration.paragraph_image_national
+  - migrate_plus.migration.paragraph_linked_logo_items_national
+  - migrate_plus.migration.paragraph_linked_logos_national
+  - migrate_plus.migration.paragraph_quick_links_national
+  - migrate_plus.migration.paragraph_rich_text_local1
+  - migrate_plus.migration.paragraph_rich_text_national
+  - migrate_plus.migration.paragraph_section_national
+  - migrate_plus.migration.paragraph_spotlight_group_national
+  - migrate_plus.migration.paragraph_spotlight_national
+  - migrate_plus.migration.paragraph_statistic_item_national
+  - migrate_plus.migration.paragraph_statistics_national
+  - migrate_plus.migration.paragraph_video_national
+  - migrate_plus.migration.taxonomy_term_blog_category
+  - migrate_plus.migration.taxonomy_term_environmental_designation
+  - migrate_plus.migration.taxonomy_term_event_theme
+  - migrate_plus.migration.taxonomy_term_event_type
+  - migrate_plus.migration.taxonomy_term_event_type_local1
+  - migrate_plus.migration.taxonomy_term_great_for
+  - migrate_plus.migration.taxonomy_term_job_type
+  - migrate_plus.migration.taxonomy_term_local_group
+  - migrate_plus.migration.taxonomy_term_news_category
+  - migrate_plus.migration.taxonomy_term_opportunity_type
+  - migrate_plus.migration.taxonomy_term_species.yml
+  - migrate_plus.migration.taxonomy_term_tag_category.yml
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 1

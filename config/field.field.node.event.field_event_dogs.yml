@@ -1,0 +1,21 @@
+uuid: 14b4f498-bebd-4f77-bdd9-430723f2ce6d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_dogs
+    - node.type.event
+  module:
+    - options
+id: node.event.field_event_dogs
+field_name: field_event_dogs
+entity_type: node
+bundle: event
+label: Dogs
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,6 @@
+'administer all block pages':
+  title: Administer all block pages
+  description: Administer all block pages - this is a more useful global permission.
+'manage footer information':
+  title: Manage Footer Information block
+  description: Allow users to manage the Footer Information block config.

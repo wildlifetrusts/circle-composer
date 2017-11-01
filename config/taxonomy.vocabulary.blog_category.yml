@@ -1,0 +1,9 @@
+uuid: e2b7ffb6-55b6-4715-b82a-2f372381ac39
+langcode: en
+status: true
+dependencies: {  }
+name: 'Blog category'
+vid: blog_category
+description: 'Categorisation for the Blog content type.'
+hierarchy: 0
+weight: 0

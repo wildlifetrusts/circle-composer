@@ -1,0 +1,27 @@
+uuid: 2634c40a-3efd-46cc-b957-f0c3e923269c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_boundary
+    - node.type.reserve
+  module:
+    - file
+id: node.reserve.field_reserve_boundary
+field_name: field_reserve_boundary
+entity_type: node
+bundle: reserve
+label: 'Reserve boundary'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: reserve-boundaries
+  file_extensions: kml
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

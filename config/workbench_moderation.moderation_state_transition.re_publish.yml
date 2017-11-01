@@ -1,0 +1,12 @@
+uuid: 2366c2e7-2a0b-458d-8397-0fe8f3a18f90
+langcode: en
+status: true
+dependencies:
+  config:
+    - workbench_moderation.moderation_state.published
+    - workbench_moderation.moderation_state.unpublished
+id: re_publish
+label: Re-publish
+stateFrom: unpublished
+stateTo: published
+weight: 5

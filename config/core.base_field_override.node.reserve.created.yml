@@ -1,0 +1,18 @@
+uuid: bc42cf7a-08d6-42a1-b06b-6a3df8be8b42
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.reserve
+id: node.reserve.created
+field_name: created
+entity_type: node
+bundle: reserve
+label: 'Authored on'
+description: 'The time that the node was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

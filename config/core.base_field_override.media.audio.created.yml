@@ -1,0 +1,18 @@
+uuid: 8656e299-27e1-4960-8562-0d2287a02688
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.audio
+id: media.audio.created
+field_name: created
+entity_type: media
+bundle: audio
+label: Created
+description: 'The time that the media was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

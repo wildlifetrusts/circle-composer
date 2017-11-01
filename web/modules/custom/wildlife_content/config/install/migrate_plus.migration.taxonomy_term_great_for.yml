@@ -1,0 +1,29 @@
+uuid: 146168a7-f320-453e-8b96-9df556fc3799
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: taxonomy_term_great_for
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Environmental Designation (tags) from a source to taxonomy terms'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/taxonomy_term_great_for.csv
+  header_row_count: 1
+  keys:
+    - tid
+process:
+  vid:
+    plugin: default_value
+    default_value: great_for
+  name: name
+  weight: weight
+destination:
+  plugin: 'entity:taxonomy_term'
+migration_dependencies: {  }

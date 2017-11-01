@@ -1,0 +1,28 @@
+uuid: f9276677-c7bc-4c15-b523-fb9d2d720c6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_reserve
+    - node.type.event
+    - node.type.reserve
+id: node.event.field_event_reserve
+field_name: field_event_reserve
+entity_type: node
+bundle: event
+label: Reserve
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      reserve: reserve
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: reserve
+field_type: entity_reference

@@ -1,0 +1,102 @@
+uuid: 0b373073-575e-4f48-8180-31170212b32e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_campaign_type
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_cm_form
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_mailchimp_btn
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_mailchimp_form
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_text_above
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_text_below
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_title
+    - paragraphs.paragraphs_type.newsletter_sign_up
+  module:
+    - fences
+    - wildlife_field_formatters
+id: paragraph.newsletter_sign_up.preview
+targetEntityType: paragraph
+bundle: newsletter_sign_up
+mode: preview
+content:
+  field_newsletter_cm_form:
+    weight: 3
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  field_newsletter_mailchimp_form:
+    weight: 2
+    label: inline
+    settings:
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  field_newsletter_text_above:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: '140'
+      word_boundary: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+  field_newsletter_text_below:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: '140'
+      word_boundary: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+  field_newsletter_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+hidden:
+  field_newsletter_campaign_type: true
+  field_newsletter_mailchimp_btn: true

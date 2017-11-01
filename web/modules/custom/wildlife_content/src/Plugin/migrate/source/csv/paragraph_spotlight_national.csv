@@ -1,0 +1,12 @@
+id,label,title,title_size,detail,link_title,link_uri,link_appearance,button_type,text_colour,display_type,image_type,image,silhouette
+2601,"Campaign","Defend Nature","small",,,internal:/,block,primary,white,overlay,image,110,
+2602,"Blog","Badger Cull Petition Response","small",,,internal:/,block,primary,white,overlay,image,111,
+2603,"News","Species at Risk of Extinction","small",,,internal:/,block,primary,white,overlay,image,112,
+2604,"Volunteer","Do something great and volunteer with us","small",,Find out more,internal:/,button,primary,black,separate,image,109,
+2605,"Campaign","Help Save Our Marine Conservation Zones","large","<p>A campaign to encourage people to respond to a government consultation about setting up 23 new Marine Conservation Zones (MCZs)in English seas.</p>",Find out more,internal:/,button,primary,white,overlay,image,108,
+2606,About,"Together, The Wildlife Trusts are the UK's largest people-powered environmental organisation.",small,"<p>Made up of 47 individual trusts, our goal is nature's recovery on land and at sea.</p>",See our work,internal:/,button,primary,black,overlay,silhouette,,230
+2607,About,"Lorem ipsum",small,"<p>Made up of 47 individual trusts, our goal is nature's recovery on land and at sea.</p>",See our work,internal:/,button,primary,black,overlay,silhouette,,230
+2608,"Campaign","Defend Nature","small",,,internal:/,block,primary,white,overlay,image,110,
+2609,"Blog","Badger Cull Petition Response","small",,,internal:/,block,primary,white,overlay,image,111,
+2610,"News","Species at Risk of Extinction","small",,,internal:/,block,primary,white,overlay,image,112,
+2611,"Volunteer","Do something great and volunteer with us","small",,Find out more,internal:/,button,primary,black,separate,image,109,

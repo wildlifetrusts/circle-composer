@@ -1,0 +1,16 @@
+uuid: b1cfb835-a2a0-4b66-b36b-671120ebf592
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: menu_section_default
+label: 'Menu section default'
+effects:
+  66119311-6b6b-4cae-a578-56e6b64aad21:
+    uuid: 66119311-6b6b-4cae-a578-56e6b64aad21
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 225
+      height: 136

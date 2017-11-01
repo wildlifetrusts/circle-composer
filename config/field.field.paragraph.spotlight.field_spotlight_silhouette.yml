@@ -1,0 +1,29 @@
+uuid: 08e3d4d3-ee7a-45cb-a024-100403116ee1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_silhouette
+    - media_entity.bundle.silhouette
+    - paragraphs.paragraphs_type.spotlight
+id: paragraph.spotlight.field_spotlight_silhouette
+field_name: field_spotlight_silhouette
+entity_type: paragraph
+bundle: spotlight
+label: Silhouette
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      silhouette: silhouette
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

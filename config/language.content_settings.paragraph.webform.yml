@@ -1,0 +1,16 @@
+uuid: ca77fc89-858d-48df-b8e2-f8ca21a73689
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.webform
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.webform
+target_entity_type_id: paragraph
+target_bundle: webform
+default_langcode: site_default
+language_alterable: true

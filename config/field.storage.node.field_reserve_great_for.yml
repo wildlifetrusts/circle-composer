@@ -1,0 +1,20 @@
+uuid: fdd5d822-fc4c-4e6a-a220-0cfc2b3aa0d1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_reserve_great_for
+field_name: field_reserve_great_for
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 5
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

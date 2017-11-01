@@ -1,0 +1,9 @@
+uuid: db122181-6df0-477b-8de8-c45b2429c254
+langcode: en
+status: true
+dependencies: {  }
+id: featured_cards
+label: 'Featured cards'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

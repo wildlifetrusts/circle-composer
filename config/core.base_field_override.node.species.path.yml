@@ -1,0 +1,20 @@
+uuid: c357f299-1873-4dda-b8e8-0db934f47fe5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.species
+  module:
+    - path
+id: node.species.path
+field_name: path
+entity_type: node
+bundle: species
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

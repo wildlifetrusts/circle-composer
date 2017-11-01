@@ -1,0 +1,28 @@
+uuid: 84730b25-f592-4a5a-9084-d1959f1d1050
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_habitat_photos
+    - media_entity.bundle.image
+    - node.type.habitat
+id: node.habitat.field_habitat_photos
+field_name: field_habitat_photos
+entity_type: node
+bundle: habitat
+label: Photos
+description: 'The first photo will be used for teaser type view modes. If more than 1 photo is present, these will form a carousel slider.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

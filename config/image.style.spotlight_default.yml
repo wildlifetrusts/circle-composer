@@ -1,0 +1,16 @@
+uuid: 6fe6eeb9-af05-456f-b1ca-bd5f0799caaf
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_default
+label: 'Spotlight default'
+effects:
+  87a621e9-4441-4154-9767-4c8088f402f8:
+    uuid: 87a621e9-4441-4154-9767-4c8088f402f8
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 350

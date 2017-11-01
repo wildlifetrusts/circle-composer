@@ -1,0 +1,28 @@
+uuid: d9259096-e5d5-46f8-b5a9-d338e9727d93
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.tag_categories
+id: taxonomy_term.tag_categories.default
+targetEntityType: taxonomy_term
+bundle: tag_categories
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true

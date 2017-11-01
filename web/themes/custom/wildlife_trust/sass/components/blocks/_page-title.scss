@@ -1,0 +1,9 @@
+.block--page-title-block {
+  @extend %clearfix;
+
+  h1 {
+    .page--type-basic-landing-page & {
+      @extend %content-narrow-constrain;
+    }
+  }
+}

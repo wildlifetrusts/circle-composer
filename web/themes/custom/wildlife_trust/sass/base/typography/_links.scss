@@ -1,0 +1,13 @@
+/* Base Link */
+a {
+  font-weight: $font-weight-regular;
+  text-decoration: underline;
+  color: palette(mono, x-dark);
+
+  /* Link States */
+  &:focus,
+  &:active,
+  &:hover {
+    color: palette(mono, mid-dark);
+  }
+}

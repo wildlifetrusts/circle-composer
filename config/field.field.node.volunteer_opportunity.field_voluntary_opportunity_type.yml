@@ -1,0 +1,28 @@
+uuid: aab15178-675e-458b-a9bf-03c471ba7859
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voluntary_opportunity_type
+    - node.type.volunteer_opportunity
+    - taxonomy.vocabulary.opportunity_type
+id: node.volunteer_opportunity.field_voluntary_opportunity_type
+field_name: field_voluntary_opportunity_type
+entity_type: node
+bundle: volunteer_opportunity
+label: 'Opportunity type'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      opportunity_type: opportunity_type
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,18 @@
+features:
+  node_user_picture: false
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: 1
+logo:
+  use_default: 1
+  path: ''
+favicon:
+  use_default: 1
+strapline:
+  show: 1
+  text: 'Lancs, Manchester & North Merseyside'
+  size: small
+colour_scheme: default
+footer_logo:
+  use_default: 1
+  path: ''

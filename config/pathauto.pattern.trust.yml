@@ -1,0 +1,22 @@
+uuid: 3933319e-fc5a-4df4-a969-4cf747a62132
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: trust
+label: Trust
+type: 'canonical_entities:node'
+pattern: 'wildlife-trusts/[node:title]'
+selection_criteria:
+  0381eaee-0ecd-4ee2-8730-8f970427ee67:
+    id: node_type
+    bundles:
+      trust: trust
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 0381eaee-0ecd-4ee2-8730-8f970427ee67
+selection_logic: and
+weight: -5
+relationships: {  }

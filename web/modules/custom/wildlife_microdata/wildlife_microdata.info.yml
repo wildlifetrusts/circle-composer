@@ -1,0 +1,5 @@
+name: Wildlife Microdata
+type: module
+description: Adds Schema.org microdata to various entities.
+core: 8.x
+package: Wildlife

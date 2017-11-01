@@ -1,0 +1,44 @@
+uuid: 9b8529ba-e6fc-46ad-bbcb-630a5f1852dc
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: paragraph_linked_logos_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Linked Logos paragraphs from a CSV source to paragraphs: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/paragraph_linked_logos_national.csv
+  header_row_count: 1
+  keys:
+    - id
+process:
+  type:
+    plugin: default_value
+    default_value: linked_logos
+  field_linked_logos:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: logos
+    -
+      plugin: migration
+      migration:
+        - paragraph_linked_logo_items_national
+      no_stub: true
+    -
+      plugin: iterator
+      process:
+        target_id: '0'
+        target_revision_id: '1'
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+migration_dependencies:
+  required:
+    - paragraph_linked_logo_items_national

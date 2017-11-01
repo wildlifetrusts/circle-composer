@@ -1,0 +1,17 @@
+uuid: be494b27-0d3f-4d37-9e5c-64f516117467
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: null
+id: audio
+label: Audio
+description: 'Add an audio media item.'
+type: generic
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration: {  }
+field_map: {  }

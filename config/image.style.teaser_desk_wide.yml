@@ -1,0 +1,16 @@
+uuid: 2e53222d-cfe2-45d2-8137-ee9d474289bb
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: teaser_desk_wide
+label: 'Teaser desk wide'
+effects:
+  bf02053a-519c-47ea-9bca-e213240f8e81:
+    uuid: bf02053a-519c-47ea-9bca-e213240f8e81
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 332
+      height: 220

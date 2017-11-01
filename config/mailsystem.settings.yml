@@ -1,0 +1,15 @@
+theme: wildlife_trust
+defaults:
+  sender: swiftmailer
+  formatter: swiftmailer
+_core:
+  default_config_hash: IhwTepsVwtbtbcT5GzQKhCXDCRvbk3MNkWqPiuiZ10s
+modules:
+  swiftmailer:
+    none:
+      formatter: swiftmailer
+      sender: swiftmailer
+  wildlife_admin:
+    needs_review:
+      formatter: swiftmailer
+      sender: swiftmailer

@@ -1,0 +1,6 @@
+wildlife_sharing.config:
+  title: 'Wildlife Sharing Configuration'
+  description: 'Configure the domains to share content between'
+  route_name: wildlife_sharing.config
+  parent: system.admin_config_services
+  weight: 12

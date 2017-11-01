@@ -1,0 +1,9 @@
+uuid: 28b4ca4b-9408-4d4b-a78d-fabd33bc60f0
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_vocabulary_environmental_designation
+action: page_redirect_json
+allow_override: 0
+redirect: /nature-reserves
+redirect_code: 301

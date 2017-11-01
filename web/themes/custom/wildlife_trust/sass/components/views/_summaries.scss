@@ -1,0 +1,42 @@
+.view-display--categories_summary,
+.view-display--tags_summary,
+.view-display--authors_summary {
+  &:not(:empty) {
+    @include keyline(all);
+    background-color: palette(mono, x-light);
+    padding: $spacing-unit-vertical $spacing-unit-horizontal;
+    margin-bottom: $spacing-unit-vertical;
+  }
+
+  .view__header,
+  .view__content {
+    margin-top: 0 !important;
+  }
+
+  .view__header h2 {
+    @extend .gamma;
+  }
+
+  .views-summary {
+    padding-left: 1em;
+    margin-bottom: 0;
+    @include setType(6, 16px);
+
+    &:not(:last-child) {
+      margin-bottom: 1em;
+    }
+
+    li {
+      color: palette(mono, mid-dark);
+    }
+
+    a {
+      text-decoration: none;
+
+      &.is-active {
+        text-decoration: underline;
+        color: palette(orange);
+      }
+    }
+  }
+}

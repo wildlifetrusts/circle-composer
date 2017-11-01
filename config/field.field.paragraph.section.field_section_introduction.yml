@@ -1,0 +1,27 @@
+uuid: ff5d1725-b898-4c4e-972a-4d6ee0834e2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_introduction
+    - paragraphs.paragraphs_type.section
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: paragraph.section.field_section_introduction
+field_name: field_section_introduction
+entity_type: paragraph
+bundle: section
+label: Introduction
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

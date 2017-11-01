@@ -1,0 +1,16 @@
+uuid: 92f240c7-9bcd-45a6-8ad4-94bfdc9e918b
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_triple_desk
+label: 'Spotlight triple desk'
+effects:
+  8af059fc-254d-4292-aaeb-b47a6d59465f:
+    uuid: 8af059fc-254d-4292-aaeb-b47a6d59465f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 400
+      height: 591

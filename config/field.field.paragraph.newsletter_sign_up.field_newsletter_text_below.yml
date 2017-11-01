@@ -1,0 +1,27 @@
+uuid: 7b88457e-89f5-4e10-8fde-6d67a53584ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_newsletter_text_below
+    - paragraphs.paragraphs_type.newsletter_sign_up
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    plain_text: plain_text
+    full_html: '0'
+id: paragraph.newsletter_sign_up.field_newsletter_text_below
+field_name: field_newsletter_text_below
+entity_type: paragraph
+bundle: newsletter_sign_up
+label: 'Text (below form)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

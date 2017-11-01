@@ -1,0 +1,32 @@
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Theme override for a Wildlife Theming Branding block.
+ *
+ * Each branding element variable ( header logo, footer logo, strapline) is only
+ * available if enabled in the block configuration.
+ *
+ * Available variables:
+ * - site_header_logo: Header logo for site as defined in Theme Variation.
+ * - site_footer_logo: Footer logo for site as defined in Theme Variation.
+ * - site_strapline: Strapline for site as defined in Theme Variation.
+ * - site_strapline_size: The size set for the site strapline as defined in
+ *     Theme Variation.
+ */
+#}
+{% block content %}
+  {% if site_header_logo %}
+    <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="branding__logo {% if site_strapline is empty %}branding__logo--no-name{% endif %}">
+      <img src="{{ site_header_logo }}" alt="{{ 'Home'|t }}" />
+    </a>
+  {% endif %}
+  {% if site_footer_logo %}
+    <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="branding__logo">
+      <img src="{{ site_footer_logo }}" alt="{{ 'Home'|t }}" />
+    </a>
+  {% endif %}
+  {% if site_strapline and site_strapline_size %}
+    <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="branding__strapline branding__strapline--{{ site_strapline_size }}">{{ site_strapline }}</a>
+  {% endif %}
+{% endblock %}

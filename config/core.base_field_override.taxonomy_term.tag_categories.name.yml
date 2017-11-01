@@ -1,0 +1,18 @@
+uuid: d915ccd8-4630-4a4b-a8e5-f471272e3567
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.tag_categories
+id: taxonomy_term.tag_categories.name
+field_name: name
+entity_type: taxonomy_term
+bundle: tag_categories
+label: Name
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

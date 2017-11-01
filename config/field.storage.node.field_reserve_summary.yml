@@ -1,0 +1,19 @@
+uuid: 388d09a5-d145-4020-9a69-0320a5655951
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_reserve_summary
+field_name: field_reserve_summary
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

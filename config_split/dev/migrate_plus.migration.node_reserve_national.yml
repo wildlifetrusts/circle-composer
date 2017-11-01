@@ -1,0 +1,156 @@
+uuid: 37fb4461-957e-4200-8a46-7f7de38c84ba
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: node_reserve_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Reserve data from a CSV source to nodes: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/node_reserve_national.csv
+  header_row_count: 1
+  keys:
+    - nid
+  constants:
+    text_format: rich_text
+    mod_state: published
+process:
+  type:
+    plugin: default_value
+    default_value: reserve
+  title: title
+  moderation_state: constants/mod_state
+  field_reserve_photos:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: photos
+    -
+      plugin: migration
+      migration: media_images_national
+      no_stub: true
+  field_reserve_wildlife_trust:
+    -
+      plugin: migration
+      migration: node_trust_national
+      source: trust
+  field_reserve_great_for:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: great_for
+    -
+      plugin: migration
+      migration: taxonomy_term_great_for
+  field_reserve_summary: summary
+  field_reserve_address: address
+  field_reserve_town: town
+  field_reserve_county: county
+  field_reserve_postcode: postcode
+  field_reserve_map_ref: map_ref
+  field_reserve_lat_long:
+    -
+      plugin: geofield_latlon
+      source:
+        - lat
+        - lon
+  field_reserve_boundary/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: boundary
+    -
+      plugin: migration
+      migration:
+        - file_documents_national
+  field_reserve_entry_fee: entry_fee
+  field_reserve_parking_info: parking_info
+  field_reserve_bicycle_parking: bicycle_parking
+  field_reserve_grazing_animals: grazing_info
+  field_reserve_walking_trails/value: walking_trails
+  field_reserve_walking_trails/format: constants/text_format
+  field_reserve_access/value: access
+  field_reserve_access/format: constants/text_format
+  field_reserve_dogs: dogs
+  field_reserve_dogs_additional: dogs_additional
+  field_reserve_visitor_centre: visitor_centre
+  field_reserve_bird_hides: bird_hides
+  field_reserve_toilets: toilets
+  field_reserve_shop: shop
+  field_reserve_cafe_refreshments: cafe_refreshments
+  field_reserve_picnic_area: picnic_area
+  field_reserve_disabled_toilet: disabled_toilet
+  field_reserve_baby_changing: baby_changing
+  field_reserve_outdoor_play_area: outdoor_play_area
+  field_reserve_car_charging: car_charging
+  field_reserve_wifi: wifi
+  field_reserve_opening_times: opening_times
+  field_reserve_best_time_to_visit: best_time_to_visit
+  field_reserve_about/value: about
+  field_reserve_about/format: constants/text_format
+  field_reserve_species:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: species
+    -
+      plugin: migration
+      migration: node_species_national
+  field_reserve_habitat:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: habitats
+    -
+      plugin: migration
+      migration: node_habitat_national
+  field_reserve_env_designation:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: env_designation
+    -
+      plugin: migration
+      migration: taxonomy_term_environmental_designation
+  field_reserve_contact_name: contact_name
+  field_reserve_contact_email: contact_email
+  field_reserve_contact_number: contact_number
+  field_reserve_twitter/uri: twitter
+  field_reserve_facebook/uri: facebook
+  field_reserve_flickr/uri: flickr
+  field_reserve_deep_link/uri: deep_link
+  field_reserve_notice/value: notice
+  field_reserve_notice/format: constants/text_format
+  field_further_content:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: further_content
+    -
+      plugin: migration
+      migration:
+        - paragraph_rich_text_national
+      no_stub: true
+    -
+      plugin: iterator
+      process:
+        target_id: '0'
+        target_revision_id: '1'
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - media_images_national
+    - node_trust_national
+    - node_species_national
+    - node_habitat_national
+    - paragraph_rich_text_national
+    - taxonomy_term_environmental_designation
+    - taxonomy_term_great_for

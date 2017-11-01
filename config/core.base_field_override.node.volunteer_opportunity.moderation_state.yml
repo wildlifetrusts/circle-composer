@@ -1,0 +1,20 @@
+uuid: ef58e3a4-3971-487d-a780-958ca92b7a84
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.volunteer_opportunity
+id: node.volunteer_opportunity.moderation_state
+field_name: moderation_state
+entity_type: node
+bundle: volunteer_opportunity
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

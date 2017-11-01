@@ -1,0 +1,17 @@
+uuid: ef2c63aa-9d45-472e-a726-0f96ee518f15
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_scheduling
+title: 'Default cron handler'
+id: wildlife_scheduling_cron
+weight: 0
+module: wildlife_scheduling
+callback: wildlife_scheduling_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

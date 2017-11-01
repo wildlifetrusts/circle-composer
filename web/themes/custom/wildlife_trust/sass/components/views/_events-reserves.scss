@@ -1,0 +1,80 @@
+.view--location-search {
+  &.view-display--event_reserve {
+
+    .views-columns {
+      @extend %clearfix;
+    }
+
+    .views__column {
+      @include spacing('large', 'top');
+
+      @include add-breakpoint('desk-and-up') {
+        @include float-span(6, $gutter: 10/13);
+
+        &:nth-child(even) {
+          @include float-span(6, 'last', $gutter: 10/13);
+        }
+      }
+
+      .view__content {
+        .l-region--content > .views-element-container & {
+          @include spacing('medium', 'top');
+        }
+      }
+
+      .field--name-field-reserve-summary,
+      .field--name-field-event-summary {
+        display: none;
+      }
+    }
+
+    .node__title {
+      @include setType(7, ms(1));
+    }
+
+    .node__media {
+      @include add-breakpoint('palm-to-lap') {
+        max-width: percentage(1/3);
+        float: right;
+        margin-right: 0;
+        margin-left: 1em;
+      }
+
+      @include add-breakpoint('lap-and-up') {
+        @include float-span(4, $grid: 10, $Location: 'last');
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+      }
+    }
+
+    .node__media + .node__detail {
+      @include add-breakpoint('lap-and-up') {
+        float: none;
+        margin-left: 0;
+        margin-right: 0;
+        width: auto;
+        clear: none;
+      }
+    }
+
+    .view__header,
+    .view__footer,
+    .view__empty,
+    .view__pre_empty {
+      @include add-breakpoint('lap-to-desk') {
+        @include isolation-span(10, 2, 'both');
+        float: none;
+      }
+    }
+
+    .view__content {
+      overflow: hidden;
+
+      .views-row {
+        @include add-breakpoint('lap-to-desk') {
+          @include isolation-span(10, 2, 'both');
+        }
+      }
+    }
+  }
+}

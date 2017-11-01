@@ -1,0 +1,343 @@
+// Spotlights
+//
+// Styleguide 4.2.0
+.spotlights {
+  @extend %clearfix;
+
+  &--double,
+  &--quadruple {
+    .spotlights__item {
+      @include add-breakpoint('lap-and-up') {
+        float: left;
+        width: percentage(1/2);
+      }
+    }
+  }
+
+  &--triple {
+    .spotlights__item {
+      @include add-breakpoint('lap-and-up') {
+        float: left;
+        width: percentage(1/3);
+      }
+    }
+  }
+
+  .spotlights__item {
+    .spotlight--separate {
+      background-color: palette(primary);
+    }
+
+    .spotlight--overlay {
+      background-color: palette(secondary);
+    }
+
+    &:nth-child(even) {
+      .spotlight--separate {
+        background-color: palette(secondary);
+      }
+
+      .spotlight--overlay {
+        background-color: palette(primary);
+      }
+    }
+  }
+}
+
+.spotlight {
+  text-align: center;
+  max-width: $max-component-width;
+  position: relative;
+
+  > .inner {
+    @include add-breakpoint('up-to-lap') {
+      min-height: 240px;
+    }
+  }
+
+  &--black {
+    color: palette(mono, x-dark);
+
+    &:not(.spotlight--silhouette):not(.spotlight--separate) {
+      .spotlight__meta,
+      .spotlight__title,
+      .spotlight__summary {
+        @include text-shadow($color: palette(mono, x-light));
+      }
+    }
+
+    .spotlight__meta {
+      border-bottom: 2px solid palette(mono, x-dark);
+    }
+  }
+
+  &--white {
+    color: palette(mono, x-light);
+
+    &:not(.spotlight--silhouette):not(.spotlight--separate) {
+      .spotlight__meta,
+      .spotlight__title,
+      .spotlight__summary {
+        @include text-shadow;
+      }
+    }
+
+    .spotlight__meta {
+      border-bottom: 2px solid palette(mono, x-light);
+    }
+  }
+
+  &--overlay {
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @include add-breakpoint('palm-and-up') {
+      background-size: 100% auto;
+    }
+
+    background-position: 50% 50%;
+
+    &.background-animate {
+      @include mouseover-transition(background-size);
+    }
+
+    .inner {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-weight: $font-weight-regular;
+    }
+  }
+
+  &--separate {
+    .spotlight__details {
+      padding-left: $spacing-unit-horizontal;
+      padding-right: $spacing-unit-horizontal;
+    }
+
+    .field--name-field-spotlight-image {
+      overflow: hidden;
+
+      > .media {
+        @include mouseover-transition(transform);
+      }
+    }
+
+    > .inner {
+      @include add-breakpoint('up-to-lap') {
+        min-height: 500px;
+      }
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      .field--name-field-spotlight-image {
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+      }
+
+      .inner {
+        align-items: center;
+        display: flex;
+        justify-content: right;
+      }
+
+      .spotlight__details {
+        width: 50%;
+      }
+    }
+
+    &.spotlight--link-block {
+      &:hover,
+      &:focus {
+        .field--name-field-spotlight-image > .media {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+  }
+
+  &--link-block {
+    &.background-animate {
+      &:hover,
+      &:focus {
+        @include add-breakpoint('palm-and-up') {
+          background-size: 110% auto;
+        }
+
+        .spotlight__silhouette {
+          background-size: 110% auto;
+        }
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  &__silhouette {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-position: 50% 100%;
+    opacity: 0.15;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+
+    .background-animate & {
+      @include mouseover-transition(background-size);
+    }
+  }
+
+  &__details {
+    position: relative;
+    z-index: 2;
+    padding-top: $spacing-unit-vertical;
+    padding-bottom: $spacing-unit-vertical;
+  }
+
+  &__meta {
+    display: inline-block;
+    padding-bottom: emRhythm(1, ms(0));
+    margin-bottom: emRhythm(4, ms(0));
+    text-transform: uppercase;
+  }
+
+  &__title--small {
+    @include setType(7, ms(1));
+
+    @include add-breakpoint('desk-and-up') {
+      @include setType(10, ms(3));
+    }
+  }
+
+  &__title--large {
+    @include setType(10, ms(3));
+    margin-top: emRhythm(2, ms(3));
+    margin-bottom: 0;
+
+    @include add-breakpoint('desk-and-up') {
+      @include setType(16, ms(5));
+      margin-top: emRhythm(2, ms(5));
+    }
+  }
+
+  &__summary {
+    margin-bottom: emRhythm(5, ms(0));
+  }
+}
+
+// Single
+//
+// Markup: ../../docs/kss-helpers/spotlight-single.hbs
+//
+// Styleguide 4.2.1
+.spotlight--single {
+  @include add-breakpoint('lap-and-up') {
+    @include aspect-ratio(2, 1);
+  }
+
+  @include add-breakpoint('desk-wide-and-up') {
+    @include aspect-ratio-responsive(2.5, 1);
+  }
+
+  &.spotlight--silhouette {
+    @include add-breakpoint('lap-and-up') {
+      @include aspect-ratio-responsive(522, 203);
+    }
+  }
+
+  &.spotlight--overlay {
+    .spotlight__details {
+      padding-left: $spacing-unit-horizontal;
+      padding-right: $spacing-unit-horizontal;
+      max-width: 48em;
+    }
+  }
+}
+
+// Double
+//
+// Markup: ../../docs/kss-helpers/spotlight-double.hbs
+//
+// Styleguide 4.2.2
+.spotlight--double {
+  @include add-breakpoint('lap-and-up') {
+    @include aspect-ratio(1, 1);
+  }
+
+  @include add-breakpoint('desk-wide-and-up') {
+    @include aspect-ratio-responsive(5, 4);
+  }
+
+  &.spotlight--overlay {
+    .spotlight__details {
+      padding-left: $spacing-unit-horizontal;
+      padding-right: $spacing-unit-horizontal;
+      max-width: 26em;
+
+      @include add-breakpoint('desk-wide-and-up') {
+        max-width: 36em;
+      }
+    }
+  }
+}
+
+// Triple
+//
+// Markup: ../../docs/kss-helpers/spotlight-triple.hbs
+//
+// Styleguide 4.2.3
+.spotlight--triple {
+  @include add-breakpoint('lap-and-up') {
+    @include aspect-ratio(23, 34);
+  }
+
+  @include add-breakpoint('desk-wide-and-up') {
+    @include aspect-ratio-responsive(23, 32);
+  }
+
+  &.spotlight--overlay {
+    .spotlight__details {
+      padding-left: $spacing-unit-horizontal;
+      padding-right: $spacing-unit-horizontal;
+
+      @include add-breakpoint('desk-and-up') {
+        padding-left: double($spacing-unit-horizontal);
+        padding-right: double($spacing-unit-horizontal);
+      }
+    }
+  }
+}
+
+// Quadruple
+.spotlight--quadruple {
+  @include breakpoint(map-get($breakpoints, 'lap-and-up')) {
+    @include aspect-ratio(1, 1);
+  }
+
+  @include breakpoint(map-get($breakpoints, 'desk-wide-and-up')) {
+    @include aspect-ratio-responsive(683, 340);
+  }
+
+  &.spotlight--overlay {
+    .spotlight__details {
+      padding-left: $spacing-unit-horizontal;
+      padding-right: $spacing-unit-horizontal;
+      max-width: 26em;
+
+      @include breakpoint(map-get($breakpoints, 'desk-wide-and-up')) {
+        max-width: 70%;
+      }
+    }
+  }
+}

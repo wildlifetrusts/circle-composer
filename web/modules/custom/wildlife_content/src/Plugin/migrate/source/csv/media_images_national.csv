@@ -1,0 +1,18 @@
+fid,filename,filepath,uri,mid,caption
+1,National event,national-event-1.jpg,public://national-event-1.jpg,101,"This image is of a national event."
+2,Robin,robin.jpg,public://robin.jpg,102,"Robins are Britain's national bird."
+3,Crocuses,crocuses.jpg,public://crocuses.jpg,103,"A photo of some crocuses in Springtime."
+4,Flowers,flowers.jpg,public://flowers.jpg,104,
+5,Example Logo,logo1.png,public://logo1.png,105,
+6,Example Logo 2,logo2.png,public://logo2.png,106,
+7,Example Logo 3,logo3.png,public://logo3.png,107,
+8,Spotlight Single 1,spotlight-single-1.jpeg,public://spotlight-single-1.jpeg,108,
+9,Spotlight Single 2,spotlight-single-2.jpeg,public://spotlight-single-2.jpeg,109,
+10,Spotlight Triple 1,spotlight-triple-1.jpeg,public://spotlight-triple-1.jpeg,110,
+11,Spotlight Triple 2,spotlight-triple-2.jpeg,public://spotlight-triple-2.jpeg,111,
+12,Spotlight Triple 3,spotlight-triple-3.jpeg,public://spotlight-triple-3.jpeg,112,
+13,Badger,badger.jpg,public://badger.jpg,113,"A Badger - latin name Meles Meles."
+14,Oystercatcher,oystercatcher.jpeg,public://oystercatcher.jpeg,114,"An Oystercatcher - latin name Haematopus ostralegus."
+15,Derbyshire Wildlife Trust,derbyshire-wildlife-trust.jpg,public://derbyshire-wildlife-trust.jpg,115,"Derbyshire Wildlife Trust"
+16,Wild Wednesdays,wild-wednesdays.jpg,public://wild-wednesdays.jpg,116,"Wild Wednesdays"
+17,Great Crested Newt,great-crested-newt.JPG,public://great-crested-newt.JPG,117,"Great Crested Newt"

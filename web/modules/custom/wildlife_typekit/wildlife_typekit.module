@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function wildlife_typekit_page_attachments_alter(array &$attachments) {
+  $config = \Drupal::config('wildlife_typekit.settings');
+  $typekit_base_url = $config->get('base_url');
+  $typekit_kit_id = $config->get('id');
+
+  if ($typekit_base_url && $typekit_kit_id) {
+    $typekit_url = '//' . $typekit_base_url . '/' . $typekit_kit_id . '.js';
+  }
+  $typekit_snippet = $config->get('snippet');
+
+  if (isset($typekit_url) && isset($typekit_snippet)) {
+    // Create the Typekit kit js.
+    $typekit_script = array(
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#attributes' => array(
+        'type' => 'text/javascript',
+        'src' => $typekit_url,
+      ),
+      '#value' => '',
+      '#weight' => 998,
+    );
+
+    // Create the Typekit snippet.
+    $typekit_snippet = array(
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#attributes' => array(
+        'type' => 'text/javascript',
+      ),
+      '#value' => $typekit_snippet,
+      '#weight' => 999,
+    );
+
+    $attachments['#attached']['html_head'][] = [$typekit_script, 'typekit_script'];
+    $attachments['#attached']['html_head'][] = [$typekit_snippet, 'typekit_snippet'];
+    $attachments['#cache']['tags'][] = 'typekit';
+  }
+}

@@ -1,0 +1,23 @@
+uuid: 3479095d-6d10-4fd6-bced-509e3a33e084
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_newsletter_cm_form
+    - paragraphs.paragraphs_type.newsletter_sign_up
+id: paragraph.newsletter_sign_up.field_newsletter_cm_form
+field_name: field_newsletter_cm_form
+entity_type: paragraph
+bundle: newsletter_sign_up
+label: 'Campaign Monitor form'
+description: 'Admin users can add new sign up forms via the <a href="/admin/config/services/campaign_monitor">Campaign Monitor Signup Forms</a> page.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:campaign_monitor_signup'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

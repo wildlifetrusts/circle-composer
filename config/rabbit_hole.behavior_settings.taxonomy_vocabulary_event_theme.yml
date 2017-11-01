@@ -1,0 +1,9 @@
+uuid: b19b8814-9035-4171-9f08-59a75f70ff2d
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_vocabulary_event_theme
+action: page_redirect_json
+allow_override: 0
+redirect: /events
+redirect_code: 301

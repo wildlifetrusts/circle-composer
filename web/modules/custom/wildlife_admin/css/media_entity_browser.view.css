@@ -1,0 +1,18 @@
+/* Images browser */
+.view-media-entity-browser .views-row {
+  width: 280px !important;
+}
+
+/* Documents browser */
+.view-media-entity-browser.view-display-id-entity_browser_document .views-row .views-field-thumbnail__target-id {
+  width: 280px;
+  height: 100px;
+  text-align: center;
+}
+
+.view-media-entity-browser.view-display-id-entity_browser_document .views-row .views-field-thumbnail__target-id img {
+  display: inline-block;
+  max-width: 280px;
+  max-height: 100px;
+  width: auto;
+}

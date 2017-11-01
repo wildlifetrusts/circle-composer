@@ -1,0 +1,23 @@
+uuid: 0422b3f0-fd98-4e60-a33d-637f100d241c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_audio_ogg
+    - media_entity.bundle.audio
+  module:
+    - link
+id: media.audio.field_audio_ogg
+field_name: field_audio_ogg
+entity_type: media
+bundle: audio
+label: 'Rackspace .ogg file link'
+description: 'Enter the link to a .ogg file for use via Rackspace streaming.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

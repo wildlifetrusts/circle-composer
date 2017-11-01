@@ -1,0 +1,9 @@
+uuid: 49872c6b-9011-418f-b9cb-9468e6ad813c
+langcode: en
+status: true
+dependencies: {  }
+id: node__species
+label: 'Content: Species'
+tags:
+  description: '[node:field_species_summary]'
+  image_src: '[node:field_species_photos:0:entity:field_media_image:large]'

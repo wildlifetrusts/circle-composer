@@ -1,0 +1,36 @@
+{#
+/**
+ * @file view_header.html.twig
+ * Default theme implementation to present View header data.
+ *
+ * This template is used when viewing View header pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ * - user_can_edit: Whether or not the user can edit View Headers.
+ * - view_header_id: The ID of the view header.
+ *
+ * @see template_preprocess_view_header()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if content %}
+  <div{{ attributes.addClass('view-header') }}>
+    {% if header_silhouette %}
+      <div class="view__header__silhouette" style="background-image: url('{{ header_silhouette }}');"></div>
+    {% endif %}
+    <div><div class="view__header_inner">
+      {{- content|without('field_further_content') -}}
+      {{ related_search }}
+    </div></div>
+    {% if user_can_edit %}
+      <a href="{{ path('entity.view_header.edit_form', {'view_header': view_header_id, 'destination': current_page}) }}" class="view__header_edit button button--tertiary button--small">{{ 'Edit view header'|t }}</a>
+    {% endif %}
+  </div>
+  <div class="view--header-further-content">
+    {{- content.field_further_content -}}
+  </div>
+{% endif %}

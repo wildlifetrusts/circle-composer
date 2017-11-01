@@ -1,0 +1,3 @@
+id: ile4fkw
+base_url: use.typekit.net
+snippet: 'try{Typekit.load({ async: true });}catch(e){}'

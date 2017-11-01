@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_social_sharing.module.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_social_sharing_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_social_sharing module.
+    case 'help.page.wildlife_social_sharing':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Social Sharing') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function wildlife_social_sharing_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = array();
+
+  // Add a 'Social Sharing' base field to all node types.
+  if ($entity_type->id() === 'node') {
+    $fields['social_sharing'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Allow social sharing'))
+      ->setDescription(t('Toggle the social sharing icons.'))
+      ->setRevisionable(TRUE)
+      ->setDefaultValue(TRUE)
+      ->setDisplayOptions('form', array(
+        'type' => 'boolean_checkbox',
+        'weight' => -1,
+      ));
+  }
+
+  return $fields;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\node\NodeForm.
+ */
+function wildlife_social_sharing_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  $form['social_sharing_details'] = array(
+    '#type' => 'details',
+    '#title' => t('Social sharing'),
+    '#open' => FALSE,
+    '#group' => 'advanced',
+    '#weight' => 30,
+  );
+
+  $form['social_sharing']['#group'] = 'social_sharing_details';
+}
+
+/**
+ * Implements hook_rrssb_buttons_alter().
+ */
+function wildlife_social_sharing_rrssb_buttons_alter(&$buttons) {
+  // Reset the icons for the share buttons.
+  if (isset($buttons['email'])) {
+    $buttons['email']['svg'] = '<span class="icon-email-white"></span>';
+  }
+
+  if (isset($buttons['facebook'])) {
+    $buttons['facebook']['svg'] = '<span class="icon-social-facebook-white"></span>';
+  }
+}

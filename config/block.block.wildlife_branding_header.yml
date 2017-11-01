@@ -1,0 +1,23 @@
+uuid: dce8f108-a814-40b3-b0ae-fd76673a4579
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_theming
+  theme:
+    - wildlife_trust
+id: wildlife_branding_header
+theme: wildlife_trust
+region: branding
+weight: 0
+provider: null
+plugin: wildlife_theming_branding_block
+settings:
+  id: wildlife_theming_branding_block
+  label: 'Wildlife Trust header branding'
+  provider: wildlife_theming
+  label_display: '0'
+  use_site_header_logo: 1
+  use_site_footer_logo: 0
+  use_site_strapline: 1
+visibility: {  }

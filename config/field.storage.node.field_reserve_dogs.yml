@@ -1,0 +1,36 @@
+uuid: 586e0d6d-091a-4585-b8e0-c9b6316aee0b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_reserve_dogs
+field_name: field_reserve_dogs
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: no_dogs_permitted
+      label: 'No dogs permitted'
+    -
+      value: dogs_permitted
+      label: 'Dogs permitted'
+    -
+      value: on_a_lead
+      label: 'On a lead'
+    -
+      value: under_effective_control
+      label: 'Under effective control'
+    -
+      value: guide_dogs_only
+      label: 'Guide dogs only'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

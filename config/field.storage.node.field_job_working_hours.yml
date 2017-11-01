@@ -1,0 +1,30 @@
+uuid: f957eb87-cc7a-4390-bcc3-750677d1e8b1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_job_working_hours
+field_name: field_job_working_hours
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: full_time
+      label: 'Full time'
+    -
+      value: part_time
+      label: 'Part time'
+    -
+      value: flexible
+      label: Flexible
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

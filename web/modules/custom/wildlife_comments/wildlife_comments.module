@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_comments.module.
+ */
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\node\NodeForm.
+ */
+function wildlife_comments_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  if (isset($form['field_disqus_comments_title']) && $form['field_disqus_comments']) {
+    $form['comments_group'] = array(
+      '#type' => 'details',
+      '#title' => t('Comments'),
+      '#open' => FALSE,
+      '#group' => 'advanced',
+      '#weight' => 30,
+    );
+
+    // Add the disqus title and comments field to comments group.
+    $form['field_disqus_comments_title']['#group'] = 'comments_group';
+    $disqus_widget = &$form['field_disqus_comments']['widget'][0];
+    $disqus_widget['#weight'] = 100;
+    $disqus_widget['#type'] = 'container';
+    $disqus_widget['#group'] = 'comments_group';
+
+    // Add override checkbox to make it more apparent there is a default.
+    $disqus_widget['override_identifier'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Override Disqus identifier'),
+      '#weight' => 2,
+      '#access' => \Drupal::currentUser()->hasPermission('administer disqus'),
+    ];
+
+    $disqus_widget['status']['#weight'] = 1;
+    $disqus_widget['identifier']['#weight'] = 3;
+    $disqus_widget['identifier']['#states'] = [
+      'disabled' => array(
+        ':input[name="field_disqus_comments[0][override_identifier]"]' => array('checked' => FALSE),
+      ),
+    ];
+
+    // Load the Disqus config and add a disabled message if it is not configured.
+    $config = \Drupal::config('disqus.settings');
+    $short_name = $config->get('disqus_domain');
+    if (empty($short_name)) {
+      $form['disqus_not_enabled'] = [
+        '#type' => 'container',
+        '#weight' => 0,
+        '#group' => 'comments_group',
+        'message' => [
+          '#markup' => t('Disqus is not currently configured. Please complete the @link.', ['@link' => \Drupal\Core\Link::createFromRoute(t('configuration'), 'disqus.settings')->toString()]),
+        ],
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function wildlife_comments_node_view(&$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Hide the Disqus Comments title if the node does not have comments enabled.
+  if ($entity instanceof Node) {
+    if ($entity->hasField('field_disqus_comments')) {
+      $disqus_comments_value = $entity->get('field_disqus_comments')->first()->getValue();
+
+      if (!$disqus_comments_value['status']) {
+        unset($build['field_disqus_comments_title']);
+      }
+    }
+  }
+
+  // Hide the Disqus comments title & comments if configuration has not been
+  // completed. i.e. There is no short name provided.
+  $config = \Drupal::config('disqus.settings');
+  $short_name = $config->get('disqus_domain');
+  if (empty($short_name)) {
+    unset($build['field_disqus_comments_title']);
+    unset($build['field_disqus_comments']);
+  }
+}

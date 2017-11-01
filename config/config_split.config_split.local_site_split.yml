@@ -1,0 +1,74 @@
+uuid: 2fa024de-7d1d-4676-b5cb-466135fb406e
+langcode: en
+status: false
+dependencies: {  }
+id: local_site_split
+label: 'Local site split'
+folder: ../config_split/local_wt
+module:
+  wildlife_local_customisation: 0
+theme: {  }
+blacklist:
+  - block.block.global_search
+  - migrate_plus.migration_group.national
+  - migrate_plus.migration.habitat
+  - migrate_plus.migration.species
+  - migrate_plus.migration.national_file_file
+  - migrate_plus.migration.national_paragraphs_audio
+  - migrate_plus.migration.national_paragraphs_flickr_album
+  - migrate_plus.migration.national_habitat
+  - migrate_plus.migration.national_media_audio
+  - migrate_plus.migration.national_media_document
+  - migrate_plus.migration.national_media_image
+  - migrate_plus.migration.national_media_silhouette
+  - migrate_plus.migration.national_media_video
+  - migrate_plus.migration.national_paragraphs_accordion
+  - migrate_plus.migration.national_paragraphs_accordion_item
+  - migrate_plus.migration.national_paragraphs_attached_files
+  - migrate_plus.migration.national_paragraphs_headline_hero
+  - migrate_plus.migration.national_paragraphs_image
+  - migrate_plus.migration.national_paragraphs_quick_links
+  - migrate_plus.migration.national_paragraphs_rich_text
+  - migrate_plus.migration.national_paragraphs_section
+  - migrate_plus.migration.national_paragraphs_spotlight
+  - migrate_plus.migration.national_paragraphs_spotlight_group
+  - migrate_plus.migration.national_paragraphs_statistic_item
+  - migrate_plus.migration.national_paragraphs_statistics
+  - migrate_plus.migration.national_paragraphs_video
+  - migrate_plus.migration.national_species
+  - migrate_plus.migration.national_term_designation
+  - migrate_plus.migration.national_term_event_theme
+  - migrate_plus.migration.national_term_event_type
+  - migrate_plus.migration.national_term_great_for
+  - migrate_plus.migration.national_term_habitats
+  - migrate_plus.migration.national_term_job_type
+  - migrate_plus.migration.national_term_opportunity_type
+  - migrate_plus.migration.national_term_species
+  - migrate_plus.migration.national_user
+  - search_api.index.index
+  - search_api.index.location
+  - views.view.local_location_result_rest
+  - views.view.location_search
+  - views.view.search
+  - wildlife_sharing.settings
+graylist:
+  - core.entity_view_display.node.habitat.default
+  - core.entity_view_display.node.habitat.search_result
+  - core.entity_view_display.node.habitat.teaser
+  - core.entity_view_display.node.species.default
+  - core.entity_view_display.node.species.search_result
+  - core.entity_view_display.node.species.teaser
+  - system.site
+  - user.role.admin
+  - user.role.anonymous
+  - user.role.authenticated
+  - user.role.author
+  - user.role.contributor
+  - user.role.editor
+  - views.view.content
+  - views.view.related_habitats
+  - views.view.related_species
+  - wildlife_trust.settings
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 0

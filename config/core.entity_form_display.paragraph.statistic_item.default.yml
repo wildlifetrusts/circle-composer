@@ -1,0 +1,76 @@
+uuid: 9a9e6c22-005f-444d-8726-a2ef3c5836d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.statistic_item.field_statistic_dynamic_type
+    - field.field.paragraph.statistic_item.field_statistic_static_custom
+    - field.field.paragraph.statistic_item.field_statistic_static_number
+    - field.field.paragraph.statistic_item.field_statistic_static_type
+    - field.field.paragraph.statistic_item.field_statistic_type
+    - field.field.paragraph.statistic_item.field_statistic_url
+    - paragraphs.paragraphs_type.statistic_item
+  module:
+    - link_attributes
+    - wildlife_field_formatters
+    - workbench_moderation
+id: paragraph.statistic_item.default
+targetEntityType: paragraph
+bundle: statistic_item
+mode: default
+content:
+  field_statistic_dynamic_type:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_statistic_static_custom:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_statistic_static_number:
+    weight: 3
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_statistic_static_type:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_icon_select
+    region: content
+  field_statistic_type:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_statistic_url:
+    weight: 7
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

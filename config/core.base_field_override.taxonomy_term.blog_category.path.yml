@@ -1,0 +1,20 @@
+uuid: 17076cca-bca1-487f-96ad-63a7bf0b8462
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.blog_category
+  module:
+    - path
+id: taxonomy_term.blog_category.path
+field_name: path
+entity_type: taxonomy_term
+bundle: blog_category
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

@@ -1,0 +1,31 @@
+uuid: cbaec127-8915-4d5c-b9a8-f8568445449d
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - rrssb
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  rrssb:
+    show: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - draft
+      - needs_review
+      - ready_to_be_published
+      - unpublished
+    default_moderation_state: draft
+name: Habitat
+type: habitat
+description: 'Add a page with information about a particular habitat.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

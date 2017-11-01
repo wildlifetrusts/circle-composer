@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Theme for the headers page.
+ *
+ * Available variables:
+ * - headers: An array of header information.
+ *     name: The site name
+ *     default_logo: Whether or not the site uses the default badger logo (bool)
+ *     show_title: Whether or not to display the site name (bool)
+ *     logo: The file extension of the logo if there is one
+ */
+#}
+
+{% for key, header in headers %}
+  <header class="l-header breakout" role="banner" aria-label="Site header" style="border-top: 1px solid #aeaeae; border-bottom: 1px solid #aeaeae;">
+    <div class="l-region l-region--branding">
+      <div id="block-site-branding" class="contextual-region block block--system block--system-branding-block">
+        <a href="/" title="Home" rel="home" class="branding__logo {% if header.hide_name is defined %}branding__logo--no-name{% endif %}">
+          {% if header.logo is not defined %}
+            <img src="/modules/custom/wildlife_development/assets/logos/default.jpg" alt="Home">
+          {% else %}
+            <img src="/modules/custom/wildlife_development/assets/logos/{{ key }}.{{ header.logo }}" alt="Home">
+          {% endif %}
+        </a>
+        {% if header.hide_name is not defined %}
+          <a href="/" title="Home" rel="home" class="branding__name">{{ header.name }}</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="l-region l-region--navigation">
+      <nav role="navigation" aria-labelledby="block-main-navigation-menu" id="block-main-navigation" class="block block--menu navigation menu--main">
+        <ul class="menu menu--level-0">
+          <li class="menu__item">
+            <a href="/" class="menu__link"><span>Wildlife</span></a>
+          </li>
+          <li class="menu__item">
+            <a href="/" class="menu__link"><span>Get Involved</span></a>
+          </li>
+          <li class="menu__item">
+            <a href="/" class="menu__link"><span>Experiences</span></a>
+          </li>
+          <li class="menu__item">
+            <a href="/" class="menu__link"><span>About</span></a>
+          </li>
+          <li class="menu__item menu__item--featured">
+            <a href="/" class="menu__link"><span>Support Us</span></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+{% endfor %}

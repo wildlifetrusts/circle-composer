@@ -1,0 +1,5 @@
+type: module
+name: Wildlife Breadcrumbs
+description: 'Breadcrumb patterns for the Wildlife Trust site.'
+package: Wildlife
+core: 8.x

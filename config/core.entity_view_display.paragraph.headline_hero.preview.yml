@@ -1,0 +1,54 @@
+uuid: 231f98a3-41dc-4048-8769-e219d3740abb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.headline_hero.field_headline_hero_background
+    - field.field.paragraph.headline_hero.field_headline_hero_cta
+    - field.field.paragraph.headline_hero.field_headline_hero_image
+    - field.field.paragraph.headline_hero.field_headline_hero_search
+    - field.field.paragraph.headline_hero.field_headline_hero_silhouette
+    - field.field.paragraph.headline_hero.field_headline_hero_title
+    - field.field.paragraph.headline_hero.field_headline_hero_video
+    - paragraphs.paragraphs_type.headline_hero
+  module:
+    - link
+    - options
+id: paragraph.headline_hero.preview
+targetEntityType: paragraph
+bundle: headline_hero
+mode: preview
+content:
+  field_headline_hero_cta:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_headline_hero_search:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_headline_hero_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_headline_hero_background: true
+  field_headline_hero_image: true
+  field_headline_hero_silhouette: true
+  field_headline_hero_video: true

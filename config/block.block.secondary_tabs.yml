@@ -1,0 +1,27 @@
+uuid: a58df2d2-245b-413f-8955-7a5dc0edd35b
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_conditions
+  theme:
+    - wildlife_trust_admin
+id: secondary_tabs
+theme: wildlife_trust_admin
+region: pre_content
+weight: 0
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  provider: core
+  label_display: '0'
+  primary: false
+  secondary: true
+visibility:
+  node_allows_social_sharing:
+    id: node_allows_social_sharing
+    display_on_social_sharing_nodes: 0
+    negate: false
+    context_mapping: {  }

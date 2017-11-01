@@ -1,0 +1,6 @@
+.field--name-field-media-caption {
+  margin-top: emRhythm(2, ms(-1));
+  text-align: center;
+  font-style: italic;
+  @include setType(5, ms(-1));
+}

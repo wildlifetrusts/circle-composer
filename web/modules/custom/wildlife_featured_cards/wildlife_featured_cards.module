@@ -1,0 +1,195 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_featured_cards.module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_featured_cards_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_featured_cards module.
+    case 'help.page.wildlife_featured_cards':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Processing and admin alterations for the Featured Cards component.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function wildlife_featured_cards_preprocess_paragraph(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+
+  if ($bundle == 'featured_cards' && $variables['view_mode'] == 'default') {
+    $type = $paragraph->get('field_cards_type')->getString();
+
+    // For dynamic cards, get the cards via the Dynamic Cards service.
+    if ($type == 'dynamic') {
+      $dynamic_cards_service = Drupal::service('wildlife_featured_cards.dynamic_cards');
+      $variables['content']['dynamic_cards'] = $dynamic_cards_service->getCards($paragraph);
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function wildlife_featured_cards_field_widget_form_alter(&$element, &$form_state, $context) {
+  /** @var \Drupal\Core\Field\FieldItemList $items */
+  $items = $context['items'];
+
+  $field_definition = $context['items']->getFieldDefinition();
+  $widget_type = $field_definition->getType();
+
+  /** @var \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $parent */
+  $parent = $items->getParent();
+  $field_name = $items->getName();
+  $parent_entity = $parent->getValue();
+
+  if ($parent && $parent_entity->getEntityTypeId() == 'paragraph') {
+    $field_parents = $context['form']['#parents'];
+    $parent_entity_type = $parent_entity->getType();
+
+    if ($parent_entity_type == 'featured_cards') {
+      // Adds states for the Featured Cards widget.
+      if (!is_array($field_parents)) {
+        $field_parents = $context['form']['#parents'];
+      }
+
+      $input_name = _wildlife_paragraphs_get_paragraph_name_from_parents($field_parents);
+
+      // Featured Cards field states.
+      if (is_array($field_parents)) {
+        if ($field_name == 'field_cards_number') {
+          $element['#states'] = array(
+            'visible' => array(
+              ':input[name="' . $input_name . '[field_cards_type]"]' => array('!value' => '_none'),
+            ),
+          );
+        }
+
+        if ($field_name == 'field_cards_curated_items') {
+          $element['#attached']['library'][] = 'wildlife_featured_cards/featured-cards-admin';
+          $element['#element_validate'][] = '_wildlife_featured_cards_curated_items_validate';
+        }
+
+        if ($field_name == 'field_cards_dynamic_type') {
+          $allowed_type_options = [
+            '_none',
+            'blog',
+            'event',
+            'news',
+            'reserve',
+          ];
+
+          foreach ($element['#options'] as $key => $value) {
+            if (!in_array($key, $allowed_type_options)) {
+              unset ($element['#options'][$key]);
+            }
+          }
+        }
+
+        if ($field_name == 'field_cards_dynamic_vocabulary') {
+          $allowed_vocab_options = [
+            '_none',
+            'blog_category',
+            'environmental_designation',
+            'event_theme',
+            'event_type',
+            'great_for',
+            'local_group',
+            'news_category',
+            'tag_categories',
+          ];
+
+          foreach ($element['#options'] as $key => $value) {
+            if (!in_array($key, $allowed_vocab_options)) {
+              unset ($element['#options'][$key]);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Validation for the field_cards_curated_items element.
+ *
+ * @param array $element
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function _wildlife_featured_cards_curated_items_validate(array $element, FormStateInterface $form_state) {
+  $curated_items_field_name = 'field_cards_curated_items';
+
+  // Find the Curated Items element parents. Drop the last item off because it
+  // is the specific delta of a single item and the value of all curated items
+  // is needed for the next step.
+  $element_parents = $element['#parents'];
+  array_pop($element_parents);
+
+  // Use the element's parents to get a useful parent array for field siblings
+  // of the curated items field.
+  $sibling_parent_position = array_search($curated_items_field_name, $element_parents, TRUE);
+  $sibling_position = array_slice($element_parents, 0, $sibling_parent_position);
+
+  // Check the card type - if it isn't curated no further validation is needed.
+  $card_type_field = array_merge($sibling_position, ['field_cards_type']);
+  $type = $form_state->getValue($card_type_field);
+
+  if ($type == 'curated') {
+    // Get all Curated Items values. Return an array of just target ids. Filter
+    // the array to remove empty items so populated items can be counted.
+    $curated_items_values = $form_state->getValue($element_parents);
+    $curated_items_targets = array_column($curated_items_values, 'target_id');
+    $curated_items_populated = array_filter($curated_items_targets);
+
+    $card_number_field = array_merge($sibling_position, ['field_cards_number']);
+    $cardinality = $form_state->getValue($card_number_field);
+
+    // Check that the cardinality matches the number of items populated and return
+    // an error if it does not.
+    if (count($curated_items_populated) < $cardinality) {
+      $form_state->setError($element, t('You must choose @cardinality items of content to populate the cards.', ['@cardinality' => $cardinality]));
+    }
+
+    $build_info = $form_state->getBuildInfo();
+    if (!empty($build_info['callback_object']) && method_exists($build_info['callback_object'], 'getEntity') && !empty($build_info['callback_object']->getEntity())) {
+      /** @var \Drupal\node\Entity\Node $node */
+      $node = $build_info['callback_object']->getEntity();
+      if ($node->id() && in_array($node->id(), $curated_items_populated)) {
+        $form_state->setError($element, t('You cannot reference %title from itself.', ['%title' => $node->getTitle()]));
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function wildlife_featured_cards_paragraph_view(&$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  $bundle = $entity->bundle();
+
+  // Remove Curated cards when the Type is set to Dynamic.
+  if ($bundle == 'featured_cards') {
+    $type = $entity->get('field_cards_type')->getString();
+
+    if ($type == 'dynamic') {
+      unset($build['field_cards_curated_items']);
+    }
+  }
+}

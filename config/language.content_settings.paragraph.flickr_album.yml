@@ -1,0 +1,16 @@
+uuid: 03efce63-93a0-4e2d-93cd-0b36a59a8c18
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.flickr_album
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.flickr_album
+target_entity_type_id: paragraph
+target_bundle: flickr_album
+default_langcode: site_default
+language_alterable: true

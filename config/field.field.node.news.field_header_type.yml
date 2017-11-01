@@ -1,0 +1,21 @@
+uuid: 0a9d93ac-98c3-4a30-8051-ec387bdb1c3a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_type
+    - node.type.news
+  module:
+    - options
+id: node.news.field_header_type
+field_name: field_header_type
+entity_type: node
+bundle: news
+label: 'Header type'
+description: 'Choose the appearance of this page''s header. If <i>None</i> is chosen, the header will be black. If <i>Colour</i> is chosen, the current colour scheme''s primary colour will be used.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

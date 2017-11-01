@@ -1,0 +1,19 @@
+uuid: a672b5fb-facd-4486-877d-ba85799a7843
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_species_scientific_name
+    - node.type.species
+id: node.species.field_species_scientific_name
+field_name: field_species_scientific_name
+entity_type: node
+bundle: species
+label: 'Scientific name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,19 @@
+uuid: ca952b3e-72f6-45ba-9f1a-c92efd7b4d2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_grazing_animals
+    - node.type.reserve
+id: node.reserve.field_reserve_grazing_animals
+field_name: field_reserve_grazing_animals
+entity_type: node
+bundle: reserve
+label: 'Grazing animals'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

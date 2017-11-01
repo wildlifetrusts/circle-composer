@@ -1,0 +1,96 @@
+.local-tasks {
+  @extend %clearfix;
+  margin-top: $spacing-unit-vertical;
+  margin-bottom: $spacing-unit-vertical;
+
+  .tabs {
+    @extend %clean-list;
+    clear: both;
+
+    &.tabs--primary {
+      @include keyline;
+      margin-bottom: halve($spacing-unit-vertical);
+    }
+
+    &.tabs--primary,
+    &.tabs--secondary {
+      @extend %clearfix;
+    }
+
+    li {
+      margin-bottom: 0.5em;
+      margin-right: 0;
+      float: none;
+      text-align: center;
+
+      @include add-breakpoint('palm-and-up') {
+        float: left;
+        margin-right: 5px;
+        margin-bottom: 0;
+
+        &.is-active {
+          margin-bottom: -1px;
+
+          a {
+            @include keyline('all');
+            border-bottom: none;
+          }
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+        margin-right: 0;
+      }
+
+      a {
+        display: block;
+        text-decoration: none;
+        padding: 0.5em 1.25em;
+        background-color: palette(mono, mid-light);
+        color: palette(mono, x-dark);
+
+        &:hover,
+        &:focus {
+          background-color: palette(mono);
+        }
+      }
+
+      &.is-active {
+        a {
+          background-color: palette(mono, x-light);
+          color: palette(orange);
+
+          @include add-breakpoint('up-to-palm') {
+            @include keyline('all');
+          }
+        }
+      }
+    }
+
+    &.tabs--secondary {
+      li {
+        a {
+          position: relative;
+          text-decoration: none;
+          @include setType(4, ms(-1));
+          background-color: palette(mono, light);
+          @include keyline('all');
+          border-radius: 10em;
+
+          &:hover,
+          &:focus {
+            background-color: palette(mono, mid-light);
+          }
+        }
+
+        &.is-active {
+          a {
+            color: palette(orange);
+            background-color: palette(mono, x-light);
+          }
+        }
+      }
+    }
+  }
+}

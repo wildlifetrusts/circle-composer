@@ -1,0 +1,10 @@
+uuid: d7721536-83f6-4180-bca6-48ccbf80952e
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.scaled_12_col_split
+label: 'Scaled 12 col split'
+targetEntityType: media
+cache: true

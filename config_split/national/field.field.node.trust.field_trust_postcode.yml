@@ -1,0 +1,19 @@
+uuid: 9846806f-adfc-4f9d-a76d-fbb998c79dcf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_postcode
+    - node.type.trust
+id: node.trust.field_trust_postcode
+field_name: field_trust_postcode
+entity_type: node
+bundle: trust
+label: Postcode
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,93 @@
+// Layout related variables.
+$spacing-vertical: (
+  small: (
+    palm: third($spacing-unit-vertical),
+    lap: halve($spacing-unit-vertical),
+  ),
+  medium: (
+    palm: $spacing-unit-vertical,
+    desk: $spacing-unit-vertical * 1.5,
+  ),
+  large: (
+    palm: $spacing-unit-vertical * 1.5,
+    lap: double($spacing-unit-vertical),
+    desk: triple($spacing-unit-vertical),
+  ),
+  x-large: (
+    palm: $spacing-unit-vertical * 1.5,
+    lap: triple($spacing-unit-vertical),
+    desk: quadruple($spacing-unit-vertical),
+  )
+);
+
+$spacing-horizontal: (
+  small: (
+    palm: third($spacing-unit-horizontal),
+  ),
+  medium: (
+    palm: $spacing-unit-horizontal,
+  ),
+  large: (
+    palm: triple($spacing-unit-horizontal),
+  ),
+  x-large: (
+    palm: quadruple($spacing-unit-horizontal),
+  ),
+);
+
+// A mixin for margin spacing.
+@mixin spacing($spacing-size, $margin-position, $default-breakpoint-name: 'palm') {
+  $spacing-map: if(($margin-position == 'top' or $margin-position == 'bottom'), $spacing-vertical, $spacing-horizontal);
+
+  margin-#{$margin-position}: map-get(map-get($spacing-map, $spacing-size), $default-breakpoint-name);
+
+  @each $breakpoint-name in map-keys(map-get($spacing-map, $spacing-size)) {
+    @if $breakpoint-name != $default-breakpoint-name {
+      @include add-breakpoint('#{$breakpoint-name}-and-up') {
+        margin-#{$margin-position}: map-get(map-get($spacing-map, $spacing-size), $breakpoint-name);
+      }
+    }
+  }
+}
+
+// Layout related abstractions.
+%center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+%constrain {
+  @extend %center;
+  max-width: $max-container-width;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+%breakout,
+.breakout {
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  clear: both;
+  float: none;
+  display: block;
+}
+
+%content-narrow-constrain {
+  @include add-breakpoint('palm-to-lap') {
+    @include isolation-span(6, 2, 'both', 8);
+  }
+
+  @include add-breakpoint('lap-and-up') {
+    @include isolation-span(8, 3, 'both');
+  }
+}
+
+%content-narrow-constrain--left {
+  @include add-breakpoint('palm-to-lap') {
+    @include float-span(6);
+  }
+
+  @include add-breakpoint('lap-and-up') {
+    @include float-span(8);
+  }
+}

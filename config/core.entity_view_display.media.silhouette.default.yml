@@ -1,0 +1,35 @@
+uuid: 81fa6a84-b686-4e48-858d-a7feea2ee032
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.silhouette.field_silhouette
+    - media_entity.bundle.silhouette
+  module:
+    - fences
+    - file
+id: media.silhouette.default
+targetEntityType: media
+bundle: silhouette
+mode: default
+content:
+  field_silhouette:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: file_url_plain
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

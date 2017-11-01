@@ -1,0 +1,20 @@
+uuid: 64e8000d-a5b3-4553-b805-83bffa5981ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.audio
+id: media.audio.name
+field_name: name
+entity_type: media
+bundle: audio
+label: 'Media name'
+description: 'Enter a descriptive name for this media.'
+required: true
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

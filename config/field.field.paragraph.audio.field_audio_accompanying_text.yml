@@ -1,0 +1,23 @@
+uuid: 42b626e9-dffb-4626-95b1-e9808e7c6170
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_audio_accompanying_text
+    - paragraphs.paragraphs_type.audio
+id: paragraph.audio.field_audio_accompanying_text
+field_name: field_audio_accompanying_text
+entity_type: paragraph
+bundle: audio
+label: 'Accompanying text'
+description: 'Check this box to add some rich text alongside the audio player.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

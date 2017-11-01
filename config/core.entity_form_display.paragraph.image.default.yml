@@ -1,0 +1,100 @@
+uuid: 672725ca-ecd5-4aac-9b5e-12da86fc01af
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.paragraph.image.field_image
+    - field.field.paragraph.image.field_image_accompanying_text
+    - field.field.paragraph.image.field_image_extra_wide
+    - field.field.paragraph.image.field_image_link_url
+    - field.field.paragraph.image.field_image_position
+    - field.field.paragraph.image.field_image_rich_text
+    - paragraphs.paragraphs_type.image
+  module:
+    - entity_browser
+    - field_group
+    - link
+    - text
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_rich_text:
+      children:
+        - field_image_accompanying_text
+        - field_image_position
+        - field_image_rich_text
+      parent_name: ''
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        label: 'Add accompanying text'
+        description: ''
+        id: ''
+        classes: ''
+        required_fields: false
+      label: 'Add accompanying text'
+id: paragraph.image.default
+targetEntityType: paragraph
+bundle: image
+mode: default
+content:
+  field_image:
+    weight: 0
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_image_accompanying_text:
+    weight: 2
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_image_extra_wide:
+    weight: 1
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_image_link_url:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_image_position:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_image_rich_text:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

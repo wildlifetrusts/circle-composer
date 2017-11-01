@@ -1,0 +1,22 @@
+uuid: 952ace1c-81bc-4f9a-bcb7-de444b9d2fbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.blog
+id: node.blog.status
+field_name: status
+entity_type: node
+bundle: blog
+label: 'Publishing status'
+description: 'A boolean indicating the published state.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

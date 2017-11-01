@@ -1,0 +1,25 @@
+uuid: 794a6752-27d7-4523-ac52-9924a527cae6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_video
+    - media_entity.bundle.video
+  module:
+    - video_embed_field
+id: media.video.field_media_video
+field_name: field_media_video
+entity_type: media
+bundle: video
+label: Video
+description: "Enter a valid URL from one of the following Video providers:\r\n<ul>\r\n<li><strong>YouTube</strong>, e.g. <i>https://www.youtube.com/watch?v=hi04r66NR9s</i> or <i>https://youtu.be/hi04r66NR9s</i></li>\r\n<li><strong>Vimeo</strong>, e.g. <i>https://vimeo.com/204162030</i></li>\r\n<ul>"
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_providers:
+    vimeo: vimeo
+    youtube: youtube
+    youtube_playlist: '0'
+field_type: video_embed_field

@@ -1,0 +1,13 @@
+.location {
+  &--viewmode--string {
+    br {
+      display: none;
+    }
+
+    .field:not(:last-child) {
+      &::after {
+        content: ', ';
+      }
+    }
+  }
+}

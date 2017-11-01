@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Provides development specific hooks and config.
+ */
+
+/**
+ * Implements hook_styleguide_alter().
+ */
+function wildlife_development_styleguide_alter(&$items) {
+  // Items to retain in the styleguide.
+  $keep_items = array(
+    'a',
+    'em',
+    's',
+    'small',
+    'strong',
+    'sub',
+    'sup',
+    'u',
+    'ul',
+    'ol',
+    'ul_long',
+    'ol_long',
+    'table',
+    'text',
+    'blockquote',
+    'headings',
+    'headings_text',
+    'status-message',
+    'warning-message',
+    'error-message',
+    'form',
+    'form-submit',
+    'form-button',
+    'pager',
+    'styleguide_breadcrumb',
+  );
+
+  foreach($items as $key => $item) {
+    if (!in_array($key, $keep_items)) {
+      unset($items[$key]);
+    }
+  }
+
+  // Form items to remove from the styleguide.
+  $remove_form_items = array(
+    'textfield-machine',
+    'machine_name',
+    'date',
+    'managed_file',
+    'password_confirm',
+    'weight',
+    'text_format',
+  );
+
+  foreach ($items['form']['content'] as $key => $form_item) {
+    if (in_array($key, $remove_form_items)) {
+      unset($items['form']['content'][$key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wildlife_development_theme($existing, $type, $theme, $path) {
+  $theme_implementations = [];
+
+  $theme_implementations['wildlife_development_headers'] = [
+    'variables' => array(
+      'headers' => NULL,
+    ),
+  ];
+
+  $theme_implementations['wildlife_development_cards'] = [
+    'variables' => array(),
+  ];
+
+  $theme_implementations['wildlife_development_teasers'] = [
+    'variables' => array(),
+  ];
+
+  $theme_implementations['wildlife_development_spotlights'] = [
+    'variables' => array(),
+  ];
+
+  return $theme_implementations;
+}

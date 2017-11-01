@@ -1,0 +1,32 @@
+uuid: d72bdf5c-31fd-4dbb-8f31-3ac635d57e3f
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: paragraph_testimonial_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Testimonial components from a CSV source to paragraphs: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/paragraph_testimonial_national.csv
+  header_row_count: 1
+  keys:
+    - id
+  constants:
+    text_format: rich_text
+process:
+  type:
+    plugin: default_value
+    default_value: testimonial
+  field_testimonial_author: author
+  field_testimonial_organisation: organisation
+  field_testimonial_quote: quote
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+migration_dependencies: null

@@ -1,0 +1,23 @@
+uuid: d72861a0-3b86-4ab1-bae7-a3143510f391
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_statistic_url
+    - paragraphs.paragraphs_type.statistic_item
+  module:
+    - link
+id: paragraph.statistic_item.field_statistic_url
+field_name: field_statistic_url
+entity_type: paragraph
+bundle: statistic_item
+label: Link
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

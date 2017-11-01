@@ -1,0 +1,61 @@
+uuid: f6083cf4-e42e-4577-a4cd-ece79c6cfcf8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.statistic_item.field_statistic_dynamic_type
+    - field.field.paragraph.statistic_item.field_statistic_static_custom
+    - field.field.paragraph.statistic_item.field_statistic_static_number
+    - field.field.paragraph.statistic_item.field_statistic_static_type
+    - field.field.paragraph.statistic_item.field_statistic_type
+    - field.field.paragraph.statistic_item.field_statistic_url
+    - paragraphs.paragraphs_type.statistic_item
+  module:
+    - fences
+    - options
+id: paragraph.statistic_item.preview
+targetEntityType: paragraph
+bundle: statistic_item
+mode: preview
+content:
+  field_statistic_dynamic_type:
+    weight: 3
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_statistic_static_number:
+    weight: 2
+    label: inline
+    settings:
+      thousand_separator: ','
+      prefix_suffix: true
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: number_integer
+    region: content
+  field_statistic_static_type:
+    weight: 1
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_statistic_type:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden:
+  field_statistic_static_custom: true
+  field_statistic_url: true

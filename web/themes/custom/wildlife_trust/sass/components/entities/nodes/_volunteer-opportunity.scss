@@ -1,0 +1,27 @@
+.node--type-volunteer-opportunity {
+  .position__details {
+    @extend %clearfix;
+    margin-top: emRhythm(10, ms(0));
+
+    @include add-breakpoint('lap-and-up') {
+      margin-top: emRhythm(12, ms(0));
+    }
+  }
+
+  .node__content {
+    .field--name-field-voluntary-application-link {
+      @include spacing('large', 'top');
+    }
+  }
+
+  &.node--view-mode-teaser {
+    .field--name-field-voluntary-location,
+    .field--name-field-voluntary-duration {
+      font-weight: $font-weight-regular;
+    }
+
+    .field--name-field-voluntary-summary {
+      margin-top: emRhythm(4);
+    }
+  }
+}

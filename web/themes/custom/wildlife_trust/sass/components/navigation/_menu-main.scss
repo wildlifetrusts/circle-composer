@@ -1,0 +1,424 @@
+.menu--main {
+  @include add-breakpoint('desk-and-up') {
+    display: flex;
+    align-items: stretch;
+    background-color: palette(mono, x-light);
+    z-index: 5;
+  }
+
+  .js & {
+    @include element-invisible;
+
+    @include add-breakpoint('desk-and-up') {
+      @include element-visible;
+    }
+  }
+
+  .is--menu-open & {
+    @include element-visible;
+  }
+
+  .menu {
+    @extend %clean-list;
+
+    @include add-breakpoint('desk-and-up') {
+      display: flex;
+      align-items: stretch;
+    }
+
+    &__link {
+      text-decoration: none;
+      display: block;
+      padding: 1em 1.625em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include add-breakpoint('desk-and-up') {
+        padding: 0.5em 0;
+      }
+
+      &:hover,
+      &:focus {
+        color: inherit;
+      }
+
+      &::after {
+        .js & {
+          content: '';
+          width: 14px;
+          height: 19px;
+          // Background image set in grunticon.js.
+          background-position: center;
+          background-size: 100% auto;
+          transition: transform 0.2s ease-in-out;
+
+          @include add-breakpoint('desk-and-up') {
+            display: none;
+          }
+        }
+      }
+
+      &--title {
+        @include add-breakpoint('desk-and-up') {
+          padding-top: 0;
+          padding-bottom: 1rem;
+          margin-bottom: 0.5rem;
+          font-size: 22px;
+          border-bottom: 1px solid palette(mono, mid-light);
+        }
+      }
+
+      &.has--dropdown {
+        position: relative;
+        z-index: 1;
+
+        &--open {
+          &::after {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      &:not(.has--dropdown)::after {
+        transform: rotate(-90deg);
+      }
+    }
+
+    &__item {
+      overflow: hidden;
+
+      @include add-breakpoint('desk-and-up') {
+        overflow: visible;
+      }
+
+      &:not(.menu__item--featured) {
+        @include add-breakpoint('desk-and-up') {
+          padding: 0 1.625em;
+        }
+      }
+
+      &--expanded {
+        html:not(.js) & {
+          > .menu__section {
+            position: absolute;
+            clip: rect(1px, 1px, 1px, 1px);
+            overflow: hidden;
+            height: 1px;
+          }
+
+          &:hover,
+          &:focus {
+            // Increase specificity.
+            > .menu__link.has--dropdown {
+              &::before {
+                @include add-breakpoint('desk-and-up') {
+                  width: 100%;
+                }
+              }
+            }
+
+            > .menu__section {
+              @include add-breakpoint('desk-and-up') {
+                clip: inherit;
+                overflow: inherit;
+                height: inherit;
+                position: absolute;
+                opacity: 1;
+                min-height: 100%;
+              }
+            }
+          }
+        }
+      }
+
+      &--featured {
+        > .menu__link {
+          background-color: palette(orange);
+          padding: 1.2em;
+          justify-content: center;
+          text-transform: uppercase;
+          color: palette(mono, x-light);
+          transition: background 0.2s ease-in-out;
+
+          &::after {
+            display: none;
+          }
+
+          &:hover,
+          &:focus {
+            background-color: palette(orange, dark);
+          }
+        }
+      }
+    }
+
+    &:not(.menu--level-0) {
+      a {
+        font-weight: $font-weight-light;
+      }
+    }
+
+    &--level {
+      &-0 {
+        > .menu__item {
+          @include add-breakpoint('desk-and-up') {
+            display: flex;
+            align-items: stretch;
+            overflow: visible;
+            position: static;
+          }
+
+          &:not(.menu__item--featured) {
+            &:not(:first-child) {
+              border-top: 1px solid palette(mono, mid-light);
+
+              @include add-breakpoint('desk-and-up') {
+                border-top: 0;
+              }
+            }
+
+            > .menu__link {
+              background-color: palette(mono, x-light);
+              position: relative;
+
+              &:not(.has--dropdown) {
+                &::before {
+                  content: '';
+                  width: 0;
+                  background-color: palette(mono, x-dark);
+                  transition: width 0.2s ease-in-out;
+                  position: absolute;
+                  left: 0;
+                  bottom: 0;
+                  height: 5px;
+                  display: none;
+
+                  @include add-breakpoint('desk-and-up') {
+                    display: block;
+                  }
+                }
+
+                &:hover,
+                &:focus {
+                  &::before {
+                    @include add-breakpoint('desk-and-up') {
+                      width: 100%;
+                    }
+                  }
+                }
+              }
+
+              &.has--dropdown {
+                &::before {
+                  content: '';
+                  width: 0;
+                  height: 100%;
+                  background-color: palette(mono, x-dark);
+                  transition: width 0.2s ease-in-out;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+
+                  @include add-breakpoint('desk-and-up') {
+                    top: auto;
+                    bottom: 0;
+                    height: 5px;
+                  }
+                }
+
+                &--open {
+                  &::before {
+                    width: 10px;
+
+                    @include add-breakpoint('desk-and-up') {
+                      width: 100%;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          > .menu__section {
+            @include add-breakpoint('desk-and-up') {
+              position: absolute;
+              top: 100%;
+              left: 0;
+              width: 100vw;
+            }
+          }
+        }
+      }
+    }
+
+    &__section {
+      @include add-breakpoint('desk-and-up') {
+        background-color: palette(mono, light);
+        padding: 1.65em 76px 1.65em 0;
+      }
+
+      &.is--open {
+        animation: 0.2s ease-in-out fade-in--down;
+
+        @include add-breakpoint('desk-and-up') {
+          animation: 0.2s ease-in-out fade-in--up;
+        }
+      }
+
+      &.has--intro {
+        .menu__section--level-1 {
+          @include add-breakpoint('desk-and-up') {
+            left: 50%;
+          }
+        }
+      }
+
+      &__wrapper {
+        @include add-breakpoint('desk-and-up') {
+          display: flex;
+          align-items: stretch;
+        }
+
+        &--main {
+          @include add-breakpoint('desk-and-up') {
+            position: relative;
+          }
+
+          .menu__item {
+            @include add-breakpoint('desk-and-up') {
+              position: static;
+            }
+          }
+        }
+
+        > .menu {
+          @include add-breakpoint('desk-and-up') {
+            width: 25%;
+            display: block;
+            border-right: 1px solid palette(mono, mid-light);
+          }
+
+          .menu {
+            @include add-breakpoint('desk-and-up') {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      &__intro {
+        display: none;
+
+        @include add-breakpoint('desk-and-up') {
+          display: block;
+          width: 25%;
+          padding: 0 1.65em;
+          border-right: 1px solid palette(mono, mid-light);
+        }
+      }
+
+      .menu__link {
+        background-color: palette(mono, light);
+        padding-left: 2em;
+
+        @include add-breakpoint('desk-and-up') {
+          padding-left: 0;
+          transition: color 0.2s ease-in-out;
+        }
+
+        &:not(.has--dropdown) {
+          &:hover,
+          &:focus {
+            @include add-breakpoint('desk-and-up') {
+              color: palette(orange);
+            }
+          }
+        }
+
+        &.has--dropdown {
+          @include add-breakpoint('desk-and-up') {
+            transition: background-image 0.2s ease-in-out, color 0.2s ease-in-out;
+          }
+
+          &::after {
+            @include add-breakpoint('desk-and-up') {
+              display: block;
+              transform: rotate(-90deg);
+            }
+          }
+
+          &--open {
+            @include add-breakpoint('desk-and-up') {
+              color: palette(orange);
+            }
+
+            &::after {
+              @include add-breakpoint('desk-and-up') {
+                transform: rotate(-90deg);
+                background-image: url('../assets/icons/minified/arrow-single.colors-orange.svg');
+              }
+            }
+          }
+        }
+      }
+
+      .menu__section {
+        @include add-breakpoint('desk-and-up') {
+          padding: 0;
+          position: absolute;
+          top: 0;
+          animation: none;
+          opacity: 0;
+        }
+
+        &.is--open {
+          @include add-breakpoint('desk-and-up') {
+            opacity: 1;
+            transition: opacity 0.2s ease-in-out;
+          }
+        }
+      }
+
+      &--level-1 {
+        @include add-breakpoint('desk-and-up') {
+          left: 25%;
+          width: 25%;
+        }
+
+        .menu__link {
+          background-color: palette(mono, mid-light-light);
+          padding-left: 3em;
+
+          @include add-breakpoint('desk-and-up') {
+            background-color: palette(mono, light);
+            padding-left: 0;
+          }
+        }
+      }
+
+      &--level-2 {
+        @include add-breakpoint('desk-and-up') {
+          left: 100%;
+          width: 100%;
+        }
+
+        .menu__link {
+          background-color: palette(mono, mid-mid-light);
+          padding-left: 4em;
+
+          @include add-breakpoint('desk-and-up') {
+            background-color: palette(mono, light);
+            padding-left: 0;
+          }
+        }
+
+        .menu {
+          @include add-breakpoint('desk-and-up') {
+            border-right: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+uuid: 43197e52-7ec5-45b0-9668-2f6f805e5ae6
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.spotlight_group
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.spotlight_group
+target_entity_type_id: paragraph
+target_bundle: spotlight_group
+default_langcode: site_default
+language_alterable: true

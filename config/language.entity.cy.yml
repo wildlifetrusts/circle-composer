@@ -1,0 +1,9 @@
+uuid: 6a431e02-2402-4587-991e-6208cc07f3db
+langcode: en
+status: true
+dependencies: {  }
+id: cy
+label: Welsh
+direction: ltr
+weight: 1
+locked: false

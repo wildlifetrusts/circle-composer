@@ -1,0 +1,36 @@
+uuid: 658ddff8-511c-4aa1-8911-d81eae63b6c8
+langcode: en
+status: true
+dependencies: {  }
+name: 'Rich text'
+format: rich_text
+weight: -10
+filters:
+  filter_autop:
+    id: filter_autop
+    provider: filter
+    status: true
+    weight: 0
+    settings: {  }
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<em> <strong> <cite> <blockquote cite> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <u> <a href hreflang target data-email class="button button--secondary button--tertiary"> <table class="table--responsive"> <caption> <tbody> <thead> <tfoot> <th> <td data-header> <tr> <p class="introduction text-align-center"><sub><sup><strike><small>'
+      filter_html_help: true
+      filter_html_nofollow: false
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {  }
+  filter_url:
+    id: filter_url
+    provider: filter
+    status: true
+    weight: 0
+    settings:
+      filter_url_length: 72

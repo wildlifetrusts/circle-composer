@@ -1,0 +1,23 @@
+uuid: b9ec2e65-30ba-41a4-8090-cd36a742bb23
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags
+    - node.type.volunteer_opportunity
+  module:
+    - metatag
+id: node.volunteer_opportunity.field_meta_tags
+field_name: field_meta_tags
+entity_type: node
+bundle: volunteer_opportunity
+label: 'Meta tags'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 'a:0:{}'
+default_value_callback: ''
+settings: {  }
+field_type: metatag

@@ -1,0 +1,19 @@
+uuid: 9c4f330a-4d12-4020-aa00-bb2f883645ad
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_accordion_introduction
+field_name: field_accordion_introduction
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

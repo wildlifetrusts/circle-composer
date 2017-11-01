@@ -1,0 +1,18 @@
+uuid: b6855b85-cf2c-45a7-b926-5075db3752b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.linked_logos
+id: paragraph.linked_logos.created
+field_name: created
+entity_type: paragraph
+bundle: linked_logos
+label: 'Authored on'
+description: 'The time that the Paragraph was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

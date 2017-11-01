@@ -1,0 +1,34 @@
+tid,name,weight
+3501,Ancient Woodland,0
+3502,Area of Outstanding Beauty (AONB),1
+3503,Area of Special Scientific Interest (ASSI),2
+3504,Biogenetic Reserve,3
+3505,Candidate SAC,4
+3506,Country Park,5
+3507,County Geological Site,6
+3508,County Wildlife Site,7
+3509,Environmentally Sensitive Area,8
+3510,Geological Conservation Review Site,9
+3511,Heritage Coast,10
+3512,Local Nature Reserve (LNR),11
+3513,Local Wildlife Site (LWS),12
+3514,Marine Conservation Zones (MCZ),13
+3515,Marine Protected Areas (MPA),14
+3516,Mountains and moorland,15
+3517,National Nature Reserve (NNR),16
+3518,National Park,17
+3519,National Scenic Area,18
+3520,Natura 2000,19
+3521,Ramsar,20
+3522,Regionally Important Geological Site (RIGS),21
+3523,SAC SSSI,22
+3524,Scheduled Ancient Monument,23
+3525,Site of Nature Conservation Importance (SNCI),24
+3526,Site of Special Scientific Interest (SSSI),25
+3527,SPA,26
+3528,Special Areas of Conservation (SAC),27
+3529,Site of Special Scientific Interest (SSSI),28
+3530,Special Protection Areas (SPA),29
+3531,Special Site of Scientific Interest,30
+3532,UNESCO Biosphere Reserve,31
+3533,World Heritage Site,32

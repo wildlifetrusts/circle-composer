@@ -1,0 +1,73 @@
+uuid: f949d896-061b-488c-8d98-ba7bb0d41f65
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+id: national_paragraphs_accordion
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: national
+label: 'Import accordion paragraphs from national Wildlife Trust site'
+source:
+  plugin: wildlife_sharing_url_title
+  track_changes: true
+  data_fetcher_plugin: http
+  data_parser_plugin: wildlife_sharing_json_title
+  path: /jsonapi/paragraph/accordion
+  pager:
+    type: urls
+    selector: 'links/next'
+  ids:
+    uuid:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: uuid
+      label: Uuid
+      selector: /attributes/uuid
+    -
+      name: created
+      label: Created
+      selector: /attributes/created
+    -
+      name: field_accordion_default_item
+      label: 'Default open'
+      selector: /attributes/field_accordion_default_item
+    -
+      name: field_accordion_introduction_value
+      label: 'Intro value'
+      selector: /attributes/field_accordion_introduction/value
+    -
+      name: field_accordion_introduction_format
+      label: 'Intro format'
+      selector: /attributes/field_accordion_introduction/format
+    -
+      name: field_accordion_title
+      label: Title
+      selector: /attributes/field_accordion_title
+    -
+      name: field_accordion_accordion_item
+      label: 'Accordion items'
+      selector: /relationships/field_accordion_accordion_item/data
+process:
+  type:
+    plugin: default_value
+    default_value: accordion
+  uuid: uuid
+  created: created
+  field_accordion_introduction/value: field_accordion_introduction_value
+  field_accordion_introduction/format: field_accordion_introduction_format
+  field_accordion_title: field_accordion_title
+  field_accordion_accordion_item:
+    plugin: wildlife_sharing_paragraph_lookup
+    source: field_accordion_accordion_item
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+migration_dependencies:
+  optional:
+    - national_paragraphs_accordion_item

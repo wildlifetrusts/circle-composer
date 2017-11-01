@@ -1,0 +1,17 @@
+uuid: b5d4c60c-a157-41ec-bf5c-ec7144d72744
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: field_silhouette
+id: silhouette
+label: Silhouette
+description: 'Add a silhouette which can be attached to other entities/components to be used as a background.'
+type: generic
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration: {  }
+field_map: {  }

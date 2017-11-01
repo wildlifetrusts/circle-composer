@@ -1,0 +1,62 @@
+uuid: b53d9c25-1c3c-458c-ac19-fa26d12c4be6
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: paragraph_spotlight_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Spotlight components from a CSV source to paragraphs: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/paragraph_spotlight_national.csv
+  header_row_count: 1
+  keys:
+    - id
+  constants:
+    text_format: rich_text
+process:
+  type:
+    plugin: default_value
+    default_value: spotlight
+  field_spotlight_label: label
+  field_spotlight_title: title
+  field_spotlight_title_size: title_size
+  field_spotlight_detail/value: detail
+  field_spotlight_detail/format: constants/text_format
+  field_spotlight_link/title: link_title
+  field_spotlight_link/uri: link_uri
+  field_spotlight_link_appearance: link_appearance
+  field_spotlight_button_type: button_type
+  field_spotlight_text_colour: text_colour
+  field_spotlight_display_type: display_type
+  field_spotlight_image_type: image_type
+  field_spotlight_image/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: image
+    -
+      plugin: migration
+      migration:
+        - media_images_national
+  field_spotlight_silhouette/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: silhouette
+    -
+      plugin: migration
+      migration:
+        - media_silhouettes_national
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+migration_dependencies:
+  required:
+    - media_images_national
+    - media_silhouettes_national

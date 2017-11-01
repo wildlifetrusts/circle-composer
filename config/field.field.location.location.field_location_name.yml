@@ -1,0 +1,20 @@
+uuid: b2db8412-25ec-4a9b-a263-0c6120b1c559
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.location.field_location_name
+  module:
+    - wildlife_location
+id: location.location.field_location_name
+field_name: field_location_name
+entity_type: location
+bundle: location
+label: Name
+description: 'The actual name of the location which will be shown to site visitors in the front end.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

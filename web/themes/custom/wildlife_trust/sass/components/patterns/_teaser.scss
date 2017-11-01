@@ -1,0 +1,100 @@
+// Teaser
+//
+// Markup: ../../docs/kss-helpers/teaser.hbs
+//
+// Styleguide 4.3.0
+.teaser {
+  @extend %clearfix;
+  margin-bottom: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  @include keyline;
+
+  @include add-breakpoint('up-to-palm') {
+    max-width: 280px;
+  }
+
+  @include add-breakpoint('desk-and-up') {
+    @include grid-span(10, 2);
+    clear: both;
+  }
+
+  &__image {
+    display: block;
+    position: relative;
+    margin-bottom: emRhythm(4, 0.888888889em);
+
+    @include add-breakpoint('palm-to-lap') {
+      @include float-span(4, 1, 9, 1/3);
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      margin-bottom: 2em;
+    }
+
+    @include add-breakpoint('lap-to-desk') {
+      @include float-span(4);
+    }
+
+    @include add-breakpoint('desk-and-up') {
+      @include float-span(4, 1, 10);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &__flag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  &__details {
+    margin-top: emRhythm(2, 0.888888889em);
+    margin-bottom: 2em;
+    @include font-size(16px);
+
+
+    @include add-breakpoint('lap-and-up') {
+      overflow: hidden;
+    }
+  }
+
+  &__title {
+    margin-bottom: emRhythm(2, 0.888888889em);
+
+    @include add-breakpoint('up-to-lap') {
+      @include setType(7, ms(1));
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &__proximity {
+    color: palette(orange);
+    @include font-size(16px);
+    margin-bottom: emRhythm(4, 0.888888889em);
+  }
+
+  &__info {
+    font-weight: $font-weight-regular;
+    margin-bottom: emRhythm(4, 0.888888889em);
+  }
+
+  &__intro {
+    margin-bottom: emRhythm(4, 0.888888889em);
+  }
+
+  &__tags {
+    a {
+      margin-right: 0.25em;
+      margin-top: emRhythm(2, 0.888888889em);
+    }
+  }
+}

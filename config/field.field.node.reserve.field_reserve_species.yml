@@ -1,0 +1,28 @@
+uuid: 430eb4ca-5523-4938-9274-7e39cdb10859
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_species
+    - node.type.reserve
+    - node.type.species
+id: node.reserve.field_reserve_species
+field_name: field_reserve_species
+entity_type: node
+bundle: reserve
+label: Species
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      species: species
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

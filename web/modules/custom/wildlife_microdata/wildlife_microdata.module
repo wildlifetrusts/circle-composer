@@ -1,0 +1,651 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_microdata.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_microdata_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_microdata module.
+    case 'help.page.wildlife_microdata':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Adds Schema.org microdata to various entities.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements template_preprocess_responsive_image().
+ */
+function wildlife_microdata_preprocess_responsive_image(&$variables) {
+  $variables['img_element']['#attributes']['itemprop'] = 'contentUrl';
+}
+
+/**
+ * Implements template_preprocess_image_style().
+ */
+function wildlife_microdata_preprocess_image_style(&$variables) {
+  $variables['image']['#attributes']['itemprop'] = $variables['style_name'] == 'profile_image' ? 'image' : 'contentUrl';
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function wildlife_microdata_preprocess_node(&$variables) {
+
+  /** @var \Drupal\node\Entity\Node $node */
+  $node = $variables['node'];
+  $view_mode = $variables['view_mode'];
+  $bundle = $node->bundle();
+
+  // Check for Reserve of Address String view mode as we want to add location
+  // schema data to those.
+  $reserve_address_view = $bundle == 'reserve' && $view_mode == 'address_string';
+
+  // Only add microdata if it's the full view mode or a reserve: address string.
+  if ($view_mode != 'full' && !$reserve_address_view) {
+    return;
+  }
+
+  $item_type = '';
+
+  switch ($bundle) {
+    case 'blog';
+      $item_type = 'http://schema.org/BlogPosting';
+      _wildlife_microdata_blog_schema_preprocess($variables, $node);
+      break;
+
+    case 'event';
+      $item_type = 'http://schema.org/Event';
+      _wildlife_microdata_event_schema_preprocess($variables, $node);
+      break;
+
+    case 'job';
+      $item_type = 'http://schema.org/JobPosting';
+      _wildlife_microdata_job_schema_preprocess($variables, $node);
+      break;
+
+    case 'news';
+      $item_type = 'http://schema.org/NewsArticle';
+      _wildlife_microdata_news_schema_preprocess($variables, $node);
+      break;
+
+    case 'reserve';
+      $item_type = 'http://schema.org/Place';
+      _wildlife_microdata_reserve_node_preprocessing($variables, $node);
+      break;
+
+    case 'trust';
+      $item_type = 'http://schema.org/Organization';
+      $variables['title_attributes']['itemprop'] = 'name';
+      break;
+  }
+
+  if ($item_type) {
+    $variables['attributes']['itemscope'] = '';
+    $variables['attributes']['itemtype'] = $item_type;
+  }
+
+}
+
+/**
+ * Blog node preprocessing called from wildlife_microdata_preprocess_node().
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_microdata_blog_schema_preprocess(&$variables, $node) {
+  $variables['title_attributes']['itemprop'] = 'headline';
+
+  _wildlife_microdata_add_representative_image($variables, $node);
+  _wildlife_microdata_add_publisher($variables);
+}
+
+/**
+ * Event node preprocessing called from wildlife_microdata_preprocess_node().
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_microdata_event_schema_preprocess(&$variables, $node) {
+  $variables['title_attributes']['itemprop'] = 'name';
+
+  /** @var \Drupal\field\Entity\FieldConfig $booking_status */
+  $booking_status_field = $node->get('field_event_booking_status');
+
+  if (!$booking_status_field->isEmpty()) {
+    $booking_status = $booking_status_field->first()->getString();
+
+    if (isset($booking_status) && $booking_status == 'cancelled') {
+      $variables['content']['cancelled_meta'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#value' => '',
+        '#attributes' => [
+          'itemprop' => 'eventStatus',
+          'content' => 'http://schema.org/EventCancelled',
+        ],
+      ];
+    }
+  }
+}
+
+/**
+ * Job node preprocessing called from wildlife_microdata_preprocess_node().
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_microdata_job_schema_preprocess(&$variables, $node) {
+  $variables['title_attributes']['itemprop'] = 'title';
+
+  $organization = _wildlife_microdata_get_trust_organization();
+
+  $variables['content']['microdata_hiring_organization'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'itemprop' => 'hiringOrganization',
+      'itemscope' => '',
+      'itemtype' => 'https://schema.org/Organization',
+    ],
+  ];
+
+  $variables['content']['microdata_hiring_organization']['name'] = $organization;
+
+  $variables['content']['meta_date_posted'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#value' => '',
+    '#attributes' => [
+      'itemprop' => 'datePosted',
+      'content' => \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'html_date'),
+    ],
+  ];
+}
+
+/**
+ * News node preprocessing called from wildlife_microdata_preprocess_node().
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_microdata_news_schema_preprocess(&$variables, $node) {
+  $variables['title_attributes']['itemprop'] = 'headline';
+
+  _wildlife_microdata_add_representative_image($variables, $node);
+
+  $variables['content']['microdata_author'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'itemprop' => 'author',
+      'itemscope' => '',
+      'itemtype' => 'https://schema.org/Organization',
+    ],
+  ];
+
+  $variables['content']['microdata_author']['name'] = _wildlife_microdata_get_trust_organization();
+
+  _wildlife_microdata_add_publisher($variables);
+}
+
+/**
+ * Reserve node preprocessing called from wildlife_microdata_preprocess_node().
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_microdata_reserve_node_preprocessing(&$variables, $node) {
+  $variables['attributes']['itemprop'] = 'location';
+  $variables['title_attributes']['itemprop'] = 'name';
+
+  $variables['content']['geo_coordinates'] = [
+    '#type' => 'container',
+    '#tag_override' => 'span',
+    '#attributes' => [
+      'itemprop' => 'geo',
+      'itemscope' => '',
+      'itemtype' => 'http://schema.org/GeoCoordinates',
+    ],
+  ];
+
+  $lat_long_field = $node->get('field_reserve_lat_long')->getValue();
+
+  $variables['content']['geo_coordinates']['latitude'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#value' => '',
+    '#attributes' => [
+      'itemprop' => 'latitude',
+      'content' => $lat_long_field[0]['lat'],
+    ],
+  ];
+
+  $variables['content']['geo_coordinates']['longitude'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#value' => '',
+    '#attributes' => [
+      'itemprop' => 'longitude',
+      'content' => $lat_long_field[0]['lon'],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_ENTITY().
+ */
+function wildlife_microdata_preprocess_media(&$variables) {
+  /** @var \Drupal\media_entity\Entity\Media $media */
+  $media = $variables['elements']['#media'];
+  $view_mode = $variables['elements']['#view_mode'];
+
+  switch ($media->bundle()) {
+    case 'audio':
+      $variables['attributes']['itemscope'] = '';
+      $variables['attributes']['itemtype'] = 'http://schema.org/AudioObject';
+      break;
+
+    case 'image':
+      if ($view_mode != 'profile') {
+        $variables['attributes']['itemscope'] = '';
+        $variables['attributes']['itemtype'] = 'http://schema.org/ImageObject';
+      }
+      if ($view_mode == 'node_hero') {
+        $variables['attributes']['itemprop'] = 'image';
+      }
+      if (isset($variables['elements']['#itemprop'])) {
+        $variables['attributes']['itemprop'] = $variables['elements']['#itemprop'];
+      }
+      break;
+
+    case 'video':
+      $variables['attributes']['itemscope'] = '';
+      $variables['attributes']['itemtype'] = 'http://schema.org/VideoObject';
+      $video_url = $media->get('field_media_video')->first()->getString();
+
+      $video_created = $media->get('created')->first()->getString();
+      $variables['content']['meta_created'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#value' => '',
+        '#attributes' => [
+          'itemprop' => 'uploadDate',
+          'content' => \Drupal::service('date.formatter')->format($video_created, 'html_date'),
+        ],
+      ];
+
+      $video_name = $media->get('name')->first()->getString();
+      $variables['content']['meta_name'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#value' => '',
+        '#attributes' => [
+          'itemprop' => 'name',
+          'content' => $video_name,
+        ],
+      ];
+
+      $video_thumbnail = $media->get('thumbnail')->first()->getValue();
+      $video_thumbnail_url = \Drupal\file\Entity\File::load($video_thumbnail['target_id'])->url();
+      $variables['content']['meta_thumbnail'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#value' => '',
+        '#attributes' => [
+          'itemprop' => 'thumbnailUrl',
+          'content' => $video_thumbnail_url,
+        ],
+      ];
+
+      $variables['attributes']['itemid'] = $video_url;
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function wildlife_microdata_preprocess_field(&$variables) {
+  $field_name = $variables['field_name'];
+
+  switch ($field_name) {
+    case 'field_author_bio':
+    case 'field_media_caption':
+    case 'field_job_summary':
+      $variables['attributes']['itemprop'] = 'description';
+      break;
+  }
+
+  _wildlife_microdata_field_event_schema_preprocessing($variables, $field_name);
+  _wildlife_microdata_field_job_schema_preprocessing($variables, $field_name);
+  _wildlife_microdata_field_news_blog_preprocessing($variables, $field_name);
+  _wildlife_microdata_field_reserve_schema_preprocessing($variables, $field_name);
+  _wildlife_microdata_field_trust_schema_preprocessing($variables, $field_name);
+}
+
+/**
+ * Helper function to preprocess Event schema related fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_microdata_field_event_schema_preprocessing(&$variables, $field_name) {
+  switch ($field_name) {
+    case 'field_event_date':
+      if (isset($variables['items'][0]['content']['start_date'])) {
+        $variables['items'][0]['content']['start_date']['#attributes']['itemprop'] = 'startDate';
+      }
+      if (isset($variables['items'][0]['content']['end_date'])) {
+        $variables['items'][0]['content']['end_date']['#attributes']['itemprop'] = 'endDate';
+      }
+      if (isset($variables['items'][0]['content']['#attributes'])) {
+        $variables['items'][0]['content']['#attributes']['itemprop'] = 'startDate';
+      }
+      break;
+
+    case 'field_event_summary':
+      $variables['attributes']['itemprop'] = 'description';
+      break;
+  }
+}
+
+/**
+ * Helper function to preprocess Job schema related fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_microdata_field_job_schema_preprocessing(&$variables, $field_name) {
+  switch ($field_name) {
+    case 'field_job_location':
+      $variables['items'][0]['content']['#itemprop'] = 'jobLocation';
+      break;
+
+    case 'field_job_closing_date':
+      $variables['items'][0]['content']['#attributes']['itemprop'] = 'validThrough';
+      break;
+
+    case 'field_job_working_hours':
+      $variables['items'][0]['attributes']->setAttribute('itemprop', 'workHours');
+      break;
+
+    case 'field_job_contract_type':
+      $variables['items'][0]['attributes']->setAttribute('itemprop', 'employmentType');
+      break;
+  }
+}
+
+/**
+ * Helper function to preprocess News and Blog schema related fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_microdata_field_news_blog_preprocessing(&$variables, $field_name) {
+  $bundle = $variables['element']['#bundle'];
+
+  if (in_array($bundle, ['blog', 'news'])) {
+    switch ($field_name) {
+      case 'field_blog_publication_date':
+      case 'field_news_publication_date':
+        if (isset($variables['items'][0]['content']['#attributes'])) {
+          $variables['items'][0]['content']['#attributes']['itemprop'] = 'datePublished';
+        }
+        break;
+
+      case 'field_further_content':
+        if (isset($variables['items'][0]['content'])) {
+          $variables['items'][0]['content']['#attributes']['itemprop'] = 'articleBody';
+        }
+        break;
+    }
+  }
+}
+
+/**
+ * Helper function to preprocess Reserve schema related fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_microdata_field_reserve_schema_preprocessing(&$variables, $field_name) {
+  switch ($field_name) {
+    case 'field_reserve_summary':
+      $variables['attributes']['itemprop'] = 'description';
+      break;
+
+    case 'field_reserve_contact_number':
+      foreach ($variables['items'] as &$item) {
+        $item['attributes']['itemprop'] = 'telephone';
+      }
+      break;
+
+    case 'field_reserve_address':
+      $variables['attributes']['itemprop'] = 'streetAddress';
+      break;
+
+    case 'field_reserve_town':
+      $variables['attributes']['itemprop'] = 'addressLocality';
+      break;
+
+    case 'field_reserve_county':
+      $variables['attributes']['itemprop'] = 'addressRegion';
+      break;
+
+    case 'field_reserve_postcode':
+      $variables['attributes']['itemprop'] = 'postalCode';
+      break;
+
+    // Facilities.
+    case 'field_reserve_visitor_centre':
+    case 'field_reserve_bird_hides':
+    case 'field_reserve_toilets':
+    case 'field_reserve_shop':
+    case 'field_reserve_cafe_refreshments':
+    case 'field_reserve_picnic_area':
+    case 'field_reserve_disabled_toilet':
+    case 'field_reserve_baby_changing':
+    case 'field_reserve_outdoor_play_area':
+    case 'field_reserve_car_charging':
+    case 'field_reserve_wifi':
+      if (isset($variables['items'][0]) && isset($variables['items'][0]['content'])) {
+        $content = $variables['items'][0]['content']['#markup'];
+
+        $variables['items'][0]['content'] = [
+          '#type' => 'container',
+          '#attributes' => [
+            'itemprop' => 'amenityFeature',
+            'itemscope' => '',
+            'itemtype' => 'http://schema.org/LocationFeatureSpecification',
+          ],
+        ];
+
+        $variables['items'][0]['content']['name'] = [
+          '#type' => 'html_tag',
+          '#tag' => 'span',
+          '#value' => $content,
+          '#attributes' => [
+            'itemprop' => 'name',
+          ],
+        ];
+
+        $variables['items'][0]['content']['value'] = [
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#value' => '',
+          '#attributes' => [
+            'itemprop' => 'value',
+            'content' => 'True',
+          ],
+        ];
+      }
+
+      break;
+  }
+}
+
+/**
+ * Helper function to preprocess Trust schema related fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_microdata_field_trust_schema_preprocessing(&$variables, $field_name) {
+  switch ($variables['field_name']) {
+    case 'field_trust_email':
+      $variables['items'][0]['content']['#options']['attributes']['itemprop'] = 'email';
+      break;
+
+    case 'field_trust_phone_number':
+      $variables['items'][0]['content']['#options']['attributes']['itemprop'] = 'telephone';
+      break;
+
+    case 'field_trust_site_url':
+      $variables['items'][0]['content']['#options']['attributes']['itemprop'] = 'url';
+      break;
+
+    case 'field_trust_image':
+      $variables['items'][0]['content']['#itemprop'] = 'image';
+      break;
+  }
+}
+
+/**
+ * Helper function to add representative image microdata.
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_microdata_add_representative_image(&$variables, $node) {
+  $representative_image = $node->get('field_representative_image')->first()->getValue();
+  $representative_image_file = \Drupal\file\Entity\File::load($representative_image['target_id']);
+
+  if ($representative_image_file) {
+    $image_style = \Drupal\image\Entity\ImageStyle::load('card_desk');
+    $representative_image_url = $image_style->buildUrl($representative_image_file->getFileUri());
+
+    $variables['content']['microdata_image'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'itemprop' => 'image',
+        'itemscope' => '',
+        'itemtype' => 'https://schema.org/ImageObject',
+      ],
+    ];
+
+    $variables['content']['microdata_image']['url'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#value' => '',
+      '#attributes' => [
+        'itemprop' => 'url',
+        'content' => $representative_image_url,
+      ],
+    ];
+
+    $variables['content']['microdata_image']['width'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#value' => '',
+      '#attributes' => [
+        'itemprop' => 'width',
+        'content' => '332',
+      ],
+    ];
+
+    $variables['content']['microdata_image']['height'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#value' => '',
+      '#attributes' => [
+        'itemprop' => 'height',
+        'content' => '226',
+      ],
+    ];
+  }
+}
+
+/**
+ * Helper function to get the current site's Organization data.
+ *
+ * @return array
+ *   A meta tag for a render array.
+ */
+function _wildlife_microdata_get_trust_organization() {
+  $config = \Drupal::config('system.site');
+
+  $organization = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#value' => '',
+    '#attributes' => [
+      'itemprop' => 'name',
+      'content' => $config->get('name'),
+    ],
+  ];
+
+  return $organization;
+}
+
+function _wildlife_microdata_add_publisher(&$variables) {
+  $organization = _wildlife_microdata_get_trust_organization();
+
+  $variables['content']['microdata_publisher'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'itemprop' => 'publisher',
+      'itemscope' => '',
+      'itemtype' => 'https://schema.org/Organization',
+    ],
+  ];
+
+  $variables['content']['microdata_publisher']['name'] = $organization;
+
+  $variables['content']['microdata_publisher']['logo'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'itemprop' => 'logo',
+      'itemscope' => '',
+      'itemtype' => 'https://schema.org/ImageObject',
+    ],
+  ];
+
+  $logo = theme_get_setting('logo');
+  $logo_url = $logo['use_default'] ? '/' . drupal_get_path('theme', 'wildlife_trust') . '/images/logo.png' : $logo['url'];
+  $logo_absolute_url = \Drupal\Core\Url::fromUserInput($logo_url, ['absolute' => TRUE])->toString();
+
+  $variables['content']['microdata_publisher']['logo']['url'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#value' => '',
+    '#attributes' => [
+      'itemprop' => 'url',
+      'content' => $logo_absolute_url,
+    ],
+  ];
+}

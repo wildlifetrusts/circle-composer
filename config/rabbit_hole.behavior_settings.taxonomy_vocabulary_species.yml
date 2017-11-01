@@ -1,0 +1,9 @@
+uuid: 1360b219-603e-4470-85e5-6263805d4738
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_vocabulary_species
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301

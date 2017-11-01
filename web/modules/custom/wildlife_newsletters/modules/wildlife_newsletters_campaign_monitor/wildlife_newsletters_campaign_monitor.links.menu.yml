@@ -1,0 +1,5 @@
+wildlife_newsletters_campaign_monitor.admin_page:
+  route_name: campaign_monitor_signup.admin
+  title: 'Campaign Monitor'
+  description: 'Manage Campaign Monitor sign-up forms.'
+  parent: system.admin_config_services

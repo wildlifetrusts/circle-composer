@@ -1,0 +1,34 @@
+uuid: 023c5e24-d177-4dfd-8ec3-9fbb6d39c228
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.linked_logos.field_linked_logos
+    - paragraphs.paragraphs_type.linked_logos
+  module:
+    - paragraphs
+    - workbench_moderation
+id: paragraph.linked_logos.default
+targetEntityType: paragraph
+bundle: linked_logos
+mode: default
+content:
+  field_linked_logos:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: Logo
+      title_plural: Logos
+      edit_mode: open
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: linked_logo_item
+    third_party_settings: {  }
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

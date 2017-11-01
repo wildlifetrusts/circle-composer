@@ -1,0 +1,10 @@
+uuid: 70c0d498-1113-42b0-8be1-0c738e3a9a13
+langcode: en
+status: true
+dependencies: {  }
+id: node__event
+label: 'Content: Event'
+tags:
+  description: '[node:field_event_summary]'
+  geo_position: '[node:field_event_reserve:entity:field_reserve_lat_long:latlon][node:field_event_location:entity:field_location_lat_long:latlon]'
+  image_src: '[node:field_event_photos:0:entity:field_media_image:large]'

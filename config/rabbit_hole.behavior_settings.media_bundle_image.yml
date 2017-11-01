@@ -1,0 +1,9 @@
+uuid: 4a5cffd9-debc-4096-9e82-5b4682999b0a
+langcode: en
+status: true
+dependencies: {  }
+id: media_bundle_image
+action: access_denied
+allow_override: 0
+redirect: ''
+redirect_code: 301

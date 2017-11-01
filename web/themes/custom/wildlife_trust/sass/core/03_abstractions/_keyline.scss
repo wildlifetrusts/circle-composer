@@ -1,0 +1,22 @@
+@mixin keyline($placement: 'bottom', $color: palette(mono, mid-light)) {
+  @if ($placement == 'all') {
+    border: 1px solid $color;
+  }
+  @else if ($placement == 'vertical') {
+    border-top: 1px solid $color;
+    border-bottom: 1px solid $color;
+  }
+  @else if ($placement == 'horizontal') {
+    border-left: 1px solid $color;
+    border-right: 1px solid $color;
+  }
+  @else {
+    border-#{$placement}: 1px solid $color;
+  }
+}
+
+%keyline-separated-rows {
+  @include keyline();
+  padding-bottom: $spacing-unit-vertical * 1.5;
+  margin-bottom: $spacing-unit-vertical * 1.5;
+}

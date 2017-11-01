@@ -1,0 +1,23 @@
+uuid: 84b14945-6579-42bf-8a5d-917aaa29c874
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_link_appearance
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - options
+id: paragraph.spotlight.field_spotlight_link_appearance
+field_name: field_spotlight_link_appearance
+entity_type: paragraph
+bundle: spotlight
+label: 'Link Appearance'
+description: 'Choose whether the link should appear as a button inside the block or if the whole block should be clickable.'
+required: true
+translatable: true
+default_value:
+  -
+    value: button
+default_value_callback: ''
+settings: {  }
+field_type: list_string

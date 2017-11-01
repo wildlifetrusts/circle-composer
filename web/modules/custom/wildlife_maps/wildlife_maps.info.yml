@@ -1,0 +1,8 @@
+name: Maps
+type: module
+description: Maps integration for Wildlife Trust events and reserves.
+core: 8.x
+package: Wildlife
+dependencies:
+  - wildlife_google_api
+  - wildlife_search

@@ -1,0 +1,5 @@
+services:
+  wildlife_backgrounds.backgrounds_service:
+    class: Drupal\wildlife_backgrounds\BackgroundsService
+    arguments: []
+

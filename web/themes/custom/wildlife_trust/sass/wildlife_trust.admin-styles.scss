@@ -1,0 +1,136 @@
+/*
+  The contents of this file are included by our wildlife_trust_admin admin theme
+  through the admin-styles library defined by the Wildlife Trust theme.
+*/
+.paragraph--view-mode--preview .field--type-image,
+.media-image .field--name-thumbnail {
+  img {
+    background: transparent url('../images/background-transparent-checkerboard.png') 0 0 repeat;
+  }
+}
+
+.media-image.view-mode-profile {
+  height: 60px;
+  width: 60px;
+  overflow: hidden;
+  border-radius: 60px;
+
+  img {
+    display: block;
+  }
+}
+
+.paragraph--type--image-gallery.paragraph--view-mode--preview .field__item {
+  display: inline-block;
+}
+
+.vertical-tabs__menu {
+  list-style: none;
+}
+
+.vertical-tabs {
+  overflow: visible;
+}
+
+.entities-list {
+  margin-top: 10px;
+
+  .rendered-entity {
+    display: block;
+    padding-left: 30px;
+    background: transparent url("../../../../core/themes/stable/images/core/icons/000000/move.svg") 0 0 no-repeat;
+  }
+
+  .rendered-entity:only-child {
+    background: transparent;
+  }
+
+  .item-container > input {
+    margin: 10px 0 0;
+  }
+}
+
+.filter-wrapper {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+.field-multiple-table {
+  tr {
+    &.odd,
+    &.even {
+      .form-item {
+        margin: 0.75em 0;
+      }
+
+      .form-checkboxes,
+      .form-radios {
+        .form-item {
+          margin: 0.4em 0;
+        }
+      }
+    }
+  }
+}
+
+.field--widget-entity-reference-paragraphs {
+  .field-multiple-table {
+    .form-text {
+      width: 100%;
+    }
+  }
+}
+
+.field--widget-options-icon-select {
+  .field-prefix {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .icon-switcher {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-size: 40px auto;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+  }
+}
+
+// Media Entity Browser exposed form.
+.view-media-entity-browser {
+  .view-filters {
+    border: 1px solid #dcdcdc;
+    background-color: #f5f5f5;
+    padding: 0.5em 1em;
+    margin-bottom: 1em;
+  }
+}
+
+// Don't allow dropbutton styles for a single link to be overwritten.
+.js .form-actions .dropbutton-single .dropbutton-action > a {
+  color: inherit;
+  text-shadow: none;
+}
+
+// Overrides for Entity hierarchy form.
+.node-habitat-entity-hierarchy-reorder-form {
+  .vertical-tabs__panes {
+    display: none;
+  }
+
+  .dropbutton-wrapper {
+    margin-right: 1em;
+  }
+}
+
+// Add a nicer wrapper for Adding components.
+.form__paragraphs-add {
+  margin-top: 1em;
+  padding: 0.5em 1em 1em 1em;
+  background-color: #f7f7f7;
+}

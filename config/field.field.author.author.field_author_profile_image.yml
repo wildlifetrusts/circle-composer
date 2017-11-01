@@ -1,0 +1,29 @@
+uuid: e58bbcef-6a52-4e4f-b5c3-d379728ba613
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.author.field_author_profile_image
+    - media_entity.bundle.image
+  module:
+    - wildlife_author
+id: author.author.field_author_profile_image
+field_name: field_author_profile_image
+entity_type: author
+bundle: author
+label: 'Profile image'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

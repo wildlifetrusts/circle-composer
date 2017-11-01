@@ -1,0 +1,18 @@
+uuid: e1cbfaa5-ce10-4c07-9961-3bc92c809c7f
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_image_extra_wide
+field_name: field_image_extra_wide
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

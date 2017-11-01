@@ -1,0 +1,17 @@
+.node--type-habitat {
+  h3.node__title {
+    @include setType(6, ms(0));
+  }
+
+  .view-related-species {
+    @extend %content-narrow-constrain;
+    @include keyline('bottom');
+    padding-top: emRhythm(2, ms(0));
+    padding-bottom: emRhythm(12, ms(0));
+    margin-bottom: emRhythm(2, ms(0));
+
+    h2 {
+      @extend .gamma;
+    }
+  }
+}

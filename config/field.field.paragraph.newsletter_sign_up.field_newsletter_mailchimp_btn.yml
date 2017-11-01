@@ -1,0 +1,19 @@
+uuid: c14a1cb4-d3a7-4b68-aef8-39215129ae05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_newsletter_mailchimp_btn
+    - paragraphs.paragraphs_type.newsletter_sign_up
+id: paragraph.newsletter_sign_up.field_newsletter_mailchimp_btn
+field_name: field_newsletter_mailchimp_btn
+entity_type: paragraph
+bundle: newsletter_sign_up
+label: 'Subscribe button text'
+description: 'This text will replace the default button text set on the sign-up form''s admin page.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

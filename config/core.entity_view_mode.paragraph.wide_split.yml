@@ -1,0 +1,10 @@
+uuid: 0b6c873a-2c3b-473a-94b1-96f7856d8651
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.wide_split
+label: 'Wide Split'
+targetEntityType: paragraph
+cache: true

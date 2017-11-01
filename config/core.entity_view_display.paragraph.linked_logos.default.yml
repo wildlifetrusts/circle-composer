@@ -1,0 +1,24 @@
+uuid: b3dde4fb-f9d9-4289-96ff-7f7c8a8ffb2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.linked_logos.field_linked_logos
+    - paragraphs.paragraphs_type.linked_logos
+  module:
+    - entity_reference_revisions
+id: paragraph.linked_logos.default
+targetEntityType: paragraph
+bundle: linked_logos
+mode: default
+content:
+  field_linked_logos:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

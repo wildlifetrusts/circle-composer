@@ -1,0 +1,16 @@
+uuid: 02cb26b6-7795-49e9-960f-70b5bb7481c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.quick_links
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.quick_links
+target_entity_type_id: paragraph
+target_bundle: quick_links
+default_langcode: site_default
+language_alterable: true

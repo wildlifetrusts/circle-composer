@@ -1,0 +1,21 @@
+uuid: a959b421-9ced-4ede-b48b-ba2eaaccaa51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_contact_number
+    - node.type.reserve
+  module:
+    - telephone
+id: node.reserve.field_reserve_contact_number
+field_name: field_reserve_contact_number
+entity_type: node
+bundle: reserve
+label: 'Contact number'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

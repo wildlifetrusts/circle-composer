@@ -1,0 +1,99 @@
+uuid: 312f1a41-5b62-4eb6-b6df-f8f5fd425580
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlights
+    - paragraphs.paragraphs_type.spotlight
+    - paragraphs.paragraphs_type.spotlight_group
+  module:
+    - entity_reference_revisions
+id: paragraph.spotlight_group.field_spotlights
+field_name: field_spotlights
+entity_type: paragraph
+bundle: spotlight_group
+label: Spotlights
+description: 'For help creating Spotlights, see the <a href="/admin/help/spotlights">Spotlight Guidance</a> page.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      spotlight: spotlight
+    target_bundles_drag_drop:
+      accordion:
+        weight: 13
+        enabled: false
+      accordion_item:
+        weight: 14
+        enabled: false
+      attached_files:
+        weight: 15
+        enabled: false
+      image:
+        weight: 16
+        enabled: false
+      linked_logo_item:
+        weight: 17
+        enabled: false
+      linked_logos:
+        weight: 18
+        enabled: false
+      quick_links:
+        weight: 19
+        enabled: false
+      rich_text:
+        weight: 20
+        enabled: false
+      section:
+        weight: 21
+        enabled: false
+      spotlight:
+        enabled: true
+        weight: 22
+      spotlight_group:
+        weight: 23
+        enabled: false
+      video:
+        weight: 24
+        enabled: false
+      audio:
+        weight: 28
+        enabled: false
+      featured_cards:
+        weight: 29
+        enabled: false
+      flickr_album:
+        weight: 30
+        enabled: false
+      headline_hero:
+        weight: 31
+        enabled: false
+      html_component:
+        weight: 32
+        enabled: false
+      image_gallery:
+        weight: 34
+        enabled: false
+      image_gallery_item:
+        weight: 35
+        enabled: false
+      newsletter_sign_up:
+        weight: 38
+        enabled: false
+      statistics:
+        weight: 44
+        enabled: false
+      statistic_item:
+        weight: 45
+        enabled: false
+      testimonial:
+        weight: 46
+        enabled: false
+      webform:
+        weight: 48
+        enabled: false
+field_type: entity_reference_revisions

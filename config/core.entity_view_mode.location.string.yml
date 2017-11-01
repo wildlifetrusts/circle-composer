@@ -1,0 +1,10 @@
+uuid: cf6761a2-e81b-4dfc-bfdd-f2456ba564e4
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_location
+id: location.string
+label: String
+targetEntityType: location
+cache: true

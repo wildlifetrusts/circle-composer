@@ -1,0 +1,20 @@
+uuid: 2590681c-d429-4539-8936-8b72001b10cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.species
+  module:
+    - text
+id: taxonomy_term.species.description
+field_name: description
+entity_type: taxonomy_term
+bundle: species
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

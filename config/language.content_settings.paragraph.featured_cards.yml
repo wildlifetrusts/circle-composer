@@ -1,0 +1,16 @@
+uuid: dd977d44-3452-4312-9125-6b332cf8bad0
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.featured_cards
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.featured_cards
+target_entity_type_id: paragraph
+target_bundle: featured_cards
+default_langcode: site_default
+language_alterable: true

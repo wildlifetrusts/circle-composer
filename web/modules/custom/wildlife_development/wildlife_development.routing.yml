@@ -1,0 +1,36 @@
+wildlife_development.headers:
+  path: '/admin/appearance/styleguide/headers'
+  defaults:
+    _controller: '\Drupal\wildlife_development\Controller\StyleguidePagesController::headers'
+    _title: 'Header Examples'
+  requirements:
+    _permission: 'view style guides'
+  options:
+    _admin_route: FALSE
+wildlife_development.cards:
+  path: '/admin/appearance/styleguide/cards'
+  defaults:
+    _controller: '\Drupal\wildlife_development\Controller\StyleguidePagesController::cards'
+    _title: 'Card Examples'
+  requirements:
+    _permission: 'view style guides'
+  options:
+    _admin_route: FALSE
+wildlife_development.teasers:
+  path: '/admin/appearance/styleguide/teasers'
+  defaults:
+    _controller: '\Drupal\wildlife_development\Controller\StyleguidePagesController::teasers'
+    _title: 'Teaser Examples'
+  requirements:
+    _permission: 'view style guides'
+  options:
+    _admin_route: FALSE
+wildlife_development.spotlights:
+  path: '/admin/appearance/styleguide/spotlights'
+  defaults:
+    _controller: '\Drupal\wildlife_development\Controller\StyleguidePagesController::spotlights'
+    _title: 'Spotlight Examples'
+  requirements:
+    _permission: 'view style guides'
+  options:
+    _admin_route: FALSE

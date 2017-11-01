@@ -1,0 +1,28 @@
+uuid: c0d89e0d-a817-4d10-8506-3965ed4e030e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_photos
+    - media_entity.bundle.image
+    - node.type.reserve
+id: node.reserve.field_reserve_photos
+field_name: field_reserve_photos
+entity_type: node
+bundle: reserve
+label: Photos
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

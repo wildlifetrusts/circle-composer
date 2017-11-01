@@ -1,0 +1,251 @@
+uuid: ad615b14-4ac7-4cc0-b79c-d0993efb1f39
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.node.habitat.field_further_content
+    - field.field.node.habitat.field_habitat_conservation
+    - field.field.node.habitat.field_habitat_distribution
+    - field.field.node.habitat.field_habitat_parent
+    - field.field.node.habitat.field_habitat_photos
+    - field.field.node.habitat.field_habitat_summary
+    - field.field.node.habitat.field_habitat_what_is_it
+    - field.field.node.habitat.field_habitat_what_to_look_for
+    - field.field.node.habitat.field_habitat_why
+    - field.field.node.habitat.field_meta_tags
+    - node.type.habitat
+  module:
+    - entity_browser
+    - entity_hierarchy
+    - field_group
+    - metatag
+    - path
+    - text
+    - wildlife_admin
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_header
+        - group_main_content
+        - group_about
+        - group_hierarchy
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_header:
+      children:
+        - field_habitat_photos
+      parent_name: group_tabs
+      weight: 7
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Header
+    group_main_content:
+      children:
+        - field_habitat_summary
+        - field_habitat_what_is_it
+        - field_habitat_why
+        - field_habitat_what_to_look_for
+        - field_habitat_distribution
+        - field_habitat_conservation
+      parent_name: group_tabs
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Main content'
+    group_about:
+      children:
+        - field_further_content
+      parent_name: group_tabs
+      weight: 9
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: About
+    group_hierarchy:
+      children:
+        - field_habitat_parent
+      parent_name: group_tabs
+      weight: 10
+      format_type: tab
+      format_settings:
+        label: Hierarchy
+        formatter: closed
+        description: "<strong>Choose the Parent of this Habitat if one is applicable.</strong><br>\nThis will inform the hierarchy of Habitat content and populate the Related Habitats blocks.<br>\nManage the order of this Habitat within the hierarchy from its parent's Children tab."
+        id: ''
+        classes: ''
+        required_fields: false
+      label: Hierarchy
+id: node.habitat.default
+targetEntityType: node
+bundle: habitat
+mode: default
+content:
+  colour_scheme:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_further_content:
+    type: tweaked_entity_reference_paragraphs
+    weight: 21
+    settings:
+      title: Component
+      title_plural: Components
+      edit_mode: open
+      add_mode: select
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_habitat_conservation:
+    weight: 21
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_habitat_distribution:
+    weight: 20
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_habitat_parent:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      hide_weight: true
+    third_party_settings: {  }
+    type: entity_reference_hierarchy_autocomplete
+    region: content
+  field_habitat_photos:
+    weight: 8
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_habitat_summary:
+    weight: 16
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_habitat_what_is_it:
+    weight: 17
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_habitat_what_to_look_for:
+    weight: 19
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_habitat_why:
+    weight: 18
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_meta_tags:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 6
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden:
+  langcode: true

@@ -1,0 +1,20 @@
+uuid: bfbe9498-be15-4871-80f2-a90006a59132
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.silhouette
+id: media.silhouette.name
+field_name: name
+entity_type: media
+bundle: silhouette
+label: 'Media name'
+description: 'Enter a descriptive name for this media.'
+required: true
+translatable: false
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

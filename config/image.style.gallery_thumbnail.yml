@@ -1,0 +1,16 @@
+uuid: 4e494272-000a-428d-b0df-04e41dfec351
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: gallery_thumbnail
+label: 'Gallery thumbnail'
+effects:
+  d76d1ffb-da83-4c1f-9eb4-b31b041ce4fe:
+    uuid: d76d1ffb-da83-4c1f-9eb4-b31b041ce4fe
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 250
+      height: 180

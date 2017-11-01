@@ -1,0 +1,37 @@
+.view--news,
+.view--blog {
+  &.view-display--listing,
+  &.view-display--by_category,
+  &.view-display--by_tag {
+    @extend %clearfix;
+
+    > .view__content {
+      @include add-breakpoint('desk-and-up') {
+        @include float-span(9);
+      }
+    }
+
+    > .view__attachment--after {
+      @include spacing('large', 'top');
+      overflow: hidden;
+
+      @include add-breakpoint('desk-and-up') {
+        @include float-span(3, 'last');
+      }
+
+      @include add-breakpoint('lap-to-desk') {
+        .views-element-container {
+          @include float-span(4);
+
+          &:nth-child(3n) {
+            @include float-span(4, 'last');
+          }
+        }
+      }
+    }
+  }
+
+  .views-row {
+    @extend %keyline-separated-rows;
+  }
+}

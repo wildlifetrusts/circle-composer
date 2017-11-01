@@ -1,0 +1,104 @@
+uuid: 6033fb63-0423-43e2-a109-05258370e7d7
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: node_news_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate News data from a CSV source to nodes: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/node_news_national.csv
+  header_row_count: 1
+  keys:
+    - nid
+  constants:
+    text_format: rich_text
+    mod_state: published
+process:
+  type:
+    plugin: default_value
+    default_value: news
+  title: title
+  moderation_state: constants/mod_state
+  field_news_publication_date: publication_date
+  field_news_display_pub_date: show_date
+  field_further_content:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: further_content
+    -
+      plugin: migration
+      migration:
+        - paragraph_rich_text_national
+        - paragraph_image_national
+        - paragraph_video_national
+      no_stub: true
+    -
+      plugin: iterator
+      process:
+        target_id: '0'
+        target_revision_id: '1'
+  field_header_type: header_type
+  field_header_image/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: header_image
+    -
+      plugin: migration
+      migration:
+        - media_images_national
+  field_header_silhouette/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: header_silhouette
+    -
+      plugin: migration
+      migration:
+        - media_silhouettes_national
+  field_news_category:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: categories
+    -
+      plugin: migration
+      migration: taxonomy_term_news_category
+  field_representative_image/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: image
+    -
+      plugin: migration
+      migration:
+        - media_images_national
+  field_news_summary: summary
+  field_tags:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: tags
+    -
+      plugin: migration
+      migration: taxonomy_term_tag_category
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - media_images_national
+    - media_silhouettes_national
+    - paragraph_rich_text_national
+    - paragraph_image_national
+    - paragraph_video_national
+    - taxonomy_term_tag_categories
+    - taxonomy_term_news_category

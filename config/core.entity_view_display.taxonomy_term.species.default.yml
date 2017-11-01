@@ -1,0 +1,26 @@
+uuid: 312c0cd2-7f7a-4f65-9b21-4282065d2abf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.species.field_meta_tags
+    - field.field.taxonomy_term.species.field_species_image
+    - taxonomy.vocabulary.species
+  module:
+    - metatag
+id: taxonomy_term.species.default
+targetEntityType: taxonomy_term
+bundle: species
+mode: default
+content:
+  field_meta_tags:
+    weight: -4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+hidden:
+  description: true
+  field_species_image: true
+  langcode: true

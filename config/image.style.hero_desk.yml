@@ -1,0 +1,14 @@
+uuid: 70aec426-573e-40ec-9177-96c638319908
+langcode: en
+status: true
+dependencies: {  }
+name: hero_desk
+label: 'Hero desk'
+effects:
+  7ad3c859-467b-409e-b43f-b3b1828735cb:
+    uuid: 7ad3c859-467b-409e-b43f-b3b1828735cb
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1199
+      height: 651

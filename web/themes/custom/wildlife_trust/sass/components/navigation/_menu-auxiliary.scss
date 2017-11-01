@@ -1,0 +1,49 @@
+.menu--auxiliary {
+  .menu {
+    @extend %clean-list;
+    font-size: 14px;
+
+    @include add-breakpoint('desk-and-up') {
+      display: flex;
+    }
+
+    &__item {
+      @include add-breakpoint('desk-and-up') {
+        height: 45px;
+        display: flex;
+        align-items: center;
+      }
+
+      &:not(:first-child) {
+        border-top: 1px solid palette(mono, dark);
+
+        @include add-breakpoint('desk-and-up') {
+          border-top: 0;
+        }
+      }
+
+      &:not(:last-child) {
+        @include add-breakpoint('desk-and-up') {
+          border-right: 1px solid palette(mono, dark);
+        }
+      }
+    }
+
+    a {
+      color: palette(mono, x-light);
+      text-decoration: none;
+      display: block;
+      padding: 1em 1.625rem;
+
+      @include add-breakpoint('desk-and-up') {
+        padding: 0 1em;
+        font-weight: $font-weight-light;
+      }
+
+      &:hover,
+      &:focus {
+        color: palette(mono);
+      }
+    }
+  }
+}

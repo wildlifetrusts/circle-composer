@@ -1,0 +1,9 @@
+uuid: 59d5f989-1cdf-4292-a611-2be126d8263b
+langcode: en
+status: true
+dependencies: {  }
+id: node_type_volunteer_opportunity
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301

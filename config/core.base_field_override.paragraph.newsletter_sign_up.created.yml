@@ -1,0 +1,18 @@
+uuid: 0e66e87b-9dd8-4135-a9b0-fbf4fce8b857
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.newsletter_sign_up
+id: paragraph.newsletter_sign_up.created
+field_name: created
+entity_type: paragraph
+bundle: newsletter_sign_up
+label: 'Authored on'
+description: 'The time that the Paragraph was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

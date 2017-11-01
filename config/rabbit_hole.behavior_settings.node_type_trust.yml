@@ -1,0 +1,9 @@
+uuid: c5e8879a-b039-4b6f-b380-4e90f9e627b5
+langcode: en
+status: true
+dependencies: {  }
+id: node_type_trust
+action: page_redirect_json
+allow_override: 1
+redirect: /wildlife-trusts
+redirect_code: 301

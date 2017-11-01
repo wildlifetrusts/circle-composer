@@ -1,0 +1,270 @@
+/*
+    Colorbox Core Style:
+    The following CSS is consistent between example themes and should not be altered.
+*/
+#colorbox, #cboxOverlay, #cboxWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+#cboxWrapper {
+  max-width: none;
+}
+
+#cboxOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+#cboxMiddleLeft, #cboxBottomLeft {
+  clear: left;
+}
+
+#cboxContent {
+  position: relative;
+}
+
+#cboxLoadedContent {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#cboxLoadingOverlay, #cboxLoadingGraphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow {
+  cursor: pointer;
+}
+
+.cboxPhoto {
+  float: left;
+  margin: auto;
+  border: 0;
+  display: block;
+  max-width: none;
+  -ms-interpolation-mode: bicubic;
+}
+
+.cboxIframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+#colorbox, #cboxContent, #cboxLoadedContent {
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+
+/*
+    User Style:
+    Change the following styles to modify the appearance of Colorbox.  They are
+    ordered & tabbed in a way that represents the nesting of the generated HTML.
+*/
+#cboxOverlay {
+  background: palette(mono, x-dark);
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+}
+
+#colorbox {
+  outline: 0;
+}
+
+#cboxContent {
+  margin-top: 20px;
+  background: palette(mono, x-light);
+}
+
+.cboxIframe {
+  background: palette(mono, x-light);
+}
+
+#cboxError {
+  padding: 50px;
+}
+
+#cboxError,
+#cboxLoadedContent {
+  background: palette(mono, x-light);
+  border: 5px solid palette(mono, x-light);
+
+  @include add-breakpoint('lap-and-up') {
+    border-width: 11px;
+  }
+
+  @include add-breakpoint('desk-and-up') {
+    border-width: 22px;
+  }
+}
+
+#cboxTitle {
+  position: absolute;
+  display: none !important;
+  bottom: 11px;
+  left: 0;
+  margin: 0 11px;
+  background-color: rgba(palette(mono, x-light), 0.6);
+  padding: 0.75em;
+  border-top-width: 1em;
+  border-bottom-width: 1em;
+  @include setType(5, ms(-1));
+
+  @include add-breakpoint('lap-and-up') {
+    display: block !important;
+  }
+
+  @include add-breakpoint('desk-and-up') {
+    margin: 0 22px;
+    bottom: 22px;
+  }
+
+  &:empty {
+    padding: 0 !important;
+  }
+}
+
+#cboxCurrent {
+  position: absolute;
+  top: -20px;
+  right: 0px;
+  color: #ccc;
+}
+
+#cboxLoadingGraphic {
+  background: url('../images/load-spinner.gif') no-repeat center center;
+}
+
+/* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
+#cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  width: auto;
+}
+
+#cboxSlideshow, #cboxClose {
+  background: none;
+}
+
+/* avoid outlines on :active (mouseclick), but preserve outlines on :focus (tabbed navigating) */
+#cboxPrevious:active, #cboxNext:active, #cboxSlideshow:active, #cboxClose:active {
+  outline: 0;
+}
+
+#cboxSlideshow {
+  position: absolute;
+  top: -20px;
+  right: 90px;
+  color: #fff;
+}
+
+#cboxPrevious,
+#cboxNext {
+  position: absolute;
+  top: 50%;
+  z-index: 100;
+  margin-top: -16px;
+  height: 33px;
+  width: 33px;
+  padding: 0;
+  border: none;
+  border-radius: 50px 50px 0 0;
+  background-color: palette(mono, x-light);
+  background-position: 50% 55%;
+  background-size: 20px auto;
+  text-indent: -9999px;
+
+  &:hover,
+  &:focus {
+    background-color: palette(mono, mid-light);
+  }
+
+  @include add-breakpoint('lap-and-up') {
+    height: 56px;
+    width: 56px;
+    margin-top: -27px;
+  }
+}
+
+#cboxPrevious {
+  left: 0;
+  transform: rotate(90deg);
+}
+
+#cboxNext {
+  right: 0;
+  transform: rotate(-90deg);
+}
+
+#cboxClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 32px;
+  height: 32px;
+  background-color: palette(mono, x-light);
+  cursor: pointer;
+
+  @include add-breakpoint('lap-and-up') {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+#cboxClose:hover,
+#cboxClose:focus {
+  background-position: bottom center;
+
+  .colorbox-close__icon__line {
+    background-color: palette(orange);
+  }
+}
+
+.colorbox-close {
+  &__text {
+    @extend %text-invisible;
+  }
+
+  &__icon {
+    width: 28px;
+    height: 21px;
+    position: absolute;
+    top: calc(50% - 10.5px);
+    left: calc(50% - 14px);
+
+    &__line {
+      width: 100%;
+      height: 3px;
+      left: 0;
+      position: absolute;
+      background-color: palette(mono, x-dark);
+
+      &--top {
+        top: 0;
+        transform: translate3d(0, 9px, 0) rotate(45deg);
+      }
+
+      &--bottom {
+        bottom: 0;
+        transform: translate3d(0, -9px, 0) rotate(-45deg);
+      }
+    }
+  }
+}

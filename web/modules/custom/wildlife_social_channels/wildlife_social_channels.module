@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_social_channels.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_social_channels_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_social_channels module.
+    case 'help.page.wildlife_social_channels':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides social media link iconset and extra configuration') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wildlife_social_channels_theme() {
+  return [
+    'social_icon' => [
+      'variables' => [
+        'icon_name' => NULL,
+        'channel_name' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_social_media_links_platforms_info_alter().
+ */
+function wildlife_social_channels_social_media_links_platforms_info_alter(&$platforms) {
+  $allowed_platforms = [
+    'twitter',
+    'facebook',
+    'instagram',
+    'flickr',
+    'youtube',
+    'googleplus',
+  ];
+
+  foreach ($platforms as $key => $platform) {
+    if (!in_array($key, $allowed_platforms)) {
+      unset($platforms[$key]);
+    }
+  }
+}

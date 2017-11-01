@@ -1,0 +1,18 @@
+uuid: da229d5d-50c9-40ed-ae5f-772c724621dd
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access content'
+  - 'view disqus comments'
+  - 'view media'
+  - 'view published author entities'
+  - 'view published local customisation entities'
+  - 'view published location entities'
+  - 'view published view header entities'

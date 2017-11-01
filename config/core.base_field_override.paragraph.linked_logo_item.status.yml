@@ -1,0 +1,22 @@
+uuid: 5bcbecde-aa34-4a8c-a157-ad22e7304f24
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.linked_logo_item
+id: paragraph.linked_logo_item.status
+field_name: status
+entity_type: paragraph
+bundle: linked_logo_item
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

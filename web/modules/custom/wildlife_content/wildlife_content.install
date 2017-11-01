@@ -1,0 +1,95 @@
+<?php
+/**
+ * @file
+ * Installation file for Wildlife content module.
+ */
+
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_install().
+ */
+function wildlife_content_install() {
+  $users = _wildlife_content_example_users();
+
+  // Loops through and creates each of the users defined in $users.
+  foreach ($users as $user) {
+    $account = User::create($user);
+    $account->save();
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function wildlife_content_uninstall() {
+  $users = _wildlife_content_example_users();
+
+  // Loops through and creates each of the users defined in $users.
+  foreach ($users as $user) {
+    $name = $user['name'];
+    $account = user_load_by_name($name);
+
+    if (!empty($account)) {
+      user_delete($account->id());
+    }
+  }
+}
+
+/**
+ * Helper function to return a list of example users.
+ *
+ * @return array
+ */
+function _wildlife_content_example_users() {
+  // An array of sample users.
+  $users = array(
+    0 => array(
+      'name' => 'wildlife_example_admin',
+      'pass' => 'password',
+      'mail' => 'wildlife_example_admin@example.com',
+      'roles' => array(
+        'admin',
+      ),
+      'status' => 1,
+    ),
+    1 => array(
+      'name' => 'wildlife_example_editor',
+      'pass' => 'password',
+      'mail' => 'wildlife_example_editor@example.com',
+      'roles' => array(
+        'editor',
+      ),
+      'status' => 1,
+    ),
+    2 => array(
+      'name' => 'wildlife_example_author',
+      'pass' => 'password',
+      'mail' => 'wildlife_example_author@example.com',
+      'roles' => array(
+        'author',
+      ),
+      'status' => 1,
+    ),
+    3 => array(
+      'name' => 'wildlife_example_contributor',
+      'pass' => 'password',
+      'mail' => 'wildlife_example_contributor@example.com',
+      'roles' => array(
+        'contributor',
+      ),
+      'status' => 1,
+    ),
+    4 => array(
+      'name' => 'wildlife_example_trust',
+      'pass' => 'password',
+      'mail' => 'wildlife_example_trust@example.com',
+      'roles' => array(
+        'trust',
+      ),
+      'status' => 1,
+    ),
+  );
+
+  return $users;
+}

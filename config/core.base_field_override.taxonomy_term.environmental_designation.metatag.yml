@@ -1,0 +1,18 @@
+uuid: 17c62546-f502-4d52-bd0b-af2ff91fe0a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.environmental_designation
+id: taxonomy_term.environmental_designation.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: environmental_designation
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

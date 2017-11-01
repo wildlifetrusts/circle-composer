@@ -1,0 +1,19 @@
+uuid: fe9cd1d5-800f-481f-9092-aff01daac8b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_species_when_to_see
+    - node.type.species
+id: node.species.field_species_when_to_see
+field_name: field_species_when_to_see
+entity_type: node
+bundle: species
+label: 'When to see'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,5 @@
+services:
+  wildlife_filters.date_filters:
+    class: Drupal\wildlife_filters\DateFilters
+    arguments: ['@database']
+

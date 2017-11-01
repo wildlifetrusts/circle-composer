@@ -1,0 +1,16 @@
+uuid: 94d55c6d-8206-4a26-b418-0bfcbc7d0dc2
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_single_desk_wide
+label: 'Spotlight single desk wide'
+effects:
+  1b3fbfeb-99c7-4091-aa16-3c565eda7fce:
+    uuid: 1b3fbfeb-99c7-4091-aa16-3c565eda7fce
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 768

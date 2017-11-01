@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Implements hook_preprocess_fieldset().
+ */
+function wildlife_trust_admin_preprocess_fieldset(&$variables) {
+  $element = $variables['element'];
+  $location_fieldsets = [
+    'job-location',
+    'volunteer-opportunity-location',
+    'event-location',
+  ];
+
+  if (isset($element['#id']) && in_array($element['#id'], $location_fieldsets)) {
+    /** @var \Drupal\Core\Template\Attribute $legend_attributes */
+    $legend_attributes = &$variables['legend']['attributes'];
+    $legend_attributes->addClass('form-required');
+  }
+}

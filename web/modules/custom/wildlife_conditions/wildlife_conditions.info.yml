@@ -1,0 +1,5 @@
+type: module
+name: Conditions
+description: 'Adds conditions for use on the Wildlife Trust sites.'
+package: PDC
+core: 8.x

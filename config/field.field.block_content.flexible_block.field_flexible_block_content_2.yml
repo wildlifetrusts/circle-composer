@@ -1,0 +1,55 @@
+uuid: 95a4493e-d35e-460e-825a-1a52806c1cfe
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flexible_block
+    - field.storage.block_content.field_flexible_block_content_2
+    - paragraphs.paragraphs_type.linked_logos
+    - paragraphs.paragraphs_type.quick_links
+    - paragraphs.paragraphs_type.rich_text
+  module:
+    - entity_reference_revisions
+id: block_content.flexible_block.field_flexible_block_content_2
+field_name: field_flexible_block_content_2
+entity_type: block_content
+bundle: flexible_block
+label: 'Block 2 Content'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      rich_text: rich_text
+      linked_logos: linked_logos
+      quick_links: quick_links
+    target_bundles_drag_drop:
+      image:
+        weight: 4
+        enabled: false
+      rich_text:
+        enabled: true
+        weight: 5
+      video:
+        weight: 6
+        enabled: false
+      attached_files:
+        weight: 9
+        enabled: false
+      linked_logo_item:
+        weight: 11
+        enabled: false
+      linked_logos:
+        enabled: true
+        weight: 12
+      quick_links:
+        enabled: true
+        weight: 13
+      section:
+        weight: 15
+        enabled: false
+field_type: entity_reference_revisions

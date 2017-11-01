@@ -1,0 +1,15 @@
+uuid: dc9d778c-3b8e-4127-b621-3c924dd7d94b
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_translation
+    - wildlife_author
+third_party_settings:
+  content_translation:
+    enabled: true
+id: author.author
+target_entity_type_id: author
+target_bundle: author
+default_langcode: site_default
+language_alterable: true

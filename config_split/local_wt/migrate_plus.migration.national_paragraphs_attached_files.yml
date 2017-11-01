@@ -1,0 +1,60 @@
+uuid: 8646e001-b5ef-418b-ad05-bfa9e552aa29
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+id: national_paragraphs_attached_files
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: national
+label: 'Import attached_files paragraphs from national Wildlife Trust site'
+source:
+  plugin: wildlife_sharing_url_title
+  track_changes: true
+  data_fetcher_plugin: http
+  data_parser_plugin: wildlife_sharing_json_title
+  path: /jsonapi/paragraph/attached_files
+  pager:
+    type: urls
+    selector: 'links/next'
+  ids:
+    uuid:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: uuid
+      label: Uuid
+      selector: /attributes/uuid
+    -
+      name: created
+      label: Created
+      selector: /attributes/created
+    -
+      name: field_attached_files_title
+      label: Title
+      selector: /attributes/field_attached_files_title
+    -
+      name: field_attached_files_file
+      label: Files
+      selector: /relationships/field_attached_files_file/data
+process:
+  type:
+    plugin: default_value
+    default_value: attached_files
+  uuid: uuid
+  created: created
+  field_attached_files_title: field_attached_files_title
+  field_attached_files_file:
+    plugin: wildlife_sharing_id_entity_lookup
+    value_key: uuid
+    source: field_attached_files_file
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+migration_dependencies:
+  optional:
+    - national_media_document

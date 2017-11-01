@@ -1,0 +1,24 @@
+uuid: 48f638b5-9c53-48ef-81d1-7aa76c889399
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.rich_text.field_rich_text
+    - paragraphs.paragraphs_type.rich_text
+  module:
+    - wildlife_field_formatters
+id: paragraph.rich_text.preview
+targetEntityType: paragraph
+bundle: rich_text
+mode: preview
+content:
+  field_rich_text:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: '140'
+    third_party_settings: {  }
+    type: intelligent_text_trimmed
+    region: content
+hidden: {  }

@@ -1,0 +1,993 @@
+diff --git a/core/lib/Drupal/Core/Field/EntityReferenceFieldItemList.php b/core/lib/Drupal/Core/Field/EntityReferenceFieldItemList.php
+index 0a53d98..6f84aa8 100644
+--- a/core/lib/Drupal/Core/Field/EntityReferenceFieldItemList.php
++++ b/core/lib/Drupal/Core/Field/EntityReferenceFieldItemList.php
+@@ -128,4 +128,26 @@ public function defaultValuesFormSubmit(array $element, array &$form, FormStateI
+     return $default_value;
+   }
+
++  /**
++   * Removes the items with a specific target id.
++   *
++   * @param int $target_id
++   *   The target id of the item to be removed.
++   *
++   * @return $this
++   *
++   * @todo Add this to EntityReferenceFieldItemListInterface in Drupal 9.0.x.
++   *   https://www.drupal.org/node/2785673
++   */
++  public function removeItemsByTargetId($target_id) {
++    if (isset($this->list)) {
++      foreach ($this->list as $delta => $item) {
++        if ($item->target_id == $target_id) {
++          $this->removeItem($delta);
++        }
++      }
++    }
++    return $this;
++  }
++
+ }
+diff --git a/core/modules/forum/forum.views.inc b/core/modules/forum/forum.views.inc
+index 6f24259..9a37c25 100644
+--- a/core/modules/forum/forum.views.inc
++++ b/core/modules/forum/forum.views.inc
+@@ -74,7 +74,7 @@ function forum_views_data() {
+     'filter' => [
+       'title' => t('Has taxonomy term'),
+       'id' => 'taxonomy_index_tid',
+-      'hierarchy table' => 'taxonomy_term_hierarchy',
++      'hierarchy table' => 'taxonomy_term__parent',
+       'numeric' => TRUE,
+       'skip base' => 'taxonomy_term_data',
+       'allow empty' => TRUE,
+diff --git a/core/modules/forum/tests/src/Functional/ForumTest.php b/core/modules/forum/tests/src/Functional/ForumTest.php
+index 76823a7..6da724d 100644
+--- a/core/modules/forum/tests/src/Functional/ForumTest.php
++++ b/core/modules/forum/tests/src/Functional/ForumTest.php
+@@ -433,7 +433,7 @@ public function createForum($type, $parent = 0) {
+
+     // Verify forum hierarchy.
+     $tid = $term['tid'];
+-    $parent_tid = db_query("SELECT t.parent FROM {taxonomy_term_hierarchy} t WHERE t.tid = :tid", [':tid' => $tid])->fetchField();
++    $parent_tid = db_query("SELECT t.parent_target_id FROM {taxonomy_term__parent} t WHERE t.entity_id = :tid", [':tid' => $tid])->fetchField();
+     $this->assertTrue($parent == $parent_tid, 'The ' . $type . ' is linked to its container');
+
+     $forum = $this->container->get('entity.manager')->getStorage('taxonomy_term')->load($tid);
+diff --git a/core/modules/hal/tests/src/Functional/EntityResource/Term/TermHalJsonAnonTest.php b/core/modules/hal/tests/src/Functional/EntityResource/Term/TermHalJsonAnonTest.php
+index ff952ea..ce330a9 100644
+--- a/core/modules/hal/tests/src/Functional/EntityResource/Term/TermHalJsonAnonTest.php
++++ b/core/modules/hal/tests/src/Functional/EntityResource/Term/TermHalJsonAnonTest.php
+@@ -46,6 +46,11 @@ protected function getExpectedNormalizedEntity() {
+           'href' => $this->baseUrl . '/rest/type/taxonomy_term/camelids',
+         ],
+       ],
++      // Terms with no parents are mandatory children of <root>.
++      // @see \Drupal\taxonomy\Entity\Term::preSave().
++      'parent' => [
++        ['target_id' => 0],
++      ],
+     ];
+   }
+
+diff --git a/core/modules/rest/tests/src/Functional/EntityResource/Term/TermResourceTestBase.php b/core/modules/rest/tests/src/Functional/EntityResource/Term/TermResourceTestBase.php
+index 698451b..995351b 100644
+--- a/core/modules/rest/tests/src/Functional/EntityResource/Term/TermResourceTestBase.php
++++ b/core/modules/rest/tests/src/Functional/EntityResource/Term/TermResourceTestBase.php
+@@ -97,7 +97,11 @@ protected function getExpectedNormalizedEntity() {
+           'format' => NULL,
+         ],
+       ],
+-      'parent' => [],
++      // Terms with no parents are mandatory children of <root>.
++      // @see \Drupal\taxonomy\Entity\Term::preSave().
++      'parent' => [
++        ['target_id' => 0],
++      ],
+       'weight' => [
+         ['value' => 0],
+       ],
+diff --git a/core/modules/taxonomy/src/Entity/Term.php b/core/modules/taxonomy/src/Entity/Term.php
+index 43e62c6..1f5fd87 100644
+--- a/core/modules/taxonomy/src/Entity/Term.php
++++ b/core/modules/taxonomy/src/Entity/Term.php
+@@ -7,6 +7,7 @@
+ use Drupal\Core\Entity\EntityStorageInterface;
+ use Drupal\Core\Entity\EntityTypeInterface;
+ use Drupal\Core\Field\BaseFieldDefinition;
++use Drupal\taxonomy\TermHierarchyInterface;
+ use Drupal\taxonomy\TermInterface;
+
+ /**
+@@ -50,11 +51,18 @@
+  *   permission_granularity = "bundle"
+  * )
+  */
+-class Term extends ContentEntityBase implements TermInterface {
++class Term extends ContentEntityBase implements TermInterface, TermHierarchyInterface {
+
+   use EntityChangedTrait;
+
+   /**
++   * Array of all loaded term ancestry keyed by ancestor term ID.
++   *
++   * @var array
++   */
++  protected $ancestors;
++
++  /**
+    * {@inheritdoc}
+    */
+   public static function postDelete(EntityStorageInterface $storage, array $entities) {
+@@ -62,22 +70,26 @@ public static function postDelete(EntityStorageInterface $storage, array $entiti
+
+     // See if any of the term's children are about to be become orphans.
+     $orphans = [];
+-    foreach (array_keys($entities) as $tid) {
+-      if ($children = $storage->loadChildren($tid)) {
++    /** @var \Drupal\taxonomy\TermInterface $term */
++    foreach ($entities as $tid => $term) {
++      if ($children = $term->getChildren()) {
++        /** @var \Drupal\taxonomy\TermInterface $child */
+         foreach ($children as $child) {
++          $parent = $child->get('parent');
++          // Update child parents item list.
++          $parent->removeItemsByTargetId($tid);
++
+           // If the term has multiple parents, we don't delete it.
+-          $parents = $storage->loadParents($child->id());
+-          if (empty($parents)) {
++          if ($parent->count()) {
++            $child->save();
++          }
++          else {
+             $orphans[] = $child;
+           }
+         }
+       }
+     }
+
+-    // Delete term hierarchy information after looking up orphans but before
+-    // deleting them so that their children/parent information is consistent.
+-    $storage->deleteTermHierarchy(array_keys($entities));
+-
+     if (!empty($orphans)) {
+       $storage->delete($orphans);
+     }
+@@ -86,14 +98,11 @@ public static function postDelete(EntityStorageInterface $storage, array $entiti
+   /**
+    * {@inheritdoc}
+    */
+-  public function postSave(EntityStorageInterface $storage, $update = TRUE) {
+-    parent::postSave($storage, $update);
+-
+-    // Only change the parents if a value is set, keep the existing values if
+-    // not.
+-    if (isset($this->parent->target_id)) {
+-      $storage->deleteTermHierarchy([$this->id()]);
+-      $storage->updateTermHierarchy($this);
++  public function preSave(EntityStorageInterface $storage) {
++    parent::preSave($storage);
++    // Terms with no parents are mandatory children of <root>.
++    if (!$this->get('parent')->count()) {
++      $this->parent->target_id = 0;
+     }
+   }
+
+@@ -154,8 +163,7 @@ public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+       ->setLabel(t('Term Parents'))
+       ->setDescription(t('The parents of this term.'))
+       ->setSetting('target_type', 'taxonomy_term')
+-      ->setCardinality(BaseFieldDefinition::CARDINALITY_UNLIMITED)
+-      ->setCustomStorage(TRUE);
++      ->setCardinality(BaseFieldDefinition::CARDINALITY_UNLIMITED);
+
+     $fields['changed'] = BaseFieldDefinition::create('changed')
+       ->setLabel(t('Changed'))
+@@ -245,4 +253,64 @@ protected function getFieldsToSkipFromTranslationChangesCheck() {
+     return $fields;
+   }
+
++  /**
++   * {@inheritdoc}
++   */
++  public function getParents() {
++    $parents = $ids = [];
++    // Cannot use $this->get('parent')->referencedEntities() here because that
++    // strips out the '0' reference.
++    foreach ($this->get('parent') as $item) {
++      if ($item->target_id == 0) {
++        // The <root> parent.
++        $parents[0] = NULL;
++        continue;
++      }
++      $ids[] = $item->target_id;
++    }
++
++    // @todo Better way to do this? AND handle the NULL/0 parent?
++    // Querying the terms again so that the same access checks are run when
++    // getParents() is called as in Drupal version prior to 8.3.
++    $loaded_parents = [];
++
++    if ($ids) {
++      $query = \Drupal::entityQuery('taxonomy_term')
++        ->condition('tid', $ids, 'IN');
++
++      $loaded_parents = static::loadMultiple($query->execute());
++    }
++
++    return $parents + $loaded_parents;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getAncestors() {
++    if (!isset($this->ancestors)) {
++      $this->ancestors = [$this->id() => $this];
++      $search[] = $this->id();
++
++      while ($tid = array_shift($search)) {
++        foreach (static::load($tid)->getParents() as $id => $parent) {
++          if ($parent && !isset($this->ancestors[$id])) {
++            $this->ancestors[$id] = $parent;
++            $search[] = $id;
++          }
++        }
++      }
++    }
++    return $this->ancestors;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getChildren() {
++    $query = \Drupal::entityQuery('taxonomy_term')
++      ->condition('parent', $this->id());
++    return static::loadMultiple($query->execute());
++  }
++
+ }
+diff --git a/core/modules/taxonomy/src/Entity/Vocabulary.php b/core/modules/taxonomy/src/Entity/Vocabulary.php
+index b0d1ac1..c244acc 100644
+--- a/core/modules/taxonomy/src/Entity/Vocabulary.php
++++ b/core/modules/taxonomy/src/Entity/Vocabulary.php
+@@ -172,4 +172,24 @@ public static function postDelete(EntityStorageInterface $storage, array $entiti
+     }
+   }
+
++  /**
++   * Gets top-level term IDs of vocabularies.
++   *
++   * @param array $vids
++   *   Array of vocabulary IDs.
++   *
++   * @return array
++   *   Array of top-level term IDs.
++   *
++   * @todo Add this to \Drupal\taxonomy\VocabularyInterface in Drupal 9.0.x.
++   *   https://www.drupal.org/node/2785681
++   */
++  public static function getTopLevelTids(array $vids) {
++    $tids = \Drupal::entityQuery('taxonomy_term')
++      ->condition('vid', $vids, 'IN')
++      ->condition('parent.target_id', 0)
++      ->execute();
++    return array_values($tids);
++  }
++
+ }
+diff --git a/core/modules/taxonomy/src/Plugin/views/argument/IndexTidDepth.php b/core/modules/taxonomy/src/Plugin/views/argument/IndexTidDepth.php
+index 6933e74..a26113c 100644
+--- a/core/modules/taxonomy/src/Plugin/views/argument/IndexTidDepth.php
++++ b/core/modules/taxonomy/src/Plugin/views/argument/IndexTidDepth.php
+@@ -110,18 +110,19 @@ public function query($group_by = FALSE) {
+     $last = "tn";
+
+     if ($this->options['depth'] > 0) {
+-      $subquery->leftJoin('taxonomy_term_hierarchy', 'th', "th.tid = tn.tid");
++      $subquery->leftJoin('taxonomy_term__parent', 'th', "th.entity_id = tn.tid");
+       $last = "th";
+       foreach (range(1, abs($this->options['depth'])) as $count) {
+-        $subquery->leftJoin('taxonomy_term_hierarchy', "th$count", "$last.parent = th$count.tid");
+-        $where->condition("th$count.tid", $tids, $operator);
++        $subquery->leftJoin('taxonomy_term__parent', "th$count", "$last.parent_target_id = th$count.entity_id");
++        $where->condition("th$count.entity_id", $tids, $operator);
+         $last = "th$count";
+       }
+     }
+     elseif ($this->options['depth'] < 0) {
+       foreach (range(1, abs($this->options['depth'])) as $count) {
+-        $subquery->leftJoin('taxonomy_term_hierarchy', "th$count", "$last.tid = th$count.parent");
+-        $where->condition("th$count.tid", $tids, $operator);
++        $field = $count == 1 ? 'tid' : 'entity_id';
++        $subquery->leftJoin('taxonomy_term__parent', "th$count", "$last.$field = th$count.parent_target_id");
++        $where->condition("th$count.entity_id", $tids, $operator);
+         $last = "th$count";
+       }
+     }
+diff --git a/core/modules/taxonomy/src/Plugin/views/filter/TaxonomyIndexTidDepth.php b/core/modules/taxonomy/src/Plugin/views/filter/TaxonomyIndexTidDepth.php
+index 732f5b1..37d7928 100644
+--- a/core/modules/taxonomy/src/Plugin/views/filter/TaxonomyIndexTidDepth.php
++++ b/core/modules/taxonomy/src/Plugin/views/filter/TaxonomyIndexTidDepth.php
+@@ -76,18 +76,19 @@ public function query() {
+     $last = "tn";
+
+     if ($this->options['depth'] > 0) {
+-      $subquery->leftJoin('taxonomy_term_hierarchy', 'th', "th.tid = tn.tid");
++      $subquery->leftJoin('taxonomy_term__parent', 'th', "th.entity_id = tn.tid");
+       $last = "th";
+       foreach (range(1, abs($this->options['depth'])) as $count) {
+-        $subquery->leftJoin('taxonomy_term_hierarchy', "th$count", "$last.parent = th$count.tid");
+-        $where->condition("th$count.tid", $this->value, $operator);
++        $subquery->leftJoin('taxonomy_term__parent', "th$count", "$last.parent_target_id = th$count.entity_id");
++        $where->condition("th$count.entity_id", $this->value, $operator);
+         $last = "th$count";
+       }
+     }
+     elseif ($this->options['depth'] < 0) {
+       foreach (range(1, abs($this->options['depth'])) as $count) {
+-        $subquery->leftJoin('taxonomy_term_hierarchy', "th$count", "$last.tid = th$count.parent");
+-        $where->condition("th$count.tid", $this->value, $operator);
++        $field = $count == 1 ? 'tid' : 'entity_id';
++        $subquery->leftJoin('taxonomy_term__parent', "th$count", "$last.$field = th$count.parent_target_id");
++        $where->condition("th$count.entity_id", $this->value, $operator);
+         $last = "th$count";
+       }
+     }
+diff --git a/core/modules/taxonomy/src/TermHierarchyInterface.php b/core/modules/taxonomy/src/TermHierarchyInterface.php
+new file mode 100644
+index 0000000..81a7c13
+--- /dev/null
++++ b/core/modules/taxonomy/src/TermHierarchyInterface.php
+@@ -0,0 +1,38 @@
++<?php
++
++namespace Drupal\taxonomy;
++
++/**
++ * Provides an interface for handling taxonomy term hierarchy.
++ *
++ * @todo Merge this into \Drupal\taxonomy\TermInterface in Drupal 9.0.x.
++ *   https://www.drupal.org/node/2785683
++ */
++interface TermHierarchyInterface {
++
++  /**
++   * Returns a list of parents of this term.
++   *
++   * @return \Drupal\taxonomy\TermInterface[]
++   *   The parent taxonomy term entities keyed by term id. If this term has a
++   *   <root> parent, that item is keyed with 0 and will have NULL as value.
++   */
++  public function getParents();
++
++  /**
++   * Returns all ancestors of this term.
++   *
++   * @return \Drupal\taxonomy\TermInterface[]
++   *   A list of ancestor taxonomy term entities keyed by term id.
++   */
++  public function getAncestors();
++
++  /**
++   * Returns all children terms of this term.
++   *
++   * @return \Drupal\taxonomy\TermInterface[]
++   *   A list of children taxonomy term entities keyed by term id.
++   */
++  public function getChildren();
++
++}
+diff --git a/core/modules/taxonomy/src/TermInterface.php b/core/modules/taxonomy/src/TermInterface.php
+index f832620..73b3e2f 100644
+--- a/core/modules/taxonomy/src/TermInterface.php
++++ b/core/modules/taxonomy/src/TermInterface.php
+@@ -7,6 +7,9 @@
+
+ /**
+  * Provides an interface defining a taxonomy term entity.
++ *
++ * @todo Merge here \Drupal\taxonomy\TermHierarchyInterface in Drupal 9.0.x.
++ *   https://www.drupal.org/node/2785685
+  */
+ interface TermInterface extends ContentEntityInterface, EntityChangedInterface {
+
+diff --git a/core/modules/taxonomy/src/TermStorage.php b/core/modules/taxonomy/src/TermStorage.php
+index 0a00c13..113286b 100644
+--- a/core/modules/taxonomy/src/TermStorage.php
++++ b/core/modules/taxonomy/src/TermStorage.php
+@@ -2,8 +2,8 @@
+
+ namespace Drupal\taxonomy;
+
+-use Drupal\Core\Entity\Sql\SqlContentEntityStorage;
+ use Drupal\Core\Entity\EntityInterface;
++use Drupal\Core\Entity\Sql\SqlContentEntityStorage;
+
+ /**
+  * Defines a Controller class for taxonomy terms.
+@@ -11,27 +11,6 @@
+ class TermStorage extends SqlContentEntityStorage implements TermStorageInterface {
+
+   /**
+-   * Array of loaded parents keyed by child term ID.
+-   *
+-   * @var array
+-   */
+-  protected $parents = [];
+-
+-  /**
+-   * Array of all loaded term ancestry keyed by ancestor term ID.
+-   *
+-   * @var array
+-   */
+-  protected $parentsAll = [];
+-
+-  /**
+-   * Array of child terms keyed by parent term ID.
+-   *
+-   * @var array
+-   */
+-  protected $children = [];
+-
+-  /**
+    * Array of term parents keyed by vocabulary ID and child term ID.
+    *
+    * @var array
+@@ -80,9 +59,6 @@ public function create(array $values = []) {
+    */
+   public function resetCache(array $ids = NULL) {
+     drupal_static_reset('taxonomy_term_count_nodes');
+-    $this->parents = [];
+-    $this->parentsAll = [];
+-    $this->children = [];
+     $this->treeChildren = [];
+     $this->treeParents = [];
+     $this->treeTerms = [];
+@@ -93,100 +69,46 @@ public function resetCache(array $ids = NULL) {
+   /**
+    * {@inheritdoc}
+    */
+-  public function deleteTermHierarchy($tids) {
+-    $this->database->delete('taxonomy_term_hierarchy')
+-      ->condition('tid', $tids, 'IN')
+-      ->execute();
+-  }
++  public function deleteTermHierarchy($tids) { }
+
+   /**
+    * {@inheritdoc}
+    */
+-  public function updateTermHierarchy(EntityInterface $term) {
+-    $query = $this->database->insert('taxonomy_term_hierarchy')
+-      ->fields(['tid', 'parent']);
+-
+-    foreach ($term->parent as $parent) {
+-      $query->values([
+-        'tid' => $term->id(),
+-        'parent' => (int) $parent->target_id,
+-      ]);
+-    }
+-    $query->execute();
+-  }
++  public function updateTermHierarchy(EntityInterface $term) { }
+
+   /**
+    * {@inheritdoc}
+    */
+   public function loadParents($tid) {
+-    if (!isset($this->parents[$tid])) {
+-      $parents = [];
+-      $query = $this->database->select('taxonomy_term_field_data', 't');
+-      $query->join('taxonomy_term_hierarchy', 'h', 'h.parent = t.tid');
+-      $query->addField('t', 'tid');
+-      $query->condition('h.tid', $tid);
+-      $query->condition('t.default_langcode', 1);
+-      $query->addTag('taxonomy_term_access');
+-      $query->orderBy('t.weight');
+-      $query->orderBy('t.name');
+-      if ($ids = $query->execute()->fetchCol()) {
+-        $parents = $this->loadMultiple($ids);
++    $terms = [];
++    /** @var \Drupal\taxonomy\TermInterface $term */
++    if ($tid && $term = $this->load($tid)) {
++      foreach ($term->getParents() as $id => $parent) {
++        // This method currently doesn't return the <root> parent.
++        // @see https://www.drupal.org/node/2019905
++        if (!empty($id)) {
++          $terms[$id] = $parent;
++        }
+       }
+-      $this->parents[$tid] = $parents;
+     }
+-    return $this->parents[$tid];
++
++    return $terms;
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+   public function loadAllParents($tid) {
+-    if (!isset($this->parentsAll[$tid])) {
+-      $parents = [];
+-      if ($term = $this->load($tid)) {
+-        $parents[$term->id()] = $term;
+-        $terms_to_search[] = $term->id();
+-
+-        while ($tid = array_shift($terms_to_search)) {
+-          if ($new_parents = $this->loadParents($tid)) {
+-            foreach ($new_parents as $new_parent) {
+-              if (!isset($parents[$new_parent->id()])) {
+-                $parents[$new_parent->id()] = $new_parent;
+-                $terms_to_search[] = $new_parent->id();
+-              }
+-            }
+-          }
+-        }
+-      }
+-
+-      $this->parentsAll[$tid] = $parents;
+-    }
+-    return $this->parentsAll[$tid];
++    /** @var \Drupal\taxonomy\TermInterface $term */
++    return (!empty($tid) && $term = $this->load($tid)) ? $term->getAncestors() : [];
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+   public function loadChildren($tid, $vid = NULL) {
+-    if (!isset($this->children[$tid])) {
+-      $children = [];
+-      $query = $this->database->select('taxonomy_term_field_data', 't');
+-      $query->join('taxonomy_term_hierarchy', 'h', 'h.tid = t.tid');
+-      $query->addField('t', 'tid');
+-      $query->condition('h.parent', $tid);
+-      if ($vid) {
+-        $query->condition('t.vid', $vid);
+-      }
+-      $query->condition('t.default_langcode', 1);
+-      $query->addTag('taxonomy_term_access');
+-      $query->orderBy('t.weight');
+-      $query->orderBy('t.name');
+-      if ($ids = $query->execute()->fetchCol()) {
+-        $children = $this->loadMultiple($ids);
+-      }
+-      $this->children[$tid] = $children;
+-    }
+-    return $this->children[$tid];
++    /** @var \Drupal\taxonomy\TermInterface $term */
++    return (!empty($tid) && $term = $this->load($tid)) ? $term->getChildren() : [];
+   }
+
+   /**
+@@ -202,11 +124,11 @@ public function loadTree($vid, $parent = 0, $max_depth = NULL, $load_entities =
+         $this->treeParents[$vid] = [];
+         $this->treeTerms[$vid] = [];
+         $query = $this->database->select('taxonomy_term_field_data', 't');
+-        $query->join('taxonomy_term_hierarchy', 'h', 'h.tid = t.tid');
++        $query->join('taxonomy_term__parent', 'p', 't.tid = p.entity_id');
++        $query->addExpression('parent_target_id', 'parent');
+         $result = $query
+           ->addTag('taxonomy_term_access')
+           ->fields('t')
+-          ->fields('h', ['parent'])
+           ->condition('t.vid', $vid)
+           ->condition('t.default_langcode', 1)
+           ->orderBy('t.weight')
+@@ -254,7 +176,9 @@ public function loadTree($vid, $parent = 0, $max_depth = NULL, $load_entities =
+               $term = clone $term;
+             }
+             $term->depth = $depth;
+-            unset($term->parent);
++            if (!$load_entities) {
++              unset($term->parent);
++            }
+             $tid = $load_entities ? $term->id() : $term->tid;
+             $term->parents = $this->treeParents[$vid][$tid];
+             $tree[] = $term;
+@@ -351,7 +275,7 @@ public function getNodeTerms(array $nids, array $vocabs = [], $langcode = NULL)
+   public function __sleep() {
+     $vars = parent::__sleep();
+     // Do not serialize static cache.
+-    unset($vars['parents'], $vars['parentsAll'], $vars['children'], $vars['treeChildren'], $vars['treeParents'], $vars['treeTerms'], $vars['trees']);
++    unset($vars['treeChildren'], $vars['treeParents'], $vars['treeTerms'], $vars['trees']);
+     return $vars;
+   }
+
+@@ -361,9 +285,6 @@ public function __sleep() {
+   public function __wakeup() {
+     parent::__wakeup();
+     // Initialize static caches.
+-    $this->parents = [];
+-    $this->parentsAll = [];
+-    $this->children = [];
+     $this->treeChildren = [];
+     $this->treeParents = [];
+     $this->treeTerms = [];
+diff --git a/core/modules/taxonomy/src/TermStorageInterface.php b/core/modules/taxonomy/src/TermStorageInterface.php
+index 05d8d7f..c9610da 100644
+--- a/core/modules/taxonomy/src/TermStorageInterface.php
++++ b/core/modules/taxonomy/src/TermStorageInterface.php
+@@ -15,6 +15,10 @@
+    *
+    * @param array $tids
+    *   Array of terms that need to be removed from hierarchy.
++   *
++   * @todo Remove this method in Drupal 9.0.x. Now the parent references are
++   *   automatically cleared when deleting a taxonomy term.
++   *   https://www.drupal.org/node/2785693
+    */
+   public function deleteTermHierarchy($tids);
+
+@@ -23,6 +27,10 @@ public function deleteTermHierarchy($tids);
+    *
+    * @param \Drupal\Core\Entity\EntityInterface $term
+    *   Term entity that needs to be added to term hierarchy information.
++   *
++   * @todo remove this method Drupal 9.0.x. Now the parent references are
++   *   automatically updates when when a taxonomy term is added/updated.
++   *   https://www.drupal.org/node/2785693
+    */
+   public function updateTermHierarchy(EntityInterface $term);
+
+@@ -34,6 +42,9 @@ public function updateTermHierarchy(EntityInterface $term);
+    *
+    * @return \Drupal\taxonomy\TermInterface[]
+    *   An array of term objects which are the parents of the term $tid.
++   *
++   * @deprecated in Drupal 8.3.x, will be removed in Drupal 9.0.0. Use
++   *   \Drupal\taxonomy\Entity\Term::load($tid)->getParents() instead.
+    */
+   public function loadParents($tid);
+
+@@ -45,6 +56,9 @@ public function loadParents($tid);
+    *
+    * @return \Drupal\taxonomy\TermInterface[]
+    *   An array of term objects which are the ancestors of the term $tid.
++   *
++   * @deprecated in Drupal 8.3.x, will be removed in Drupal 9.0.0. Use
++   *   \Drupal\taxonomy\Entity\Term::load($tid)->getAncestors() instead.
+    */
+   public function loadAllParents($tid);
+
+@@ -58,6 +72,9 @@ public function loadAllParents($tid);
+    *
+    * @return \Drupal\taxonomy\TermInterface[]
+    *   An array of term objects that are the children of the term $tid.
++   *
++   * @deprecated in Drupal 8.3.x, will be removed in Drupal 9.0.0. Use
++   *   \Drupal\taxonomy\Entity\Term::load($tid)->getChildren($vid) instead.
+    */
+   public function loadChildren($tid, $vid = NULL);
+
+diff --git a/core/modules/taxonomy/src/TermStorageSchema.php b/core/modules/taxonomy/src/TermStorageSchema.php
+index 5bcb088..2b49ee2 100644
+--- a/core/modules/taxonomy/src/TermStorageSchema.php
++++ b/core/modules/taxonomy/src/TermStorageSchema.php
+@@ -22,36 +22,6 @@ protected function getEntitySchema(ContentEntityTypeInterface $entity_type, $res
+       'taxonomy_term__vid_name' => ['vid', 'name'],
+     ];
+
+-    $schema['taxonomy_term_hierarchy'] = [
+-      'description' => 'Stores the hierarchical relationship between terms.',
+-      'fields' => [
+-        'tid' => [
+-          'type' => 'int',
+-          'unsigned' => TRUE,
+-          'not null' => TRUE,
+-          'default' => 0,
+-          'description' => 'Primary Key: The {taxonomy_term_data}.tid of the term.',
+-        ],
+-        'parent' => [
+-          'type' => 'int',
+-          'unsigned' => TRUE,
+-          'not null' => TRUE,
+-          'default' => 0,
+-          'description' => "Primary Key: The {taxonomy_term_data}.tid of the term's parent. 0 indicates no parent.",
+-        ],
+-      ],
+-      'indexes' => [
+-        'parent' => ['parent'],
+-      ],
+-      'foreign keys' => [
+-        'taxonomy_term_data' => [
+-          'table' => 'taxonomy_term_data',
+-          'columns' => ['tid' => 'tid'],
+-        ],
+-      ],
+-      'primary key' => ['tid', 'parent'],
+-    ];
+-
+     $schema['taxonomy_index'] = [
+       'description' => 'Maintains denormalized information about node/term relationships.',
+       'fields' => [
+diff --git a/core/modules/taxonomy/src/TermViewsData.php b/core/modules/taxonomy/src/TermViewsData.php
+index 5e98bfe..a52c1b2 100644
+--- a/core/modules/taxonomy/src/TermViewsData.php
++++ b/core/modules/taxonomy/src/TermViewsData.php
+@@ -36,7 +36,7 @@ public function getViewsData() {
+     $data['taxonomy_term_field_data']['tid']['filter']['id'] = 'taxonomy_index_tid';
+     $data['taxonomy_term_field_data']['tid']['filter']['title'] = $this->t('Term');
+     $data['taxonomy_term_field_data']['tid']['filter']['help'] = $this->t('Taxonomy term chosen from autocomplete or select widget.');
+-    $data['taxonomy_term_field_data']['tid']['filter']['hierarchy table'] = 'taxonomy_term_hierarchy';
++    $data['taxonomy_term_field_data']['tid']['filter']['hierarchy table'] = 'taxonomy_term__parent';
+     $data['taxonomy_term_field_data']['tid']['filter']['numeric'] = TRUE;
+
+     $data['taxonomy_term_field_data']['tid_raw'] = [
+@@ -146,8 +146,8 @@ public function getViewsData() {
+         'left_field' => 'nid',
+         'field' => 'nid',
+       ],
+-      'taxonomy_term_hierarchy' => [
+-        'left_field' => 'tid',
++      'taxonomy_term__parent' => [
++        'left_field' => 'entity_id',
+         'field' => 'tid',
+       ],
+     ];
+@@ -181,7 +181,7 @@ public function getViewsData() {
+       'filter' => [
+         'title' => $this->t('Has taxonomy term'),
+         'id' => 'taxonomy_index_tid',
+-        'hierarchy table' => 'taxonomy_term_hierarchy',
++        'hierarchy table' => 'taxonomy_term__parent',
+         'numeric' => TRUE,
+         'skip base' => 'taxonomy_term_field_data',
+         'allow empty' => TRUE,
+@@ -223,40 +223,15 @@ public function getViewsData() {
+       ],
+     ];
+
+-    $data['taxonomy_term_hierarchy']['table']['group']  = $this->t('Taxonomy term');
+-    $data['taxonomy_term_hierarchy']['table']['provider']  = 'taxonomy';
+-
+-    $data['taxonomy_term_hierarchy']['table']['join'] = [
+-      'taxonomy_term_hierarchy' => [
+-        // Link to self through left.parent = right.tid (going down in depth).
+-        'left_field' => 'tid',
+-        'field' => 'parent',
+-      ],
+-      'taxonomy_term_field_data' => [
+-        // Link directly to taxonomy_term_field_data via tid.
+-        'left_field' => 'tid',
+-        'field' => 'tid',
+-      ],
++    // Link to self through left.parent = right.tid (going down in depth).
++    $data['taxonomy_term__parent']['table']['join']['taxonomy_term__parent'] = [
++      'left_field' => 'entity_id',
++      'field' => 'parent_target_id',
+     ];
+
+-    $data['taxonomy_term_hierarchy']['parent'] = [
+-      'title' => $this->t('Parent term'),
+-      'help' => $this->t('The parent term of the term. This can produce duplicate entries if you are using a vocabulary that allows multiple parents.'),
+-      'relationship' => [
+-        'base' => 'taxonomy_term_field_data',
+-        'field' => 'parent',
+-        'label' => $this->t('Parent'),
+-        'id' => 'standard',
+-      ],
+-      'filter' => [
+-        'help' => $this->t('Filter the results of "Taxonomy: Term" by the parent pid.'),
+-        'id' => 'numeric',
+-      ],
+-      'argument' => [
+-        'help' => $this->t('The parent term of the term.'),
+-        'id' => 'taxonomy',
+-      ],
+-    ];
++    $data['taxonomy_term__parent']['parent']['help'] = $this->t('The parent term of the term. This can produce duplicate entries if you are using a vocabulary that allows multiple parents.');
++    $data['taxonomy_term__parent']['parent']['argument']['id'] = 'taxonomy';
++    $data['taxonomy_term__parent']['parent']['relationship']['label'] = $this->t('Parent');
+
+     return $data;
+   }
+diff --git a/core/modules/taxonomy/src/VocabularyStorage.php b/core/modules/taxonomy/src/VocabularyStorage.php
+index bdbf893..fb4efee 100644
+--- a/core/modules/taxonomy/src/VocabularyStorage.php
++++ b/core/modules/taxonomy/src/VocabularyStorage.php
+@@ -3,6 +3,7 @@
+ namespace Drupal\taxonomy;
+
+ use Drupal\Core\Config\Entity\ConfigEntityStorage;
++use Drupal\taxonomy\Entity\Vocabulary;
+
+ /**
+  * Defines a storage handler class for taxonomy vocabularies.
+@@ -21,7 +22,7 @@ public function resetCache(array $ids = NULL) {
+    * {@inheritdoc}
+    */
+   public function getToplevelTids($vids) {
+-    return db_query('SELECT t.tid FROM {taxonomy_term_data} t INNER JOIN {taxonomy_term_hierarchy} th ON th.tid = t.tid WHERE t.vid IN ( :vids[] ) AND th.parent = 0', [':vids[]' => $vids])->fetchCol();
++    return Vocabulary::getTopLevelTids($vids);
+   }
+
+ }
+diff --git a/core/modules/taxonomy/src/VocabularyStorageInterface.php b/core/modules/taxonomy/src/VocabularyStorageInterface.php
+index 1ece404..3549ee0 100644
+--- a/core/modules/taxonomy/src/VocabularyStorageInterface.php
++++ b/core/modules/taxonomy/src/VocabularyStorageInterface.php
+@@ -17,6 +17,9 @@
+    *
+    * @return array
+    *   Array of top-level term IDs.
++   *
++   * @deprecated in Drupal 8.2.x, will be removed in Drupal 9.0.x Use
++   *   \Drupal\taxonomy\Entity\Vocabulary::getTopLevelTids($vids) instead.
+    */
+   public function getToplevelTids($vids);
+
+diff --git a/core/modules/taxonomy/taxonomy.install b/core/modules/taxonomy/taxonomy.install
+new file mode 100644
+index 0000000..f1f271b
+--- /dev/null
++++ b/core/modules/taxonomy/taxonomy.install
+@@ -0,0 +1,124 @@
++<?php
++
++/**
++ * @file
++ * Install, update and uninstall functions for the taxonomy module.
++ */
++
++/**
++ * @addtogroup updates-8.3.x
++ * @{
++ */
++
++/**
++ * Convert the custom taxonomy term hierarchy storage to a default storage.
++ */
++function taxonomy_update_8301() {
++  $manager = \Drupal::entityDefinitionUpdateManager();
++  /** @var \Drupal\Core\Field\BaseFieldDefinition $definition */
++  $definition = $manager->getFieldStorageDefinition('parent', 'taxonomy_term');
++  $definition->setCustomStorage(FALSE);
++  $manager->updateFieldStorageDefinition($definition);
++  // Update the entity type because a new interface was added to Term entity.
++  $manager->updateEntityType($manager->getEntityType('taxonomy_term'));
++}
++
++/**
++ * Copy hierarchy from {taxonomy_term_hierarchy} to {taxonomy_term__parent}.
++ */
++function taxonomy_update_8302(&$sandbox) {
++  $database = \Drupal::database();
++
++  if (!isset($sandbox['current'])) {
++    // Set batch ops sandbox.
++    $sandbox['current'] = 0;
++    $sandbox['max'] = $database->select('taxonomy_term_hierarchy')
++      ->countQuery()
++      ->execute()
++      ->fetchField();
++  }
++
++  // Save the hierarchy.
++  $select = $database->select('taxonomy_term_hierarchy', 'h');
++  $select->join('taxonomy_term_data', 'd', 'h.tid = d.tid');
++  $hierarchy = $select
++    ->fields('h', ['tid', 'parent'])
++    ->fields('d', ['vid', 'langcode'])
++    ->range($sandbox['current'], $sandbox['current'] + 100)
++    ->execute()
++    ->fetchAll();
++
++  // Restore data.
++  $insert = $database->insert('taxonomy_term__parent')
++    ->fields(['bundle', 'entity_id', 'revision_id', 'langcode', 'delta', 'parent_target_id']);
++  $tid = -1;
++  foreach ($hierarchy as $row) {
++    if ($row->tid !== $tid) {
++      $delta = 0;
++      $tid = $row->tid;
++    }
++    $insert->values([
++      'bundle' => $row->vid,
++      'entity_id' => $row->tid,
++      'revision_id' => $row->tid,
++      'langcode' => $row->langcode,
++      'delta' => $delta,
++      'parent_target_id' => $row->parent,
++    ]);
++    $delta++;
++    $sandbox['current']++;
++  }
++  $insert->execute();
++
++  $sandbox['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['current'] / $sandbox['max']);
++
++  if ($sandbox['#finished'] >= 1) {
++    return t('Taxonomy term hierarchy converted.');
++  }
++}
++
++/**
++ * Update views to use {taxonomy_term__parent} in relationships.
++ */
++function taxonomy_update_8303() {
++  $config_factory = \Drupal::configFactory();
++  foreach ($config_factory->listAll('views.view.') as $id) {
++    $view = $config_factory->getEditable($id);
++    $changed = FALSE;
++    foreach ($view->get('display') as $display_id => &$display) {
++      $path = "display.$display_id.display_options.relationships.parent.table";
++      if (!empty($table = $view->get($path)) && $table == 'taxonomy_term_hierarchy') {
++        $view->set($path, 'taxonomy_term__parent');
++
++        $path = "display.{$display_id}.display_options.filters.parent.table";
++        if (!empty($table = $view->get($path)) && $table == 'taxonomy_term_hierarchy') {
++          $view->set($path, 'taxonomy_term__parent');
++        }
++
++        $path = "display.{$display_id}.display_options.arguments.parent.table";
++        if (!empty($table = $view->get($path)) && $table == 'taxonomy_term_hierarchy') {
++          $view->set($path, 'taxonomy_term__parent');
++        }
++
++        $changed = TRUE;
++      }
++    }
++    if ($changed) {
++      $view->save(TRUE);
++    }
++  }
++}
++
++/**
++ * Drop the legacy table {taxonomy_term_hierarchy}.
++ */
++function taxonomy_update_8304(&$sandbox) {
++  $database = \Drupal::database();
++  // Drop the legacy table.
++  $database->schema()->dropTable('taxonomy_term_hierarchy');
++  return t('Taxonomy term legacy tables dropped.');
++}
++
++/**
++ * @} End of "addtogroup updates-8.3.x".
++ */
+diff --git a/core/modules/taxonomy/tests/modules/taxonomy_test_views/test_views/views.view.test_taxonomy_parent.yml b/core/modules/taxonomy/tests/modules/taxonomy_test_views/test_views/views.view.test_taxonomy_parent.yml
+index 256f618..5ede43b 100644
+--- a/core/modules/taxonomy/tests/modules/taxonomy_test_views/test_views/views.view.test_taxonomy_parent.yml
++++ b/core/modules/taxonomy/tests/modules/taxonomy_test_views/test_views/views.view.test_taxonomy_parent.yml
+@@ -124,7 +124,7 @@ display:
+       relationships:
+         parent:
+           id: parent
+-          table: taxonomy_term_hierarchy
++          table: taxonomy_term__parent
+           field: parent
+           relationship: none
+           group_type: group
+diff --git a/core/modules/taxonomy/tests/modules/taxonomy_test_views/test_views/views.view.test_taxonomy_term_relationship.yml b/core/modules/taxonomy/tests/modules/taxonomy_test_views/test_views/views.view.test_taxonomy_term_relationship.yml
+index 80295b6..c7aeb16 100644
+--- a/core/modules/taxonomy/tests/modules/taxonomy_test_views/test_views/views.view.test_taxonomy_term_relationship.yml
++++ b/core/modules/taxonomy/tests/modules/taxonomy_test_views/test_views/views.view.test_taxonomy_term_relationship.yml
+@@ -186,7 +186,7 @@ display:
+           plugin_id: standard
+         parent:
+           id: parent
+-          table: taxonomy_term_hierarchy
++          table: taxonomy_term__parent
+           field: parent
+           relationship: none
+           group_type: group
+diff --git a/core/modules/taxonomy/tests/src/Kernel/Migrate/d6/MigrateTaxonomyTermTest.php b/core/modules/taxonomy/tests/src/Kernel/Migrate/d6/MigrateTaxonomyTermTest.php
+index 1252833..6b3e55c 100644
+--- a/core/modules/taxonomy/tests/src/Kernel/Migrate/d6/MigrateTaxonomyTermTest.php
++++ b/core/modules/taxonomy/tests/src/Kernel/Migrate/d6/MigrateTaxonomyTermTest.php
+@@ -88,7 +88,7 @@ public function testTaxonomyTerms() {
+       $this->assertIdentical($values['vid'], $term->vid->target_id);
+       $this->assertIdentical((string) $values['weight'], $term->weight->value);
+       if ($values['parent'] === [0]) {
+-        $this->assertNull($term->parent->target_id);
++        $this->assertSame((int) $term->parent->target_id, 0);
+       }
+       else {
+         $parents = [];

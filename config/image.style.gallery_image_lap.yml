@@ -1,0 +1,14 @@
+uuid: e94988e8-b007-4c99-87b3-1390aacd3489
+langcode: en
+status: true
+dependencies: {  }
+name: gallery_image_lap
+label: 'Gallery image lap'
+effects:
+  0e312660-22b6-40db-802e-39c65485d41d:
+    uuid: 0e312660-22b6-40db-802e-39c65485d41d
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 511
+      height: 383

@@ -1,0 +1,18 @@
+uuid: bb60c144-0f1d-49b2-871d-2ec4fcb53cc7
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.document
+id: media.document.metatag
+field_name: metatag
+entity_type: media
+bundle: document
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

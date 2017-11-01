@@ -1,0 +1,64 @@
+uuid: f6f1f18c-c905-49a2-9a74-ee94684cd0c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.location.location.field_location_address
+    - field.field.location.location.field_location_county
+    - field.field.location.location.field_location_grid_ref
+    - field.field.location.location.field_location_lat_long
+    - field.field.location.location.field_location_name
+    - field.field.location.location.field_location_postcode
+    - field.field.location.location.field_location_town
+  module:
+    - wildlife_location
+id: location.location.default
+targetEntityType: location
+bundle: location
+mode: default
+content:
+  field_location_address:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_location_county:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_location_name:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_location_postcode:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_location_town:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_location_grid_ref: true
+  field_location_lat_long: true
+  langcode: true
+  name: true
+  user_id: true

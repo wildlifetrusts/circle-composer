@@ -1,0 +1,28 @@
+uuid: c545b94e-fdae-426a-9519-7b7bf1a3bee8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_species_habitats
+    - node.type.habitat
+    - node.type.species
+id: node.species.field_species_habitats
+field_name: field_species_habitats
+entity_type: node
+bundle: species
+label: Habitats
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      habitat: habitat
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

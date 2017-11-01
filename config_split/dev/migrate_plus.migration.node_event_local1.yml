@@ -1,0 +1,116 @@
+uuid: feaf5efa-6161-48a7-a065-4b323413e098
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: node_event_local1
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_local1
+label: 'Migrate Event data from a CSV source to nodes: Local 1'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/node_event_local1.csv
+  header_row_count: 1
+  keys:
+    - nid
+  constants:
+    text_format: rich_text
+    mod_state: published
+process:
+  type:
+    plugin: default_value
+    default_value: event
+  title: title
+  moderation_state: constants/mod_state
+  field_event_photos:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: photos
+    -
+      plugin: migration
+      migration: media_images_local1
+      no_stub: true
+  field_event_location/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: location
+    -
+      plugin: migration
+      migration:
+        - location_local1
+  field_event_meeting_point: meeting_point
+  field_event_date/value: date_start
+  field_event_date/end_value: date_end
+  field_event_time: time
+  field_event_type:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: type
+    -
+      plugin: migration
+      migration: taxonomy_term_event_type_local1
+  field_event_summary: summary
+  field_event_about/value: about
+  field_event_about/format: constants/text_format
+  field_event_booking_url/uri: booking_url
+  field_event_phone_number: phone
+  field_event_email: email
+  field_event_price_donation: price
+  field_event_capacity: capacity
+  field_event_booking_status: booking_status
+  field_event_additional_info: additional_info
+  field_event_booking_embed: booking_embed
+  field_event_suitable_for:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: suitable_for
+  field_event_contact_name: contact_name
+  field_event_contact_email: contact_email
+  field_event_contact_number: contact_number
+  field_event_mobility: mobility
+  field_event_wheelchair: wheelchair
+  field_event_hearing_loop: hearing_loop
+  field_event_what_to_bring: what_to_bring
+  field_event_dogs: dogs
+  field_event_dogs_additional: dogs_additional
+  field_event_parking_info: parking_info
+  field_event_bicycle_parking: bicycle_parking
+  field_event_toilets: toilets
+  field_event_shop: shop
+  field_event_cafe_refreshments: cafe_refreshments
+  field_event_picnic_area: picnic_area
+  field_event_disabled_toilet: disabled_toilet
+  field_event_baby_changing: baby_changing
+  field_event_car_charging: car_charging
+  field_further_content:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: further_content
+    -
+      plugin: migration
+      migration:
+        - paragraph_rich_text_local1
+      no_stub: true
+    -
+      plugin: iterator
+      process:
+        target_id: '0'
+        target_revision_id: '1'
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - media_images_local1
+    - location_local1
+    - paragraph_rich_text_local1
+    - taxonomy_term_event_type_local1

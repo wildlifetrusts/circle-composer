@@ -1,0 +1,32 @@
+uuid: 476f65db-f160-4d46-b71b-ff7c06d7d000
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_lat_long
+    - node.type.reserve
+  module:
+    - geofield
+id: node.reserve.field_reserve_lat_long
+field_name: field_reserve_lat_long
+entity_type: node
+bundle: reserve
+label: Lat/Long
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: 'POINT (-2.776943 54.345341)'
+    geo_type: Point
+    lat: 54.345341
+    lon: -2.776943
+    left: -2.776943
+    top: 54.345341
+    right: -2.776943
+    bottom: 54.345341
+    geohash: gcwj0v3bs9c4
+    latlon: '54.345341,-2.776943'
+default_value_callback: ''
+settings: {  }
+field_type: geofield

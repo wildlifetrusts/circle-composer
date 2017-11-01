@@ -1,0 +1,36 @@
+.menu--footer {
+  margin-bottom: $spacing-unit-vertical;
+
+  @include add-breakpoint('palm-and-up') {
+    margin-bottom: quarter($spacing-unit-vertical);
+  }
+
+  ul {
+    @extend %clean-list;
+    @extend %clearfix;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: $font-weight-light;
+    display: block;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  li {
+    float: left;
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child)::after {
+      content: '/';
+      display: block;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+  }
+}

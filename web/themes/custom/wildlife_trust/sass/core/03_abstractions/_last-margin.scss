@@ -1,0 +1,15 @@
+////
+/// @group Layout
+////
+
+/// Adds a standard bottom margin of $spacing-unit-vertical on items, but makes
+/// sure if an element is the last child it does not have a margin.
+///
+/// This is useful for fields inside fields, for example.
+%last-margin {
+  margin-bottom: $spacing-unit-vertical;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

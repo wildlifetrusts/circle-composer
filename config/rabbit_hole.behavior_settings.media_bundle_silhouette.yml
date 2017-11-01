@@ -1,0 +1,9 @@
+uuid: 8ea00a03-1765-40e5-a579-746bd785ca79
+langcode: en
+status: true
+dependencies: {  }
+id: media_bundle_silhouette
+action: access_denied
+allow_override: 0
+redirect: ''
+redirect_code: 301

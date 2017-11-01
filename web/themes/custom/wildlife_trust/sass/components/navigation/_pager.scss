@@ -1,0 +1,105 @@
+.pager {
+  @extend %clearfix;
+  clear: both;
+  text-align: center;
+  font-size: 0;
+}
+
+.pager:not(.js-pager__items) {
+  .pager__items {
+    display: inline-block;
+    @extend %clearfix;
+    padding: 0;
+
+    .pager__item {
+      float: left;
+      min-width: 35px;
+      min-height: 35px;
+      border: 1px solid palette(mono, x-dark);
+      border-right: 0;
+      font-size: 1rem;
+
+      &:last-child {
+        border-right: 1px solid palette(mono, x-dark);
+      }
+
+      a {
+        display: block;
+        height: 35px;
+        background-color: palette(mono, x-light);
+        text-align: center;
+        text-decoration: none;
+        @include setType(8, ms(-1));
+        line-height: 35px;
+
+        &:hover,
+        &:focus {
+          background-color: palette(mono, x-dark);
+          color: palette(mono, x-light);
+        }
+      }
+
+      &.is-active {
+        a {
+          cursor: default;
+          background-color: palette(mono, mid-light);
+          color: palette(mono, x-dark);
+        }
+      }
+    }
+
+    .pager__item--first,
+    .pager__item--previous,
+    .pager__item--next,
+    .pager__item--last {
+      position: relative;
+      overflow: hidden;
+
+      span {
+        @extend %element-invisible;
+      }
+
+      a::after {
+        position: absolute;
+        content: '';
+        top: 50%;
+        left: 50%;
+        margin-top: -5px;
+        margin-left: -5px;
+        width: 10px;
+        height: 10px;
+        background-size: 10px 10px;
+        background-position: 50% 50%;
+      }
+
+      &:first-child {
+        border-radius: 10em 0 0 10em;
+        min-width: 38px;
+      }
+
+      &:last-child {
+        border-radius: 0 10em 10em 0;
+        min-width: 38px;
+      }
+    }
+
+    .pager__item--first {
+      a::after {
+        transform: rotate(180deg);
+      }
+    }
+
+    .pager__item--previous {
+      a::after {
+        transform: rotate(90deg);
+      }
+    }
+
+    .pager__item--next {
+      a::after {
+        transform: rotate(-90deg);
+      }
+    }
+
+  }
+}

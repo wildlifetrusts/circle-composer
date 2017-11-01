@@ -1,0 +1,22 @@
+uuid: 6080e563-794a-4a3a-ba71-d1ee7706d225
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.attached_files
+id: paragraph.attached_files.status
+field_name: status
+entity_type: paragraph
+bundle: attached_files
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,27 @@
+uuid: 208f4aa4-d6a3-4e1c-b6f2-c9d72dc12e21
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_statistic_type
+field_name: field_statistic_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: static
+      label: Static
+    -
+      value: dynamic
+      label: Dynamic
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

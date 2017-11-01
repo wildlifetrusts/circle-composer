@@ -1,0 +1,9 @@
+uuid: 090f8068-9f64-4b0d-a2fd-93a7e56c3dfe
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_vocabulary_blog_category
+action: page_redirect_json
+allow_override: 0
+redirect: '/blog/category/[term:name:views_name]'
+redirect_code: 301

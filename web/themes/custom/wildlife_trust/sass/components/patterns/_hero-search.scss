@@ -1,0 +1,57 @@
+.hero-search {
+  display: flex;
+  align-items: stretch;
+  margin: auto;
+  max-width: 440px;
+  font-family: $adelle-font-family;
+  font-weight: $font-weight-semi-bold;
+  padding-bottom: 8px; /* the height of the bottom shadow on hovered item */
+
+  @include add-breakpoint('palm-and-up') {
+    width: 440px;
+  }
+
+  &__text {
+    flex-grow: 1;
+    padding: 1em 0.5em 1em 1em;
+    box-shadow: none;
+    border: 0;
+    border-radius: 2em 0 0 2em;
+    color: palette(mono, x-dark);
+
+    @include add-breakpoint('palm-and-up') {
+      padding: 1em 1em 1em 1.5em;
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      padding: 1em 1.75em;
+    }
+
+    &:focus {
+      outline: none;
+      @extend %fake-focus-outline;
+    }
+  }
+
+  &__submit {
+    @include add-breakpoint('up-to-lap') {
+      @include setType(6, 14px);
+      text-indent: 150%;
+      white-space: nowrap;
+      overflow: hidden;
+      padding: 0;
+      width: 55px;
+      // Background image set in grunticon.js.
+      background-size: 38% auto;
+      background-position: 45% 50%;
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      &,
+      &:hover,
+      &:focus {
+        background-image: none !important;
+      }
+    }
+  }
+}

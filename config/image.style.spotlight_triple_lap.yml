@@ -1,0 +1,16 @@
+uuid: b120d15c-c42c-455c-b785-1154d3efeb18
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_triple_lap
+label: 'Spotlight triple lap'
+effects:
+  89cb72e4-e4a6-4662-ab86-34b5267c460d:
+    uuid: 89cb72e4-e4a6-4662-ab86-34b5267c460d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 341
+      height: 505

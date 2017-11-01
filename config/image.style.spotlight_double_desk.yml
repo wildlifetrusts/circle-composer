@@ -1,0 +1,16 @@
+uuid: 387f598a-dcbf-4b8d-9791-60a564cb4957
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_double_desk
+label: 'Spotlight double desk'
+effects:
+  60fdfc86-33a4-4510-a65b-b6793d552ecf:
+    uuid: 60fdfc86-33a4-4510-a65b-b6793d552ecf
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 600
+      height: 600

@@ -1,0 +1,23 @@
+uuid: 9a231db8-923d-4f4b-8066-6c570db1e7a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_disabled_toilet
+    - node.type.event
+id: node.event.field_event_disabled_toilet
+field_name: field_event_disabled_toilet
+entity_type: node
+bundle: event
+label: 'Disabled toilet'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Disabled toilet'
+  off_label: 'Off'
+field_type: boolean

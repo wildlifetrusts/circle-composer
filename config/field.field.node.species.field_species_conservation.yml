@@ -1,0 +1,19 @@
+uuid: 2d4c9d4d-6db4-4dbc-a22f-fa510fa4990e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_species_conservation
+    - node.type.species
+id: node.species.field_species_conservation
+field_name: field_species_conservation
+entity_type: node
+bundle: species
+label: 'Conservation status'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

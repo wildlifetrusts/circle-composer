@@ -1,0 +1,16 @@
+uuid: 962f122b-6689-47c9-9a9c-0fcba472fae0
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.newsletter_sign_up
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.newsletter_sign_up
+target_entity_type_id: paragraph
+target_bundle: newsletter_sign_up
+default_langcode: site_default
+language_alterable: true

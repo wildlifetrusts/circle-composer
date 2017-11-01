@@ -1,0 +1,21 @@
+uuid: d5a815e3-2ea9-4127-ab31-64f65f27d414
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_suitable_for
+    - node.type.event
+  module:
+    - options
+id: node.event.field_event_suitable_for
+field_name: field_event_suitable_for
+entity_type: node
+bundle: event
+label: 'Suitable for'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

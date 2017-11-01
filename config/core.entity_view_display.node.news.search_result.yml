@@ -1,0 +1,62 @@
+uuid: 0804ddb4-fa8c-4fa1-aa80-da4581b9bf99
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.news.field_disqus_comments
+    - field.field.node.news.field_disqus_comments_title
+    - field.field.node.news.field_further_content
+    - field.field.node.news.field_header_image
+    - field.field.node.news.field_header_silhouette
+    - field.field.node.news.field_header_type
+    - field.field.node.news.field_meta_tags
+    - field.field.node.news.field_news_category
+    - field.field.node.news.field_news_display_pub_date
+    - field.field.node.news.field_news_publication_date
+    - field.field.node.news.field_news_summary
+    - field.field.node.news.field_representative_image
+    - field.field.node.news.field_tags
+    - node.type.news
+  module:
+    - fences
+    - user
+    - wildlife_field_formatters
+id: node.news.search_result
+targetEntityType: node
+bundle: news
+mode: search_result
+content:
+  field_news_summary:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: '200'
+      word_boundary: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+hidden:
+  field_disqus_comments: true
+  field_disqus_comments_title: true
+  field_further_content: true
+  field_header_image: true
+  field_header_silhouette: true
+  field_header_type: true
+  field_meta_tags: true
+  field_news_category: true
+  field_news_display_pub_date: true
+  field_news_publication_date: true
+  field_representative_image: true
+  field_tags: true
+  langcode: true
+  links: true
+  related_news_and_blogs_related_news: true
+  workbench_moderation_control: true

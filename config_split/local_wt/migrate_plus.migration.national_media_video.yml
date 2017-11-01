@@ -1,0 +1,80 @@
+uuid: 8b586d7c-a8bf-4739-ba00-03f0748d8183
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+id: national_media_video
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: national
+label: 'Import videos from national Wildlife Trust site'
+source:
+  plugin: wildlife_sharing_url_title
+  track_changes: true
+  data_fetcher_plugin: http
+  data_parser_plugin: wildlife_sharing_json_title
+  path: /jsonapi/media/video
+  pager:
+    type: urls
+    selector: 'links/next'
+  ids:
+    uuid:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: uuid
+      label: Uuid
+      selector: /attributes/uuid
+    -
+      name: created
+      label: Created
+      selector: /attributes/created
+    -
+      name: changed
+      label: Changed
+      selector: /attributes/changed
+    -
+      name: name
+      label: Name
+      selector: /attributes/name
+    -
+      name: field_media_video
+      label: Video
+      selector: /attributes/field_media_video
+    -
+      name: thumbnail_id
+      label: Thumbnail
+      selector: /relationships/thumbnail/data/id
+    -
+      name: thumbnail_meta
+      label: 'Thumbnail meta'
+      selector: /relationships/thumbnail/data/meta
+    -
+      name: field_media_caption_value
+      label: 'Intro value'
+      selector: /attributes/field_media_caption/value
+    -
+      name: field_media_caption_format
+      label: 'Intro format'
+      selector: /attributes/field_media_caption/format
+process:
+  bundle:
+    plugin: default_value
+    default_value: video
+  uuid: uuid
+  created: created
+  changed: changed
+  name: name
+  field_media_video: field_media_video
+  field_media_caption/value: field_media_caption_value
+  field_media_caption/format: field_media_caption_format
+  thumbnail/target_id: thumbnail_id
+  thumbnail/meta: thumbnail_meta
+destination:
+  plugin: 'entity:media'
+migration_dependencies: {  }

@@ -1,0 +1,14 @@
+////
+/// @group Typesetting
+////
+
+/// Font size mixin to generate a REM based font size declaration (based on the
+/// $base-font-size) with a pixel fallback given a font size in pixels.
+///
+/// Warning: This should only be used if you don't care about Vertical Rhythm or
+/// modular scale for the item the mixin is being used for.
+/// @param {String} $font-size - The font size in pixels you want to achieve.
+@mixin font-size($font-size){
+  font-size: $font-size;
+  font-size: ($font-size / $base-font-size) * 1rem;
+}

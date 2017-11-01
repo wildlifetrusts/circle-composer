@@ -1,0 +1,14 @@
+uuid: d93b53f1-7bc3-4ccf-89cc-291e4c023ec5
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.trust
+  module:
+    - user
+id: user_remove_role_action.trust
+label: 'Remove the Trust role from the selected users'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: trust

@@ -1,0 +1,5 @@
+id,type,dynamic_type,static_type,static_number,static_custom,url
+2901,dynamic,events,,,,internal:/
+2902,static,,visitor_centre,101,Visits to reserves,
+2903,static,,river,6,Living landscapes,
+2904,dynamic,reserves,,,,internal:/

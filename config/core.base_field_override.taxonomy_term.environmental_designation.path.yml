@@ -1,0 +1,20 @@
+uuid: a7c8130f-00fe-4934-a556-14c0f70415fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.environmental_designation
+  module:
+    - path
+id: taxonomy_term.environmental_designation.path
+field_name: path
+entity_type: taxonomy_term
+bundle: environmental_designation
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

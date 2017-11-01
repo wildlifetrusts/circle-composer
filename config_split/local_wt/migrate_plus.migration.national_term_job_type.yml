@@ -1,0 +1,52 @@
+uuid: c1d05d42-87ea-49cf-b4bb-69fdefe4183a
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+id: national_term_job_type
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: national
+label: 'Import role_type terms from national Wildlife Trust site'
+source:
+  plugin: wildlife_sharing_url_title
+  track_changes: true
+  data_fetcher_plugin: http
+  data_parser_plugin: wildlife_sharing_json_title
+  path: /jsonapi/taxonomy_term/job_type
+  pager:
+    type: urls
+    selector: 'links/next'
+  ids:
+    uuid:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: name
+      label: Name
+      selector: /attributes/name
+    -
+      name: uuid
+      label: UUID
+      selector: /attributes/uuid
+    -
+      name: parent
+      label: Parent
+      selector: /relationships/parent/data
+process:
+  name: name
+  uuid: uuid
+  parent:
+    plugin: wildlife_sharing_id_lookup
+    source: parent
+    migration: national_term_job_type
+destination:
+  plugin: 'entity:taxonomy_term'
+  track_changes: true
+  default_bundle: job_type
+migration_dependencies: {  }

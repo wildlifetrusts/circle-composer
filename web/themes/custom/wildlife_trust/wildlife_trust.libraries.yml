@@ -1,0 +1,219 @@
+# COLOUR SCHEMES.
+colours-default:
+  css:
+    theme:
+      css/wildlife_trust.default.styles.css: {}
+
+colours-blue:
+  css:
+    theme:
+      css/wildlife_trust.blue.styles.css: {}
+
+colours-orange:
+  css:
+    theme:
+      css/wildlife_trust.orange.styles.css: {}
+
+colours-purple:
+  css:
+    theme:
+      css/wildlife_trust.purple.styles.css: {}
+
+colours-teal:
+  css:
+    theme:
+      css/wildlife_trust.teal.styles.css: {}
+# END COLOUR SCHEMES.
+
+global-js:
+  js:
+    js/wildlife_trust.behavior.accessibility.min.js: {}
+    js/wildlife_trust.behavior.menu.min.js: {}
+  dependencies:
+    - wildlife_trust/header
+    - core/jquery
+    - core/drupal
+    - core/jquery.once
+    - core/drupal.debounce
+    - core/modernizr
+    - wildlife_trust/match-height
+
+admin-styles:
+  # Our admin theme loads this library. This lets us use Sass, autoprefixer etc
+  # in our admin theme, without the overhead of a second Grunt instance.
+  css:
+    theme:
+      css/wildlife_trust.admin-styles.css: {}
+
+admin-javascript:
+  js:
+    js/wildlife_trust.behavior.admin.min.js: {}
+  dependencies:
+    - core/jquery
+
+admin-icon-picker:
+  js:
+    js/wildlife_trust.behavior.icon-picker.min.js: {}
+  dependencies:
+    - core/jquery
+
+modernizr:
+  # Block the page from being loaded until Modernizr is initialized.
+  header: true
+  js:
+    js/vendor/modernizr.min.js: { preprocess: 0, weight: -21, minified: true }
+
+uniform:
+  js:
+    libraries/jquery.uniform/dist/js/jquery.uniform.standalone.js: {}
+    js/wildlife_trust.behavior.uniform.min.js: {}
+  dependencies:
+    - core/jquery
+
+match-height:
+  js:
+    libraries/matchHeight/dist/jquery.matchHeight-min.js: {}
+  dependencies:
+    - core/jquery
+
+header:
+  js:
+    js/wildlife_trust.behavior.header.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.debounce
+
+accordion:
+  js:
+    libraries/details-polyfill/dist/details-element-polyfill.js: {}
+    js/wildlife_trust.behavior.accordion.min.js: {}
+
+enquire:
+  js:
+    libraries/enquire/dist/enquire.min.js: {}
+
+flexible-blocks:
+  js:
+    js/wildlife_trust.behavior.flexible-blocks.min.js: {}
+  dependencies:
+    - wildlife_trust/enquire
+
+responsive-background-images:
+  js:
+    js/wildlife_trust.behavior.responsive-background-images.min.js: {}
+  dependencies:
+    - wildlife_trust/enquire
+    - core/jquery
+
+responsive_tables:
+  js:
+    js/wildlife_trust.behavior.responsive-tables.min.js: {}
+
+headline-hero-vimeo:
+  js:
+    //player.vimeo.com/api/player.js: { type: external, minified: true }
+    js/wildlife_trust.behavior.headline-hero-videos.min.js: {}
+    js/wildlife_trust.behavior.headline-hero-videos.vimeo.min.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+
+headline-hero-youtube:
+  js:
+    //www.youtube.com/iframe_api: { type: external, minified: true }
+    js/wildlife_trust.behavior.headline-hero-videos.min.js: {}
+    js/wildlife_trust.behavior.headline-hero-videos.youtube.min.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+
+slick:
+  js:
+    libraries/slick-carousel/slick/slick.min.js: { minified: true }
+  css:
+    theme:
+      libraries/slick-carousel/slick/slick.css: {}
+
+slick-field-default:
+  js:
+    js/wildlife_trust.behavior.slick-field-default.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - wildlife_trust/slick
+
+cards:
+  js:
+    js/wildlife_trust.behavior.card-equal-heights.min.js: {}
+  dependencies:
+    - wildlife_trust/match-height
+
+event-datepickers:
+  js:
+    js/wildlife_trust.behavior.event-datepickers.min.js: {}
+  dependencies:
+    - core/drupal.date
+
+author:
+  js:
+    js/wildlife_trust.behavior.author.min.js: {}
+  dependencies:
+    - core/jquery
+
+waypoints:
+  js:
+    libraries/waypoints/lib/jquery.waypoints.min.js: {}
+  dependencies:
+    - core/jquery
+
+rrssb-sticky:
+  js:
+    js/wildlife_trust.behavior.rrssb-sticky.min.js: {}
+  dependencies:
+    - wildlife_trust/enquire
+    - wildlife_trust/waypoints
+
+colorbox:
+  js:
+    libraries/colorbox/jquery.colorbox-min.js: {}
+
+image-gallery:
+  js:
+    js/wildlife_trust.behavior.image-gallery.min.js: {}
+  dependencies:
+    - core/jquery
+    - wildlife_trust/enquire
+    - wildlife_trust/slick
+    - wildlife_trust/colorbox
+
+responsive-flickr:
+  js:
+    js/wildlife_trust.behavior.responsive-flickr.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal.debounce
+    - core/drupalSettings
+
+global-search:
+  js:
+    js/wildlife_trust.behavior.global-search-toggle.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once
+    - core/drupal.debounce
+
+reserve-search-checkboxes:
+  js:
+    js/wildlife_trust.behavior.reserve-search-checkboxes.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once
+
+spotlight-animatable-background:
+  js:
+    js/wildlife_trust.behavior.spotlight-animatable-background.min.js: {}
+  dependencies:
+    - core/jquery

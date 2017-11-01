@@ -1,0 +1,9 @@
+uuid: 92f1aa42-415f-4f5b-acaf-f6f462f68a6b
+langcode: en
+status: true
+dependencies: {  }
+id: node__volunteer_opportunity
+label: 'Content: Volunteer Opportunity'
+tags:
+  description: '[node:field_voluntary_summary]'
+  geo_position: '[node:field_voluntary_reserve:entity:field_reserve_lat_long:latlon][node:field_voluntary_location:entity:field_location_lat_long:latlon]'

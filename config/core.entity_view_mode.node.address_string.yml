@@ -1,0 +1,10 @@
+uuid: c36f136a-aa34-4ffc-a52b-a1b3426f058c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.address_string
+label: 'Address (string)'
+targetEntityType: node
+cache: true

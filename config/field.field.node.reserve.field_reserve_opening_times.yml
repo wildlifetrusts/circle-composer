@@ -1,0 +1,19 @@
+uuid: 6c3c4366-018e-463c-8205-12bf4601d5a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_opening_times
+    - node.type.reserve
+id: node.reserve.field_reserve_opening_times
+field_name: field_reserve_opening_times
+entity_type: node
+bundle: reserve
+label: 'Opening times'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

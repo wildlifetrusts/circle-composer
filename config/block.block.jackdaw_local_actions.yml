@@ -1,0 +1,20 @@
+uuid: 14e9ebfb-6ea5-46bc-bcdf-94d993b0dd6b
+langcode: en
+status: true
+dependencies:
+  theme:
+    - jackdaw
+_core:
+  default_config_hash: PffmQ-ABSz5tFjWmVsR7NesunDnEivvopnJnBjl8KNE
+id: jackdaw_local_actions
+theme: jackdaw
+region: content
+weight: -4
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

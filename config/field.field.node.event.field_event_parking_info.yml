@@ -1,0 +1,19 @@
+uuid: a2514038-b424-4b87-a399-ebdfd7f80846
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_parking_info
+    - node.type.event
+id: node.event.field_event_parking_info
+field_name: field_event_parking_info
+entity_type: node
+bundle: event
+label: 'Parking information'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

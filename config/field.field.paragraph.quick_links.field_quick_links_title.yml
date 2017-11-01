@@ -1,0 +1,19 @@
+uuid: 08b5c4d4-d5c4-4a54-8168-ede6f6d81397
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_quick_links_title
+    - paragraphs.paragraphs_type.quick_links
+id: paragraph.quick_links.field_quick_links_title
+field_name: field_quick_links_title
+entity_type: paragraph
+bundle: quick_links
+label: Title
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

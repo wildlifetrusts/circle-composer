@@ -1,0 +1,19 @@
+uuid: f9831255-ade6-4834-8c48-5ea01f081368
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_county
+    - node.type.trust
+id: node.trust.field_trust_county
+field_name: field_trust_county
+entity_type: node
+bundle: trust
+label: County
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,23 @@
+uuid: 6825fddd-8434-4bc4-b321-89c06cd1d8d6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_news_display_pub_date
+    - node.type.news
+id: node.news.field_news_display_pub_date
+field_name: field_news_display_pub_date
+entity_type: node
+bundle: news
+label: 'Display publication date'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

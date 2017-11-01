@@ -1,0 +1,53 @@
+@keyframes menu-line--top {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, 9px, 0); }
+  100% { transform: translate3d(0, 9px, 0) rotate(45deg); }
+}
+
+// Reverse animation because setting the animation direction property
+// doesn't seem to be working for this animation for some reason...
+@keyframes menu-line--top--reverse {
+  0% { transform: translate3d(0, 9px, 0) rotate(45deg); }
+  50% { transform: translate3d(0, 9px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes menu-line--bottom {
+  0% { transform: translate3d(0, 0, 0); }
+  50% {  transform: translate3d(0, -9px, 0); }
+  100% { transform: translate3d(0, -9px, 0) rotate(-45deg); }
+}
+
+// Reverse animation because setting the animation direction property
+// doesn't seem to be working for this animation for some reason...
+@keyframes menu-line--bottom--reverse {
+  0% { transform: translate3d(0, -9px, 0) rotate(-45deg); }
+  50% { transform: translate3d(0, -9px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fade-in--down {
+  0% {
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    max-height: 100vh;
+  }
+}
+
+@keyframes fade-in--up {
+  0% {
+    transform: translate3d(0, $spacing-unit-vertical, 0);
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    max-height: 100vh;
+  }
+}

@@ -1,0 +1,39 @@
+uuid: 0422ac7d-8b70-46f0-8311-9cabf42cd3f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.audio.field_audio_mp3
+    - field.field.media.audio.field_audio_ogg
+    - field.field.media.audio.field_media_caption
+    - media_entity.bundle.audio
+  module:
+    - fences
+    - text
+id: media.audio.default
+targetEntityType: media
+bundle: audio
+mode: default
+content:
+  field_media_caption:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: figcaption
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: text_default
+    region: content
+hidden:
+  created: true
+  field_audio_mp3: true
+  field_audio_ogg: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

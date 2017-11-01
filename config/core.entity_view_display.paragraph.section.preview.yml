@@ -1,0 +1,41 @@
+uuid: d451c83c-4b1a-4fd7-8a16-787d0407e07d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.section.field_section_heading
+    - field.field.paragraph.section.field_section_introduction
+    - paragraphs.paragraphs_type.section
+  module:
+    - fences
+    - wildlife_field_formatters
+id: paragraph.section.preview
+targetEntityType: paragraph
+bundle: section
+mode: preview
+content:
+  field_section_heading:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_section_introduction:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: '140'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+hidden: {  }

@@ -1,0 +1,112 @@
+$radio-options: (
+  radioWidth: 27px,
+  radioHeight: 27px,
+  checkWidth: 13px,
+  checkHeight: 13px
+);
+
+.form__item--type-radio .form-radio,
+.form__item--type-checkbox .form-checkbox {
+  // Hide the checkboxes in a way that removes them from the flow of the
+  // document, but also does not remove them from the tab order.
+  position: absolute;
+  opacity: 0;
+
+  &.is-disabled + label {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.form-radio:focus + label::before,
+.form-checkbox:focus + label::before {
+  @extend %fake-focus-outline;
+}
+
+.form__item--type-radio,
+.form__item--type-checkbox {
+  margin-bottom: halve($spacing-unit-vertical);
+
+  // Default (label after input).
+  label {
+    display: inline-block;
+    position: relative;
+    user-select: none;
+    padding-left: map-get($radio-options, radioWidth) + (map-get($radio-options, radioWidth) / 2);
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+    }
+
+    &::before {
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: map-get($radio-options, radioWidth);
+      height: map-get($radio-options, radioHeight);
+      border: 2px solid palette(mono, x-dark);
+      background-color: transparent;
+    }
+
+    &::after {
+      left: calc((#{map-get($radio-options, radioWidth)} / 2) - (#{map-get($radio-options, checkWidth)} / 2));
+      top: 50%;
+      transform: translateY(-50%);
+      width: map-get($radio-options, checkWidth);
+      height: map_get($radio-options, checkHeight);
+      background-color: transparent;
+    }
+  }
+
+  // Label before input (relevant for Webforms).
+  &.form__item--label-before label {
+    padding-left: 0;
+    padding-right: map-get($radio-options, radioWidth) + (map-get($radio-options, radioWidth) / 2);
+
+    &::before {
+      left: auto;
+      right: 0;
+    }
+
+    &::after {
+      left: auto;
+      right: calc((#{map-get($radio-options, radioWidth)} / 2) - (#{map-get($radio-options, checkWidth)} / 2));
+    }
+  }
+}
+
+.form__item--type-radio {
+  .form-radio {
+    &:checked + label {
+      &::after {
+        background-color: palette(mono, x-dark);
+      }
+    }
+  }
+
+  label {
+    &::before,
+    &::after {
+      border-radius: 50%;
+    }
+  }
+}
+
+.form__item--type-checkbox {
+  label {
+    &::before {
+      border-radius: 2px;
+    }
+
+    &::after {
+      background-size: 100% auto;
+    }
+  }
+}

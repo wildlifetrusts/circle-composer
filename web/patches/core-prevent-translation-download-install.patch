@@ -1,0 +1,13 @@
+diff --git a/core/includes/install.core.inc b/core/includes/install.core.inc
+index cfc0497..c326802 100644
+--- a/core/includes/install.core.inc
++++ b/core/includes/install.core.inc
+@@ -1374,6 +1374,8 @@ function install_download_translation(&$install_state) {
+  *   TRUE on success, FALSE on failure.
+  */
+ function install_retrieve_file($uri, $destination) {
++  // Do not download translation during installation. See composer.json.
++  return TRUE;
+   $parsed_url = parse_url($uri);
+   if (is_dir(drupal_realpath($destination))) {
+     // Prevent URIs with triple slashes when gluing parts together.

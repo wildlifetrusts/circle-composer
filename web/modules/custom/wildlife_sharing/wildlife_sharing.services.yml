@@ -1,0 +1,15 @@
+services:
+  wildlife_sharing.paragraph_cleaner:
+    class: Drupal\wildlife_sharing\ParagraphCleaner
+  serializer.normalizer.media.jsonapi:
+    class: Drupal\wildlife_sharing\Normalizer\FocusPointEntityNormalizer
+    arguments: ['@jsonapi.link_manager', '@jsonapi.resource_type.repository', '@entity_type.manager']
+    tags:
+      # Priority must be higher than serializer.normalizer.entity.jsonapi in jsonapi.services.yaml.
+      - { name: normalizer, priority: 25 }
+  serializer.normalizer.link.jsonapi:
+    class: Drupal\wildlife_sharing\Normalizer\ImageLinkNormalizer
+    arguments: ['@jsonapi.link_manager', '@jsonapi.resource_type.repository', '@entity_type.manager']
+    tags:
+      # Priority must be higher than serializer.normalizer.entity.jsonapi in jsonapi.services.yaml.
+      - { name: normalizer, priority: 30 }

@@ -1,0 +1,274 @@
+uuid: c792a486-3cea-4127-8a6f-f8a5e6d7a704
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_location
+    - search_api
+    - node
+  config:
+    - field.storage.node.field_event_suitable_for
+    - field.storage.node.field_event_type
+    - field.storage.node.field_event_local_group
+    - field.storage.node.field_event_tags
+    - field.storage.node.field_event_date
+    - field.storage.node.field_job_contract_type
+    - field.storage.node.field_job_working_hours
+    - field.storage.node.field_job_role_type
+    - field.storage.node.field_job_closing_date
+    - field.storage.node.field_voluntary_opportunity_type
+    - field.storage.node.field_reserve_dogs
+    - field.storage.node.field_reserve_visitor_centre
+    - field.storage.node.field_reserve_bird_hides
+    - field.storage.node.field_reserve_toilets
+    - field.storage.node.field_reserve_shop
+    - field.storage.node.field_reserve_cafe_refreshments
+    - field.storage.node.field_reserve_picnic_area
+    - field.storage.node.field_reserve_disabled_toilet
+    - field.storage.node.field_reserve_baby_changing
+    - field.storage.node.field_reserve_outdoor_play_area
+    - field.storage.node.field_external_link
+    - search_api.server.location_multilingual
+id: location
+name: Location
+description: 'Location based search index.'
+read_only: true
+field_settings:
+  location:
+    label: Location
+    property_path: aggregated_field
+    type: location
+    configuration:
+      type: union
+      fields:
+        - 'entity:node/field_reserve_lat_long'
+        - 'entity:node/field_voluntary_location:entity:field_location_lat_long'
+        - 'entity:node/field_voluntary_reserve:entity:field_reserve_lat_long'
+        - 'entity:node/field_event_location:entity:field_location_lat_long'
+        - 'entity:node/field_event_reserve:entity:field_reserve_lat_long'
+        - 'entity:node/field_job_location:entity:field_location_lat_long'
+        - 'entity:node/field_job_reserve:entity:field_reserve_lat_long'
+  nid:
+    label: ID
+    datasource_id: 'entity:node'
+    property_path: nid
+    type: integer
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+  field_event_suitable_for:
+    label: 'Suitable for'
+    datasource_id: 'entity:node'
+    property_path: field_event_suitable_for
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_event_suitable_for
+  field_event_type:
+    label: 'Event type'
+    datasource_id: 'entity:node'
+    property_path: field_event_type
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_event_type
+  field_event_local_group:
+    label: 'Local group'
+    datasource_id: 'entity:node'
+    property_path: field_event_local_group
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_event_local_group
+  field_event_tags:
+    label: 'Event tags'
+    datasource_id: 'entity:node'
+    property_path: field_event_tags
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_event_tags
+  field_event_date:
+    label: 'Event Date start value'
+    datasource_id: 'entity:node'
+    property_path: field_event_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_event_date
+  field_event_date_end:
+    label: 'Event Date end value'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_date:end_value'
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_event_date
+  field_job_contract_type:
+    label: 'Contract type'
+    datasource_id: 'entity:node'
+    property_path: field_job_contract_type
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_job_contract_type
+  field_job_working_hours:
+    label: 'Working hours'
+    datasource_id: 'entity:node'
+    property_path: field_job_working_hours
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_job_working_hours
+  field_job_role_type:
+    label: 'Role type'
+    datasource_id: 'entity:node'
+    property_path: field_job_role_type
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_job_role_type
+  field_job_closing_date:
+    label: 'Closing date'
+    datasource_id: 'entity:node'
+    property_path: field_job_closing_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_job_closing_date
+  changed:
+    label: Updated
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+  field_voluntary_opportunity_type:
+    label: 'Opportunity type'
+    datasource_id: 'entity:node'
+    property_path: field_voluntary_opportunity_type
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_voluntary_opportunity_type
+  field_reserve_dogs:
+    label: Dogs
+    datasource_id: 'entity:node'
+    property_path: field_reserve_dogs
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_dogs
+  field_reserve_visitor_centre:
+    label: 'Visitor centre'
+    datasource_id: 'entity:node'
+    property_path: field_reserve_visitor_centre
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_visitor_centre
+  field_reserve_bird_hides:
+    label: 'Bird hides'
+    datasource_id: 'entity:node'
+    property_path: field_reserve_bird_hides
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_bird_hides
+  field_reserve_toilets:
+    label: Toilets
+    datasource_id: 'entity:node'
+    property_path: field_reserve_toilets
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_toilets
+  field_reserve_shop:
+    label: Shop
+    datasource_id: 'entity:node'
+    property_path: field_reserve_shop
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_shop
+  field_reserve_cafe_refreshments:
+    label: Cafe/refreshments
+    datasource_id: 'entity:node'
+    property_path: field_reserve_cafe_refreshments
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_cafe_refreshments
+  field_reserve_picnic_area:
+    label: 'Picnic area'
+    datasource_id: 'entity:node'
+    property_path: field_reserve_picnic_area
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_picnic_area
+  field_reserve_disabled_toilet:
+    label: 'Disabled toilet'
+    datasource_id: 'entity:node'
+    property_path: field_reserve_disabled_toilet
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_disabled_toilet
+  field_reserve_baby_changing:
+    label: 'Baby changing facilities'
+    datasource_id: 'entity:node'
+    property_path: field_reserve_baby_changing
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_baby_changing
+  field_reserve_outdoor_play_area:
+    label: 'Outdoor play area'
+    datasource_id: 'entity:node'
+    property_path: field_reserve_outdoor_play_area
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_reserve_outdoor_play_area
+  uuid:
+    label: UUID
+    datasource_id: 'entity:node'
+    property_path: uuid
+    type: string
+  field_external_link:
+    label: 'External Link'
+    datasource_id: 'entity:node'
+    property_path: field_external_link
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_external_link
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - event
+        - job
+        - reserve
+        - volunteer_opportunity
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  entity_status: {  }
+  rendered_item: {  }
+tracker_settings:
+  default: {  }
+options:
+  index_directly: true
+  cron_limit: 50
+server: location_multilingual

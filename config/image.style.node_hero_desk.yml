@@ -1,0 +1,16 @@
+uuid: 39c1ac85-0be4-4fe2-ae90-3cba6e4816c1
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: node_hero_desk
+label: 'Node hero desk'
+effects:
+  d323616c-bedd-4e7e-8ec8-351f2a1b8c3c:
+    uuid: d323616c-bedd-4e7e-8ec8-351f2a1b8c3c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 348

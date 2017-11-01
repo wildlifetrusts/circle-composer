@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_location.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_location_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_location module.
+    case 'help.page.wildlife_location':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Location') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wildlife_location_theme() {
+  return [
+    'location' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function wildlife_location_theme_suggestions_location(array $variables) {
+  $suggestions = array();
+  $sanitized_view_mode = strtr($variables['children']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'location__' . $sanitized_view_mode;
+
+  return $suggestions;
+}
+
+/**
+ * Prepares variables for Location templates.
+ *
+ * Default template: location.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the user information and any
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_location(array &$variables) {
+  // Fetch Location Entity Object.
+  /** @var \Drupal\wildlife_location\Entity\Location $location */
+  $location = $variables['children']['#location'];
+  $variables['view_mode'] = $variables['children']['#view_mode'];
+
+  // Helpful $content variable for templates.
+  foreach (Element::children($variables['children']) as $key) {
+    $variables['content'][$key] = $variables['children'][$key];
+  }
+
+  // Add Schema.Org microdata.
+  $variables['attributes']['itemscope'] = '';
+  $variables['attributes']['itemprop'] = isset($variables['children']['#itemprop']) ? $variables['children']['#itemprop'] : 'location';
+  $variables['attributes']['itemtype'] = 'http://schema.org/Place';
+
+  $variables['content']['geo_coordinates'] = [
+    '#type' => 'container',
+    '#tag_override' => 'span',
+    '#attributes' => [
+      'itemprop' => 'geo',
+      'itemscope' => '',
+      'itemtype' => 'http://schema.org/GeoCoordinates',
+    ],
+  ];
+
+  $lat_long_field = $location->get('field_location_lat_long')->getValue();
+
+  $variables['content']['geo_coordinates']['latitude'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#value' => '',
+    '#attributes' => [
+      'itemprop' => 'latitude',
+      'content' => $lat_long_field[0]['lat'],
+    ],
+  ];
+
+  $variables['content']['geo_coordinates']['longitude'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#value' => '',
+    '#attributes' => [
+      'itemprop' => 'longitude',
+      'content' => $lat_long_field[0]['lon'],
+    ],
+  ];
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function wildlife_location_preprocess_field(&$variables) {
+  if ($variables['entity_type'] == 'location') {
+    switch ($variables['field_name']) {
+      case 'field_location_name':
+        $variables['attributes']['itemprop'] = 'name';
+        break;
+      case 'field_location_address':
+        $variables['attributes']['itemprop'] = 'streetAddress';
+        break;
+
+      case 'field_location_town':
+        $variables['attributes']['itemprop'] = 'addressLocality';
+        break;
+
+      case 'field_location_county':
+        $variables['attributes']['itemprop'] = 'addressRegion';
+        break;
+
+      case 'field_location_postcode':
+        $variables['attributes']['itemprop'] = 'postalCode';
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_location_form_location_form_alter(&$form, &$form_state, $form_id) {
+  // Add Revision and Translation information to fieldgroups.
+  $form['#fieldgroups']['group_revision']->children[] = 'new_revision';
+  $form['#fieldgroups']['group_revision']->children[] = 'revision_log_message';
+  $form['#fieldgroups']['group_revision']->children[] = 'content_translation';
+  $form['#group_children']['new_revision'] = 'group_revision';
+  $form['#group_children']['revision_log_message'] = 'group_revision';
+  $form['#group_children']['content_translation'] = 'group_translation';
+}

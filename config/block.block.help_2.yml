@@ -1,0 +1,32 @@
+uuid: b72e5d32-0b9f-4665-bc7b-d65c9e4def77
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+    - system
+    - wildlife_conditions
+  theme:
+    - wildlife_trust_admin
+id: help_2
+theme: wildlife_trust_admin
+region: help
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: visible
+visibility:
+  node_allows_social_sharing:
+    id: node_allows_social_sharing
+    display_on_social_sharing_nodes: 0
+    negate: false
+    context_mapping: {  }
+  request_path:
+    id: request_path
+    pages: /admin/help
+    negate: true
+    context_mapping: {  }

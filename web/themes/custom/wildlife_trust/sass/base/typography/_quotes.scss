@@ -1,0 +1,44 @@
+// Quotes
+//
+// Styleguide 3.0.0
+
+// Blockquote
+//
+// Markup: ../../docs/kss-helpers/blockquote.hbs
+//
+// Styleguide 3.1.0
+blockquote {
+  padding-top: emRhythm(12, ms(2));
+  background-position: 50% 0;
+  background-size: auto 27px;
+  font-family: $adelle-font-family;
+  @include setType(9, ms(2));
+  text-align: center;
+
+  cite {
+    font-style: normal;
+    font-family: $base-font-family;
+    @include font-size(14px);
+
+    @include add-breakpoint('lap-and-up') {
+      @include font-size(16px);
+    }
+  }
+}
+
+// Quote
+//
+// Markup: <q>Lorem ipsum dolor sit amet</q>
+//
+// Styleguide 3.2.0
+q {
+  quotes: "“" "”" "‘" "’";
+  font-style: italic;
+
+  &:before {
+    content: open-quote;
+  }
+  &:after {
+     content: close-quote;
+  }
+}

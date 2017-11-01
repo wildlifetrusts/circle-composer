@@ -1,0 +1,30 @@
+uuid: 02eb765f-0c28-48bb-9009-c2d8170b8fe3
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - rrssb
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  rrssb:
+    show: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - draft
+      - needs_review
+      - ready_to_be_published
+      - unpublished
+    default_moderation_state: draft
+name: Species
+type: species
+description: 'Add a page about a particular species to educate and raise awareness for site visitors.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

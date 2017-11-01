@@ -1,0 +1,18 @@
+uuid: b931486c-490e-4ad9-957c-43647495a259
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flexible_block
+id: block_content.flexible_block.metatag
+field_name: metatag
+entity_type: block_content
+bundle: flexible_block
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

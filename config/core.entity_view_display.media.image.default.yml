@@ -1,0 +1,73 @@
+uuid: 6851c1e2-f2bf-41f1-b06d-f30c0215bf1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_caption
+    - field.field.media.image.field_media_image
+    - media_entity.bundle.image
+  module:
+    - fences
+    - field_group
+    - image
+    - text
+third_party_settings:
+  field_group:
+    group_figure:
+      children:
+        - field_media_image
+        - field_media_caption
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: figure
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Figure
+id: media.image.default
+targetEntityType: media
+bundle: image
+mode: default
+content:
+  field_media_caption:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: figcaption
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: text_default
+    region: content
+  field_media_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: image
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

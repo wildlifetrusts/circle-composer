@@ -1,0 +1,27 @@
+uuid: be871442-9c7b-40b6-b775-39fcac5a322d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.local_customisation.field_local_in_our_area
+  module:
+    - allowed_formats
+    - text
+    - wildlife_local_customisation
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: local_customisation.local_customisation.field_local_in_our_area
+field_name: field_local_in_our_area
+entity_type: local_customisation
+bundle: local_customisation
+label: 'In our area'
+description: "Informative Trust specific content.<br>\r\nWill appear between on:\r\n<ul>\r\n<li>Habitat: Between <i>Why is it like this?</i> and <i>Distribution in the UK</i> fields.</li>\r\n<li>Species: Between <i>How to identify</i> and <i>Distribution</i> fields.</li>\r\n</ul>"
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

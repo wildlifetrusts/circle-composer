@@ -1,0 +1,7 @@
+wildlife_sharing.config:
+  path: '/admin/config/services/wildlife-sharing'
+  defaults:
+    _form: 'Drupal\wildlife_sharing\Form\SharingConfiguration'
+    _title: 'Wildlife Sharing configuration'
+  requirements:
+    _permission: 'administer search configuration'

@@ -1,0 +1,9 @@
+uuid: a9b2a71e-981a-4024-bd70-7213012a7fa4
+langcode: en
+status: true
+dependencies: {  }
+id: node__habitat
+label: 'Content: Habitat'
+tags:
+  description: '[node:field_habitat_summary]'
+  image_src: '[node:field_habitat_photos:0:entity:field_media_image:large]'

@@ -1,0 +1,20 @@
+uuid: f036010f-b0dc-4976-80b6-bd69cc6bc5dd
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_author
+id: author.author.name
+field_name: name
+entity_type: author
+bundle: author
+label: 'Author name'
+description: 'The name of the Author.'
+required: true
+translatable: false
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,8 @@
+type: module
+name: Wildlife Navigation
+description: 'Creates base fields and includes processing for navigation related content/settings.'
+package: Wildlife
+core: 8.x
+dependencies:
+  - entity_browser
+  - menu_link_content

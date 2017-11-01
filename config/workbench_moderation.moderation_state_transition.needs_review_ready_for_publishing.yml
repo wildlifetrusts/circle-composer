@@ -1,0 +1,12 @@
+uuid: 00a1d59f-b32a-4991-980b-f814892bb867
+langcode: en
+status: true
+dependencies:
+  config:
+    - workbench_moderation.moderation_state.needs_review
+    - workbench_moderation.moderation_state.ready_to_be_published
+id: needs_review_ready_for_publishing
+label: 'Approve for publishing'
+stateFrom: needs_review
+stateTo: ready_to_be_published
+weight: -4

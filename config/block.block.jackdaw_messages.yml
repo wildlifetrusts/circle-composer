@@ -1,0 +1,22 @@
+uuid: 8d932155-8e57-4029-8db5-b573c2d43221
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - jackdaw
+_core:
+  default_config_hash: 5MNdk3fpMKx_xxBTcz2T11DL4XEU1H5SgHl8BsYdFsA
+id: jackdaw_messages
+theme: jackdaw
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

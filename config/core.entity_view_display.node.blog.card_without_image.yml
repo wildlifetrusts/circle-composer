@@ -1,0 +1,64 @@
+uuid: 71a787e2-f11f-49d2-a3d3-096d9731f46c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_without_image
+    - field.field.node.blog.field_blog_author
+    - field.field.node.blog.field_blog_category
+    - field.field.node.blog.field_blog_display_pub_date
+    - field.field.node.blog.field_blog_publication_date
+    - field.field.node.blog.field_blog_summary
+    - field.field.node.blog.field_disqus_comments
+    - field.field.node.blog.field_disqus_comments_title
+    - field.field.node.blog.field_further_content
+    - field.field.node.blog.field_header_image
+    - field.field.node.blog.field_header_silhouette
+    - field.field.node.blog.field_header_type
+    - field.field.node.blog.field_meta_tags
+    - field.field.node.blog.field_representative_image
+    - field.field.node.blog.field_tags
+    - node.type.blog
+  module:
+    - fences
+    - user
+    - wildlife_field_formatters
+id: node.blog.card_without_image
+targetEntityType: node
+bundle: blog
+mode: card_without_image
+content:
+  field_blog_summary:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: '140'
+      word_boundary: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+hidden:
+  field_blog_author: true
+  field_blog_category: true
+  field_blog_display_pub_date: true
+  field_blog_publication_date: true
+  field_disqus_comments: true
+  field_disqus_comments_title: true
+  field_further_content: true
+  field_header_image: true
+  field_header_silhouette: true
+  field_header_type: true
+  field_meta_tags: true
+  field_representative_image: true
+  field_tags: true
+  langcode: true
+  links: true
+  related_news_and_blogs_related_blogs: true
+  workbench_moderation_control: true

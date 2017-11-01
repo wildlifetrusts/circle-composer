@@ -1,0 +1,16 @@
+.paragraph--type--testimonial {
+  cite {
+    display: block;
+    margin-top: emRhythm(4);
+
+    .field {
+      display: inline;
+    }
+  }
+}
+
+.field--name-field-testimonial-author ~ .field--name-field-testimonial-organisation {
+  &::before {
+    content: ', ';
+  }
+}

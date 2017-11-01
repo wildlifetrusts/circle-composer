@@ -1,0 +1,39 @@
+default:
+  description: 'Default (production) build'
+  tasks:
+    - 'concurrent:cleanStep'
+    - 'concurrent:productionStepOne'
+    - 'concurrent:productionStepTwo'
+    - 'concurrent:productionStepThree'
+    - 'concurrent:productionStepFour'
+
+dev:
+  description: 'Development build'
+  tasks:
+    - 'concurrent:cleanStep'
+    - 'concurrent:devStepOne'
+    - 'concurrent:devStepTwo'
+    - 'concurrent:devStepThree'
+    - 'concurrent:devStepFour'
+    - 'concurrent:devStepFive'
+
+watcher:
+  description: 'Watcher'
+  tasks:
+    - 'dev'
+    - 'browserSync'
+    - 'sass:kss'
+    - 'kss'
+    - 'watch'
+
+docs:
+  description: 'Generate Documentation'
+  tasks:
+    - clean
+    - sassdoc
+    - 'sass_globbing:dist'
+    - 'sass:dev'
+    - 'svgmin:icons'
+    - 'grunticon'
+    - 'sass:kss'
+    - kss

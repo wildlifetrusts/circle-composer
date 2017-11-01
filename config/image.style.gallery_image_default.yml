@@ -1,0 +1,14 @@
+uuid: cb3540f2-88b8-4629-8646-6803be8cc045
+langcode: en
+status: true
+dependencies: {  }
+name: gallery_image_default
+label: 'Gallery image default'
+effects:
+  73762680-f44b-421d-a706-6f8da7a1e5bd:
+    uuid: 73762680-f44b-421d-a706-6f8da7a1e5bd
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 347
+      height: 260

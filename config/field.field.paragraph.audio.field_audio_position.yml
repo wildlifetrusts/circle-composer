@@ -1,0 +1,23 @@
+uuid: 8d9f6a9d-fb38-4afb-a260-81cfadc52acc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_audio_position
+    - paragraphs.paragraphs_type.audio
+  module:
+    - options
+id: paragraph.audio.field_audio_position
+field_name: field_audio_position
+entity_type: paragraph
+bundle: audio
+label: 'Audio player position'
+description: "Choose the side you wish the audio player to appear on.\r\nNote that the audio player will appear above the text on viewports too narrow to accommodate text and audio player side by side."
+required: true
+translatable: true
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

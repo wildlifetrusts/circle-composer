@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Implements hook_cron().
+ */
+function wildlife_scheduling_cron() {
+  // Use drupal_static so that any function can find out if we are running
+  // Scheduler cron. Set the default value to FALSE, then turn on the flag.
+  // @see scheduler_cron_is_running()
+  $scheduler_cron = &drupal_static(__FUNCTION__, FALSE);
+  $scheduler_cron = TRUE;
+
+  /** @var \Drupal\wildlife_scheduling\WildlifeScheduler $scheduler_manager */
+  $scheduler_manager = \Drupal::service('wildlife_scheduling.manager');
+  $scheduler_manager->publish();
+  $scheduler_manager->unpublish();
+
+  // Reset the static scheduler_cron flag.
+  drupal_static_reset(__FUNCTION__);
+}
+
+/**
+ * Return whether Scheduler cron is running.
+ *
+ * @return bool
+ *   TRUE if wildlife_scheduling_cron is currently running. FALSE if not.
+ */
+function wildlife_scheduling_cron_is_running() {
+  return drupal_static('wildlife_scheduling_cron');
+}

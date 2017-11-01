@@ -1,0 +1,15 @@
+uuid: 25fe66ce-7a3f-4bd1-8a8d-3ac370b0e5ab
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: example_wildlife_local1
+label: 'Wildlife Example Content: Local 1'
+description: 'Example content for the Wildlife Trusts Local 1 site.'
+source_type: csv
+module: null
+shared_configuration:
+  source:
+    key: default

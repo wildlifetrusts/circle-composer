@@ -1,0 +1,20 @@
+uuid: a5536d3d-1c7d-40ff-9a6e-60aab133070b
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.local_group
+  module:
+    - path
+id: taxonomy_term.local_group.path
+field_name: path
+entity_type: taxonomy_term
+bundle: local_group
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

@@ -1,0 +1,19 @@
+uuid: d085537e-a558-4ee8-aaa7-973b7e6c360b
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flexible_block
+    - field.storage.block_content.field_flexible_block_title_3
+id: block_content.flexible_block.field_flexible_block_title_3
+field_name: field_flexible_block_title_3
+entity_type: block_content
+bundle: flexible_block
+label: 'Block 3 Title'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

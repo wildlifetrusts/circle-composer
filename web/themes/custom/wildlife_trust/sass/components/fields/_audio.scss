@@ -1,0 +1,15 @@
+.field--name-field-audio {
+  .audio__container {
+    @include keyline(all);
+
+    .paragraph--split & {
+      margin-top: emRhythm(2, ms(0));
+    }
+  }
+
+  audio {
+    display: block;
+    width: 100%;
+    min-width: 100px;
+  }
+}

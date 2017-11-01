@@ -1,0 +1,24 @@
+id: media_audio_national
+label: "Migrate Media Audio items from a CSV source to media entities: National"
+migration_group: example_wildlife_national
+source:
+  plugin: csv
+  path: './modules/custom/wildlife_content/src/Plugin/migrate/source/csv/media_audio_national.csv'
+  header_row_count: 1
+  keys:
+    - mid
+process:
+  bundle:
+    plugin: default_value
+    default_value: audio
+  name: name
+  field_audio_mp3: mp3
+  field_audio_ogg: ogg
+  field_media_caption: caption
+destination:
+  plugin: entity:media
+
+dependencies:
+  enforced:
+    module:
+      - wildlife_content

@@ -1,0 +1,10 @@
+uuid: 4029f045-90e4-4c30-89a9-9aeca9011d45
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_view_headers
+id: view_header.token
+label: Token
+targetEntityType: view_header
+cache: true

@@ -1,0 +1,20 @@
+uuid: ef209a36-b81e-48c2-a314-c647b87c939f
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.linked_logos
+id: paragraph.linked_logos.uid
+field_name: uid
+entity_type: paragraph
+bundle: linked_logos
+label: 'Authored by'
+description: 'The user ID of the paragraphs author.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: 'Drupal\paragraphs\Entity\Paragraph::getCurrentUserId'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

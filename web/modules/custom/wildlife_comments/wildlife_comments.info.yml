@@ -1,0 +1,7 @@
+name: Wildlife Trust Comments
+type: module
+description: Alterations related to comments.
+core: 8.x
+package: Wildlife
+dependencies:
+  - disqus

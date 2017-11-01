@@ -1,0 +1,31 @@
+// Import external libraries.
+@import '_external';
+
+// Set the palette.
+@import 'palettes/_default';
+
+// Import styles required for WYSIWYG editor.
+@import 'core/__core';
+@import 'base/__base';
+
+.cke_editable {
+  margin: 0.5em;
+
+  .table--responsive {
+    outline: 2px dotted rgba(red, 0.5);
+    position: relative;
+
+    &::before {
+      content: 'Responsive';
+      background: rgba(red, 0.5);
+      color: white;
+      padding: 0.5em;
+      line-height: 1;
+      font-size: 10px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      letter-spacing: 0.05em;
+    }
+  }
+}

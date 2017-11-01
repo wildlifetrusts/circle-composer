@@ -1,0 +1,27 @@
+uuid: 3a49a28c-e8c6-4545-9c81-31ab67b7648c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_detail
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: paragraph.spotlight.field_spotlight_detail
+field_name: field_spotlight_detail
+entity_type: paragraph
+bundle: spotlight
+label: Detail
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

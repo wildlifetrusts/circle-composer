@@ -1,0 +1,9 @@
+uuid: 3ba1ad00-19d0-4a26-93c7-b59dbbe7c387
+langcode: en
+status: true
+dependencies: {  }
+name: Species
+vid: species
+description: 'A taxonomy used to categorise Species content.'
+hierarchy: 0
+weight: 0

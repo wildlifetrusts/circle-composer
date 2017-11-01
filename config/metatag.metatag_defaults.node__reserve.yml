@@ -1,0 +1,10 @@
+uuid: e18aeab1-3f48-495f-a857-8c195a6be645
+langcode: en
+status: true
+dependencies: {  }
+id: node__reserve
+label: 'Content: Reserve'
+tags:
+  description: '[node:field_reserve_summary]'
+  geo_position: '[node:field_reserve_lat_long:latlon]'
+  image_src: '[node:field_reserve_photos:0:entity:field_media_image:large]'

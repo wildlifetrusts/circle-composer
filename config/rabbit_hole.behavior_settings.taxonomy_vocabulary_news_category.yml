@@ -1,0 +1,9 @@
+uuid: 53bdf268-2224-4755-aabb-39a1a0b50aac
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_vocabulary_news_category
+action: page_redirect_json
+allow_override: 0
+redirect: '/news/category/[term:name:views_name]'
+redirect_code: 301

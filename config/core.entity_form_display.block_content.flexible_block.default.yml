@@ -1,0 +1,157 @@
+uuid: a3280501-73d8-4359-8c2d-3e7069c7db9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flexible_block
+    - field.field.block_content.flexible_block.field_flexible_block_content_1
+    - field.field.block_content.flexible_block.field_flexible_block_content_2
+    - field.field.block_content.flexible_block.field_flexible_block_content_3
+    - field.field.block_content.flexible_block.field_flexible_block_title_1
+    - field.field.block_content.flexible_block.field_flexible_block_title_2
+    - field.field.block_content.flexible_block.field_flexible_block_title_3
+  module:
+    - field_group
+    - paragraphs
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_block_1:
+      children:
+        - field_flexible_block_title_1
+        - field_flexible_block_content_1
+      parent_name: group_block_tabs
+      weight: 2
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: 'Block 1'
+    group_block_2:
+      children:
+        - field_flexible_block_title_2
+        - field_flexible_block_content_2
+      parent_name: group_block_tabs
+      weight: 3
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Block 2'
+    group_block_3:
+      children:
+        - field_flexible_block_title_3
+        - field_flexible_block_content_3
+      parent_name: group_block_tabs
+      weight: 4
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Block 3'
+    group_block_tabs:
+      children:
+        - group_block_1
+        - group_block_2
+        - group_block_3
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        label: 'Block tabs'
+        direction: horizontal
+        id: ''
+        classes: ''
+      label: 'Block tabs'
+id: block_content.flexible_block.default
+targetEntityType: block_content
+bundle: flexible_block
+mode: default
+content:
+  field_flexible_block_content_1:
+    type: entity_reference_paragraphs
+    weight: 27
+    settings:
+      title: 'Block content'
+      title_plural: 'Block contents'
+      edit_mode: preview
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_flexible_block_content_2:
+    type: entity_reference_paragraphs
+    weight: 28
+    settings:
+      title: 'Block content'
+      title_plural: 'Block contents'
+      edit_mode: preview
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_flexible_block_content_3:
+    type: entity_reference_paragraphs
+    weight: 29
+    settings:
+      title: 'Block content'
+      title_plural: 'Block contents'
+      edit_mode: preview
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_flexible_block_title_1:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_flexible_block_title_2:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_flexible_block_title_3:
+    weight: 28
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+hidden: {  }

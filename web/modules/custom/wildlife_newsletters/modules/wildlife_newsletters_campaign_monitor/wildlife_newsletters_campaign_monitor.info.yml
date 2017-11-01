@@ -1,0 +1,8 @@
+name: 'Newsletters: Campaign Monitor Signup'
+type: module
+description: Campaign Monitor signup entity
+package: Wildlife
+core: 8.x
+configure: campaign_monitor_signup.admin
+dependencies:
+  - wildlife_newsletters

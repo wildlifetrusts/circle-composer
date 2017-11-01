@@ -1,0 +1,22 @@
+uuid: 331b2062-cd49-4554-ad81-da10b649b84a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: job
+label: Job
+type: 'canonical_entities:node'
+pattern: 'jobs/[node:title]'
+selection_criteria:
+  f438ef59-777a-45ed-aeec-b264a34e84a4:
+    id: node_type
+    bundles:
+      job: job
+    negate: false
+    context_mapping:
+      node: node
+    uuid: f438ef59-777a-45ed-aeec-b264a34e84a4
+selection_logic: and
+weight: -5
+relationships: {  }

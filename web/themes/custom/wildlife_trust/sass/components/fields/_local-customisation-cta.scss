@@ -1,0 +1,6 @@
+.field--name-field-local-cta {
+  a {
+    @include button();
+    @include button--contrast();
+  }
+}

@@ -1,0 +1,20 @@
+uuid: 66afec16-14de-464b-a5d0-d964e31f9285
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.location.field_location_county
+  module:
+    - wildlife_location
+id: location.location.field_location_county
+field_name: field_location_county
+entity_type: location
+bundle: location
+label: County
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

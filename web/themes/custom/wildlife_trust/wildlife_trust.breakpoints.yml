@@ -1,0 +1,30 @@
+wildlife_trust.default:
+  label: default
+  mediaQuery: ''
+  weight: 0
+  multipliers:
+    - 1x
+wildlife_trust.palm:
+  label: palm
+  mediaQuery: 'all and (min-width:480px)'
+  weight: 1
+  multipliers:
+    - 1x
+wildlife_trust.lap:
+  label: lap
+  mediaQuery: 'all and (min-width:768px)'
+  weight: 2
+  multipliers:
+    - 1x
+wildlife_trust.desk:
+  label: desk
+  mediaQuery: 'all and (min-width:1025px)'
+  weight: 3
+  multipliers:
+    - 1x
+wildlife_trust.desk_wide:
+  label: desk wide
+  mediaQuery: 'all and (min-width: 1200px)'
+  weight: 4
+  multipliers:
+    - 1x

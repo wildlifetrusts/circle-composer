@@ -1,0 +1,20 @@
+uuid: ee7be2f1-8ede-4cb2-aefb-144632d6a0f2
+langcode: en
+status: true
+dependencies:
+  theme:
+    - wildlife_trust_admin
+_core:
+  default_config_hash: PffmQ-ABSz5tFjWmVsR7NesunDnEivvopnJnBjl8KNE
+id: wildlife_trust_admin_local_actions
+theme: wildlife_trust_admin
+region: content
+weight: -3
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

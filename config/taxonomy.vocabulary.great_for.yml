@@ -1,0 +1,9 @@
+uuid: 3bb089b5-8b92-4905-9865-1cac5b8cd0eb
+langcode: en
+status: true
+dependencies: {  }
+name: 'Great for'
+vid: great_for
+description: 'Terms to let visitors know what Reserves are great for.'
+hierarchy: 0
+weight: 0

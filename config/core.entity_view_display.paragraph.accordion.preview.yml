@@ -1,0 +1,61 @@
+uuid: 21ff748f-eefc-4536-b288-c327f67f8706
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.accordion.field_accordion_accordion_item
+    - field.field.paragraph.accordion.field_accordion_default_item
+    - field.field.paragraph.accordion.field_accordion_introduction
+    - field.field.paragraph.accordion.field_accordion_title
+    - paragraphs.paragraphs_type.accordion
+  module:
+    - entity_reference_revisions
+    - fences
+    - wildlife_field_formatters
+id: paragraph.accordion.preview
+targetEntityType: paragraph
+bundle: accordion
+mode: preview
+content:
+  field_accordion_accordion_item:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: preview
+      link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: ul
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    region: content
+  field_accordion_introduction:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: '140'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+  field_accordion_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_accordion_default_item: true

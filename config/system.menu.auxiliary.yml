@@ -1,0 +1,8 @@
+uuid: bcbe2973-21e2-48c7-9b49-859cba1528d9
+langcode: en
+status: true
+dependencies: {  }
+id: auxiliary
+label: 'Auxiliary menu'
+description: 'The auxiliary menu provides extra links in the header region.'
+locked: false

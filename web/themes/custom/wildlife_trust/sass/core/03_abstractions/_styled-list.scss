@@ -1,0 +1,20 @@
+////
+/// @group Style
+////
+
+/// Removes the default styling of a list (bullets/numbering, padding) to give a
+/// clean slate for theming more styled lists, e.g. Menus.
+%clean-list {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  li {
+    padding-left: 0;
+    list-style: none;
+
+    &::before {
+      display: none;
+    }
+  }
+}

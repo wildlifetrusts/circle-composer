@@ -1,0 +1,23 @@
+uuid: 0a54c4a2-cb51-4b41-9134-46b765248cb2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_picnic_area
+    - node.type.reserve
+id: node.reserve.field_reserve_picnic_area
+field_name: field_reserve_picnic_area
+entity_type: node
+bundle: reserve
+label: 'Picnic area'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Picnic area'
+  off_label: 'Off'
+field_type: boolean

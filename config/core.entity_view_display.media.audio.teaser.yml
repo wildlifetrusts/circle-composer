@@ -1,0 +1,40 @@
+uuid: 11b7f8dd-e7a3-4f66-ba4a-d7abffd0bef2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.teaser
+    - field.field.media.audio.field_audio_mp3
+    - field.field.media.audio.field_audio_ogg
+    - field.field.media.audio.field_media_caption
+    - media_entity.bundle.audio
+  module:
+    - fences
+id: media.audio.teaser
+targetEntityType: media
+bundle: audio
+mode: teaser
+content:
+  name:
+    type: string
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: true
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+hidden:
+  created: true
+  field_audio_mp3: true
+  field_audio_ogg: true
+  field_media_caption: true
+  langcode: true
+  thumbnail: true
+  uid: true

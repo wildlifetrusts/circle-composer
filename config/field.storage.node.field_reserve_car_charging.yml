@@ -1,0 +1,18 @@
+uuid: 9e09c430-f3dc-4e15-8334-0f51e58fa20f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_reserve_car_charging
+field_name: field_reserve_car_charging
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

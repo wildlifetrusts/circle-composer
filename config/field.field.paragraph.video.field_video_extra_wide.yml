@@ -1,0 +1,23 @@
+uuid: e5446f3f-83aa-413f-97c6-8ac5ca8844c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_video_extra_wide
+    - paragraphs.paragraphs_type.video
+id: paragraph.video.field_video_extra_wide
+field_name: field_video_extra_wide
+entity_type: paragraph
+bundle: video
+label: 'Extra wide'
+description: 'If checked, the video will "break-out" of the narrow 8 column content area and fit the full 12 column maximum content width (when the viewport width allows for this).'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,93 @@
+.node--type-event {
+  .node__header {
+    .quick-links-list {
+      a {
+        @include button();
+        @include button--contrast();
+        @include button--small();
+      }
+    }
+
+    .event__book {
+      @include button--secondary();
+      @include button--contrast();
+    }
+  }
+
+  .event__dogs {
+    position: relative;
+  }
+
+  .field--name-field-event-parking-info,
+  .field--name-field-event-bicycle-parking,
+  .field--name-field-event-wheelchair,
+  .field--name-field-event-hearing-loop,
+  .field--name-field-event-mobility,
+  .field--name-field-event-what-to-bring,
+  .field--name-field-event-dogs,
+  .event__facilities {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 100%;
+      width: 32px;
+      height: 32px;
+      background-size: 32px auto;
+      margin-right: 1em;
+    }
+  }
+
+  .field--name-field-event-dogs {
+    position: inherit;
+  }
+
+  .group--templated-fields{
+    .field--name-field-event-contact-name,
+    .field--name-field-event-contact-number {
+      margin-bottom: 0;
+    }
+
+    .field--name-field-event-contact-name {
+      font-weight: $font-weight-regular;
+    }
+
+    .field--name-field-event-contact-name,
+    .field--name-field-event-contact-number,
+    .field--name-field-event-contact-email {
+      @include setType(6, ms(0));
+    }
+  }
+}
+
+.field--name-field-event-booking-embed {
+  padding-top: emRhythm(6, ms(0));
+
+  @include add-breakpoint('lap-and-up') {
+    padding-top: emRhythm(10, ms(0));
+  }
+}
+
+.field--name-field-event-reserve,
+.field--name-field-event-location {
+  margin-bottom: emRhythm(4, ms(0));
+}
+
+.node__header {
+  .event__tags {
+    margin-bottom: emRhythm(6, ms(0));
+  }
+}
+
+.event__date-time {
+  font-weight: $font-weight-regular;
+  margin-bottom: emRhythm(4);
+
+  span ~ .field--name-field-event-time {
+    &::before {
+      content: '/ ';
+    }
+  }
+}

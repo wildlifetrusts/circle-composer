@@ -1,0 +1,15 @@
+uuid: d46c5d97-53b9-4078-97c2-4b2145e0725f
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_8_col_desk
+label: 'Scaled 8 col desk'
+effects:
+  0043c94e-54e1-4433-9157-bc46893aa266:
+    uuid: 0043c94e-54e1-4433-9157-bc46893aa266
+    id: image_scale
+    weight: 1
+    data:
+      width: 688
+      height: null
+      upscale: false

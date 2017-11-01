@@ -1,0 +1,17 @@
+uuid: b761fd05-6008-4212-b43a-6ed87a256e38
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+_core:
+  default_config_hash: tJKYOTUXKm7gYYOCDVBpohvz8fLLfeGKbfzhkEJci1M
+id: initial
+label: 'Initial migrations'
+description: 'Import initial Wildlife Trusts content.'
+source_type: json
+module: null
+shared_configuration:
+  source:
+    key: default

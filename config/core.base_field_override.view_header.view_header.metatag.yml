@@ -1,0 +1,18 @@
+uuid: a68616e4-3240-4523-901e-cbb50f3af6ad
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_view_headers
+id: view_header.view_header.metatag
+field_name: metatag
+entity_type: view_header
+bundle: view_header
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

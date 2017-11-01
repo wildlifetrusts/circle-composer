@@ -1,0 +1,28 @@
+uuid: 36270671-34bc-4f81-9012-d36d52123f2d
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.great_for
+id: taxonomy_term.great_for.default
+targetEntityType: taxonomy_term
+bundle: great_for
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true

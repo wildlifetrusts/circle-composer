@@ -1,0 +1,3 @@
+fid,filename,filepath,uri,mid
+120,"Example .pdf Document",example-document.pdf,public://example-document.pdf,202
+121,"Example .doc Document",doc.doc,public://doc.doc,203

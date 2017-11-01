@@ -1,0 +1,19 @@
+# View header routing definition
+view_header.settings_tab:
+  route_name: view_header.settings
+  title: 'Settings'
+  base_route: view_header.settings
+
+entity.view_header.edit_form:
+  route_name: entity.view_header.edit_form
+  title: 'Edit'
+
+entity.view_header.version_history:
+  route_name: entity.view_header.version_history
+  title: 'Revisions'
+
+entity.view_header.delete_form:
+  route_name:  entity.view_header.delete_form
+  title: Delete
+  weight: 10
+

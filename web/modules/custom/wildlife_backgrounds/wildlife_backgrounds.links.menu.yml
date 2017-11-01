@@ -1,0 +1,12 @@
+wildlife_backgrounds.collection:
+  title: 'Silhouettes'
+  parent: system.admin_content
+  description: 'Manage silhouettes.'
+  route_name: view.silhouettes.silhouettes_page_list
+
+wildlife_backgrounds.add:
+  title: 'Add a new silhouette'
+  parent: wildlife_backgrounds.collection
+  description: 'Add a new silhouette.'
+  route_name: entity.media.add_form
+  route_parameters: { media_bundle: 'silhouette' }

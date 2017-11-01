@@ -1,0 +1,41 @@
+uuid: f2d04623-b18d-48ff-8252-a0f49007cf9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.map
+    - field.field.media.image.field_media_caption
+    - field.field.media.image.field_media_image
+    - image.style.map_thumb
+    - media_entity.bundle.image
+  module:
+    - fences
+    - image
+id: media.image.map
+targetEntityType: media
+bundle: image
+mode: map
+content:
+  field_media_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: map_thumb
+      image_link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: image
+    region: content
+hidden:
+  created: true
+  field_media_caption: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

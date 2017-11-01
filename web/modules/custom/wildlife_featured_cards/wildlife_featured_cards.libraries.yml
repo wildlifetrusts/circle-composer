@@ -1,0 +1,6 @@
+featured-cards-admin:
+  js:
+    js/wildlife_featured_cards.behavior.featured-cards.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once

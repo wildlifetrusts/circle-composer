@@ -1,0 +1,322 @@
+uuid: c6d2e982-2e21-47ad-ab86-129203e2efaf
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.node.trust.field_external_link
+    - field.field.node.trust.field_trust_address
+    - field.field.node.trust.field_trust_alternative_name
+    - field.field.node.trust.field_trust_city
+    - field.field.node.trust.field_trust_county
+    - field.field.node.trust.field_trust_email
+    - field.field.node.trust.field_trust_image
+    - field.field.node.trust.field_trust_lat_long
+    - field.field.node.trust.field_trust_membership_link
+    - field.field.node.trust.field_trust_phone_number
+    - field.field.node.trust.field_trust_postcode
+    - field.field.node.trust.field_trust_site_url
+    - field.field.node.trust.field_trust_sms_button_text
+    - field.field.node.trust.field_trust_sms_donation_enabled
+    - field.field.node.trust.field_trust_sms_donation_keyword
+    - field.field.node.trust.field_trust_sms_donation_number
+    - field.field.node.trust.field_trust_sms_ts_and_cs
+    - field.field.node.trust.field_trust_summary
+    - node.type.trust
+  module:
+    - entity_browser
+    - field_group
+    - geofield_map
+    - link
+    - path
+    - telephone
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_trust_details
+        - group_location
+        - group_sms_donation
+      parent_name: ''
+      weight: 7
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_trust_details:
+      children:
+        - field_trust_summary
+        - field_trust_site_url
+        - field_trust_image
+        - field_trust_phone_number
+        - field_trust_email
+        - field_trust_alternative_name
+        - field_trust_membership_link
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Trust details'
+    group_sms_donation:
+      children:
+        - field_trust_sms_button_text
+        - field_trust_sms_donation_number
+        - field_trust_sms_donation_keyword
+        - field_trust_sms_ts_and_cs
+        - field_trust_sms_donation_enabled
+      parent_name: group_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'SMS Donation'
+    group_location:
+      children:
+        - field_trust_address
+        - field_trust_postcode
+        - field_trust_city
+        - field_trust_county
+        - field_trust_lat_long
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Location
+id: node.trust.default
+targetEntityType: node
+bundle: trust
+mode: default
+content:
+  colour_scheme:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_trust_address:
+    weight: 34
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_trust_alternative_name:
+    weight: 41
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_trust_city:
+    weight: 36
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_trust_county:
+    weight: 37
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_trust_email:
+    weight: 40
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_trust_image:
+    weight: 33
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_trust_lat_long:
+    weight: 38
+    settings:
+      map_library: gmap
+      map_type_google: roadmap
+      map_type_leaflet: OpenStreetMap_Mapnik
+      map_type_selector: '1'
+      zoom:
+        start: '5'
+        focus: '14'
+        min: '1'
+        max: '17'
+      click_to_find_marker: '1'
+      geoaddress_field:
+        field: '0'
+        disabled: '1'
+        hidden: 0
+      map_google_api_key: AIzaSyCfsYG-uXxdZdGYt0mp2i0Z4fw5VJ4uLCY
+      click_to_place_marker: 0
+      html5_geolocation: 0
+      zoom_level: 5
+      map_dimensions:
+        width: 100%
+        height: 450px
+    third_party_settings: {  }
+    type: geofield_map
+    region: content
+  field_trust_membership_link:
+    weight: 42
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_trust_phone_number:
+    weight: 39
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_trust_postcode:
+    weight: 35
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_trust_site_url:
+    weight: 32
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_trust_sms_button_text:
+    weight: 43
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_trust_sms_donation_enabled:
+    weight: 47
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_trust_sms_donation_keyword:
+    weight: 45
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_trust_sms_donation_number:
+    weight: 44
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_trust_sms_ts_and_cs:
+    weight: 46
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_trust_summary:
+    weight: 31
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  path:
+    type: path
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 6
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden:
+  field_external_link: true
+  langcode: true

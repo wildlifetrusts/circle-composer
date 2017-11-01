@@ -1,0 +1,23 @@
+uuid: 1ba0833c-8c39-4b98-a815-7e4d1983513e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_external_link
+    - node.type.volunteer_opportunity
+  module:
+    - link
+id: node.volunteer_opportunity.field_external_link
+field_name: field_external_link
+entity_type: node
+bundle: volunteer_opportunity
+label: 'External Link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 1
+field_type: link

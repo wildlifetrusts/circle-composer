@@ -1,0 +1,28 @@
+uuid: 74946f5f-87cc-434f-bc4a-3896c77f0c0b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_reserve
+    - node.type.job
+    - node.type.reserve
+id: node.job.field_job_reserve
+field_name: field_job_reserve
+entity_type: node
+bundle: job
+label: Reserve
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      reserve: reserve
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

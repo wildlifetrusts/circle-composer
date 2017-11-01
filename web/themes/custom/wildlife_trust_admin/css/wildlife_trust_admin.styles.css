@@ -1,0 +1,7 @@
+/*
+  The admin theme inherits CSS from
+  themes/custom/wildlife_trust/sass/wildlife_trust.admin-styles.scss.
+
+  This allows us to have the benefits of Sass, postcss (Autoprefixer) etc,
+  without having to maintain two build processes.
+*/

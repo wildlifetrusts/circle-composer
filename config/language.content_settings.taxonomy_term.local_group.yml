@@ -1,0 +1,16 @@
+uuid: e6b75b12-4522-4b6e-8d09-e2a748ae8819
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.local_group
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.local_group
+target_entity_type_id: taxonomy_term
+target_bundle: local_group
+default_langcode: site_default
+language_alterable: true

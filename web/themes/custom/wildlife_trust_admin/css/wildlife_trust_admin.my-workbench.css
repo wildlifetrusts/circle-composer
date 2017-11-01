@@ -1,0 +1,24 @@
+/**
+ * CSS for the my-workbench page.
+ */
+
+div.admin.my-workbench .workbench-left {
+  width: calc(50% - 1em);
+  float: left;
+  padding-right: 1em;
+}
+
+div.admin.my-workbench .workbench-right {
+  width: calc(50% - 1em);
+  float: right;
+  padding-left: 1em;
+}
+
+div.admin.my-workbench .workbench-full {
+  width: 100%;
+  clear: both;
+}
+
+div.admin.my-workbench .workbench-spacer {
+  padding-top: 2em;
+}

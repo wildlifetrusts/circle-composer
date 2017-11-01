@@ -1,0 +1,59 @@
+/**
+ * @file
+ * Wizard progress tracker styles.
+ *
+ * @see http://nigelotoole.github.io/progress-tracker/
+ */
+
+.webform-progress-tracker {
+  &.progress-tracker {
+    margin-top: $spacing-unit-vertical;
+    margin-bottom: $spacing-unit-vertical;
+  }
+
+  .progress-step {
+    .progress-text {
+      color: #b6b6b6;
+      padding-top: 5px;
+      padding-bottom: 0;
+
+      @include add-breakpoint('up-to-palm') {
+        display: none;
+      }
+
+      @include add-breakpoint('up-to-lap') {
+        font-size: smaller;
+      }
+    }
+
+    .progress-marker,
+    &:hover .progress-marker,
+    &:focus .progress-marker {
+      background-color: palette(mono, mid-dark);
+    }
+
+    &.is-active {
+      .progress-text {
+        color: #333;
+      }
+
+      .progress-marker,
+      &:hover .progress-marker,
+      &:focus .progress-marker {
+        background-color: palette(primary);
+      }
+    }
+
+    &.is-complete {
+      .progress-text {
+        color: #333;
+      }
+
+      .progress-marker,
+      &:hover .progress-marker,
+      &:focus .progress-marker {
+        background-color: mix(palette(primary), palette(mono), 35%);
+      }
+    }
+  }
+}

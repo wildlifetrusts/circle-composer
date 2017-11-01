@@ -1,0 +1,14 @@
+uuid: 28017411-b365-4969-8bb6-028d6ba36452
+langcode: en
+status: true
+dependencies: {  }
+name: hero_default
+label: 'Hero default'
+effects:
+  4b70a4c0-c434-4250-9b73-7ab29526f1eb:
+    uuid: 4b70a4c0-c434-4250-9b73-7ab29526f1eb
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 287

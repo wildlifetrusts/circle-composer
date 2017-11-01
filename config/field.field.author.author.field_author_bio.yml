@@ -1,0 +1,20 @@
+uuid: a3362090-dce4-4dbc-a59c-4587f75d69f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.author.field_author_bio
+  module:
+    - wildlife_author
+id: author.author.field_author_bio
+field_name: field_author_bio
+entity_type: author
+bundle: author
+label: Biography
+description: 'This is limited to 250 characters.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

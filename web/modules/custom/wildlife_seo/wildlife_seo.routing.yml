@@ -1,0 +1,7 @@
+wildlife_seo.gtm_admin:
+  path: '/admin/config/system/gtm-id-config'
+  defaults:
+    _form: '\Drupal\wildlife_seo\Form\GtmIdAdmin'
+    _title: 'Google Tag Manager ID Admin'
+  requirements:
+    _permission: administer gtm id settings

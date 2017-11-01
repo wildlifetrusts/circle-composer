@@ -1,0 +1,16 @@
+uuid: 800e7fa9-fa97-4494-be5e-3f864a9ba8ed
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_quadruple_lap
+label: 'Spotlight quadruple lap'
+effects:
+  bce16ba9-b34a-453d-90df-92eebd3bee0c:
+    uuid: bce16ba9-b34a-453d-90df-92eebd3bee0c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 512
+      height: 512

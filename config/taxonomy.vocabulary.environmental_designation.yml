@@ -1,0 +1,9 @@
+uuid: 6c1119e1-e2c3-43e5-8aa5-6d6f871efd2d
+langcode: en
+status: true
+dependencies: {  }
+name: 'Environmental designation'
+vid: environmental_designation
+description: 'Environmental designations for Reserves.'
+hierarchy: 0
+weight: 0

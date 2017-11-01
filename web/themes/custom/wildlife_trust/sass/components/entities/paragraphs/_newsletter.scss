@@ -1,0 +1,114 @@
+$hedgehog_height: 48px;
+
+.paragraph--type--newsletter-sign-up {
+  @include keyline('all');
+  border-top: 6px solid palette(mono, x-dark);
+  background-color: palette(mono, x-light);
+  padding: $spacing-unit-vertical $spacing-unit-horizontal;
+  position: relative;
+  margin-top: $hedgehog_height;
+
+  @include add-breakpoint('lap-and-up') {
+    padding-left: triple($spacing-unit-horizontal);
+    padding-right: triple($spacing-unit-horizontal);
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 72px;
+    height: $hedgehog_height;
+    background: transparent url('../images/hedgehog.svg') 0 0 no-repeat;
+    bottom: 100%;
+    left: triple($spacing-unit-horizontal);
+    margin-bottom: 4px;
+  }
+}
+
+.field--name-field-newsletter-title {
+  text-align: center;
+}
+
+.field--name-field-newsletter-mailchimp-form {
+  .mailchimp-newsletter-mergefields,
+  [class^="mailchimp-newsletter-interests-"] .form-checkboxes {
+    display: inline-block;
+    min-width: 50%;
+
+    input[type=text],
+    input[type=tel],
+    input[type=number],
+    input[type=email] {
+      width: 100%;
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: flex-start;
+    }
+
+    .form__item {
+      @include add-breakpoint('lap-and-up') {
+        flex: 0 1 percentage(1/2);
+        padding-left: halve($spacing-unit-horizontal);
+        padding-right: halve($spacing-unit-horizontal);
+      }
+
+      @include add-breakpoint('desk-and-up') {
+        flex: 0 1 percentage(1/3);
+      }
+    }
+  }
+
+  .form-actions {
+    text-align: center;
+  }
+}
+
+.field--name-field-newsletter-mailchimp-form,
+.field--name-field-newsletter-cm-form {
+  @include spacing('medium', 'top');
+  @include spacing('medium', 'bottom');
+}
+
+.field--name-field-newsletter-cm-form {
+  button {
+    @include button;
+  }
+
+  label {
+    font-weight: $font-weight-regular;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="email"],
+  input[type="number"],
+  select {
+    max-width: 100%;
+    @include keyline('all');
+    background-color: palette(mono, x-light);
+    color: palette(mono, dark);
+    text-align: left;
+
+    &:focus {
+      outline: none;
+      @extend %fake-focus-outline;
+    }
+  }
+
+  textarea {
+    padding: 0.8125em;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  select {
+    padding: 0 0.8125em;
+    height: 43px;
+    line-height: 43px;
+  }
+}

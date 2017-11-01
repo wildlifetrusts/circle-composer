@@ -1,0 +1,754 @@
+uuid: d8e2a1d8-0ce0-4f8f-a060-b00771de077c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.event.field_event_about
+    - field.field.node.event.field_event_additional_info
+    - field.field.node.event.field_event_baby_changing
+    - field.field.node.event.field_event_bicycle_parking
+    - field.field.node.event.field_event_booking_embed
+    - field.field.node.event.field_event_booking_status
+    - field.field.node.event.field_event_booking_url
+    - field.field.node.event.field_event_cafe_refreshments
+    - field.field.node.event.field_event_capacity
+    - field.field.node.event.field_event_car_charging
+    - field.field.node.event.field_event_contact_email
+    - field.field.node.event.field_event_contact_name
+    - field.field.node.event.field_event_contact_number
+    - field.field.node.event.field_event_date
+    - field.field.node.event.field_event_disabled_toilet
+    - field.field.node.event.field_event_dogs
+    - field.field.node.event.field_event_dogs_additional
+    - field.field.node.event.field_event_email
+    - field.field.node.event.field_event_hearing_loop
+    - field.field.node.event.field_event_local_group
+    - field.field.node.event.field_event_location
+    - field.field.node.event.field_event_meeting_point
+    - field.field.node.event.field_event_mobility
+    - field.field.node.event.field_event_parking_info
+    - field.field.node.event.field_event_phone_number
+    - field.field.node.event.field_event_photos
+    - field.field.node.event.field_event_picnic_area
+    - field.field.node.event.field_event_price_donation
+    - field.field.node.event.field_event_reserve
+    - field.field.node.event.field_event_shop
+    - field.field.node.event.field_event_suitable_for
+    - field.field.node.event.field_event_summary
+    - field.field.node.event.field_event_tags
+    - field.field.node.event.field_event_theme
+    - field.field.node.event.field_event_time
+    - field.field.node.event.field_event_toilets
+    - field.field.node.event.field_event_type
+    - field.field.node.event.field_event_what_to_bring
+    - field.field.node.event.field_event_wheelchair
+    - field.field.node.event.field_external_link
+    - field.field.node.event.field_further_content
+    - field.field.node.event.field_meta_tags
+    - node.type.event
+  module:
+    - datetime_range
+    - entity_reference_revisions
+    - fences
+    - field_group
+    - link
+    - metatag
+    - options
+    - telephone
+    - text
+    - user
+    - wildlife_field_formatters
+third_party_settings:
+  field_group:
+    group_standfirst:
+      children:
+        - field_event_summary
+      parent_name: ''
+      weight: 5
+      format_type: html_element
+      format_settings:
+        label: Standfirst
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'standfirst is-unconstrained'
+      label: Standfirst
+    group_notice:
+      children:
+        - field_event_booking_status
+      parent_name: ''
+      weight: 4
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: 'flag flag--negative is-unconstrained breakout'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Notice
+    group_know_before_you_go:
+      children:
+        - group_dogs
+        - field_event_mobility
+        - field_event_wheelchair
+        - field_event_hearing_loop
+        - field_event_what_to_bring
+        - field_event_parking_info
+        - field_event_bicycle_parking
+        - group_facilities
+      parent_name: ''
+      weight: 11
+      format_type: html_element
+      format_settings:
+        label: 'Know before you go'
+        element: div
+        show_label: true
+        label_element: h2
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'group--templated-fields know-before-you-go'
+      label: 'Know before you go'
+    group_facilities:
+      children:
+        - field_event_toilets
+        - field_event_shop
+        - field_event_cafe_refreshments
+        - field_event_picnic_area
+        - field_event_disabled_toilet
+        - field_event_baby_changing
+        - field_event_car_charging
+      parent_name: group_know_before_you_go
+      weight: 28
+      format_type: html_element
+      format_settings:
+        label: Facilities
+        element: div
+        show_label: true
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: event__facilities
+      label: Facilities
+    group_dogs:
+      children:
+        - field_event_dogs
+        - field_event_dogs_additional
+      parent_name: group_know_before_you_go
+      weight: 20
+      format_type: html_element
+      format_settings:
+        label: Dogs
+        element: div
+        show_label: true
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: event__dogs
+      label: Dogs
+    group_booking:
+      children:
+        - field_event_booking_url
+        - field_event_phone_number
+        - field_event_email
+        - field_event_price_donation
+        - field_event_additional_info
+        - field_event_suitable_for
+      parent_name: ''
+      weight: 9
+      format_type: html_element
+      format_settings:
+        label: Booking
+        element: div
+        show_label: true
+        label_element: h2
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: group--templated-fields
+      label: Booking
+    group_tags:
+      children:
+        - group_links_wrapper
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        label: Tags
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'event__tags quick-links-list'
+      label: Tags
+    group_links_wrapper:
+      children:
+        - field_event_type
+        - field_event_tags
+      parent_name: group_tags
+      weight: 20
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: ul
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Links wrapper'
+    group_contact_us:
+      children:
+        - field_event_contact_name
+        - field_event_contact_number
+        - field_event_contact_email
+      parent_name: ''
+      weight: 12
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: group--templated-fields
+        element: div
+        show_label: true
+        label_element: h2
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Contact us'
+    group_event_details:
+      children:
+        - field_event_meeting_point
+        - field_event_date
+        - field_event_time
+        - field_event_local_group
+        - static_map
+      parent_name: ''
+      weight: 7
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: group--templated-fields
+        element: div
+        show_label: true
+        label_element: h2
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Event details'
+id: node.event.default
+targetEntityType: node
+bundle: event
+mode: default
+content:
+  field_event_about:
+    weight: 8
+    label: above
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: field--templated
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h2
+        fences_label_classes: ''
+    type: text_default
+    region: content
+  field_event_additional_info:
+    weight: 20
+    label: above
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: basic_string
+    region: content
+  field_event_baby_changing:
+    weight: 28
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: boolean_hide_on_false
+    region: content
+  field_event_bicycle_parking:
+    weight: 27
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_event_booking_embed:
+    weight: 10
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: field--templated
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: text_default
+    region: content
+  field_event_booking_status:
+    weight: 29
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: list_default
+    region: content
+  field_event_booking_url:
+    weight: 15
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: link
+    region: content
+  field_event_cafe_refreshments:
+    weight: 25
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: boolean_hide_on_false
+    region: content
+  field_event_car_charging:
+    weight: 29
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: boolean_hide_on_false
+    region: content
+  field_event_contact_email:
+    weight: 27
+    label: inline
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: email_mailto
+    region: content
+  field_event_contact_name:
+    weight: 25
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_event_contact_number:
+    weight: 26
+    label: inline
+    settings:
+      title: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: telephone_link
+    region: content
+  field_event_date:
+    weight: 8
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: display_long_date
+      separator: '-'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: daterange_default
+    region: content
+  field_event_disabled_toilet:
+    weight: 27
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: boolean_hide_on_false
+    region: content
+  field_event_dogs:
+    weight: 25
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_event_dogs_additional:
+    weight: 26
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_event_email:
+    weight: 17
+    label: above
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: email_mailto
+    region: content
+  field_event_hearing_loop:
+    weight: 24
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_event_local_group:
+    weight: 10
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_event_location:
+    weight: 1
+    label: inline
+    settings:
+      view_mode: string
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_event_meeting_point:
+    weight: 7
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_event_mobility:
+    weight: 21
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_event_parking_info:
+    weight: 26
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_event_phone_number:
+    weight: 16
+    label: above
+    settings:
+      title: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: telephone_link
+    region: content
+  field_event_photos:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: node_hero
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: slick-field
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_event_picnic_area:
+    weight: 26
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: boolean_hide_on_false
+    region: content
+  field_event_price_donation:
+    weight: 19
+    label: above
+    settings: { }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: basic_string
+    region: content
+  field_event_reserve:
+    weight: 2
+    label: inline
+    settings:
+      view_mode: address_string
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_event_shop:
+    weight: 23
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: boolean_hide_on_false
+    region: content
+  field_event_suitable_for:
+    weight: 21
+    label: above
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: list_default
+    region: content
+  field_event_summary:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_event_tags:
+    weight: 11
+    label: hidden
+    settings:
+      link: true
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  field_event_time:
+    weight: 9
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_event_toilets:
+    weight: 22
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: boolean_hide_on_false
+    region: content
+  field_event_type:
+    weight: 10
+    label: hidden
+    settings:
+      link: true
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  field_event_what_to_bring:
+    weight: 25
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_event_wheelchair:
+    weight: 22
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h3
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_further_content:
+    weight: 13
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: is-unconstrained
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_meta_tags:
+    weight: 14
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  static_map:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  workbench_moderation_control:
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_event_capacity: true
+  field_event_theme: true
+  field_external_link: true
+  langcode: true
+  links: true

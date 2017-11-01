@@ -1,0 +1,52 @@
+uuid: 69738fc2-d841-4244-ac2e-3e1b1589eb95
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+id: national_term_event_theme
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: national
+label: 'Import event_theme terms from national Wildlife Trust site'
+source:
+  plugin: wildlife_sharing_url_title
+  track_changes: true
+  data_fetcher_plugin: http
+  data_parser_plugin: wildlife_sharing_json_title
+  path: /jsonapi/taxonomy_term/event_theme
+  pager:
+    type: urls
+    selector: 'links/next'
+  ids:
+    uuid:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: name
+      label: Name
+      selector: /attributes/name
+    -
+      name: uuid
+      label: UUID
+      selector: /attributes/uuid
+    -
+      name: parent
+      label: Parent
+      selector: /relationships/parent/data
+process:
+  name: name
+  uuid: uuid
+  parent:
+    plugin: wildlife_sharing_id_lookup
+    source: parent
+    migration: national_term_event_theme
+destination:
+  plugin: 'entity:taxonomy_term'
+  track_changes: true
+  default_bundle: event_theme
+migration_dependencies: {  }

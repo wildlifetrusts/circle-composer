@@ -1,0 +1,33 @@
+uuid: 6c7338c5-c11e-488f-82d6-d1c5f86ef8b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.linked_logos.field_linked_logos
+    - paragraphs.paragraphs_type.linked_logos
+  module:
+    - entity_reference_revisions
+    - fences
+id: paragraph.linked_logos.preview
+targetEntityType: paragraph
+bundle: linked_logos
+mode: preview
+content:
+  field_linked_logos:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: preview
+      link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    region: content
+hidden: {  }

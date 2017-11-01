@@ -1,0 +1,23 @@
+uuid: a13be4e3-ec43-405a-a0ac-8e33b9add83b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cards_dynamic_type
+    - paragraphs.paragraphs_type.featured_cards
+id: paragraph.featured_cards.field_cards_dynamic_type
+field_name: field_cards_dynamic_type
+entity_type: paragraph
+bundle: featured_cards
+label: 'Content type'
+description: 'Choose the types of content you want to display in this component. If you leave this blank, all allowed types will be shown.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node_type'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

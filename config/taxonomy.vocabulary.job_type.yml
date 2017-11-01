@@ -1,0 +1,9 @@
+uuid: e80bcf2a-fa1e-42b5-b7f7-fc66709319d1
+langcode: en
+status: true
+dependencies: {  }
+name: 'Job type / category'
+vid: job_type
+description: 'The category a job belongs to.'
+hierarchy: 0
+weight: 0

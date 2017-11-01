@@ -1,0 +1,45 @@
+uuid: 2d725fab-4474-442d-9fd0-472738ccf7d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.local_customisation.cta
+    - field.field.local_customisation.local_customisation.field_local_blacklist
+    - field.field.local_customisation.local_customisation.field_local_cta
+    - field.field.local_customisation.local_customisation.field_local_in_our_area
+    - field.field.local_customisation.local_customisation.field_local_spotlight
+  module:
+    - fences
+    - link
+    - wildlife_local_customisation
+id: local_customisation.local_customisation.cta
+targetEntityType: local_customisation
+bundle: local_customisation
+mode: cta
+content:
+  field_local_cta:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: link
+    region: content
+hidden:
+  field_local_blacklist: true
+  field_local_in_our_area: true
+  field_local_spotlight: true
+  langcode: true
+  name: true
+  user_id: true

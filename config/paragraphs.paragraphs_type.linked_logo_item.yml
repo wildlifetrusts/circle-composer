@@ -1,0 +1,9 @@
+uuid: 40db73b8-9ef0-48ec-abd9-614cfed0f31b
+langcode: en
+status: true
+dependencies: {  }
+id: linked_logo_item
+label: 'Linked logo item'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

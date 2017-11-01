@@ -1,0 +1,20 @@
+uuid: 0f12318a-f0cc-4097-9f36-8af67ac76fc9
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.great_for
+  module:
+    - path
+id: taxonomy_term.great_for.path
+field_name: path
+entity_type: taxonomy_term
+bundle: great_for
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

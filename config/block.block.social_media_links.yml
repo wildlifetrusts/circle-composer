@@ -1,0 +1,64 @@
+uuid: af7c87c8-991a-409d-b325-75efd51c5b7d
+langcode: en
+status: true
+dependencies:
+  module:
+    - social_media_links
+    - wildlife_conditions
+  theme:
+    - wildlife_trust
+id: social_media_links
+theme: wildlife_trust
+region: topbar_social
+weight: -9
+provider: null
+plugin: social_media_links_block
+settings:
+  id: social_media_links_block
+  label: 'Follow us'
+  provider: social_media_links
+  label_display: visible
+  platforms:
+    flickr:
+      value: groups/wildlifetrusts/
+      description: ''
+      weight: '-10'
+    facebook:
+      value: wildlifetrusts
+      description: ''
+      weight: '-5'
+    googleplus:
+      value: ''
+      description: ''
+      weight: '-3'
+    instagram:
+      value: ''
+      description: ''
+      weight: '-2'
+    twitter:
+      value: wildlifetrusts
+      description: ''
+      weight: '4'
+    youtube:
+      value: user/TheWildlifeTrusts
+      description: ''
+      weight: '6'
+  appearance:
+    orientation: h
+    show_name: 0
+  link_attributes:
+    target: '<none>'
+    rel: '<none>'
+  iconset:
+    style: 'wildlife:24'
+    installed_iconsets:
+      fontawesome:
+        examples: ''
+      wildlife:
+        examples: ''
+visibility:
+  node_allows_social_sharing:
+    id: node_allows_social_sharing
+    display_on_social_sharing_nodes: 0
+    negate: false
+    context_mapping: {  }

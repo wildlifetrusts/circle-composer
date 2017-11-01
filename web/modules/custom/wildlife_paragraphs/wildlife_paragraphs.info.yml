@@ -1,0 +1,7 @@
+type: module
+name: Wildlife Paragraphs
+description: 'Validation, improvements, alterations and preprocessing for Paragraphs.'
+package: Wildlife
+core: 8.x
+dependencies:
+  - wildlife_backgrounds

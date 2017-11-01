@@ -1,0 +1,18 @@
+ignored_config_entities:
+  0: 'user.role.*'
+  2: 'webform.webform.*'
+  4: system.site
+  6: wildlife_trust.settings
+  8: block.block.footer_information
+  10: core.entity_form_display.location.location.default
+  12: core.entity_form_display.node.reserve.default
+  14: core.entity_form_display.node.trust.default
+  16: disqus.settings
+  18: mailchimp.settings
+  20: 'mailchimp_signup.mailchimp_signup.*'
+  22: 'wildlife_newsletters_campaign_monitor.campaign_monitor_signup.*'
+  24: wildlife_sharing.settings
+  26: geofield_map.settings
+  28: wildlife_google_api.settings
+_core:
+  default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk

@@ -1,0 +1,33 @@
+add location entities:
+  title: 'Create new Location entities'
+
+administer location entities:
+  title: 'Administer Location entities'
+  description: 'Allow to access the administration form to configure Location entities.'
+  restrict access: true
+
+delete location entities:
+  title: 'Delete Location entities'
+
+edit location entities:
+  title: 'Edit Location entities'
+
+access location overview:
+  title: 'Access the Location overview page'
+
+view published location entities:
+  title: 'View published Location entities'
+
+view unpublished location entities:
+  title: 'View unpublished Location entities'
+
+view all location revisions:
+  title: 'View all Location revisions'
+
+revert all location revisions:
+  title: 'Revert all Location revisions'
+  description: 'Role requires permission <em>view Location revisions</em> and <em>edit rights</em> for location entities in question or <em>administer location entities</em>.'
+
+delete all location revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Location revisions</em> and <em>delete rights</em> for location entities in question or <em>administer location entities</em>.'

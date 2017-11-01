@@ -1,0 +1,193 @@
+uuid: cf8a10dc-b4bc-420a-b97c-1f8fdd942876
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.paragraph.spotlight.field_spotlight_button_type
+    - field.field.paragraph.spotlight.field_spotlight_detail
+    - field.field.paragraph.spotlight.field_spotlight_display_type
+    - field.field.paragraph.spotlight.field_spotlight_image
+    - field.field.paragraph.spotlight.field_spotlight_image_type
+    - field.field.paragraph.spotlight.field_spotlight_label
+    - field.field.paragraph.spotlight.field_spotlight_link
+    - field.field.paragraph.spotlight.field_spotlight_link_appearance
+    - field.field.paragraph.spotlight.field_spotlight_silhouette
+    - field.field.paragraph.spotlight.field_spotlight_text_colour
+    - field.field.paragraph.spotlight.field_spotlight_title
+    - field.field.paragraph.spotlight.field_spotlight_title_size
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - entity_browser
+    - field_group
+    - link_attributes
+    - text
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_spotlight_content:
+      children:
+        - field_spotlight_label
+        - field_spotlight_title
+        - field_spotlight_title_size
+        - field_spotlight_detail
+      parent_name: group_spotlight_tabs
+      weight: 1
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Spotlight content'
+    group_spotlight_link_settings:
+      children:
+        - field_spotlight_link
+        - field_spotlight_link_appearance
+        - field_spotlight_button_type
+      parent_name: group_spotlight_tabs
+      weight: 2
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Spotlight link settings'
+    group_spotlight_display:
+      children:
+        - field_spotlight_text_colour
+        - field_spotlight_display_type
+        - field_spotlight_image_type
+        - field_spotlight_image
+        - field_spotlight_silhouette
+      parent_name: group_spotlight_tabs
+      weight: 3
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Spotlight display'
+    group_spotlight_tabs:
+      children:
+        - group_spotlight_content
+        - group_spotlight_link_settings
+        - group_spotlight_display
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        label: 'Spotlight tabs'
+        direction: horizontal
+        id: ''
+        classes: ''
+      label: 'Spotlight tabs'
+id: paragraph.spotlight.default
+targetEntityType: paragraph
+bundle: spotlight
+mode: default
+content:
+  field_spotlight_button_type:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_spotlight_detail:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_spotlight_display_type:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_spotlight_image:
+    weight: 6
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_spotlight_image_type:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_spotlight_label:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_spotlight_link:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_spotlight_link_appearance:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_spotlight_silhouette:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_spotlight_text_colour:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_spotlight_title:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_spotlight_title_size:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

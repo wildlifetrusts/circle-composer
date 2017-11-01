@@ -1,0 +1,19 @@
+uuid: d1547b08-79f8-4840-ac1f-57a7e1cdaa0a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_habitat_conservation
+field_name: field_habitat_conservation
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

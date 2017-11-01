@@ -1,0 +1,48 @@
+$node_blog_types: news, blog;
+
+@each $type in $node_blog_types {
+  .node--type-#{$type} {
+    &.node--view-mode-full {
+      .node__content {
+        .views-element-container {
+          overflow: hidden;
+          clear: both;
+        }
+      }
+    }
+
+    &.node--view-mode-teaser {
+      .field--name-field-#{$type}-publication-date {
+        font-weight: $font-weight-regular;
+      }
+
+      .field--name-field-#{$type}-publication-date,
+      .field--name-field-#{$type}-summary {
+        margin-bottom: emRhythm(4);
+      }
+
+      @extend %teaser-preview;
+    }
+  }
+}
+
+.node--type-news,
+.node--type-blog {
+  &.node--view-mode-teaser {
+  }
+}
+
+.news__tags,
+.blog__tags {
+  @include quick-links-list(false);
+  margin-bottom: - 0.5em;
+
+  a {
+    @include button();
+    @include button--secondary();
+
+    .node--view-mode-teaser & {
+      @include button--small();
+    }
+  }
+}

@@ -1,0 +1,23 @@
+uuid: d3252013-87e6-4eb6-af82-661159e9fc94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_html_component_hide_narrow
+    - paragraphs.paragraphs_type.html_component
+id: paragraph.html_component.field_html_component_hide_narrow
+field_name: field_html_component_hide_narrow
+entity_type: paragraph
+bundle: html_component
+label: 'Hide on narrow devices'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

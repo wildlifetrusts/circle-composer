@@ -1,0 +1,16 @@
+uuid: 292e82ba-3eab-4c39-b766-7525ec9ac547
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.accordion_item
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.accordion_item
+target_entity_type_id: paragraph
+target_bundle: accordion_item
+default_langcode: site_default
+language_alterable: true

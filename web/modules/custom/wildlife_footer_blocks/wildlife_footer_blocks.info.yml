@@ -1,0 +1,7 @@
+type: module
+name: Wildlife Footer Blocks
+description: 'Adds the flexible footer blocks on install and management tools for the footer blocks.'
+package: Wildlife
+core: 8.x
+dependencies:
+  - block_content

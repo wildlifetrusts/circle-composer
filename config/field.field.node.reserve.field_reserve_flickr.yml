@@ -1,0 +1,23 @@
+uuid: 91d9bcb6-4838-4261-a158-883de2e77c85
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_flickr
+    - node.type.reserve
+  module:
+    - link
+id: node.reserve.field_reserve_flickr
+field_name: field_reserve_flickr
+entity_type: node
+bundle: reserve
+label: Flickr
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

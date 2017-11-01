@@ -1,0 +1,20 @@
+uuid: 0a24d554-caff-4d20-88ab-f8cb48933f4c
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+    - node
+id: node.field_reserve_photos
+field_name: field_reserve_photos
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

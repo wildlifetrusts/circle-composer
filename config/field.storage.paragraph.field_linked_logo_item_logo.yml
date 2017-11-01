@@ -1,0 +1,20 @@
+uuid: df7c0170-59d3-4f08-875d-94f4c44a80b1
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+    - paragraphs
+id: paragraph.field_linked_logo_item_logo
+field_name: field_linked_logo_item_logo
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

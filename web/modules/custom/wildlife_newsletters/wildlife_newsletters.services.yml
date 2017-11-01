@@ -1,0 +1,5 @@
+services:
+  wildlife_newsletters.route_subscriber:
+   class: Drupal\wildlife_newsletters\Routing\RouteSubscriber
+   tags:
+     - { name: 'event_subscriber' }

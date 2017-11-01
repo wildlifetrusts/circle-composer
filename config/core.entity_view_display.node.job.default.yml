@@ -1,0 +1,245 @@
+uuid: 1998dccb-0df5-4bcf-a9cc-adb02b021ecd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.job.field_external_link
+    - field.field.node.job.field_further_content
+    - field.field.node.job.field_header_image
+    - field.field.node.job.field_header_silhouette
+    - field.field.node.job.field_header_type
+    - field.field.node.job.field_job_application_link
+    - field.field.node.job.field_job_closing_date
+    - field.field.node.job.field_job_contact_details
+    - field.field.node.job.field_job_contract_type
+    - field.field.node.job.field_job_location
+    - field.field.node.job.field_job_reference
+    - field.field.node.job.field_job_reserve
+    - field.field.node.job.field_job_role_type
+    - field.field.node.job.field_job_salary
+    - field.field.node.job.field_job_summary
+    - field.field.node.job.field_job_working_hours
+    - field.field.node.job.field_meta_tags
+    - node.type.job
+  module:
+    - datetime
+    - entity_reference_revisions
+    - fences
+    - field_group
+    - link
+    - metatag
+    - options
+    - text
+    - user
+third_party_settings:
+  field_group:
+    group_standfirst:
+      children:
+        - field_job_summary
+      parent_name: ''
+      weight: 6
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: 'standfirst is-unconstrained'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Standfirst
+id: node.job.default
+targetEntityType: node
+bundle: job
+mode: default
+content:
+  field_further_content:
+    type: entity_reference_revisions_entity_view
+    weight: 10
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: is-unconstrained
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    region: content
+  field_job_application_link:
+    weight: 11
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: link
+    region: content
+  field_job_closing_date:
+    weight: 0
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: display_long_date
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: datetime_default
+    region: content
+  field_job_contact_details:
+    weight: 8
+    label: above
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: field--templated
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: h2
+        fences_label_classes: ''
+    type: text_default
+    region: content
+  field_job_contract_type:
+    weight: 2
+    label: inline
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: span
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: list_default
+    region: content
+  field_job_location:
+    weight: 4
+    label: inline
+    settings:
+      view_mode: string
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_job_reference:
+    weight: 9
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: span
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_job_reserve:
+    weight: 5
+    label: inline
+    settings:
+      view_mode: address_string
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_job_salary:
+    weight: 1
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: span
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_job_summary:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: basic_string
+    region: content
+  field_job_working_hours:
+    weight: 3
+    label: inline
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: span
+        fences_field_item_classes: ''
+        fences_label_tag: span
+        fences_label_classes: ''
+    type: list_default
+    region: content
+  field_meta_tags:
+    weight: 12
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  workbench_moderation_control:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_external_link: true
+  field_header_image: true
+  field_header_silhouette: true
+  field_header_type: true
+  field_job_role_type: true
+  langcode: true
+  links: true

@@ -1,0 +1,42 @@
+uuid: 919df909-9c84-4a77-9319-9827c542f465
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.spotlight_default
+    - image.style.spotlight_double_desk
+    - image.style.spotlight_double_desk_wide
+    - image.style.spotlight_double_lap
+    - image.style.spotlight_palm
+  theme:
+    - wildlife_trust
+id: spotlight_double
+label: 'Spotlight double'
+image_style_mappings:
+  -
+    breakpoint_id: wildlife_trust.desk_wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: spotlight_double_desk_wide
+  -
+    breakpoint_id: wildlife_trust.desk
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: spotlight_double_desk
+  -
+    breakpoint_id: wildlife_trust.lap
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: spotlight_double_lap
+  -
+    breakpoint_id: wildlife_trust.palm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: spotlight_palm
+  -
+    breakpoint_id: wildlife_trust.default
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: spotlight_default
+breakpoint_group: wildlife_trust
+fallback_image_style: spotlight_default

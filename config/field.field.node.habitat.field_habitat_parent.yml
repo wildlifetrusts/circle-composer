@@ -1,0 +1,32 @@
+uuid: 221129ab-5388-4e6a-b169-d4f0299b79c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_habitat_parent
+    - node.type.habitat
+  module:
+    - entity_hierarchy
+id: node.habitat.field_habitat_parent
+field_name: field_habitat_parent
+entity_type: node
+bundle: habitat
+label: Parent
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      habitat: habitat
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+  weight_min: -50
+  weight_max: 50
+  weight_label: Weight
+field_type: entity_reference_hierarchy

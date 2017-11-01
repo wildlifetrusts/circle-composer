@@ -1,0 +1,19 @@
+uuid: 9a493d88-c3d0-487a-9f30-a86f69ba5689
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_title
+    - paragraphs.paragraphs_type.spotlight
+id: paragraph.spotlight.field_spotlight_title
+field_name: field_spotlight_title
+entity_type: paragraph
+bundle: spotlight
+label: Title
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,17 @@
+uuid: f761e961-8e8b-40f9-b4fc-99ea91e613d0
+langcode: en
+status: false
+dependencies: {  }
+id: avonwildlifetrust
+label: 'Avon site split'
+folder: ../config_split/avonwildlifetrust
+module:
+  wildlife_local_customisation: 0
+theme: {  }
+blacklist: {  }
+graylist:
+  - system.site
+  - wildlife_trust.settings
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 5

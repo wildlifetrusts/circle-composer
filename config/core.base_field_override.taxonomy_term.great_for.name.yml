@@ -1,0 +1,18 @@
+uuid: 437fccb7-7513-43a9-808a-31290d76915a
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.great_for
+id: taxonomy_term.great_for.name
+field_name: name
+entity_type: taxonomy_term
+bundle: great_for
+label: Name
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,18 @@
+uuid: c60dbdf8-0d51-4dd2-8064-18df5885e52a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.habitat
+id: node.habitat.created
+field_name: created
+entity_type: node
+bundle: habitat
+label: 'Authored on'
+description: 'The time that the node was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

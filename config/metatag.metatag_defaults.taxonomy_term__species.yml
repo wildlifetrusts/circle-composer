@@ -1,0 +1,8 @@
+uuid: 43dd8760-f5ea-4684-83aa-7ca11566a548
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_term__species
+label: 'Taxonomy term: Species'
+tags:
+  image_src: '[node:field_species_image:0:entity:field_media_image:large]'

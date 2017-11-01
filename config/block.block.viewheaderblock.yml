@@ -1,0 +1,20 @@
+uuid: 35113040-fbd5-4a97-bab4-aa6b6ed09ddc
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_view_headers
+  theme:
+    - wildlife_trust
+id: viewheaderblock
+theme: wildlife_trust
+region: content
+weight: -11
+provider: null
+plugin: view_header_block
+settings:
+  id: view_header_block
+  label: 'View header block'
+  provider: wildlife_view_headers
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,28 @@
+uuid: 73a99860-a500-4114-a790-9805bd027f52
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_headline_hero_silhouette
+    - media_entity.bundle.silhouette
+    - paragraphs.paragraphs_type.headline_hero
+id: paragraph.headline_hero.field_headline_hero_silhouette
+field_name: field_headline_hero_silhouette
+entity_type: paragraph
+bundle: headline_hero
+label: Silhouette
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      silhouette: silhouette
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

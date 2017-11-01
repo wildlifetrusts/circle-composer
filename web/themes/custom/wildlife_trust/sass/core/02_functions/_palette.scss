@@ -1,0 +1,15 @@
+////
+/// @group Colours
+////
+
+/// Defines a function to derive a color given a palette and tone.
+/// @param {String} $palette - The palette colour/name
+/// @param {String} $tone [base] - The tone of the colour
+/// @return {string} - Colour Hexcode
+/// @example scss - Palette function
+/// palette(mono) // #666
+/// palette(mono, dark) // #000
+/// @link http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+@function palette($palette, $tone: 'base') {
+  @return map-get(map-get($palettes, $palette), $tone);
+}

@@ -1,0 +1,14 @@
+
+# Local customisation menu items definition
+entity.local_customisation.collection:
+  title: 'Local customisations'
+  route_name: entity.local_customisation.collection
+  description: 'List Local customisation entities'
+  parent: system.admin_content
+  weight: 100
+
+local_customisation.admin.structure.settings:
+  title: Local customisation settings
+  description: 'Configure Local customisation entities'
+  route_name: local_customisation.settings
+  parent: wildlife_admin.custom_entities.list

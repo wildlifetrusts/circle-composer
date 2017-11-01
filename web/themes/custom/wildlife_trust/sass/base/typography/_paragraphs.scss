@@ -1,0 +1,21 @@
+// Paragraphs
+//
+// Markup: ../../docs/kss-helpers/paragraphs.hbs
+//
+// Styleguide 1.2.0
+p {
+  /* Last Paragraph */
+  &:last-child {
+    margin-bottom: 0;
+  }
+  /* Adjacent Image */
+  & + img {
+    float: left;
+  }
+
+  &.introduction {
+    @include setType(7, ms(1));
+    margin-bottom: emRhythm(6, ms(1));
+    font-family: $adelle-font-family;
+  }
+}

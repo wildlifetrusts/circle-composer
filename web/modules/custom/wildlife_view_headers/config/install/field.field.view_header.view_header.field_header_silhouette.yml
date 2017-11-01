@@ -1,0 +1,29 @@
+uuid: 7935a6cf-0217-40d6-a325-b8e4c64ffd13
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.view_header.field_header_silhouette
+    - media_entity.bundle.silhouette
+  module:
+    - wildlife_view_headers
+id: view_header.view_header.field_header_silhouette
+field_name: field_header_silhouette
+entity_type: view_header
+bundle: view_header
+label: 'Header silhouette'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      silhouette: silhouette
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

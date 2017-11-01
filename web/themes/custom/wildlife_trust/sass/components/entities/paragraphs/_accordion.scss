@@ -1,0 +1,7 @@
+.paragraph--type--accordion {
+  @extend %content-narrow-constrain;
+
+  .field--name-field-accordion-introduction {
+    margin-bottom: emRhythm(6, ms(0));
+  }
+}

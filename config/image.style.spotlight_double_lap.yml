@@ -1,0 +1,16 @@
+uuid: ebbf4964-7bc8-45ef-bf87-abddf9acad36
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_double_lap
+label: 'Spotlight double lap'
+effects:
+  e3d4d55e-864f-497b-bb6e-6468f2bd892c:
+    uuid: e3d4d55e-864f-497b-bb6e-6468f2bd892c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 512
+      height: 512

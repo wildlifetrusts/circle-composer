@@ -1,0 +1,255 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_filters.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_filters_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_filters module.
+    case 'help.page.wildlife_filters':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Filters') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wildlife_filters_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $view = $form_state->get('view');
+  $view_id = $view->id();
+  $current_display = $view->current_display;
+  $filters_service = Drupal::service('wildlife_filters.date_filters');
+  $location = Drupal::request()->get('location');
+  $has_location = isset($location) && $location != '';
+
+  switch ($view_id . ':' . $current_display) {
+    case 'news:listing':
+    case 'news:by_category':
+    case 'news:by_tag':
+    case 'blog:listing':
+    case 'blog:by_category':
+    case 'blog:by_tag':
+      $form['date']['min']['#type'] = 'hidden';
+      $form['date']['max']['#type'] = 'hidden';
+      $form = $filters_service->getDateFormItems($view_id) + $form;
+      array_unshift($form['#submit'], '_wildlife_filters_date_range_filter_submit');
+      break;
+
+    case 'location_search:events':
+    case 'location_search:events_map':
+      if (!$has_location) {
+        $form['location_distance']['#access'] = FALSE;
+      }
+
+      $today = date('d/m/Y');
+      $max_date = date('d/m/Y', strtotime($filters_service->getActiveEventsLatestDate()));
+      $format = 'dd/mm/yyyy';
+      $form['date_from']['#attributes']['placeholder'] = $format;
+      $form['date_to']['#attributes']['placeholder'] = $format;
+      $form['#attached']['library'][] = 'wildlife_trust/event-datepickers';
+      $form['#attached']['drupalSettings']['wildlife_filters']['event_datepicker']['today'] = $today;
+      $form['#attached']['drupalSettings']['wildlife_filters']['event_datepicker']['max_date'] = $max_date;
+      array_unshift($form['#submit'], '_wildlife_filters_event_date_submit');
+
+      break;
+
+    case 'location_search:jobs':
+    case 'location_search:volunteering_opportunities':
+      if (!$has_location) {
+        $form['location_distance']['#access'] = FALSE;
+      }
+      break;
+
+    case 'location_search:trusts':
+      // Hide the Filter button as we only use the header search.
+      $form['actions']['submit']['#attributes']['class'][] = 'visually-hidden';
+
+      if (!$has_location) {
+        $form['#attributes']['class'][] = 'visually-hidden';
+      }
+      break;
+
+    case 'location_search:reserves':
+    case 'location_search:reserves_map':
+      if (!$has_location) {
+        $form['location_distance']['#access'] = FALSE;
+      }
+
+      break;
+
+    case 'location_search:event_reserve':
+      $form['#attributes']['class'][] = 'visually-hidden';
+      break;
+
+    case 'search:global':
+      $form['search']['#attributes']['placeholder'] = t('Enter Search Term');
+      break;
+  }
+
+  // Update submit button ID to prevent duplicates on the page.
+  if (isset($form['actions']['submit'])) {
+    $form['actions']['submit']['#id'] = $view_id . '-' . $current_display . '-submit';
+  }
+
+  // Add small/tertiary button style to all location search forms.
+  if (in_array($view_id, ['location_search', 'blog', 'news']) && isset($form['actions']['reset'])) {
+    $form['actions']['reset']['#attributes']['class'][] = 'button--small';
+    $form['actions']['reset']['#attributes']['class'][] = 'button--tertiary';
+  }
+}
+
+/**
+ * Custom form submit handler for Views Exposed Forms with date range field.
+ */
+function _wildlife_filters_date_range_filter_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $view = $form_state->get('view');
+  $view_id = $view->id();
+  $current_display = $view->current_display;
+  $values = $form_state->getValues();
+
+  switch ($view_id . ':' . $current_display) {
+    case 'news:listing':
+    case 'news:by_category':
+    case 'news:by_tag':
+    case 'blog:listing':
+    case 'blog:by_category':
+    case 'blog:by_tag':
+      if (!empty($values['year'])) {
+        $month_value = $values['month'];
+
+        if ($month_value !== 'any') {
+          // If a month is set, the range should go from the start of the month to
+          // the end of the month for the given year.
+          $date_start_month = strlen($values['month']) == 1 ? '0' . $month_value : $month_value;
+          $date_end_month = $date_start_month;
+        }
+        else {
+          // If no month is set, the range should go from the start of the given year
+          // to the end of the given year.
+          $date_start_month = '01';
+          $date_end_month = '12';
+        }
+
+        $date_start_day = '01';
+        $date_year = $values['year'];
+        $date_end_day = date('t', strtotime($date_year . '-' . $date_end_month . '-01'));
+
+        // Minimum and maximum dates in the format CCYY-MM-DD.
+        $start_date = $date_year . '-' . $date_start_month . '-' . $date_start_day;
+        $end_date = $date_year . '-' . $date_end_month . '-' . $date_end_day;
+
+        $date_min_max = [
+          'min' => $start_date,
+          'max' => $end_date,
+        ];
+
+        $form_state->setValue('date', $date_min_max);
+      }
+      break;
+  }
+}
+
+/**
+ * Custom form submit handler for the Views Exposed Form event date field.
+ */
+function _wildlife_filters_event_date_submit($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $values = $form_state->getValues();
+
+  // For the from and to dates, convert the UI format to the format views wants.
+  $date_fields = ['date_from', 'date_to'];
+  
+  foreach ($date_fields as $date_field) {
+    if (isset($values[$date_field]) && $values[$date_field] != '') {
+      $date_from = DateTime::createFromFormat('d/m/Y', $values[$date_field]);
+      $date_from_submit = $date_from->format('Y-m-d');
+      $form_state->setValue($date_field, $date_from_submit);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view_summary().
+ */
+function wildlife_filters_preprocess_views_view_summary(&$variables) {
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $variables['view'];
+
+  // Update the Author summary block to use the Author's Name as the link text.
+  if (in_array($view->id(), ['blog', 'news'])) {
+    $add_clear = FALSE;
+
+    $active_urls = [
+      // Force system path.
+      \Drupal::url('<current>', [], ['alias' => TRUE]),
+      // Force system path.
+      Url::fromRouteMatch(\Drupal::routeMatch())->setOption('alias', TRUE)->toString(),
+      // Could be an alias.
+      \Drupal::url('<current>'),
+      // Could be an alias.
+      Url::fromRouteMatch(\Drupal::routeMatch())->toString(),
+    ];
+    $active_urls = array_combine($active_urls, $active_urls);
+
+
+    /** @var \Drupal\views\ResultRow $row */
+    foreach ($variables['rows'] as $id => &$row) {
+      $related_entities = $row->_relationship_entities;
+
+      if ($view->current_display == 'authors_summary' && isset($related_entities['field_blog_author'])) {
+        $author_name = $related_entities['field_blog_author']->get('name')->getString();
+        $row->link = $author_name;
+      }
+
+      if (in_array($view->current_display, ['categories_summary', 'tags_summary']) && isset($related_entities['term_node_tid'])) {
+        if (\Drupal::service('module_handler')->moduleExists('pathauto')) {
+          $current_url_parts = explode('/', $row->url);
+          $term_name = $related_entities['term_node_tid']->get('name')->getString();
+          $term_url = \Drupal::service('pathauto.alias_cleaner')->cleanString($term_name);
+          $current_url_parts[3] = $term_url;
+          $row->url = implode('/', $current_url_parts);
+        }
+      }
+
+      // If the view is being generated by AJAX a better URL match is needed.
+      if (\Drupal::url('<current>') == '/views/ajax') {
+        $view_args = isset($_REQUEST['view_args']) ? explode('/', $_REQUEST['view_args']) : NULL;
+        $view_path =  isset($_REQUEST['view_base_path']) ? $_REQUEST['view_base_path'] : '';
+
+        foreach ($view_args as $arg) {
+          $view_path = preg_replace('/%/', $arg, $view_path, 1);
+        }
+
+        if ($row->url == '/' . $view_path) {
+          $row->active = TRUE;
+        }
+      }
+      else {
+        $variables['rows'][$id]->active = isset($active_urls[$row->url]);
+      }
+
+      // Set a value to add the clear button if at least one row is active.
+      if ($row->active) {
+        $add_clear = TRUE;
+      }
+    }
+
+    if ($add_clear) {
+      $options['attributes']['class'] = ['button', 'button--small', 'button--tertiary'];
+      $variables['clear'] = Link::createFromRoute(t('Return to main'), 'view.' . $view->id() . '.listing', [], $options);
+    }
+  }
+}

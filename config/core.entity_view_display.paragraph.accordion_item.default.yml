@@ -1,0 +1,61 @@
+uuid: be0b3247-4177-4d76-ac12-d1cf905d6d73
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.accordion_item.field_accordion_item_content
+    - field.field.paragraph.accordion_item.field_accordion_item_title
+    - paragraphs.paragraphs_type.accordion_item
+  module:
+    - entity_reference_revisions
+    - fences
+    - field_group
+third_party_settings:
+  field_group:
+    group_details:
+      children:
+        - field_accordion_item_title
+        - field_accordion_item_content
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: details
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Details
+id: paragraph.accordion_item.default
+targetEntityType: paragraph
+bundle: accordion_item
+mode: default
+content:
+  field_accordion_item_content:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_accordion_item_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: summary
+        fences_field_classes: ''
+        fences_field_item_tag: h3
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+hidden: {  }

@@ -1,0 +1,72 @@
+uuid: 9ae821c9-a543-4edc-9459-7cbf91a7338f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_statistic_item
+    - paragraphs.paragraphs_type.statistic_item
+    - paragraphs.paragraphs_type.statistics
+  module:
+    - entity_reference_revisions
+id: paragraph.statistics.field_statistic_item
+field_name: field_statistic_item
+entity_type: paragraph
+bundle: statistics
+label: 'Statistic item'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      statistic_item: statistic_item
+    target_bundles_drag_drop:
+      accordion:
+        weight: 16
+        enabled: false
+      accordion_item:
+        weight: 17
+        enabled: false
+      attached_files:
+        weight: 18
+        enabled: false
+      headline_hero:
+        weight: 19
+        enabled: false
+      image:
+        weight: 20
+        enabled: false
+      linked_logo_item:
+        weight: 21
+        enabled: false
+      linked_logos:
+        weight: 22
+        enabled: false
+      quick_links:
+        weight: 23
+        enabled: false
+      rich_text:
+        weight: 24
+        enabled: false
+      section:
+        weight: 25
+        enabled: false
+      spotlight:
+        weight: 26
+        enabled: false
+      spotlight_group:
+        weight: 27
+        enabled: false
+      statistic_item:
+        enabled: true
+        weight: 28
+      statistics:
+        weight: 29
+        enabled: false
+      video:
+        weight: 30
+        enabled: false
+field_type: entity_reference_revisions

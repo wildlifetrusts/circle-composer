@@ -1,0 +1,83 @@
+.node--type-trust {
+  &.node--view-mode-full {
+    @extend %clearfix;
+    @include keyline('all');
+    background-color: palette(mono, x-light);
+    padding: 1em;
+
+    .node__title a {
+      text-decoration: none;
+    }
+
+    &.node--preview {
+      @include spacing('x-large', 'top');
+    }
+  }
+
+  .field--name-field-trust-site-url,
+  .field--name-field-trust-membership-link {
+    display: inline-block;
+    margin-right: 1em;
+
+    a {
+      @include button();
+    }
+  }
+
+  .field--name-field-trust-site-url a {
+    @include button--secondary();
+  }
+
+  .field--name-field-trust-membership-link a {
+    @include button--tertiary();
+  }
+
+  .field--name-field-trust-phone-number,
+  .field--name-field-trust-email {
+    padding-left: 40px;
+    background-position: 0 50%;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .field--name-field-trust-image {
+    margin-bottom: 1em;
+
+    @include add-breakpoint('palm-and-up') {
+      margin-bottom: 0;
+    }
+
+    @include add-breakpoint('palm-to-lap') {
+      max-width: percentage(1/3);
+      float: left;
+      margin-right: 1em;
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      @include float-span(4);
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .node__detail {
+    margin-top: emRhythm(2, ms(0));
+
+    @include add-breakpoint('palm-to-lap') {
+      overflow: hidden;
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      @include float-span(8, 'last');
+    }
+
+    .field {
+      margin-bottom: emRhythm(3, ms(0));
+    }
+  }
+}

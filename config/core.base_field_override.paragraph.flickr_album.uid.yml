@@ -1,0 +1,20 @@
+uuid: f66c8f46-a61b-4863-b80f-0a713b1a5948
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.flickr_album
+id: paragraph.flickr_album.uid
+field_name: uid
+entity_type: paragraph
+bundle: flickr_album
+label: 'Authored by'
+description: 'The user ID of the paragraphs author.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: 'Drupal\paragraphs\Entity\Paragraph::getCurrentUserId'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

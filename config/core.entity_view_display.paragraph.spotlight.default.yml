@@ -1,0 +1,114 @@
+uuid: 9a6e472e-8e1f-49ef-9701-146f5fc671fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.spotlight.field_spotlight_button_type
+    - field.field.paragraph.spotlight.field_spotlight_detail
+    - field.field.paragraph.spotlight.field_spotlight_display_type
+    - field.field.paragraph.spotlight.field_spotlight_image
+    - field.field.paragraph.spotlight.field_spotlight_image_type
+    - field.field.paragraph.spotlight.field_spotlight_label
+    - field.field.paragraph.spotlight.field_spotlight_link
+    - field.field.paragraph.spotlight.field_spotlight_link_appearance
+    - field.field.paragraph.spotlight.field_spotlight_silhouette
+    - field.field.paragraph.spotlight.field_spotlight_text_colour
+    - field.field.paragraph.spotlight.field_spotlight_title
+    - field.field.paragraph.spotlight.field_spotlight_title_size
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - fences
+    - link
+    - text
+id: paragraph.spotlight.default
+targetEntityType: paragraph
+bundle: spotlight
+mode: default
+content:
+  field_spotlight_detail:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: spotlight__summary
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: text_default
+    region: content
+  field_spotlight_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: spotlight_double
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_spotlight_label:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: span
+        fences_field_classes: spotlight__meta
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_spotlight_link:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: link
+    region: content
+  field_spotlight_title:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: h2
+        fences_field_classes: spotlight__title
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+hidden:
+  field_spotlight_button_type: true
+  field_spotlight_display_type: true
+  field_spotlight_image_type: true
+  field_spotlight_link_appearance: true
+  field_spotlight_silhouette: true
+  field_spotlight_text_colour: true
+  field_spotlight_title_size: true

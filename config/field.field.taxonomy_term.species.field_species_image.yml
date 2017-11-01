@@ -1,0 +1,28 @@
+uuid: 758e1ed9-b83c-43e6-af8f-d8e44e199c6b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_species_image
+    - media_entity.bundle.image
+    - taxonomy.vocabulary.species
+id: taxonomy_term.species.field_species_image
+field_name: field_species_image
+entity_type: taxonomy_term
+bundle: species
+label: Image
+description: 'This image will be used on the Species Explorer view.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

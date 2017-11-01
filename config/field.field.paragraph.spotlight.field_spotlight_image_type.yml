@@ -1,0 +1,23 @@
+uuid: 6e6f8067-9486-475f-a255-83bbb52fa486
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_image_type
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - options
+id: paragraph.spotlight.field_spotlight_image_type
+field_name: field_spotlight_image_type
+entity_type: paragraph
+bundle: spotlight
+label: 'Image type'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: image
+default_value_callback: ''
+settings: {  }
+field_type: list_string

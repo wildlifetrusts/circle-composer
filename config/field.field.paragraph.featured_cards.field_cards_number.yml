@@ -1,0 +1,23 @@
+uuid: e8ee91db-5c75-496e-80f4-22cef702b2fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cards_number
+    - paragraphs.paragraphs_type.featured_cards
+  module:
+    - options
+id: paragraph.featured_cards.field_cards_number
+field_name: field_cards_number
+entity_type: paragraph
+bundle: featured_cards
+label: 'Number of items'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: '3'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,24 @@
+uuid: f3fb667c-634e-4440-ac00-bc825d88584b
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.menu_section_default
+    - image.style.menu_section_desk_wide
+  theme:
+    - wildlife_trust
+id: menu_section
+label: 'Menu section'
+image_style_mappings:
+  -
+    breakpoint_id: wildlife_trust.desk_wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: menu_section_desk_wide
+  -
+    breakpoint_id: wildlife_trust.desk
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: menu_section_default
+breakpoint_group: wildlife_trust
+fallback_image_style: menu_section_default

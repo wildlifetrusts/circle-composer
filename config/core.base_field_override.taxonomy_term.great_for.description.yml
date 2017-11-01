@@ -1,0 +1,20 @@
+uuid: e86b4a78-da17-4abe-aee6-4384faae5999
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.great_for
+  module:
+    - text
+id: taxonomy_term.great_for.description
+field_name: description
+entity_type: taxonomy_term
+bundle: great_for
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

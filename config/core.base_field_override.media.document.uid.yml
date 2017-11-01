@@ -1,0 +1,20 @@
+uuid: 59af52ca-5921-42b2-adc3-087ead20bb0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.document
+id: media.document.uid
+field_name: uid
+entity_type: media
+bundle: document
+label: 'Publisher ID'
+description: 'The user ID of the media publisher.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: 'Drupal\media_entity\Entity\Media::getCurrentUserId'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

@@ -1,0 +1,9 @@
+uuid: 301cd9ae-eca4-431c-a13e-8d17c55f70a7
+langcode: en
+status: true
+dependencies: {  }
+name: 'News category'
+vid: news_category
+description: 'Categorisation for the News content type.'
+hierarchy: 0
+weight: 0

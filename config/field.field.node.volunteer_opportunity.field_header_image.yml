@@ -1,0 +1,28 @@
+uuid: e520cc73-bf7b-4c41-a495-f8fd6453c00c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_image
+    - media_entity.bundle.image
+    - node.type.volunteer_opportunity
+id: node.volunteer_opportunity.field_header_image
+field_name: field_header_image
+entity_type: node
+bundle: volunteer_opportunity
+label: 'Header image'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

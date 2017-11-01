@@ -1,0 +1,4 @@
+services:
+  wildlife_habitat_hierarchy.habitat_relations:
+    class: Drupal\wildlife_habitat_hierarchy\WildlifeHabitatRelations
+    arguments: ['@entity_hierarchy.nested_set_storage_factory', '@entity_hierarchy.nested_set_node_factory', '@entity_hierarchy.entity_tree_node_mapper', '@entity_type.manager']

@@ -1,0 +1,13 @@
+.flag {
+  display: block;
+  padding: 0.5em;
+  background-color: palette(mono, dark);
+  color: palette(mono, x-light);
+  text-transform: uppercase;
+  text-align: center;
+  @include setType(4, ms(-1));
+
+  &--negative {
+    background-color: palette(orange);
+  }
+}

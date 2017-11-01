@@ -1,0 +1,33 @@
+.form-text,
+.form-textarea,
+.form-password,
+.form-email,
+.form-number,
+.form-time,
+.form-select {
+  max-width: 100%;
+  @include keyline('all');
+  background-color: palette(mono, x-light);
+  color: palette(mono, dark);
+  border-radius: 0;
+  -webkit-appearance: none;
+
+  &:focus {
+    outline: none;
+    @extend %fake-focus-outline;
+  }
+}
+
+.form-textarea {
+  padding: 0.8125em;
+}
+
+.form-text,
+.form-password,
+.form-email,
+.form-number,
+.form-time,
+.form-select {
+  padding: 0 0.8125em;
+  height: 43px;
+}

@@ -1,0 +1,18 @@
+'administer structure':
+  title: Administer structure
+  description: Administer the Structure section of the site.
+'administer configuration':
+  title: Administer configuration
+  description: Administer the Configuration section of the site.
+'access all configuration pages':
+  title: Access all configuration pages
+  description: Access all of the Configuration section child pages.
+'administer custom entity settings':
+  title: Administer custom entity settins
+  description: Access to the administer settings pages for custom entities.
+'administer sitemap settings admin section':
+  title: 'Administer sitemap settings admin section'
+  description: 'Administer Simple XML sitemap settings from the admin pages.'
+'administer site settings':
+  title: Administer basic site settings
+  description: Administer the basic site settings such as front page and email.

@@ -1,0 +1,18 @@
+.node--view-mode-search-result {
+  &.node--preview {
+    @extend %content-narrow-constrain--left;
+  }
+
+  .node__title {
+    @include setType(6, 22px);
+    margin-bottom: $base-vertical-unit;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .node__content {
+    @include setType(6, 16px);
+  }
+}

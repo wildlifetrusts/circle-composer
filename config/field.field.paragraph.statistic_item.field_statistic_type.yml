@@ -1,0 +1,23 @@
+uuid: c5fe9683-f774-47c7-8046-159c097aa16b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_statistic_type
+    - paragraphs.paragraphs_type.statistic_item
+  module:
+    - options
+id: paragraph.statistic_item.field_statistic_type
+field_name: field_statistic_type
+entity_type: paragraph
+bundle: statistic_item
+label: 'Statistic type'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: static
+default_value_callback: ''
+settings: {  }
+field_type: list_string

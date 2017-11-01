@@ -1,0 +1,18 @@
+uuid: 16639c21-217c-4a94-a669-0e80a1cb539f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.species
+id: node.species.title
+field_name: title
+entity_type: node
+bundle: species
+label: 'English/Common name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

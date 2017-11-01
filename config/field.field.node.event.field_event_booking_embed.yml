@@ -1,0 +1,27 @@
+uuid: 87f1ebc9-1e94-418d-a17e-bda2df4ef9f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_booking_embed
+    - node.type.event
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: '0'
+    full_html: full_html
+    plain_text: '0'
+id: node.event.field_event_booking_embed
+field_name: field_event_booking_embed
+entity_type: node
+bundle: event
+label: 'Third party booking embed code'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

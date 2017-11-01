@@ -1,0 +1,21 @@
+uuid: 37c71c8e-1a0b-46d6-9cf8-15816aad9a74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_contract_type
+    - node.type.job
+  module:
+    - options
+id: node.job.field_job_contract_type
+field_name: field_job_contract_type
+entity_type: node
+bundle: job
+label: 'Contract type'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

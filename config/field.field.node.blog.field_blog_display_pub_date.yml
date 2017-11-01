@@ -1,0 +1,23 @@
+uuid: 9955e7e8-40a3-47b5-abea-e8617a62eb08
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blog_display_pub_date
+    - node.type.blog
+id: node.blog.field_blog_display_pub_date
+field_name: field_blog_display_pub_date
+entity_type: node
+bundle: blog
+label: 'Display publication date'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,30 @@
+uuid: 61d1095d-043c-4057-808b-2b030e007d95
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.gallery_image_default
+    - image.style.gallery_image_lap
+    - image.style.gallery_image_palm
+  theme:
+    - wildlife_trust
+id: gallery_image
+label: 'Gallery image'
+image_style_mappings:
+  -
+    breakpoint_id: wildlife_trust.lap
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: gallery_image_lap
+  -
+    breakpoint_id: wildlife_trust.palm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: gallery_image_palm
+  -
+    breakpoint_id: wildlife_trust.default
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: gallery_image_default
+breakpoint_group: wildlife_trust
+fallback_image_style: gallery_image_default

@@ -1,0 +1,23 @@
+uuid: f5f6e4a3-0562-4bb2-b221-ffa9099a67c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_external_link
+    - node.type.reserve
+  module:
+    - link
+id: node.reserve.field_external_link
+field_name: field_external_link
+entity_type: node
+bundle: reserve
+label: 'External Link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 1
+field_type: link

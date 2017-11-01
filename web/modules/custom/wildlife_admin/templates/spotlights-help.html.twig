@@ -1,0 +1,246 @@
+<p>To create a Spotlight component:</p>
+
+<ol>
+  <li>Choose "Add Spotlight Group" from the component drop-down.</li>
+  <li>Fill in the "Spotlight" admin form. You can add up to 4 spotlights per group using the "Add Spotlight" button.</li>
+  <li>Save the page.</li>
+</ol>
+
+<h3>Contents:</h3>
+<ul>
+  <li><a href="#spotlight-content">Spotlight content</a></li>
+  <li><a href="#spotlight-link-settings">Spotlight link settings</a></li>
+  <li><a href="#spotlight-display">Spotlight display</a></li>
+  <li><a href="#spotlight-examples">Further examples</a></li>
+</ul>
+<h2 id="spotlight-content" style="padding-top: 80px;">Spotlight content</h2>
+<p>You must choose a <strong>Title</strong> and <strong>Title font size</strong>, but <strong>Label</strong> and <strong>Detail</strong> are optional.<br />
+  This example shows how the <strong>Label</strong>, <strong>Title</strong>, <strong>Detail</strong> and <strong>Link text</strong> fields are displayed.<br />
+You can adjust the <strong>Title</strong> size using the "Title font size".</p>
+
+<figure style="margin-left: 0; margin-right: 0;">
+  <div class="spotlight spotlight--single spotlight--overlay spotlight--white" style="background-image: url('https://unsplash.it/1044/680?image=18');">
+    <div class="inner">
+      <div class="spotlight__details">
+        <span class="spotlight__meta">Label</span>
+        <h2 class="spotlight__title">This is the "Title" field for this spotlight</h2>
+        <p class="spotlight__summary">This is the "Detail" field for this spotlight. You can add whatever text you like here.</p>
+        <a href="#" class="button">Spotlight link text</a>
+      </div>
+    </div>
+  </div>
+  <figcaption class="field--name-field-media-caption">Above is a single Spotlight in a Spotlight Group with <strong>Title font size</strong> set to "Small", <strong>Link Appearance</strong> set to "Button", and <strong>Button colour</strong> set to "Primary (black)"</figcaption>
+</figure>
+
+<h2 id="spotlight-link-settings" style="padding-top: 80px;">Spotlight link settings</h2>
+<p>When you start typing in the Link <strong>URL</strong> field to add a link, the <strong>Link Appearance</strong> and <strong>Button colour</strong> fields will appear. Here is an explanation of the link settings fields:</p>
+<ul>
+  <li>Link
+    <ul>
+      <li><strong>URL:</strong> When you start typing in this field to add the destination for the link, the <strong>Link Appearance</strong> and <strong>Button colour</strong> fields will appear. The URL field</li>
+      <li><strong>Link text:</strong> This text will appear as the Button text when "Button" is set as <strong>Link Appearance</strong>. If "Whole block" is selected, this text will be added as the "title" attribute to the whole block which is useful for screen-readers and will usually appear when a visitor hovers over the spotlight.</li>
+    </ul>
+  </li>
+  <li>Link Appearance
+    <ul>
+      <li><strong>Button:</strong> Adds a call to action button below the other spotlight content.</li>
+      <li><strong>Whole block:</strong> Makes the whole spotlight a link. The background image (if there is one) will have a zoom effect when these blocks are hovered over.</li>
+    </ul>
+  </li>
+  <li><strong>Button colour:</strong> There are 3 options for button colour:<br />
+    <a class="button" href="#">Primary (black)</a> <a class="button button--secondary" href="#">Secondary (white)</a> <a class="button button--tertiary" href="#">Tertiary (orange)</a></li>
+    </ul>
+  </li>
+</ul>
+
+<figure style="margin-left: 0; margin-right: 0;">
+  <div class="spotlight spotlight--single spotlight--overlay spotlight--white spotlight--link-block" style="background-image: url('https://unsplash.it/1044/680?image=152');">
+    <a href="#" class="inner">
+      <div class="spotlight__details">
+        <span class="spotlight__meta">Event</span>
+        <h2 class="spotlight__title spotlight__title--large">Sed ut perspiciatis unde perspiciatis un</h2>
+        <p class="spotlight__summary">Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempor incididunt</p>
+      </div>
+    </a>
+  </div>
+  <figcaption class="field--name-field-media-caption">Above is a single Spotlight in a Spotlight Group with <strong>Title font size</strong> set to "Large" and <strong>Link Appearance</strong> set to "Whole block".</figcaption>
+</figure>
+
+<h2 id="spotlight-display" style="padding-top: 80px;">Spotlight display</h2>
+<p>This tab allows you to make visual changes to the content you have already added.</p>
+<ul>
+  <li><strong>Text colour:</strong> Choose the colour of the text. It will have a drop-shadow added to help the text show up over the image. You should try to choose images well-suited to be backgrounds, i.e. No text on the image, an abstract image or one without too much detail, an image which will provide good contrast for the text.
+  </li>
+  <li>Display type:
+    <ul>
+      <li><strong>Image overlay:</strong> The content will be overlaid on to an image background.</li>
+      <li><strong>Image and colour block:</strong> The content will appear in a coloured block alongside an image.<br />
+        The colour of the block will alternate if more than one spotlight with display type "Image and colour block" appear in the same Spotlight Group.<br />
+        <strong>NOTE:</strong> Multiple spotlights added to a Spotlight Group where at least one has display type "Image and colour block" will stack on top of eachother instead of appearing alongside eachother.
+      </li>
+    </ul>
+  </li>
+  <li>Image type (only appears if "Image overlay" is selected as the <strong>Display type</strong>).
+    <ul>
+      <li><strong>Background image:</strong> Choose an image from the Media library or add a new image.</li>
+      <li><strong>Silhouette:</strong> Choose a silhouette from the Silhouette library.</li>
+    </ul>
+  </li>
+</ul>
+
+<figure style="margin-left: 0; margin-right: 0;">
+  <div class="spotlights">
+    <div class="spotlights__item">
+      <div class="spotlight--separate spotlight--white spotlight--single spotlight">
+        <div class="inner">
+          <div class="field--name-field-spotlight-image">
+            <article class="media media-image view-mode-spotlight-double">
+              <img src="https://unsplash.it/683/680?image=18" alt="Spotlight Single 2">
+            </article>
+          </div>
+          <div class="spotlight__details">
+            <span class="spotlight__meta ">Volunteer</span>
+            <h2 class="spotlight__title spotlight__title--small">Do something great and volunteer with us</h2>
+            <p class="spotlight__summary">This Spotlight has its Text colour set to "White".</p>
+            <a href="/" class="button">Find out more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="spotlights__item">
+      <div class="spotlight--separate spotlight--black spotlight--single spotlight--link-block spotlight">
+        <a class="inner" href="#" title="Find out more">
+          <div class="field--name-field-spotlight-image">
+            <article class="media media-image view-mode-spotlight-double">
+              <img src="https://unsplash.it/683/680?image=152" alt="Spotlight Single 2">
+            </article>
+          </div>
+          <div class="spotlight__details">
+            <span class="spotlight__meta ">Volunteer</span>
+            <h2 class="spotlight__title spotlight__title--small">Do something great and volunteer with us</h2>
+            <p class="spotlight__summary">Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempor incididunt</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <figcaption class="field--name-field-media-caption">Above are a two Spotlights in a Spotlight Group with <strong>Display type</strong> set to "Image and colour block". The Spotlight's <strong>Link Appearance</strong> set to "Button" and "Whole block" in the first and second respectively.</figcaption>
+</figure>
+
+<h2 id="spotlight-examples" style="padding-top: 80px;">{{ 'Further examples'|t }}</h2>
+<p><strong>NOTE:</strong> All spotlights "breakout" of the constrained content container. The examples above were constrained for brevity, but those below are how they would actually appear.</p>
+
+<h3>Two Spotlights in a Spotlight Group</h3>
+<figure style="margin-left: 0; margin-right: 0;">
+  <div class="spotlights spotlights--double breakout">
+    <div class="spotlights__item">
+      <div class="spotlight spotlight--overlay spotlight--double spotlight--white" style="background-image: url('https://unsplash.it/683/680?image=18');">
+        <div class="inner">
+          <div class="spotlight__details">
+            <span class="spotlight__meta">Event</span>
+            <h2 class="spotlight__title">Sed ut perspiciatis unde perspiciatis un</h2>
+            <p class="spotlight__summary">Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempor incididunt</p>
+            <a href="#" class="button">Spotlight CTA</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="spotlights__item">
+      <div class="spotlight spotlight--overlay spotlight--double spotlight--white spotlight--link-block" style="background-image: url('https://unsplash.it/683/680?image=152');">
+        <a href="#" class="inner">
+          <div class="spotlight__details">
+            <span class="spotlight__meta">Event</span>
+            <h2 class="spotlight__title">Sed ut perspiciatis unde perspiciatis un</h2>
+            <p class="spotlight__summary">Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempor incididunt</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <figcaption class="field--name-field-media-caption">Two Spotlights one with with a button link and one with a whole block link.</figcaption>
+</figure>
+
+<h3>Three Spotlights in a Spotlight Group</h3>
+<figure style="margin-left: 0; margin-right: 0;">
+  <div class="spotlights spotlights--triple breakout">
+    <div class="spotlights__item">
+      <div class="spotlight spotlight--overlay spotlight--triple spotlight--white spotlight--link-block" style="background-image: url('https://unsplash.it/456/680?image=18');">
+        <a href="#" class="inner">
+          <div class="spotlight__details">
+            <span class="spotlight__meta">Campaign</span>
+            <h2 class="spotlight__title">Defend nature</h2>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="spotlights__item">
+      <div class="spotlight spotlight--overlay spotlight--triple spotlight--white spotlight--link-block" style="background-image: url('https://unsplash.it/456/680?image=152');">
+        <a href="#" class="inner">
+          <div class="spotlight__details">
+            <span class="spotlight__meta">Blog</span>
+            <h2 class="spotlight__title">Badger cull petition response</h2>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="spotlights__item">
+      <div class="spotlight spotlight--overlay spotlight--triple spotlight--white spotlight--link-block" style="background-image: url('https://unsplash.it/456/680?image=17');">
+        <a href="#" class="inner">
+          <div class="spotlight__details">
+            <span class="spotlight__meta">News</span>
+            <h2 class="spotlight__title">Species at risk of extinction</h2>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <figcaption class="field--name-field-media-caption">Three Spotlights all with whole block links.</figcaption>
+</figure>
+
+<h3>Four Spotlights in a Spotlight Group</h3>
+<figure style="margin-left: 0; margin-right: 0;">
+  <div class="spotlights spotlights--quadruple breakout">
+    <div class="spotlights__item">
+      <div class="spotlight spotlight--overlay spotlight--quadruple spotlight--white spotlight--link-block" style="background-image: url('https://unsplash.it/456/680?image=18');">
+        <a href="#" class="inner">
+          <div class="spotlight__details">
+            <span class="spotlight__meta">Spring</span>
+            <h2 class="spotlight__title">Lorem ipsum dolor sit amet</h2>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="spotlights__item">
+      <div class="spotlight spotlight--overlay spotlight--quadruple spotlight--white spotlight--link-block" style="background-image: url('https://unsplash.it/456/680?image=152');">
+        <a href="#" class="inner">
+          <div class="spotlight__details">
+            <span class="spotlight__meta">Summer</span>
+            <h2 class="spotlight__title">Lorem ipsum dolor sit amet</h2>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="spotlights__item">
+      <div class="spotlight spotlight--overlay spotlight--quadruple spotlight--white spotlight--link-block" style="background-image: url('https://unsplash.it/456/680?image=17');">
+        <a href="#" class="inner">
+          <div class="spotlight__details">
+            <span class="spotlight__meta">Autumn</span>
+            <h2 class="spotlight__title">Lorem ipsum dolor sit amet</h2>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="spotlights__item">
+      <div class="spotlight spotlight--overlay spotlight--quadruple spotlight--white spotlight--link-block" style="background-image: url('https://unsplash.it/456/680?image=125');">
+        <a href="#" class="inner">
+          <div class="spotlight__details">
+            <span class="spotlight__meta">Winter</span>
+            <h2 class="spotlight__title">Lorem ipsum dolor sit amet</h2>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <figcaption class="field--name-field-media-caption">Four Spotlights all with whole block links. Four Spotlights can be useful for Seasonal Highlights type blocks.</figcaption>
+</figure>
+

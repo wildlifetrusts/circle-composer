@@ -1,0 +1,28 @@
+uuid: 7fd12de3-3e99-446f-87c2-b4e9ca20b2a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_linked_logo_item_logo
+    - media_entity.bundle.image
+    - paragraphs.paragraphs_type.linked_logo_item
+id: paragraph.linked_logo_item.field_linked_logo_item_logo
+field_name: field_linked_logo_item_logo
+entity_type: paragraph
+bundle: linked_logo_item
+label: Logo
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

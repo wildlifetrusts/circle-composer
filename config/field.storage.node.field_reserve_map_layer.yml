@@ -1,0 +1,33 @@
+uuid: a99f09c3-e05d-4a47-9088-d1e130d8d946
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_reserve_map_layer
+field_name: field_reserve_map_layer
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: roadmap
+      label: Roadmap
+    -
+      value: satellite
+      label: Satellite
+    -
+      value: hybrid
+      label: Hybrid
+    -
+      value: terrain
+      label: Terrain
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

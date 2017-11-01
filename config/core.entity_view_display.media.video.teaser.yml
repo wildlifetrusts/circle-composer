@@ -1,0 +1,33 @@
+uuid: 34de3801-d8b3-4e3a-9c56-c427a375ee37
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.teaser
+    - field.field.media.video.field_media_caption
+    - field.field.media.video.field_media_video
+    - image.style.thumbnail
+    - media_entity.bundle.video
+  module:
+    - image
+id: media.video.teaser
+targetEntityType: media
+bundle: video
+mode: teaser
+content:
+  thumbnail:
+    type: image
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_media_caption: true
+  field_media_video: true
+  langcode: true
+  name: true
+  uid: true

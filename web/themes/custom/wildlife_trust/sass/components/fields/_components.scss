@@ -1,0 +1,18 @@
+.field--name-field-components,
+.field--name-field-further-content {
+  @extend %clearfix;
+
+  > .paragraph--no-margin:last-child {
+    @include spacing('large', 'bottom');
+  }
+}
+
+.field--name-field-further-content {
+  clear: both;
+
+  .node:not(.node--type-blog):not(.node--type-news) & {
+    > .paragraph:first-child {
+      @include spacing('large', 'top');
+    }
+  }
+}

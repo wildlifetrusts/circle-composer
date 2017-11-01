@@ -1,0 +1,18 @@
+uuid: 67b1124a-14bd-4a80-81bf-19add007c4b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.species
+id: taxonomy_term.species.name
+field_name: name
+entity_type: taxonomy_term
+bundle: species
+label: Name
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,27 @@
+uuid: 919e9cb1-84b3-43d0-9138-600f7b81e417
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_about
+    - node.type.reserve
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.reserve.field_reserve_about
+field_name: field_reserve_about
+entity_type: node
+bundle: reserve
+label: 'About the reserve'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

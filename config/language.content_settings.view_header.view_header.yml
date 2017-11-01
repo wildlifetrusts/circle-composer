@@ -1,0 +1,15 @@
+uuid: 045773cd-1411-4bb3-bc56-d0940e79be84
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_translation
+    - wildlife_view_headers
+third_party_settings:
+  content_translation:
+    enabled: true
+id: view_header.view_header
+target_entity_type_id: view_header
+target_bundle: view_header
+default_langcode: site_default
+language_alterable: true

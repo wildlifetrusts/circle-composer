@@ -1,0 +1,19 @@
+uuid: ef58b240-ceaf-40c8-985b-081477a1d916
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_hearing_loop
+    - node.type.event
+id: node.event.field_event_hearing_loop
+field_name: field_event_hearing_loop
+entity_type: node
+bundle: event
+label: 'Hearing loop'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

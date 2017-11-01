@@ -1,0 +1,36 @@
+uuid: 60e8e340-1996-41d5-8721-8b71d7525dae
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_event_suitable_for
+field_name: field_event_suitable_for
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: families
+      label: Families
+    -
+      value: children
+      label: Children
+    -
+      value: adults
+      label: Adults
+    -
+      value: experts
+      label: Experts
+    -
+      value: beginners
+      label: Beginners
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

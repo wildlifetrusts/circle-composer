@@ -1,0 +1,106 @@
+.block--rrssb {
+  position: fixed;
+  left: 0;
+
+  &,
+  &.is-horizontal {
+    bottom: 0;
+    z-index: 5;
+    width: 100%;
+    height: 3em;
+    transition: height 0.4s ease-in-out;
+  }
+
+
+  @include add-breakpoint('palm-and-up') {
+    &:not(.is-horizontal) {
+      height: auto;
+      width: 3em;
+      top: 250px;
+      bottom: auto;
+      transition: top 250ms ease-in-out;
+
+      .toolbar-horizontal & {
+        top: 375px;
+      }
+
+      .toolbar-horizontal.toolbar-tray-open & {
+        top: 400px;
+      }
+    }
+  }
+
+  &.is-hidden {
+    &.is-horizontal {
+      height: 0;
+    }
+    @include add-breakpoint('up-to-palm') {
+      height: 0;
+    }
+  }
+}
+
+article ~ .block--rrssb {
+  position: relative;
+  z-index: 1;
+}
+
+.rrssb {
+  height: 3em;
+  font-size: inherit;
+
+  @include add-breakpoint('palm-and-up') {
+    .block--rrssb:not(.is-horizontal) & {
+      height: 100%;
+    }
+  }
+
+  .rrssb-buttons {
+    display: block;
+    margin-bottom: 0;
+    background-color: palette(mono, mid-light);
+    text-align: center;
+  }
+
+  li {
+    padding: 0;
+
+    @include add-breakpoint('palm-and-up') {
+      .block--rrssb:not(.is-horizontal) & {
+        display: block;
+      }
+    }
+
+    a {
+      width: 3em;
+      height: 3em;
+      border-radius: 0;
+    }
+  }
+
+  .rrssb-icon {
+    position: relative;
+    left: 20%;
+    top: 20%;
+    height: 60%;
+
+    > span,
+    svg {
+      display: block;
+    }
+
+    > span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 100% auto;
+      background-position: 50% 50%;
+    }
+  }
+
+  .rrssb-text {
+    @extend %element-invisible;
+  }
+}

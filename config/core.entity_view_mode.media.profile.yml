@@ -1,0 +1,10 @@
+uuid: dd266d4a-347a-4a69-a0a1-66c865440db7
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.profile
+label: Profile
+targetEntityType: media
+cache: true

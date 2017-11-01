@@ -1,0 +1,202 @@
+uuid: 74983b79-d348-4907-b2de-4be744641f59
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+id: national_habitat
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: national
+label: 'Import habitats from national Wildlife Trust site'
+source:
+  plugin: wildlife_sharing_url_title
+  track_changes: true
+  data_fetcher_plugin: http
+  data_parser_plugin: wildlife_sharing_json_title
+  path: /jsonapi/node/habitat
+  pager:
+    type: urls
+    selector: 'links/next'
+  ids:
+    uuid:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: nid
+      label: Nid
+      selector: /attributes/nid
+    -
+      name: vid
+      label: Vid
+      selector: /attributes/vid
+    -
+      name: uuid
+      label: Uuid
+      selector: /attributes/uuid
+    -
+      name: title
+      label: Title
+      selector: /attributes/title
+    -
+      name: created
+      label: Created
+      selector: /attributes/created
+    -
+      name: changed
+      label: Changed
+      selector: /attributes/changed
+    -
+      name: status
+      label: Status
+      selector: /attributes/status
+    -
+      name: sticky
+      label: Sticky
+      selector: /attributes/sticky
+    -
+      name: promote
+      label: Promote
+      selector: /attributes/promote
+    -
+      name: default_langcode
+      label: 'Default Langcode'
+      selector: /attributes/default_langcode
+    -
+      name: path
+      label: Path
+      selector: /attributes/path
+    -
+      name: colour_scheme
+      label: 'Colour scheme'
+      selector: /attributes/colour_scheme
+    -
+      name: uid
+      label: Uid
+      selector: /relationships/uid
+    -
+      name: field_habitat_conservation_value
+      label: 'Conservation value'
+      selector: /attributes/field_habitat_conservation/value
+    -
+      name: field_habitat_conservation_format
+      label: 'Conservation format'
+      selector: /attributes/field_habitat_conservation/format
+    -
+      name: field_habitat_distribution_value
+      label: 'Distribution value'
+      selector: /attributes/field_habitat_distribution/value
+    -
+      name: field_habitat_distribution_format
+      label: 'Distribution format'
+      selector: /attributes/field_habitat_distribution/format
+    -
+      name: field_habitat_what_is_it_value
+      label: 'What is it value'
+      selector: /attributes/field_habitat_what_is_it/value
+    -
+      name: field_habitat_what_is_it_format
+      label: 'What is it format'
+      selector: /attributes/field_habitat_what_is_it/format
+    -
+      name: field_habitat_what_to_look_for_value
+      label: 'What to look for value'
+      selector: /attributes/field_habitat_what_to_look_for/value
+    -
+      name: field_habitat_what_to_look_for_format
+      label: 'What to look for format'
+      selector: /attributes/field_habitat_what_to_look_for/format
+    -
+      name: field_habitat_why_value
+      label: 'Why value'
+      selector: /attributes/field_habitat_why/value
+    -
+      name: field_habitat_why_format
+      label: 'Why format'
+      selector: /attributes/field_habitat_why/format
+    -
+      name: field_habitat_summary
+      label: Summary
+      selector: /attributes/field_habitat_summary
+    -
+      name: field_habitat_parent
+      label: Habitat parent
+      selector: /relationships/field_habitat_parent/data/id
+    -
+      name: field_habitat_parent_weight
+      label: Habitat parent weight
+      selector: /relationships/field_habitat_parent/data/meta/weight
+    -
+      name: field_further_content
+      label: 'Further content'
+      selector: /relationships/field_further_content/data
+    -
+      name: field_habitat_photos
+      label: Photos
+      selector: /relationships/field_habitat_photos/data
+process:
+  type:
+    plugin: default_value
+    default_value: habitat
+  uuid: uuid
+  title: title
+  created: created
+  changed: changed
+  status: status
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  sticky: sticky
+  promote: promote
+  default_language: default_language
+  path: path
+  colour_scheme: colour_scheme
+  field_habitat_conservation/value: field_habitat_conservation_value
+  field_habitat_conservation/format: field_habitat_conservation_format
+  field_habitat_distribution/value: field_habitat_distribution_value
+  field_habitat_distribution/format: field_habitat_distribution_format
+  field_habitat_what_is_it/value: field_habitat_what_is_it_value
+  field_habitat_what_is_it/format: field_habitat_what_is_it_format
+  field_habitat_what_to_look_for/value: field_habitat_what_to_look_for_value
+  field_habitat_what_to_look_for/format: field_habitat_what_to_look_for_format
+  field_habitat_why/value: field_habitat_why_value
+  field_habitat_why/format: field_habitat_why_format
+  field_habitat_summary: field_habitat_summary
+  field_habitat_parent/target_id:
+    plugin: migration_lookup
+    migration: national_habitat
+    source: field_habitat_parent
+  field_habitat_parent/weight: field_habitat_parent_weight
+  field_further_content:
+    plugin: wildlife_sharing_paragraph_lookup
+    source: field_further_content
+  field_habitat_photos:
+    plugin: wildlife_sharing_id_entity_lookup
+    value_key: uuid
+    source: field_habitat_photos
+  uid:
+    plugin: wildlife_sharing_user
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  optional:
+    - national_user
+    - national_term_habitats
+    - national_media_image
+    - national_media_silhouette
+    - national_paragraphs_accordion
+    - national_paragraphs_attached_files
+    - national_paragraphs_flickr_album
+    - national_paragraphs_headline_hero
+    - national_paragraphs_image
+    - national_paragraphs_quick_links
+    - national_paragraphs_rich_text
+    - national_paragraphs_section
+    - national_paragraphs_spotlight
+    - national_paragraphs_spotlight_group
+    - national_paragraphs_statistics
+    - national_paragraphs_video

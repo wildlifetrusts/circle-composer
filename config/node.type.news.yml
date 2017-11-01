@@ -1,0 +1,30 @@
+uuid: 8b0a2a59-ef63-4510-a16a-1b6a5ea46cf4
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - rrssb
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  rrssb:
+    show: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - draft
+      - needs_review
+      - ready_to_be_published
+      - unpublished
+    default_moderation_state: draft
+name: News
+type: news
+description: 'Add an informative piece of News content to appear in News listings.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

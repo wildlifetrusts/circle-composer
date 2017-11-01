@@ -1,0 +1,10 @@
+uuid: 718ef443-ac22-4639-a080-44b6fe60fd07
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.gmap_point
+label: 'GMap Point'
+targetEntityType: node
+cache: true

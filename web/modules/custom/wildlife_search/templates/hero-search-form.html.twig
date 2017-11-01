@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a hero search form.
+ *
+ * Available variables:
+ * - placeholder: The placeholder text for the text input element.
+ * - action_url: The action URL to redirect the form to on submit.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_hero_search_form()
+ *
+ * @ingroup themeable
+ */
+#}
+<form class="hero-search" action="{{ action_url }}">
+  <label for="{{ search_type }}" class="visually-hidden">{{ placeholder }}</label>
+  <input id="{{ search_type }}" class="hero-search__text" type="text" name="{{ identifier }}" placeholder="{{ placeholder }}" value="{{ value }}" />
+  <input class="hero-search__submit button button--soft-end" type="submit" value="Search" />
+</form>

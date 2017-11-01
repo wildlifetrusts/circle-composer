@@ -1,0 +1,10 @@
+uuid: dfb512b1-3419-40ba-9d6a-389c66ad37f2
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.split
+label: Split
+targetEntityType: paragraph
+cache: true

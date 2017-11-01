@@ -1,0 +1,18 @@
+uuid: a6ef59b9-77d2-4d3e-abd1-fd821c0ef6a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.local_group
+id: taxonomy_term.local_group.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: local_group
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

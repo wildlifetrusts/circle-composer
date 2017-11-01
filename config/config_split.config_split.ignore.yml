@@ -1,0 +1,15 @@
+uuid: 5539473e-7d17-4f44-876c-a7b9b199f0bb
+langcode: en
+status: true
+dependencies: {  }
+id: ignore
+label: 'Ignore split'
+folder: ../config_split/ignore
+module:
+  config_ignore: 0
+theme: {  }
+blacklist: {  }
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 10

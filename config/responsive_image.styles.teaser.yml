@@ -1,0 +1,40 @@
+uuid: b4e3435d-b87e-487f-8c54-f676c58bec28
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.teaser_default
+    - image.style.teaser_desk_wide
+    - image.style.teaser_palm
+  theme:
+    - wildlife_trust
+id: teaser
+label: Teaser
+image_style_mappings:
+  -
+    breakpoint_id: wildlife_trust.desk_wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: teaser_desk_wide
+  -
+    breakpoint_id: wildlife_trust.desk
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: teaser_palm
+  -
+    breakpoint_id: wildlife_trust.lap
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: teaser_palm
+  -
+    breakpoint_id: wildlife_trust.palm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: teaser_palm
+  -
+    breakpoint_id: wildlife_trust.default
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: teaser_default
+breakpoint_group: wildlife_trust
+fallback_image_style: teaser_default

@@ -1,0 +1,22 @@
+uuid: 8b0ea18d-a3b2-417a-ad15-65ae11252055
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.spotlight_group
+id: paragraph.spotlight_group.status
+field_name: status
+entity_type: paragraph
+bundle: spotlight_group
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

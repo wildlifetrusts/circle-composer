@@ -1,0 +1,22 @@
+uuid: 3d25acdf-fd97-4f8b-bf75-8326d319d71e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: volunteering_opportunities
+label: 'Volunteering Opportunities'
+type: 'canonical_entities:node'
+pattern: 'volunteering-opportunities/[node:title]'
+selection_criteria:
+  729a6400-1dc0-4ae5-990c-caa1ac535827:
+    id: node_type
+    bundles:
+      volunteer_opportunity: volunteer_opportunity
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 729a6400-1dc0-4ae5-990c-caa1ac535827
+selection_logic: and
+weight: -5
+relationships: {  }

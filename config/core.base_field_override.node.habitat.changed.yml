@@ -1,0 +1,18 @@
+uuid: c99c6d34-e014-4c3d-81cc-1f01ce082379
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.habitat
+id: node.habitat.changed
+field_name: changed
+entity_type: node
+bundle: habitat
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

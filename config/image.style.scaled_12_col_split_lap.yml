@@ -1,0 +1,15 @@
+uuid: 8d675a76-4eb4-4e33-8e0a-e13b949adb9e
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_12_col_split_lap
+label: 'Scaled 12 col split lap'
+effects:
+  c942020c-a845-4355-9f9f-38cab7ceb069:
+    uuid: c942020c-a845-4355-9f9f-38cab7ceb069
+    id: image_scale
+    weight: 1
+    data:
+      width: 398
+      height: null
+      upscale: false

@@ -1,0 +1,28 @@
+uuid: d98a5452-4072-4e31-b957-cb389be3d049
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.event_theme
+id: taxonomy_term.event_theme.default
+targetEntityType: taxonomy_term
+bundle: event_theme
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true

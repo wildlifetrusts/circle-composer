@@ -1,0 +1,32 @@
+.l-footer {
+  .footer__content {
+    background-color: palette(mono, x-dark);
+  }
+
+  &,
+  a {
+    color: palette(mono);
+  }
+
+  ul li:not([class])::before {
+    background-color: palette(mono);
+  }
+}
+
+.footer__decal {
+  @include aspect-ratio(1996, 326);
+  background-color: transparent;
+  background-image: url('../images/footer-chalk.svg');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: 50% 0;
+}
+
+.l-footer__bottom {
+  @include keyline('top', palette(mono, dark));
+}
+
+.l-footer__top {
+  padding-top: emRhythm(16, ms(0));
+  padding-bottom: emRhythm(10, ms(0));
+}

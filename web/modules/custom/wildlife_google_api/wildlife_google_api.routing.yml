@@ -1,0 +1,7 @@
+wildlife_google_api.config:
+  path: '/admin/config/services/google-api'
+  defaults:
+    _form: 'Drupal\wildlife_google_api\Form\GoogleApiConfiguration'
+    _title: 'Google API configuration'
+  requirements:
+    _permission: 'administer google api configuration'

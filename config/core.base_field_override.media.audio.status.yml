@@ -1,0 +1,22 @@
+uuid: 768b1458-2262-4b67-a99b-fbbb9eee670c
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.audio
+id: media.audio.status
+field_name: status
+entity_type: media
+bundle: audio
+label: 'Publishing status'
+description: 'A boolean indicating whether the media is published.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

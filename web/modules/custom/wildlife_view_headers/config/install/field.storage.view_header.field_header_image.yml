@@ -1,0 +1,20 @@
+uuid: f5f3f6ba-ab9b-454f-a6eb-3f786488b0b6
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+    - wildlife_view_headers
+id: view_header.field_header_image
+field_name: field_header_image
+entity_type: view_header
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

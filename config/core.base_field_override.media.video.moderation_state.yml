@@ -1,0 +1,20 @@
+uuid: 7cae703c-3268-48be-907a-f88b61b650ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.video
+id: media.video.moderation_state
+field_name: moderation_state
+entity_type: media
+bundle: video
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

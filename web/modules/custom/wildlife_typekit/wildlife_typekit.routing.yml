@@ -1,0 +1,7 @@
+wildlife_typekit.admin:
+  path: '/admin/config/user-interface/typekit'
+  defaults:
+    _form: '\Drupal\wildlife_typekit\Form\TypekitAdmin'
+    _title: 'Typekit Admin'
+  requirements:
+    _permission: administer typekit settings

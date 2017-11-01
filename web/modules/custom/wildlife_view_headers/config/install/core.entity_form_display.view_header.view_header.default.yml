@@ -1,0 +1,146 @@
+uuid: 98cee344-6609-4f49-85ac-a7a8bfc0b11f
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.view_header.view_header.field_further_content
+    - field.field.view_header.view_header.field_header_image
+    - field.field.view_header.view_header.field_header_silhouette
+  module:
+    - entity_browser
+    - field_group
+    - paragraphs
+    - wildlife_view_headers
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_translation
+        - group_revision
+        - group_colour_scheme
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_translation:
+      children:
+        - langcode
+        - translation
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Translation
+    group_revision:
+      children: {  }
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Revision
+    group_colour_scheme:
+      children:
+        - colour_scheme
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Colour scheme'
+id: view_header.view_header.default
+targetEntityType: view_header
+bundle: view_header
+mode: default
+content:
+  colour_scheme:
+    type: options_select
+    weight: -2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_further_content:
+    weight: 4
+    settings:
+      title: Component
+      title_plural: Components
+      edit_mode: preview
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+    region: content
+  field_header_image:
+    weight: 2
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_header_silhouette:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_header_type:
+    type: options_select
+    weight: 1
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  field_view_header_title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  user_id: true

@@ -1,0 +1,33 @@
+uuid: e1c8b5d3-7f53-4ba8-b6e4-b75880dfdbf1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.js_gallery
+    - field.field.paragraph.image_gallery.field_gallery_items
+    - paragraphs.paragraphs_type.image_gallery
+  module:
+    - entity_reference_revisions
+    - fences
+id: paragraph.image_gallery.js_gallery
+targetEntityType: paragraph
+bundle: image_gallery
+mode: js_gallery
+content:
+  field_gallery_items:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: js_gallery
+      link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    region: content
+hidden: {  }

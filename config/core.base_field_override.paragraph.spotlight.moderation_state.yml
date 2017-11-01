@@ -1,0 +1,20 @@
+uuid: 88725a67-2ae9-439f-9f87-9228aeda3c6a
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.spotlight
+id: paragraph.spotlight.moderation_state
+field_name: moderation_state
+entity_type: paragraph
+bundle: spotlight
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

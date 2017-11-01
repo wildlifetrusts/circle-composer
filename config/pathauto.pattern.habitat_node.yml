@@ -1,0 +1,22 @@
+uuid: 8e9aa611-623e-4e45-b0da-8b0d54130e53
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: habitat_node
+label: 'Habitat (Node)'
+type: 'canonical_entities:node'
+pattern: 'habitats/[node:parents:join-path]/[node:title]'
+selection_criteria:
+  13d47f85-6ea4-4caa-90da-d21abcdb1b89:
+    id: node_type
+    bundles:
+      habitat: habitat
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 13d47f85-6ea4-4caa-90da-d21abcdb1b89
+selection_logic: and
+weight: -5
+relationships: {  }

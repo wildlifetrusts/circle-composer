@@ -1,0 +1,19 @@
+uuid: 6f788d56-391d-4ad7-bbb2-ba1cf6197906
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_what_to_bring
+    - node.type.event
+id: node.event.field_event_what_to_bring
+field_name: field_event_what_to_bring
+entity_type: node
+bundle: event
+label: 'What to bring'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

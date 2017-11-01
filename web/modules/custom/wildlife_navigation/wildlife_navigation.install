@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function wildlife_navigation_install() {
+  // Create field storage for 'Featured', 'Section Summary', and 'Section Image'
+  // base fields.
+  $entity_manager = \Drupal::entityManager();
+  $custom_fields = ['featured', 'section_summary', 'section_image'];
+  foreach ($custom_fields as $field) {
+    $definition = $entity_manager->getFieldStorageDefinitions('menu_link_content')[$field];
+    $entity_manager->onFieldStorageDefinitionCreate($definition);
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function wildlife_navigation_uninstall() {
+  // Delete field storage for 'Featured', 'Section Summary', and 'Section Image'
+  // base fields.
+  $entity_manager = \Drupal::entityManager();
+  $custom_fields = ['featured', 'section_summary', 'section_image'];
+  foreach ($custom_fields as $field) {
+    $definition = $entity_manager->getLastInstalledFieldStorageDefinitions('menu_link_content')[$field];
+    $entity_manager->onFieldStorageDefinitionDelete($definition);
+  }
+}

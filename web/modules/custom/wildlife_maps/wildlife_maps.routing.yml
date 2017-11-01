@@ -1,0 +1,6 @@
+wildlife_maps.infowindow_data:
+  path: 'map-ajax/{uuid}/{data_type}'
+  defaults:
+    _controller: '\Drupal\wildlife_maps\Controller\Maps::renderMapNode'
+  requirements:
+    _access: 'TRUE'

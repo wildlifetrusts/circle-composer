@@ -1,0 +1,19 @@
+uuid: 9f150223-c696-4af6-835b-a5fe96eeabee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_best_time_to_visit
+    - node.type.reserve
+id: node.reserve.field_reserve_best_time_to_visit
+field_name: field_reserve_best_time_to_visit
+entity_type: node
+bundle: reserve
+label: 'Best time to visit'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

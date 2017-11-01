@@ -1,0 +1,6 @@
+wildlife_google_api.config:
+  title: 'Google API Configuration'
+  description: 'Configure Google API settings'
+  route_name: wildlife_google_api.config
+  parent: system.admin_config_services
+  weight: 10

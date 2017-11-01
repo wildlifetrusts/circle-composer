@@ -1,0 +1,75 @@
+uuid: 6e039a40-8c0a-4749-8cec-806c4bdef5ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_campaign_type
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_cm_form
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_mailchimp_btn
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_mailchimp_form
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_text_above
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_text_below
+    - field.field.paragraph.newsletter_sign_up.field_newsletter_title
+    - paragraphs.paragraphs_type.newsletter_sign_up
+  module:
+    - fences
+    - text
+    - wildlife_newsletters
+id: paragraph.newsletter_sign_up.default
+targetEntityType: paragraph
+bundle: newsletter_sign_up
+mode: default
+content:
+  field_newsletter_cm_form:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: signup_form
+    region: content
+  field_newsletter_mailchimp_form:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: signup_form
+    region: content
+  field_newsletter_text_above:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_newsletter_text_below:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_newsletter_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: h2
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+hidden:
+  field_newsletter_campaign_type: true
+  field_newsletter_mailchimp_btn: true

@@ -1,0 +1,16 @@
+uuid: 21ef9173-1735-4a12-93df-c20a62b961e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: teaser_palm
+label: 'Teaser palm'
+effects:
+  ed33e16d-1b00-4f2a-b02e-7e3b35a0760f:
+    uuid: ed33e16d-1b00-4f2a-b02e-7e3b35a0760f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 315
+      height: 209

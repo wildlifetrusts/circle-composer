@@ -1,0 +1,16 @@
+uuid: c5abbcee-cbdc-42b9-955d-a10e8048f687
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_palm
+label: 'Spotlight palm'
+effects:
+  20d30cd8-1ae0-46bd-9e60-a2407c608c2c:
+    uuid: 20d30cd8-1ae0-46bd-9e60-a2407c608c2c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 767
+      height: 384

@@ -1,0 +1,45 @@
+uuid: fa70bdae-d57e-489d-adfc-83a1572ccc31
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_headline_hero_search
+field_name: field_headline_hero_search
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: global_site_search
+      label: 'Global site search'
+    -
+      value: trusts
+      label: Trusts
+    -
+      value: reserves
+      label: Reserves
+    -
+      value: species
+      label: Species
+    -
+      value: event
+      label: Event
+    -
+      value: event_reserve
+      label: Event/Reserve
+    -
+      value: jobs
+      label: Jobs
+    -
+      value: volunteering_opportunities
+      label: 'Volunteering opportunities'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

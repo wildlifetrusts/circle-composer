@@ -1,0 +1,223 @@
+uuid: 4d5a9cc1-7939-49d0-961f-557fbe925ddb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.blog.field_blog_author
+    - field.field.node.blog.field_blog_category
+    - field.field.node.blog.field_blog_display_pub_date
+    - field.field.node.blog.field_blog_publication_date
+    - field.field.node.blog.field_blog_summary
+    - field.field.node.blog.field_disqus_comments
+    - field.field.node.blog.field_disqus_comments_title
+    - field.field.node.blog.field_further_content
+    - field.field.node.blog.field_header_image
+    - field.field.node.blog.field_header_silhouette
+    - field.field.node.blog.field_header_type
+    - field.field.node.blog.field_meta_tags
+    - field.field.node.blog.field_representative_image
+    - field.field.node.blog.field_tags
+    - node.type.blog
+  module:
+    - datetime
+    - disqus
+    - entity_reference_revisions
+    - fences
+    - field_group
+    - metatag
+    - user
+third_party_settings:
+  field_group:
+    group_standfirst:
+      children:
+        - field_blog_summary
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: 'standfirst is-unconstrained'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Standfirst
+    group_tags:
+      children:
+        - group_links_wrapper
+      parent_name: ''
+      weight: 5
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: blog__tags
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Tags
+    group_links_wrapper:
+      children:
+        - field_blog_category
+        - field_tags
+      parent_name: group_tags
+      weight: 20
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: ul
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Links wrapper'
+id: node.blog.default
+targetEntityType: node
+bundle: blog
+mode: default
+content:
+  field_blog_author:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_blog_category:
+    weight: 21
+    label: hidden
+    settings:
+      link: true
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  field_blog_publication_date:
+    weight: 0
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: display_long_date
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: datetime_default
+    region: content
+  field_blog_summary:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: basic_string
+    region: content
+  field_disqus_comments:
+    weight: 8
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: disqus_comment
+    region: content
+  field_disqus_comments_title:
+    weight: 7
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: h2
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_further_content:
+    weight: 4
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: is-unconstrained
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_meta_tags:
+    weight: 9
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_tags:
+    weight: 22
+    label: hidden
+    settings:
+      link: true
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_label
+    region: content
+  related_news_and_blogs_related_blogs:
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  workbench_moderation_control:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_blog_display_pub_date: true
+  field_header_image: true
+  field_header_silhouette: true
+  field_header_type: true
+  field_representative_image: true
+  langcode: true
+  links: true

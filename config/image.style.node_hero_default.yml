@@ -1,0 +1,16 @@
+uuid: 3ae95f23-0f64-48d2-af2c-44f60ff331ae
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: node_hero_default
+label: 'Node hero default'
+effects:
+  c6e21479-5bf7-4960-89b2-0289ffaebd4a:
+    uuid: c6e21479-5bf7-4960-89b2-0289ffaebd4a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 270

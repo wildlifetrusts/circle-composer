@@ -1,0 +1,11 @@
+.paragraph--type--html-component {
+  &:not(.paragraph--wide) {
+    @extend %content-narrow-constrain;
+  }
+
+  &.paragraph--hide-on-narrow {
+    @include add-breakpoint('up-to-lap') {
+      display: none;
+    }
+  }
+}

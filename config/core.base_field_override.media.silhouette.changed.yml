@@ -1,0 +1,18 @@
+uuid: 3fa20a33-5409-4150-92c8-a4a70fad5b0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.silhouette
+id: media.silhouette.changed
+field_name: changed
+entity_type: media
+bundle: silhouette
+label: Changed
+description: 'The time that the media was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

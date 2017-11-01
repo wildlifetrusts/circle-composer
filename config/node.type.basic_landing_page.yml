@@ -1,0 +1,31 @@
+uuid: 797a227c-9952-4405-a73b-5663fb7419bb
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - rrssb
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  rrssb:
+    show: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - draft
+      - needs_review
+      - ready_to_be_published
+      - unpublished
+    default_moderation_state: draft
+name: 'Basic/Landing Page'
+type: basic_landing_page
+description: 'Add a page which does not belong to any particular section of the site. Useful for visually engaging landing pages or for general basic content such as Terms and Conditions.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,23 @@
+uuid: 98edfd84-a316-4137-a95d-a9a5233a079d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_map_layer
+    - node.type.reserve
+  module:
+    - options
+id: node.reserve.field_reserve_map_layer
+field_name: field_reserve_map_layer
+entity_type: node
+bundle: reserve
+label: 'Map base layer'
+description: 'Choose the base layer for the map.'
+required: true
+translatable: true
+default_value:
+  -
+    value: roadmap
+default_value_callback: ''
+settings: {  }
+field_type: list_string

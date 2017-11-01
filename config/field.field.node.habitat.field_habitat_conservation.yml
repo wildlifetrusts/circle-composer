@@ -1,0 +1,27 @@
+uuid: b097c5c8-e37f-461b-8fd8-b0f1804e41fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_habitat_conservation
+    - node.type.habitat
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.habitat.field_habitat_conservation
+field_name: field_habitat_conservation
+entity_type: node
+bundle: habitat
+label: Conservation
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

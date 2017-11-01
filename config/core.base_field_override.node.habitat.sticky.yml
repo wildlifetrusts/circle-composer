@@ -1,0 +1,22 @@
+uuid: f948dd2f-4251-4b02-aa1c-5128ea98c547
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.habitat
+id: node.habitat.sticky
+field_name: sticky
+entity_type: node
+bundle: habitat
+label: 'Sticky at top of lists'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

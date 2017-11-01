@@ -1,0 +1,17 @@
+uuid: f625bbeda-9015-4147-9791-903bf0fa7865
+langcode: en
+status: false
+dependencies: {  }
+id: wildlondon
+label: 'London site split'
+folder: ../config_split/wildlondon
+module:
+  wildlife_local_customisation: 0
+theme: {  }
+blacklist: {  }
+graylist:
+  - system.site
+  - wildlife_trust.settings
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 5

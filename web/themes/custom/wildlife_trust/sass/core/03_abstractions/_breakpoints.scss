@@ -1,0 +1,6 @@
+// Short-hand breakpoint mixin which still allows us to use the better mappings.
+@mixin add-breakpoint($mapping) {
+  @include breakpoint(map-get($breakpoints, $mapping)) {
+    @content;
+  }
+}

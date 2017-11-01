@@ -1,0 +1,18 @@
+uuid: 084c86db-e2cc-40bf-bc42-7c724bed261f
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.great_for
+id: taxonomy_term.great_for.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: great_for
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

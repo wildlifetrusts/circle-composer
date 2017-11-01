@@ -1,0 +1,26 @@
+uuid: 456156f1-f04e-4427-ae7e-18a79ea531c6
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - wildlife_conditions
+  theme:
+    - wildlife_trust
+id: lang_switcher
+theme: wildlife_trust
+region: topbar_nav
+weight: 0
+provider: null
+plugin: 'language_block:language_interface'
+settings:
+  id: 'language_block:language_interface'
+  label: Language
+  provider: language
+  label_display: visible
+visibility:
+  node_allows_social_sharing:
+    id: node_allows_social_sharing
+    display_on_social_sharing_nodes: 0
+    negate: false
+    context_mapping: {  }

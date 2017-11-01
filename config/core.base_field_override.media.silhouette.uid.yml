@@ -1,0 +1,20 @@
+uuid: bce506a7-4b0d-4feb-8e2a-38f1d7b643a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.silhouette
+id: media.silhouette.uid
+field_name: uid
+entity_type: media
+bundle: silhouette
+label: 'Publisher ID'
+description: 'The user ID of the media publisher.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\media_entity\Entity\Media::getCurrentUserId'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

@@ -1,0 +1,12 @@
+uuid: fa97dcd0-da20-4847-9d02-da5ce23904c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - workbench_moderation.moderation_state.draft
+    - workbench_moderation.moderation_state.ready_to_be_published
+id: draft_ready_for_publishing
+label: 'Set as ready for publishing'
+stateFrom: draft
+stateTo: ready_to_be_published
+weight: -7

@@ -1,0 +1,28 @@
+# Schema for the configuration files of the wildlife_newsletters_campaign_monitor module.
+
+wildlife_newsletters_campaign_monitor.campaign_monitor_signup.*:
+  type: config_entity
+  label: 'Campaign Monitor Signup config'
+  mapping:
+    id:
+      type: string
+      label: 'Machine Name'
+    title:
+      type: text
+      label: 'Title'
+    uuid:
+      type: string
+      label: 'UUID'
+    form:
+      type: mapping
+      label: 'Form'
+      mapping:
+        value:
+          type: text
+          label: 'Value'
+        format:
+          type: string
+          label: 'Text format'
+    status:
+      type: boolean
+      label: 'Status'

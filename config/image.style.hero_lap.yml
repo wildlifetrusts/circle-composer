@@ -1,0 +1,14 @@
+uuid: 23da560c-d349-48ec-86a5-64dbbce35eaf
+langcode: en
+status: true
+dependencies: {  }
+name: hero_lap
+label: 'Hero lap'
+effects:
+  7f4b4766-9379-42ce-8a05-52dcdd601750:
+    uuid: 7f4b4766-9379-42ce-8a05-52dcdd601750
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 564

@@ -1,0 +1,23 @@
+uuid: fe056f2a-aeeb-49c1-8012-262cc4940e58
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_disabled_toilet
+    - node.type.reserve
+id: node.reserve.field_reserve_disabled_toilet
+field_name: field_reserve_disabled_toilet
+entity_type: node
+bundle: reserve
+label: 'Disabled toilet'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Disabled toilet'
+  off_label: 'Off'
+field_type: boolean

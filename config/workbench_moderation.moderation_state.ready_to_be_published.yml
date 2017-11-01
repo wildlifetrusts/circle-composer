@@ -1,0 +1,8 @@
+uuid: 566eeca6-e538-487b-bccd-ecf03e33f60d
+langcode: en
+status: true
+dependencies: {  }
+id: ready_to_be_published
+label: 'Ready to be published'
+published: false
+default_revision: false

@@ -1,0 +1,7 @@
+uuid: 63619be7-b266-4eea-a4eb-07544e456435
+langcode: en
+status: false
+dependencies: {  }
+formId: node_reserve_form
+captchaType: default
+label: null

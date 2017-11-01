@@ -1,0 +1,9 @@
+uuid: 9a4df085-c378-4580-a473-974c77c39ab8
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_vocabulary_job_type
+action: page_redirect_json
+allow_override: 0
+redirect: '/jobs?type=[term:tid]'
+redirect_code: 301

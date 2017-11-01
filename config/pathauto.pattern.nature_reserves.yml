@@ -1,0 +1,22 @@
+uuid: 89c8f5ec-30ca-4710-bb31-592404affcc0
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: nature_reserves
+label: 'Nature Reserves'
+type: 'canonical_entities:node'
+pattern: 'nature-reserves/[node:title]'
+selection_criteria:
+  58df9578-96ae-497c-9fa7-d01dead8c39d:
+    id: node_type
+    bundles:
+      reserve: reserve
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 58df9578-96ae-497c-9fa7-d01dead8c39d
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,165 @@
+uuid: 3b0a8071-20bc-4d2b-b523-5009dad8d518
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.author.author.field_author_bio
+    - field.field.author.author.field_author_facebook
+    - field.field.author.author.field_author_instagram
+    - field.field.author.author.field_author_linkedin
+    - field.field.author.author.field_author_profile_image
+    - field.field.author.author.field_author_twitter
+  module:
+    - fences
+    - field_group
+    - link
+    - wildlife_author
+third_party_settings:
+  field_group:
+    group_main:
+      children:
+        - field_author_profile_image
+        - group_details
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: author__main
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Main
+    group_social:
+      children:
+        - field_author_twitter
+        - field_author_facebook
+        - field_author_instagram
+        - field_author_linkedin
+      parent_name: group_details
+      weight: 4
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: author__social
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Social
+    group_details:
+      children:
+        - name
+        - group_social
+      parent_name: group_main
+      weight: 2
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: author__details
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Details
+id: author.author.default
+targetEntityType: author
+bundle: author
+mode: default
+content:
+  field_author_bio:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_author_facebook:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_author_instagram:
+    type: link
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_author_linkedin:
+    type: link
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_author_profile_image:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: profile
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_author_twitter:
+    type: link
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  name:
+    label: hidden
+    type: string
+    weight: 3
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: h3
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+hidden:
+  langcode: true
+  user_id: true

@@ -1,0 +1,15 @@
+uuid: 803cc589-8030-4eb3-b968-0fd196158cec
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_12_col_desk
+label: 'Scaled 12 col desk'
+effects:
+  722f706e-5b01-49a2-aaf2-657b78a8afec:
+    uuid: 722f706e-5b01-49a2-aaf2-657b78a8afec
+    id: image_scale
+    weight: 1
+    data:
+      width: 1044
+      height: null
+      upscale: false

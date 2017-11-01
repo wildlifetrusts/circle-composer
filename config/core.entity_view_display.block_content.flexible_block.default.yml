@@ -1,0 +1,151 @@
+uuid: 426a5e70-9cae-493b-9877-e6fef3f66a12
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flexible_block
+    - field.field.block_content.flexible_block.field_flexible_block_content_1
+    - field.field.block_content.flexible_block.field_flexible_block_content_2
+    - field.field.block_content.flexible_block.field_flexible_block_content_3
+    - field.field.block_content.flexible_block.field_flexible_block_title_1
+    - field.field.block_content.flexible_block.field_flexible_block_title_2
+    - field.field.block_content.flexible_block.field_flexible_block_title_3
+  module:
+    - entity_reference_revisions
+    - fences
+    - field_group
+third_party_settings:
+  field_group:
+    group_block_1:
+      children:
+        - field_flexible_block_title_1
+        - field_flexible_block_content_1
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        label: 'Block 1'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'flexible-block flexible-block--first'
+      label: 'Block 1'
+    group_block_2:
+      children:
+        - field_flexible_block_title_2
+        - field_flexible_block_content_2
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        label: 'Block 2'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'flexible-block flexible-block--middle'
+      label: 'Block 2'
+    group_block:
+      children:
+        - field_flexible_block_title_3
+        - field_flexible_block_content_3
+      parent_name: ''
+      weight: 6
+      format_type: html_element
+      format_settings:
+        label: 'Block 3'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'flexible-block flexible-block--last'
+      label: 'Block 3'
+id: block_content.flexible_block.default
+targetEntityType: block_content
+bundle: flexible_block
+mode: default
+content:
+  field_flexible_block_content_1:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_flexible_block_content_2:
+    type: entity_reference_revisions_entity_view
+    weight: 5
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_flexible_block_content_3:
+    type: entity_reference_revisions_entity_view
+    weight: 8
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_flexible_block_title_1:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: h2
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_flexible_block_title_2:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: h2
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_flexible_block_title_3:
+    weight: 7
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: h2
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+hidden:
+  langcode: true

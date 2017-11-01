@@ -1,0 +1,46 @@
+uuid: e2e93d64-6c46-414f-b843-e598dacce3fd
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.basic_landing_page.field_basic_landing_summary
+    - field.field.node.basic_landing_page.field_components
+    - field.field.node.basic_landing_page.field_disqus_comments
+    - field.field.node.basic_landing_page.field_disqus_comments_title
+    - field.field.node.basic_landing_page.field_hide_title
+    - field.field.node.basic_landing_page.field_meta_tags
+    - node.type.basic_landing_page
+  module:
+    - fences
+    - user
+id: node.basic_landing_page.teaser
+targetEntityType: node
+bundle: basic_landing_page
+mode: teaser
+content:
+  field_basic_landing_summary:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  workbench_moderation_control:
+    weight: -20
+    region: content
+hidden:
+  field_components: true
+  field_disqus_comments: true
+  field_disqus_comments_title: true
+  field_hide_title: true
+  field_meta_tags: true
+  langcode: true
+  links: true

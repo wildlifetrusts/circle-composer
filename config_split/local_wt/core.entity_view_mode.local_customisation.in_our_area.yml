@@ -1,0 +1,10 @@
+uuid: 25403c38-7318-409c-ae3e-95917d328ed9
+langcode: en
+status: false
+dependencies:
+  module:
+    - wildlife_local_customisation
+id: local_customisation.in_our_area
+label: 'In our area'
+targetEntityType: local_customisation
+cache: true

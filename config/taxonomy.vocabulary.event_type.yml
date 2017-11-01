@@ -1,0 +1,9 @@
+uuid: 097df14a-434a-4a84-b2da-020061ff5b3e
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event type'
+vid: event_type
+description: 'Categorisation for the type of an Event'
+hierarchy: 0
+weight: 0

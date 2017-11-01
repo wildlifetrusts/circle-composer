@@ -1,0 +1,32 @@
+.map-view-display {
+  .map__container {
+    @extend .breakout;
+    @include keyline;
+
+    > div {
+      width: 100%;
+      height: 400px;
+      max-height: 100vh;
+      box-sizing: content-box;
+
+      @include add-breakpoint('lap-and-up') {
+        height: 500px;
+      }
+    }
+  }
+
+  .map__data {
+    display: none;
+  }
+}
+
+.cluster-info {
+  &__heading {
+    @extend .epsilon;
+  }
+
+  &__list {
+    padding-left: 1.5em;
+    margin-bottom: 0;
+  }
+}

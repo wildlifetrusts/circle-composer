@@ -1,0 +1,24 @@
+uuid: 7d742981-c05b-4e49-a45d-c25b5bbed420
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.auxiliary
+  module:
+    - system
+  theme:
+    - wildlife_trust
+id: auxiliary_navigation
+theme: wildlife_trust
+region: topbar_nav
+weight: 0
+provider: null
+plugin: 'system_menu_block:auxiliary'
+settings:
+  id: 'system_menu_block:auxiliary'
+  label: 'Auxiliary menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 1
+visibility: {  }

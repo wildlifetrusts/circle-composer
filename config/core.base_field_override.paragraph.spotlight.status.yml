@@ -1,0 +1,22 @@
+uuid: 272f2010-ca1f-4bf8-b176-2a85f3f13b2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.spotlight
+id: paragraph.spotlight.status
+field_name: status
+entity_type: paragraph
+bundle: spotlight
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

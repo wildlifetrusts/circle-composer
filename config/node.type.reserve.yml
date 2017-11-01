@@ -1,0 +1,30 @@
+uuid: 606a0c11-8367-4447-bb92-41fc65511cdd
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - rrssb
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  rrssb:
+    show: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - draft
+      - needs_review
+      - ready_to_be_published
+      - unpublished
+    default_moderation_state: draft
+name: Reserve
+type: reserve
+description: 'Add a Reserve so that visitors can find out where they can get in touch with nature.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

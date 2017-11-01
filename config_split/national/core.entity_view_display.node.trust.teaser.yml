@@ -1,0 +1,58 @@
+uuid: c6859b69-1af9-48c7-98e3-3733445973b1
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.trust.field_external_link
+    - field.field.node.trust.field_trust_address
+    - field.field.node.trust.field_trust_alternative_name
+    - field.field.node.trust.field_trust_city
+    - field.field.node.trust.field_trust_county
+    - field.field.node.trust.field_trust_email
+    - field.field.node.trust.field_trust_image
+    - field.field.node.trust.field_trust_lat_long
+    - field.field.node.trust.field_trust_membership_link
+    - field.field.node.trust.field_trust_phone_number
+    - field.field.node.trust.field_trust_postcode
+    - field.field.node.trust.field_trust_site_url
+    - field.field.node.trust.field_trust_sms_button_text
+    - field.field.node.trust.field_trust_sms_donation_enabled
+    - field.field.node.trust.field_trust_sms_donation_keyword
+    - field.field.node.trust.field_trust_sms_donation_number
+    - field.field.node.trust.field_trust_sms_ts_and_cs
+    - field.field.node.trust.field_trust_summary
+    - node.type.trust
+  module:
+    - user
+id: node.trust.teaser
+targetEntityType: node
+bundle: trust
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+  workbench_moderation_control:
+    weight: -20
+    region: content
+hidden:
+  field_external_link: true
+  field_trust_address: true
+  field_trust_alternative_name: true
+  field_trust_city: true
+  field_trust_county: true
+  field_trust_email: true
+  field_trust_image: true
+  field_trust_lat_long: true
+  field_trust_membership_link: true
+  field_trust_phone_number: true
+  field_trust_postcode: true
+  field_trust_site_url: true
+  field_trust_sms_button_text: true
+  field_trust_sms_donation_enabled: true
+  field_trust_sms_donation_keyword: true
+  field_trust_sms_donation_number: true
+  field_trust_sms_ts_and_cs: true
+  field_trust_summary: true
+  langcode: true

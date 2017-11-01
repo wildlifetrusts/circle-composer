@@ -1,0 +1,14 @@
+uuid: 9e344632-9954-47fd-8849-38d50abb1367
+langcode: en
+status: true
+dependencies: {  }
+name: gallery_image_palm
+label: 'Gallery image palm'
+effects:
+  c5701eaf-692d-420c-9952-b836b08ff8b0:
+    uuid: c5701eaf-692d-420c-9952-b836b08ff8b0
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 381
+      height: 286

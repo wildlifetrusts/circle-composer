@@ -1,0 +1,5 @@
+wildlife_webforms.webforms:
+  title: 'Webforms'
+  description: 'Create webforms and manage submissions.'
+  parent: system.admin_content
+  route_name: entity.webform.collection

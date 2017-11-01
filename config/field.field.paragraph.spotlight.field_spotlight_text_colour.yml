@@ -1,0 +1,23 @@
+uuid: 1d52d2ec-6ac8-4c82-8632-9688ead6ece7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_text_colour
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - options
+id: paragraph.spotlight.field_spotlight_text_colour
+field_name: field_spotlight_text_colour
+entity_type: paragraph
+bundle: spotlight
+label: 'Text colour'
+description: 'Choose the colour of text to be displayed. Try to tailor the text colour to best contrast against a background image (if in use). Text will be displayed with a drop-shadow.'
+required: true
+translatable: true
+default_value:
+  -
+    value: black
+default_value_callback: ''
+settings: {  }
+field_type: list_string

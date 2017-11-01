@@ -1,0 +1,18 @@
+uuid: b2ade89d-beef-44b2-a113-0bb7ba69cafa
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_blog_display_pub_date
+field_name: field_blog_display_pub_date
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

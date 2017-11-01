@@ -1,0 +1,22 @@
+uuid: f2980a99-0b70-4680-9b0b-40ee04c441d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.reserve
+id: node.reserve.sticky
+field_name: sticky
+entity_type: node
+bundle: reserve
+label: 'Sticky at top of lists'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

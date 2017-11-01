@@ -1,0 +1,21 @@
+uuid: 05fa2f2d-8043-4600-8349-127f387ae720
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_location
+id: location.field_location_county
+field_name: field_location_county
+entity_type: location
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

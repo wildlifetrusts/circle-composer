@@ -1,0 +1,19 @@
+uuid: 57777883-eb3e-4d99-b933-11dd6e9bd55f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_audio_title
+    - paragraphs.paragraphs_type.audio
+id: paragraph.audio.field_audio_title
+field_name: field_audio_title
+entity_type: paragraph
+bundle: audio
+label: Title
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

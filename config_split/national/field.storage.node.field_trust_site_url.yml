@@ -1,0 +1,19 @@
+uuid: f3646eaf-9bdd-4633-bdc5-293d0cfdd5f2
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_trust_site_url
+field_name: field_trust_site_url
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

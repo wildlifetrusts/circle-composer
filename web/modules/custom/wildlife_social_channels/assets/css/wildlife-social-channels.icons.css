@@ -1,0 +1,30 @@
+.active span[class^="icon-social-"] {
+  display: block;
+  background-position: 50% 50%;
+  width: 24px;
+  height: 24px;
+}
+
+.active .icon-social-facebook {
+  background-image: url('../icons/social-facebook.png');
+}
+
+.active .icon-social-googleplus {
+  background-image: url('../icons/social-googleplus.png');
+}
+
+.active .icon-social-instagram {
+  background-image: url('../icons/social-instagram.png');
+}
+
+.active .icon-social-twitter {
+  background-image: url('../icons/social-twitter.png');
+}
+
+.active .icon-social-youtube {
+  background-image: url('../icons/social-youtube.png');
+}
+
+.active .icon-social-flickr {
+  background-image: url('../icons/social-flickr.png');
+}

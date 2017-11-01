@@ -1,0 +1,20 @@
+uuid: 04360cc7-9518-403f-a3cf-727052d54de9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_reserve_map_zoom
+field_name: field_reserve_map_zoom
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

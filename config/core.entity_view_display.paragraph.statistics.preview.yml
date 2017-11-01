@@ -1,0 +1,33 @@
+uuid: a5e68447-c19d-48fb-a433-416e51e2c57c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.statistics.field_statistic_item
+    - paragraphs.paragraphs_type.statistics
+  module:
+    - entity_reference_revisions
+    - fences
+id: paragraph.statistics.preview
+targetEntityType: paragraph
+bundle: statistics
+mode: preview
+content:
+  field_statistic_item:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: preview
+      link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: ul
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    region: content
+hidden: {  }

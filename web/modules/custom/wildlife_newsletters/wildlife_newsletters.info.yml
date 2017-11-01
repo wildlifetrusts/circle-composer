@@ -1,0 +1,8 @@
+name: Newsletters
+type: module
+description: Creates Campaign Monitor sign-up form entity type, adds tweaks and preprocessing for other Newsletter entities.
+core: 8.x
+package: Wildlife
+dependencies:
+  - mailchimp
+  - wildlife_paragraphs

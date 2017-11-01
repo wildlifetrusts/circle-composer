@@ -1,0 +1,18 @@
+uuid: b30e333b-4702-413d-86f4-8d4d410307f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.event_theme
+id: taxonomy_term.event_theme.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: event_theme
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

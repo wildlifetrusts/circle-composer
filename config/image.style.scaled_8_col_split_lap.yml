@@ -1,0 +1,15 @@
+uuid: f495e27c-2256-483d-a6ad-d43bcb60f3a7
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_8_col_split_lap
+label: 'Scaled 8 col split lap'
+effects:
+  d97e70c1-2d58-4bb0-9334-e390ff1183e6:
+    uuid: d97e70c1-2d58-4bb0-9334-e390ff1183e6
+    id: image_scale
+    weight: 1
+    data:
+      width: 314
+      height: null
+      upscale: false

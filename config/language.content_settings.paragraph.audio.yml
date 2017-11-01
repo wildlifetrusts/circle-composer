@@ -1,0 +1,16 @@
+uuid: dddfd0b6-7042-4043-a72a-6db3b4ce0d0e
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.audio
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.audio
+target_entity_type_id: paragraph
+target_bundle: audio
+default_langcode: site_default
+language_alterable: true

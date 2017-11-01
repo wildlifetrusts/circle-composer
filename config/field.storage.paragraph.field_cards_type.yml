@@ -1,0 +1,27 @@
+uuid: 6e56209d-1f17-4382-b5c5-3d46cb3964c5
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_cards_type
+field_name: field_cards_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: curated
+      label: Curated
+    -
+      value: dynamic
+      label: Dynamic
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

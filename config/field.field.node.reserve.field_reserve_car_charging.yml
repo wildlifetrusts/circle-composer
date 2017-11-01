@@ -1,0 +1,23 @@
+uuid: 96a05157-0d7f-4eca-9d1c-1e9ba8fd5d2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_car_charging
+    - node.type.reserve
+id: node.reserve.field_reserve_car_charging
+field_name: field_reserve_car_charging
+entity_type: node
+bundle: reserve
+label: 'Electric car charging point'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Electric car charging point'
+  off_label: 'Off'
+field_type: boolean

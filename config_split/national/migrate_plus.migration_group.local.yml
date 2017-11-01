@@ -1,0 +1,17 @@
+uuid: 7f2e8c8e-e129-4203-a002-a0c06310c9f5
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+_core:
+  default_config_hash: tJKYOTUXKm7gYYOCDVBpohvz8fLLfeGKbfzhkEJci1M
+id: local
+label: 'Local migrations'
+description: 'Import and update content from local Wildlife Trusts site.'
+source_type: json
+module: null
+shared_configuration:
+  source:
+    key: default

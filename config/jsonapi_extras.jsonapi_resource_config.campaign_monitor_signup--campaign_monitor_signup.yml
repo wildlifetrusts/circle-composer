@@ -1,0 +1,51 @@
+uuid: f5682b56-4bdb-4771-b8fb-df62fdefa7c4
+langcode: en
+status: true
+dependencies: {  }
+id: campaign_monitor_signup--campaign_monitor_signup
+disabled: true
+path: campaign_monitor_signup/campaign_monitor_signup
+resourceType: campaign_monitor_signup--campaign_monitor_signup
+resourceFields:
+  id:
+    fieldName: id
+    publicName: id
+    enhancer:
+      id: ''
+    disabled: false
+  uuid:
+    fieldName: uuid
+    publicName: uuid
+    enhancer:
+      id: ''
+    disabled: false
+  form:
+    fieldName: form
+    publicName: form
+    enhancer:
+      id: ''
+    disabled: false
+  revision:
+    fieldName: revision
+    publicName: revision
+    enhancer:
+      id: ''
+    disabled: false
+  bundle:
+    fieldName: bundle
+    publicName: bundle
+    enhancer:
+      id: ''
+    disabled: false
+  langcode:
+    fieldName: langcode
+    publicName: langcode
+    enhancer:
+      id: ''
+    disabled: false
+  default_langcode:
+    fieldName: default_langcode
+    publicName: default_langcode
+    enhancer:
+      id: ''
+    disabled: false

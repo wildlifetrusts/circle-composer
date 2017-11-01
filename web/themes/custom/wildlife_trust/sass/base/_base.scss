@@ -1,0 +1,64 @@
+// Setup Borderbox.
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+// Setup Breaky (see http://qrious.com/breaky).
+//html:before {
+//  content: "palm,lap,desk,desk-wide";
+//  display: none;
+//}
+//
+//body:before {
+//  display: none;
+//  content: "palm";
+//
+//  @include breakpoint ($palm) {
+//    content: "palm";
+//  }
+//
+//  @include breakpoint ($lap) {
+//    content: "lap";
+//  }
+//
+//  @include breakpoint ($desk) {
+//    content: "desk";
+//  }
+//
+//  @include breakpoint ($desk-wide, true) {
+//    content: "desk-wide";
+//  }
+//}
+html:before {
+  content: "mobile,tablet,desktop";
+  display: none;
+}
+
+body:before {
+  content: "mobile";
+  display: none;
+}
+@media (min-width: 320px) {
+  body:before {
+    content: "mobile";
+  }
+}
+@media (min-width: 768px) {
+  body:before {
+    content: "tablet";
+  }
+}
+@media (min-width: 960px) {
+  body:before {
+    content: "desktop";
+  }
+}
+
+// Background.
+body {
+  background: palette(mono, x-light) url('../images/background-texture.png') 0 0 repeat;
+}

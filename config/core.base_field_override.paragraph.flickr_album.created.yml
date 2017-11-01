@@ -1,0 +1,18 @@
+uuid: 6a2eed42-e865-4c60-86dd-7b6dea319d01
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.flickr_album
+id: paragraph.flickr_album.created
+field_name: created
+entity_type: paragraph
+bundle: flickr_album
+label: 'Authored on'
+description: 'The time that the Paragraph was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

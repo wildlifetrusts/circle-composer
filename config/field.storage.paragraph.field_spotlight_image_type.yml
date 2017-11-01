@@ -1,0 +1,27 @@
+uuid: 05fc4c49-ddff-4ba6-b29f-bf4ccd01a2c8
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_spotlight_image_type
+field_name: field_spotlight_image_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: image
+      label: 'Background image'
+    -
+      value: silhouette
+      label: Silhouette
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

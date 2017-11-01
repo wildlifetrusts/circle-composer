@@ -1,0 +1,33 @@
+uuid: eaab1e97-fca5-4b7a-811e-5d06e0aaf5db
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - wildlife_view_headers
+id: view_header.field_header_type
+field_name: field_header_type
+entity_type: view_header
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: none
+      label: None
+    -
+      value: colour
+      label: Colour
+    -
+      value: image
+      label: Image
+    -
+      value: silhouette
+      label: Silhouette
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

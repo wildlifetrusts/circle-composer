@@ -1,0 +1,72 @@
+.paragraph--type--audio,
+.paragraph--type--image,
+.paragraph--type--video {
+  &:not(.paragraph--wide) {
+    @extend %content-narrow-constrain;
+  }
+
+  img {
+    display: block;
+  }
+
+  &.paragraph--split {
+    @extend %clearfix;
+
+    .field--media {
+      margin-bottom: 1em;
+    }
+  }
+
+  &.paragraph--media-left {
+    .field--media {
+      @include add-breakpoint('palm-to-lap') {
+        @include float-span(2);
+      }
+    }
+
+    &.paragraph--wide {
+      .field--media {
+        @include add-breakpoint('lap-and-up') {
+          @include float-span(5);
+        }
+      }
+    }
+
+    &:not(.paragraph--wide) {
+      .field--media {
+        @include add-breakpoint('lap-and-up') {
+          @include float-span(4, $grid: 8);
+        }
+      }
+    }
+  }
+
+  &.paragraph--media-right {
+    .field--media {
+      @include add-breakpoint('palm-to-lap') {
+        @include float-span(2, 'last');
+        margin-left: gutter-span(1/8, 4);
+      }
+
+      @include add-breakpoint('lap-and-up') {
+        margin-left: gutter-span(5/13, 8);
+      }
+    }
+
+    &.paragraph--wide {
+      .field--media {
+        @include add-breakpoint('lap-and-up') {
+          @include float-span(5, 'last');
+        }
+      }
+    }
+
+    &:not(.paragraph--wide) {
+      .field--media {
+        @include add-breakpoint('lap-and-up') {
+          @include float-span(4, 'last', 8);
+        }
+      }
+    }
+  }
+}

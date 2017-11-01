@@ -1,0 +1,18 @@
+uuid: b8c8243c-9ba5-4a04-8bbf-21e3a3edc2f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.environmental_designation
+id: taxonomy_term.environmental_designation.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: environmental_designation
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

@@ -1,0 +1,22 @@
+uuid: e6055952-ca87-48f9-bfd8-26e04e2929e4
+langcode: en
+status: false
+dependencies:
+  module:
+    - user
+  theme:
+    - wildlife_trust
+_core:
+  default_config_hash: 4QlSnWBcxxKMIFRM8sbu_MjSkcp3NjGgnVrc-lynQHI
+id: wildlife_trust_login
+theme: wildlife_trust
+region: branding
+weight: -2
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'User login'
+  provider: user
+  label_display: visible
+visibility: {  }

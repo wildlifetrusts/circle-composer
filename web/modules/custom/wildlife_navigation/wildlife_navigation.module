@@ -1,0 +1,131 @@
+<?php
+
+/**
+ * @file
+ * The module file for wildlife_navigation.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function wildlife_navigation_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = array();
+
+  // Add featured item, section image and section summary fields to Menu Link
+  // Content entity.
+  if ($entity_type->id() === 'menu_link_content') {
+    $fields['featured'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Featured menu item'))
+      ->setDescription(t('Apply styling for a featured menu item.'))
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', array(
+        'type' => 'checkbox',
+        'weight' => -1,
+      ));
+
+    $fields['section_image'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Section image'))
+      ->setDescription(t('The image for the section represented by a menu item.'))
+      ->setSetting('target_type', 'media')
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('form', array(
+        'type' => 'entity_browser_entity_reference',
+        'weight' => 1,
+        'settings' => array(
+          'entity_browser' => 'media_image_browser',
+          'field_widget_display' => 'rendered_entity',
+          'field_widget_remove' => TRUE,
+          'open' => TRUE,
+          'selection_mode' => 'selection_append',
+          'field_widget_display_settings' => ['view_mode' => 'teaser'],
+          'field_widget_edit' => FALSE,
+        ),
+      ));
+
+    $fields['section_summary'] = BaseFieldDefinition::create('text_long')
+      ->setLabel(t('Section summary'))
+      ->setDescription(t('The summary for the section represented by a menu item.'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('form', array(
+        'type' => 'string_textarea',
+        'weight' => 2,
+      ))
+      ->setDisplayConfigurable('form', TRUE);
+  }
+
+  return $fields;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\node\NodeForm.
+ */
+function wildlife_navigation_form_menu_link_content_form_alter(&$form, FormStateInterface $form_state) {
+  // Add Section grouping for Summary and Image fields.
+  $section_description = t('The Section Summary and Image will be displayed in the Main Menu in the menu drop-down. In order for this to show, you must:');
+  $section_description .= '<ul>';
+  $section_description .= '<li>' . t('Check the <em>Enabled</em> and <em>Show as expanded</em> checkboxes.');
+  $section_description .= '<li>' . t('Assign at least one child menu item to this menu item.');
+  $section_description .= '<li>' . t('Set this menu item to the top level of this menu, i.e. <em>Parent link</em> should be set to "&lt;Main navigation&gt;".');
+  $section_description .= '</ul>';
+
+  $form['section'] = array(
+    '#type' => 'details',
+    '#title' => t('Menu section'),
+    '#open' => TRUE,
+    '#weight' => 11,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="menu_parent"]' => array('value' => 'main:'),
+      ),
+    ),
+    '#description' => $section_description,
+  );
+
+  $form['section_summary']['#group'] = 'section';
+  $form['section_image']['#group'] = 'section';
+
+  // Hide Langcode from the form. This will be automatically generated anyway
+  // when a user uses the Translate link.
+  if (isset($form['langcode'])) {
+    $form['langcode']['#access'] = FALSE;
+  }
+
+  // Move Simple XML Sitemap settings to the bottom of the page.
+  if (isset($form['simple_sitemap'])) {
+    $form['actions']['#weight'] = 100;
+    $form['simple_sitemap']['#weight'] = 99;
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function wildlife_navigation_menu_local_tasks_alter(&$data, $route_name) {
+  // Hide the Translate link on menu when a user doesn't have the permission.
+  if ($route_name == 'entity.menu_link_content.canonical') {
+    $current_user = \Drupal::currentUser();
+    $has_translate_tab = isset($data['tabs'][0]['content_translation.local_tasks:entity.menu_link_content.content_translation_overview']);
+    $user_has_translate_permission = $current_user->hasPermission('translate any entity');
+
+    if ($has_translate_tab && !$user_has_translate_permission) {
+      unset($data['tabs'][0]['content_translation.local_tasks:entity.menu_link_content.content_translation_overview']);
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_operation_alter().
+ */
+function wildlife_navigation_entity_operation_alter(&$operations, \Drupal\Core\Entity\EntityInterface $entity) {
+  // Always unset the Translate operation here as it's not relevant to the
+  // front end, can be accessed from the List Links page, and it sits at the top
+  // of the operations making those links confusing at a glance.
+  if ($entity->getEntityTypeId() == 'menu' && isset($operations['translate'])) {
+    unset($operations['translate']);
+  }
+}

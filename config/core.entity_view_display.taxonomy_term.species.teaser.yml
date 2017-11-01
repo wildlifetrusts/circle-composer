@@ -1,0 +1,36 @@
+uuid: e173dc07-420d-4fbb-bece-99cd13765ff9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.teaser
+    - field.field.taxonomy_term.species.field_meta_tags
+    - field.field.taxonomy_term.species.field_species_image
+    - taxonomy.vocabulary.species
+  module:
+    - fences
+id: taxonomy_term.species.teaser
+targetEntityType: taxonomy_term
+bundle: species
+mode: teaser
+content:
+  field_species_image:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: grid_teaser
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  description: true
+  field_meta_tags: true
+  langcode: true

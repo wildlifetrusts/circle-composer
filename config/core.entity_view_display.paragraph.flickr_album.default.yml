@@ -1,0 +1,22 @@
+uuid: a5db445a-f4b8-43e7-bafa-b604e21c3207
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.flickr_album.field_flickr_embed_code
+    - paragraphs.paragraphs_type.flickr_album
+  module:
+    - text
+id: paragraph.flickr_album.default
+targetEntityType: paragraph
+bundle: flickr_album
+mode: default
+content:
+  field_flickr_embed_code:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

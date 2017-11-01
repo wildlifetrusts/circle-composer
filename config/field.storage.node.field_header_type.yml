@@ -1,0 +1,33 @@
+uuid: ae2a88c6-e49f-4192-ab2d-02f51192b012
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_header_type
+field_name: field_header_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: none
+      label: None
+    -
+      value: colour
+      label: Colour
+    -
+      value: image
+      label: Image
+    -
+      value: silhouette
+      label: Silhouette
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

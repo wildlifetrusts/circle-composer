@@ -1,0 +1,66 @@
+uuid: 854f4a71-c878-4335-b415-71a8ef0178d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.local_customisation.field_local_spotlight
+    - paragraphs.paragraphs_type.spotlight_group
+  module:
+    - entity_reference_revisions
+    - wildlife_local_customisation
+id: local_customisation.local_customisation.field_local_spotlight
+field_name: field_local_spotlight
+entity_type: local_customisation
+bundle: local_customisation
+label: Spotlight
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      spotlight_group: spotlight_group
+    target_bundles_drag_drop:
+      accordion:
+        weight: 14
+        enabled: false
+      accordion_item:
+        weight: 15
+        enabled: false
+      attached_files:
+        weight: 16
+        enabled: false
+      headline_hero:
+        weight: 17
+        enabled: false
+      image:
+        weight: 18
+        enabled: false
+      linked_logos:
+        weight: 19
+        enabled: false
+      linked_logo_item:
+        weight: 20
+        enabled: false
+      quick_links:
+        weight: 21
+        enabled: false
+      rich_text:
+        weight: 22
+        enabled: false
+      section:
+        weight: 23
+        enabled: false
+      spotlight:
+        weight: 24
+        enabled: false
+      spotlight_group:
+        enabled: true
+        weight: 25
+      video:
+        weight: 26
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,139 @@
+uuid: be6d6307-8029-460c-afbe-c3775e91637e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.event.field_event_about
+    - field.field.node.event.field_event_additional_info
+    - field.field.node.event.field_event_baby_changing
+    - field.field.node.event.field_event_bicycle_parking
+    - field.field.node.event.field_event_booking_embed
+    - field.field.node.event.field_event_booking_status
+    - field.field.node.event.field_event_booking_url
+    - field.field.node.event.field_event_cafe_refreshments
+    - field.field.node.event.field_event_capacity
+    - field.field.node.event.field_event_car_charging
+    - field.field.node.event.field_event_contact_email
+    - field.field.node.event.field_event_contact_name
+    - field.field.node.event.field_event_contact_number
+    - field.field.node.event.field_event_date
+    - field.field.node.event.field_event_disabled_toilet
+    - field.field.node.event.field_event_dogs
+    - field.field.node.event.field_event_dogs_additional
+    - field.field.node.event.field_event_email
+    - field.field.node.event.field_event_hearing_loop
+    - field.field.node.event.field_event_local_group
+    - field.field.node.event.field_event_location
+    - field.field.node.event.field_event_meeting_point
+    - field.field.node.event.field_event_mobility
+    - field.field.node.event.field_event_parking_info
+    - field.field.node.event.field_event_phone_number
+    - field.field.node.event.field_event_photos
+    - field.field.node.event.field_event_picnic_area
+    - field.field.node.event.field_event_price_donation
+    - field.field.node.event.field_event_reserve
+    - field.field.node.event.field_event_shop
+    - field.field.node.event.field_event_suitable_for
+    - field.field.node.event.field_event_summary
+    - field.field.node.event.field_event_tags
+    - field.field.node.event.field_event_theme
+    - field.field.node.event.field_event_time
+    - field.field.node.event.field_event_toilets
+    - field.field.node.event.field_event_type
+    - field.field.node.event.field_event_what_to_bring
+    - field.field.node.event.field_event_wheelchair
+    - field.field.node.event.field_external_link
+    - field.field.node.event.field_further_content
+    - field.field.node.event.field_meta_tags
+    - node.type.event
+  module:
+    - fences
+    - link
+    - user
+    - wildlife_field_formatters
+id: node.event.search_result
+targetEntityType: node
+bundle: event
+mode: search_result
+content:
+  field_event_summary:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: '200'
+      word_boundary: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+  field_external_link:
+    type: link
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+hidden:
+  field_event_about: true
+  field_event_additional_info: true
+  field_event_baby_changing: true
+  field_event_bicycle_parking: true
+  field_event_booking_embed: true
+  field_event_booking_status: true
+  field_event_booking_url: true
+  field_event_cafe_refreshments: true
+  field_event_capacity: true
+  field_event_car_charging: true
+  field_event_contact_email: true
+  field_event_contact_name: true
+  field_event_contact_number: true
+  field_event_date: true
+  field_event_disabled_toilet: true
+  field_event_dogs: true
+  field_event_dogs_additional: true
+  field_event_email: true
+  field_event_hearing_loop: true
+  field_event_local_group: true
+  field_event_location: true
+  field_event_meeting_point: true
+  field_event_mobility: true
+  field_event_parking_info: true
+  field_event_phone_number: true
+  field_event_photos: true
+  field_event_picnic_area: true
+  field_event_price_donation: true
+  field_event_reserve: true
+  field_event_shop: true
+  field_event_suitable_for: true
+  field_event_tags: true
+  field_event_theme: true
+  field_event_time: true
+  field_event_toilets: true
+  field_event_type: true
+  field_event_what_to_bring: true
+  field_event_wheelchair: true
+  field_further_content: true
+  field_meta_tags: true
+  langcode: true
+  links: true
+  static_map: true
+  workbench_moderation_control: true

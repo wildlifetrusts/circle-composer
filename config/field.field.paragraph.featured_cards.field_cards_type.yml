@@ -1,0 +1,21 @@
+uuid: 29f7e92d-1f0a-4b25-b104-b3cda715ba86
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cards_type
+    - paragraphs.paragraphs_type.featured_cards
+  module:
+    - options
+id: paragraph.featured_cards.field_cards_type
+field_name: field_cards_type
+entity_type: paragraph
+bundle: featured_cards
+label: Type
+description: '<strong>Curated</strong> will allow you to select the exact content items you wish to display as cards.<br><strong>Dynamic</strong> will allow you to select filters which will then display cards matching the given filters.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

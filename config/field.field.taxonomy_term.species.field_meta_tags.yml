@@ -1,0 +1,23 @@
+uuid: 70be7c9a-f45d-4089-9ec7-d787a31fb019
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_meta_tags
+    - taxonomy.vocabulary.species
+  module:
+    - metatag
+id: taxonomy_term.species.field_meta_tags
+field_name: field_meta_tags
+entity_type: taxonomy_term
+bundle: species
+label: 'Meta tags'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 'a:0:{}'
+default_value_callback: ''
+settings: {  }
+field_type: metatag

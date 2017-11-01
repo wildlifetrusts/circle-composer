@@ -1,0 +1,19 @@
+uuid: 88edda55-0e5b-451d-8775-3b87fa040dde
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_job_application_link
+field_name: field_job_application_link
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

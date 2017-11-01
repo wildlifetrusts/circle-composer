@@ -1,0 +1,44 @@
+uuid: 56ea4797-2137-44e4-a297-3cee674b3e88
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: paragraph_statistics_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Statistics components from a CSV source to paragraphs: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/paragraph_statistics_national.csv
+  header_row_count: 1
+  keys:
+    - id
+process:
+  type:
+    plugin: default_value
+    default_value: statistics
+  field_statistic_item:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: statistic_items
+    -
+      plugin: migration
+      migration:
+        - paragraph_statistic_item_national
+      no_stub: true
+    -
+      plugin: iterator
+      process:
+        target_id: '0'
+        target_revision_id: '1'
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+migration_dependencies:
+  required:
+    - paragraph_statistic_item_national

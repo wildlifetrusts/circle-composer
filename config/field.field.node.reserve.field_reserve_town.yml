@@ -1,0 +1,19 @@
+uuid: 558bca37-63dd-4b35-bff6-01cc7d4da6a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_town
+    - node.type.reserve
+id: node.reserve.field_reserve_town
+field_name: field_reserve_town
+entity_type: node
+bundle: reserve
+label: Town
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

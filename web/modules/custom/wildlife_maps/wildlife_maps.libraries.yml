@@ -1,0 +1,17 @@
+location-search-map:
+  js:
+    js/wildlife_search.marker-clusterer.js: {}
+    js/wildlife_search.behaviors.location-search-map.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.debounce
+
+reserve-interactive-map:
+  js:
+    js/wildlife_search.behaviors.reserve-interactive-map.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.debounce
+

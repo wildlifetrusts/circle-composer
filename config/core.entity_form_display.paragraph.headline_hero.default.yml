@@ -1,0 +1,132 @@
+uuid: e585393a-876f-42c5-a771-8f722b9984b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_video_browser
+    - field.field.paragraph.headline_hero.field_headline_hero_background
+    - field.field.paragraph.headline_hero.field_headline_hero_cta
+    - field.field.paragraph.headline_hero.field_headline_hero_image
+    - field.field.paragraph.headline_hero.field_headline_hero_search
+    - field.field.paragraph.headline_hero.field_headline_hero_silhouette
+    - field.field.paragraph.headline_hero.field_headline_hero_title
+    - field.field.paragraph.headline_hero.field_headline_hero_video
+    - paragraphs.paragraphs_type.headline_hero
+  module:
+    - entity_browser
+    - field_group
+    - link_attributes
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_background:
+      children:
+        - field_headline_hero_background
+        - field_headline_hero_image
+        - field_headline_hero_silhouette
+        - field_headline_hero_video
+      parent_name: ''
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        label: Background
+        description: 'Choose either an image or a silhouette to use as the background for this component.'
+        required_fields: true
+        id: background
+        classes: ''
+      label: Background
+    group_action:
+      children:
+        - field_headline_hero_search
+        - field_headline_hero_cta
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        label: Action
+        description: 'Select a Search Action from the drop-down list or select ''None'' to specify a Call To Action button and associated link.'
+        required_fields: true
+        id: action
+        classes: ''
+      label: Action
+id: paragraph.headline_hero.default
+targetEntityType: paragraph
+bundle: headline_hero
+mode: default
+content:
+  field_headline_hero_background:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_headline_hero_cta:
+    weight: 3
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_headline_hero_image:
+    weight: 2
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_headline_hero_search:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_headline_hero_silhouette:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_headline_hero_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_headline_hero_video:
+    weight: 4
+    settings:
+      entity_browser: media_video_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

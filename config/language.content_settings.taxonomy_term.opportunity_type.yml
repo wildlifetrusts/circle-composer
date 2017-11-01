@@ -1,0 +1,16 @@
+uuid: 7bfe9a26-d0a2-4efa-a96b-c340bdf3df77
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.opportunity_type
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.opportunity_type
+target_entity_type_id: taxonomy_term
+target_bundle: opportunity_type
+default_langcode: site_default
+language_alterable: true

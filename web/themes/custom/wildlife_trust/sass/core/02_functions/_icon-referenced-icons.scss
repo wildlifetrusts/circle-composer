@@ -1,0 +1,7 @@
+@function arrow-down($fillColour) {
+  @return svg-url('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M35.275 36.046l15.718 15.718L66.917 35.84a3 3 0 0 1 4.24 4.24l.003.003-18 18A2.994 2.994 0 0 1 51 59h-.014a2.99 2.99 0 0 1-2.16-.918l-18-18 .008-.007a3 3 0 1 1 4.44-4.03z" fill-rule="evenodd" clip-rule="evenodd"/></svg>');
+}
+
+@function arrow-down_white($fillColour) {
+  @return svg-url('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40"><path fill="' + $fillColour + '" d="M35.275 36.046l15.718 15.718L66.917 35.84a3 3 0 0 1 4.24 4.24l.003.003-18 18A2.994 2.994 0 0 1 51 59h-.014a2.99 2.99 0 0 1-2.16-.918l-18-18 .008-.007a3 3 0 1 1 4.44-4.03z" fill-rule="evenodd" clip-rule="evenodd"/></svg>');
+}

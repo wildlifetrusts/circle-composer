@@ -1,0 +1,51 @@
+uuid: c6d9535b-3ad1-45d8-9d51-50afb239f6a6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_voluntary_commitment
+field_name: field_voluntary_commitment
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: mon
+      label: Monday
+    -
+      value: tue
+      label: Tuesday
+    -
+      value: wed
+      label: Wednesday
+    -
+      value: thu
+      label: Thursday
+    -
+      value: fri
+      label: Friday
+    -
+      value: sat
+      label: Saturday
+    -
+      value: sun
+      label: Sunday
+    -
+      value: weekdays
+      label: Weekdays
+    -
+      value: weekends
+      label: Weekends
+    -
+      value: any
+      label: 'Any Day'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

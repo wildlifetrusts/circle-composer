@@ -1,0 +1,10 @@
+uuid: 15699901-dfb5-4e5f-a3b8-3a5e05d0eda6
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.gallery_item
+label: 'Gallery item'
+targetEntityType: media
+cache: true

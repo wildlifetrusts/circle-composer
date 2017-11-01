@@ -1,0 +1,23 @@
+uuid: 1a23b295-7c71-452b-808c-721fd1ed9c4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_audio_mp3
+    - media_entity.bundle.audio
+  module:
+    - link
+id: media.audio.field_audio_mp3
+field_name: field_audio_mp3
+entity_type: media
+bundle: audio
+label: 'Rackspace .mp3 file link'
+description: 'Enter the link to a .mp3 file for use via Rackspace streaming.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

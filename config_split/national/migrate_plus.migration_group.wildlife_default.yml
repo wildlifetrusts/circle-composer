@@ -1,0 +1,15 @@
+uuid: e2c34496-7091-446b-a0e7-cee19effb9d2
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+id: wildlife_default
+label: 'Default migrations'
+description: 'Import default content for Wildlife Trusts sites.'
+source_type: csv
+module: null
+shared_configuration:
+  source:
+    key: default

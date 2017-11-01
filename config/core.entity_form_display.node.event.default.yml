@@ -1,0 +1,575 @@
+uuid: f524f23c-1e6b-473d-b2f7-3b001a50d1b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.node.event.field_event_about
+    - field.field.node.event.field_event_additional_info
+    - field.field.node.event.field_event_baby_changing
+    - field.field.node.event.field_event_bicycle_parking
+    - field.field.node.event.field_event_booking_embed
+    - field.field.node.event.field_event_booking_status
+    - field.field.node.event.field_event_booking_url
+    - field.field.node.event.field_event_cafe_refreshments
+    - field.field.node.event.field_event_capacity
+    - field.field.node.event.field_event_car_charging
+    - field.field.node.event.field_event_contact_email
+    - field.field.node.event.field_event_contact_name
+    - field.field.node.event.field_event_contact_number
+    - field.field.node.event.field_event_date
+    - field.field.node.event.field_event_disabled_toilet
+    - field.field.node.event.field_event_dogs
+    - field.field.node.event.field_event_dogs_additional
+    - field.field.node.event.field_event_email
+    - field.field.node.event.field_event_hearing_loop
+    - field.field.node.event.field_event_local_group
+    - field.field.node.event.field_event_location
+    - field.field.node.event.field_event_meeting_point
+    - field.field.node.event.field_event_mobility
+    - field.field.node.event.field_event_parking_info
+    - field.field.node.event.field_event_phone_number
+    - field.field.node.event.field_event_photos
+    - field.field.node.event.field_event_picnic_area
+    - field.field.node.event.field_event_price_donation
+    - field.field.node.event.field_event_reserve
+    - field.field.node.event.field_event_shop
+    - field.field.node.event.field_event_suitable_for
+    - field.field.node.event.field_event_summary
+    - field.field.node.event.field_event_tags
+    - field.field.node.event.field_event_theme
+    - field.field.node.event.field_event_time
+    - field.field.node.event.field_event_toilets
+    - field.field.node.event.field_event_type
+    - field.field.node.event.field_event_what_to_bring
+    - field.field.node.event.field_event_wheelchair
+    - field.field.node.event.field_external_link
+    - field.field.node.event.field_further_content
+    - field.field.node.event.field_meta_tags
+    - node.type.event
+  module:
+    - datetime_range
+    - entity_browser
+    - entity_browser_entity_form
+    - field_group
+    - inline_entity_form
+    - link
+    - metatag
+    - path
+    - telephone
+    - text
+    - wildlife_admin
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_general_information
+        - group_booking
+        - group_contact_details
+        - group_know_before_you_go
+        - group_further_content
+      parent_name: ''
+      weight: 6
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_know_before_you_go:
+      children:
+        - field_event_mobility
+        - field_event_wheelchair
+        - field_event_hearing_loop
+        - field_event_what_to_bring
+        - field_event_dogs
+        - field_event_dogs_additional
+        - field_event_parking_info
+        - field_event_bicycle_parking
+        - field_event_toilets
+        - field_event_shop
+        - field_event_cafe_refreshments
+        - field_event_picnic_area
+        - field_event_disabled_toilet
+        - field_event_baby_changing
+        - field_event_car_charging
+      parent_name: group_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Know before you go'
+    group_booking:
+      children:
+        - field_event_booking_url
+        - field_event_phone_number
+        - field_event_email
+        - field_event_price_donation
+        - field_event_capacity
+        - field_event_booking_status
+        - field_event_additional_info
+        - field_event_booking_embed
+        - field_event_suitable_for
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Booking
+    group_general_information:
+      children:
+        - field_event_photos
+        - group_event_location
+        - field_event_meeting_point
+        - field_event_date
+        - field_event_time
+        - field_event_type
+        - field_event_tags
+        - field_event_theme
+        - field_event_local_group
+        - field_event_summary
+        - field_event_about
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'General information'
+    group_further_content:
+      children:
+        - field_further_content
+      parent_name: group_tabs
+      weight: 24
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Further content'
+    group_event_location:
+      children:
+        - field_event_location
+        - field_event_reserve
+      parent_name: group_general_information
+      weight: 32
+      format_type: fieldset
+      format_settings:
+        label: 'Event location'
+        description: 'Choose either a Reserve or other Location.'
+        required_fields: true
+        id: event-location
+        classes: ''
+      label: 'Event location'
+    group_contact_details:
+      children:
+        - field_event_contact_name
+        - field_event_contact_number
+        - field_event_contact_email
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Contact details'
+id: node.event.default
+targetEntityType: node
+bundle: event
+mode: default
+content:
+  colour_scheme:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_event_about:
+    weight: 41
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_event_additional_info:
+    weight: 52
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_event_baby_changing:
+    weight: 38
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_event_bicycle_parking:
+    weight: 31
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_event_booking_embed:
+    weight: 53
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_event_booking_status:
+    weight: 49
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_event_booking_url:
+    weight: 44
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_event_cafe_refreshments:
+    weight: 34
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_event_capacity:
+    weight: 48
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_event_car_charging:
+    weight: 39
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_event_contact_email:
+    weight: 23
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_event_contact_name:
+    weight: 21
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_event_contact_number:
+    weight: 22
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_event_date:
+    weight: 34
+    settings: {  }
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_event_disabled_toilet:
+    weight: 36
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_event_dogs:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_event_dogs_additional:
+    weight: 29
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_event_email:
+    weight: 46
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_event_hearing_loop:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_event_local_group:
+    weight: 39
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_event_location:
+    weight: 32
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
+  field_event_meeting_point:
+    weight: 33
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_event_mobility:
+    weight: 24
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_event_parking_info:
+    weight: 30
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_event_phone_number:
+    weight: 45
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_event_photos:
+    weight: 31
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_event_picnic_area:
+    weight: 35
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_event_price_donation:
+    weight: 47
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_event_reserve:
+    weight: 33
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_event_shop:
+    weight: 33
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_event_suitable_for:
+    weight: 54
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_event_summary:
+    weight: 40
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_event_tags:
+    weight: 37
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+    region: content
+  field_event_theme:
+    weight: 38
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_event_time:
+    weight: 35
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_event_toilets:
+    weight: 32
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_event_type:
+    weight: 36
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_event_what_to_bring:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_event_wheelchair:
+    weight: 25
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_further_content:
+    weight: 17
+    settings:
+      title: Component
+      title_plural: Components
+      edit_mode: preview
+      add_mode: select
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: tweaked_entity_reference_paragraphs
+    region: content
+  field_meta_tags:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden:
+  field_external_link: true
+  langcode: true

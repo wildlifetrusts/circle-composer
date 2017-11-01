@@ -1,0 +1,121 @@
+.author {
+  @include setType(6, 16px);
+
+  .toggle--bio {
+    display: block;
+    float: left;
+    margin-left: emRhythm(4, ms(0));
+    margin-top: 16px;
+    width: 28px;
+    height: 28px;
+    background-color: palette(mono, mid-dark);
+    border-radius: 28px;
+    overflow: hidden;
+    text-indent: -9999px;
+    background-size: 15px auto;
+    background-position: 50% 50%;
+    transition: transform 0.4s ease-in-out;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      background-color: palette(mono, dark);
+    }
+  }
+
+  &.bio--is-expanded {
+    .toggle--bio {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.author__social {
+  display: inline-block;
+
+  .field {
+    @extend %social-icons;
+    float: left;
+
+    a {
+      border-radius: 3px;
+      width: 32px;
+      height: 32px;
+      background-color: rgba(palette(mono, x-dark), 0.6);
+      background-size: 20px auto;
+    }
+  }
+}
+
+.author__main {
+  display: inline-block;
+  margin-top: 0.5em;
+
+  > .field-group-wrapper {
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .field--name-name {
+    @include setType(6, 16px);
+    font-family: $base-font-family;
+    font-weight: $font-weight-light;
+    color: palette(mono, x-light);
+
+    a {
+      color: palette(mono, x-light);
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .author__details {
+    float: left;
+    clear: right;
+    text-align: left;
+  }
+}
+
+.field--name-field-author-profile-image {
+  float: left;
+  clear: left;
+  height: 60px;
+  width: 60px;
+  overflow: hidden;
+  border-radius: 60px;
+  margin-right: emRhythm(5, ms(0));
+
+  img {
+    display: block;
+  }
+}
+
+.field--name-field-author-bio {
+  @include setType(6, 16px);
+  overflow: hidden;
+
+  .field__item {
+    transition: max-height 1s ease-in-out;
+    margin-top: 0.75em;
+
+    @include add-breakpoint('lap-and-up') {
+      @include isolation-span(8, 3);
+    }
+
+    html.js & {
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    html.js .bio--is-expanded & {
+      max-height: 100px;
+    }
+  }
+}

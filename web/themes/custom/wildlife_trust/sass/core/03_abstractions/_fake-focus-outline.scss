@@ -1,0 +1,4 @@
+%fake-focus-outline {
+  $focus-color: palette(secondary);
+  box-shadow: 0 0 1px $focus-color, 0 0 3px $focus-color, 0 0 8px $focus-color;
+}

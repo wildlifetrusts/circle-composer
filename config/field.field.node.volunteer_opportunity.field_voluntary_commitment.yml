@@ -1,0 +1,21 @@
+uuid: f213f4ce-dad0-42ef-8a7f-19bf41d57f97
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voluntary_commitment
+    - node.type.volunteer_opportunity
+  module:
+    - options
+id: node.volunteer_opportunity.field_voluntary_commitment
+field_name: field_voluntary_commitment
+entity_type: node
+bundle: volunteer_opportunity
+label: Commitment
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

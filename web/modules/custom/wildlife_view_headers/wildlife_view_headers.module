@@ -1,0 +1,268 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_view_headers.module.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_view_headers_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_view_headers module.
+    case 'help.page.wildlife_view_headers':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('View Headers') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wildlife_view_headers_theme() {
+  return array(
+    'view_header' => array(
+      'render element' => 'elements',
+    ),
+  );
+}
+
+/**
+ * Prepares variables for View header templates.
+ *
+ * Default template: view_header.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the user information and any
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_view_header(array &$variables) {
+  // Fetch ViewHeader Entity Object.
+  /** @var \Drupal\wildlife_view_headers\Entity\ViewHeader $view_header */
+  $view_header = $variables['elements']['#view_header'];
+
+  // Helpful $content variable for templates.
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  if (!empty($view_header->get('field_header_type'))) {
+    $header_type = $view_header->get('field_header_type')->first()->getValue();
+    $variables['attributes']['class'][] = 'view-header--' . $header_type['value'];
+
+    if (in_array($header_type['value'], ['image', 'silhouette'])) {
+      $backgrounds_service = Drupal::service('wildlife_backgrounds.backgrounds_service');
+
+      switch ($header_type['value']) {
+        case 'image':
+          $background_image = $view_header->get('field_header_image');
+          $backgrounds = $backgrounds_service->getResponsiveBackgroundImages($background_image);
+
+          if (!empty($backgrounds)) {
+            // Add responsive images library to spotlight.
+            $variables['attributes']['class'][] = 'responsive-component';
+            $variables['#attached']['library'][] = 'wildlife_trust/responsive-background-images';
+
+            // Add the default background style and loop through the other
+            // backgrounds to add those.
+            $variables['attributes']['style'] = 'background-image: url(' . $backgrounds['default'] . ');';
+
+            foreach ($backgrounds as $viewport => $background) {
+              $variables['attributes']['data-background-' . $viewport] = $background;
+            }
+          }
+          break;
+
+        case 'silhouette':
+          $silhouette_image = $view_header->get('field_header_silhouette');
+          $variables['header_silhouette'] = $backgrounds_service->getSilhouetteUrl($silhouette_image);
+          break;
+      }
+    }
+  }
+
+  // Related search.
+  $view_id = $view_header->getAssociatedViewId();
+  $view_display_id = $view_header->getAssociatedViewDisplayId();
+
+  // For Explorer views, get the Search equivalent.
+  $search_equivalents = ['explorer', 'explorer_habitats'];
+  if (in_array($view_id, $search_equivalents)) {
+    $view_id = 'search';
+  }
+
+  /** @var \Drupal\views\Entity\View $view */
+  $view = \Drupal\views\Entity\View::load($view_id);
+  $view_executable = $view->getExecutable();
+  $view_executable->setDisplay($view_display_id);
+  $display = $view_executable->getDisplay();
+
+  $filters = $display->getOption('filters');
+
+  // The exposed filter identifiers that may use the hero_search_form.
+  $allowed_identifiers = ['search', 'location'];
+  $variables['related_search'] = FALSE;
+  foreach ($filters as $filter) {
+    $identifier = isset($filter['expose']) && isset($filter['expose']['identifier']) ? $filter['expose']['identifier'] : NULL;
+    if (in_array($identifier, $allowed_identifiers)) {
+      $variables['related_search'] = [
+        '#type' => 'hero_search_form',
+        '#search_type' => $view_display_id,
+        '#identifier' => $identifier,
+      ];
+    }
+  }
+
+  // Edit link.
+  $user = \Drupal::currentUser();
+  $variables['user_can_edit'] = $user->hasPermission('edit view header entities');
+  $variables['view_header_id'] = $view_header->id();
+  $variables['current_page'] = Url::fromRoute('<current>')->toString();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wildlife_view_headers_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Hide the search or location field on forms where that will be moved in to
+  // the view header.
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $form_state->get('view');
+  $view_identifier = $view->id() . ':' . $view->current_display;
+
+  $exceptions = ['search:global'];
+
+  if (!in_array($view_identifier, $exceptions) && (isset($form['location']) || isset($form['search']))) {
+    if (isset($form['location'])) {
+      $form['location']['#type'] = 'hidden';
+    }
+    if (isset($form['search'])) {
+      $form['search']['#type'] = 'hidden';
+
+      // On forms where 1 search field is all there is (e.g. Habitat and Species
+      // hide the form entirely.
+      if (count($form['#info']) == 1) {
+        $form['#attributes']['class'][] = 'visually-hidden';
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function wildlife_view_headers_view_insert(Drupal\views\Entity\View $entity) {
+  _wildlife_view_headers_create_view_header($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function wildlife_view_headers_view_update(Drupal\views\Entity\View $entity) {
+  _wildlife_view_headers_create_view_header($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function wildlife_view_headers_view_delete(Drupal\views\Entity\View $entity) {
+  $view_id = $entity->id();
+  $displays = $entity->get('display');
+
+  foreach ($displays as $display_id => $display) {
+    if ($display['display_plugin'] == 'page') {
+      $query = \Drupal::entityQuery('view_header');
+      $query->condition('view_id', $view_id);
+      $query->condition('view_display_id', $display_id);
+      $entity_id = $query->execute();
+
+      if (!empty($entity_id)) {
+        $view_header_id = reset($entity_id);
+
+        $view_header = Drupal::entityManager()
+          ->getStorage('view_header')
+          ->load($view_header_id);
+        $view_header->delete();
+      }
+    }
+  }
+}
+
+/**
+ * Create a View Header when a view is inserted/updated.
+ */
+function _wildlife_view_headers_create_view_header(Drupal\views\Entity\View $entity) {
+  $view_id = $entity->id();
+  $displays = $entity->get('display');
+
+  $exclude_views = [
+    'taxonomy_term',
+    'frontpage'
+  ];
+
+  if (in_array($view_id, $exclude_views)) {
+    return;
+  }
+
+  foreach ($displays as $display_id => $display) {
+    if ($display['display_plugin'] == 'page') {
+      $admin_path = strpos($display['display_options']['path'], 'admin/') === 0;
+
+      $query = \Drupal::entityQuery('view_header');
+      $query->condition('view_id', $view_id);
+      $query->condition('view_display_id', $display_id);
+      $entity_id = $query->execute();
+
+      if (empty($entity_id) && !$admin_path && $entity->status()) {
+        $view_header_name = $entity->label() . ' - ' . $display['display_title'];
+
+        // If an entity ID doesn't exist, create a new View Header entity.
+        $data = [
+          'name' => $view_header_name,
+          'view_id' => $view_id,
+          'view_display_id' => $display_id,
+          'field_view_header_title' => isset($display['display_options']['title']) ? $display['display_options']['title'] : $display['display_title'],
+          'field_header_type' => 'none',
+        ];
+
+        /** @var \Drupal\wildlife_view_headers\Entity\ViewHeader $view_header */
+        $view_header = \Drupal::entityManager()
+          ->getStorage('view_header')
+          ->create($data);
+        $view_header->save();
+      }
+      else if (!empty($entity_id) && $admin_path) {
+        $view_header_id = reset($entity_id);
+
+        $view_header = Drupal::entityManager()
+          ->getStorage('view_header')
+          ->load($view_header_id);
+        $view_header->delete();
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_view_headers_form_view_header_form_alter(&$form, &$form_state, $form_id) {
+  // Add Revision and Translation information to fieldgroups.
+  $form['#fieldgroups']['group_revision']->children[] = 'new_revision';
+  $form['#fieldgroups']['group_revision']->children[] = 'revision_log_message';
+  $form['#fieldgroups']['group_revision']->children[] = 'content_translation';
+  $form['#group_children']['new_revision'] = 'group_revision';
+  $form['#group_children']['revision_log_message'] = 'group_revision';
+  $form['#group_children']['content_translation'] = 'group_translation';
+}

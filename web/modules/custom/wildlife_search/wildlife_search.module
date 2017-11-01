@@ -1,0 +1,618 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_search.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_search_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_search module.
+    case 'help.page.wildlife_search':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides search related enhancements and code.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wildlife_search_theme() {
+  return [
+    'hero_search_form' => [
+      'variables' => [
+        'value' => NULL,
+        'placeholder' => NULL,
+        'action_url' => NULL,
+        'identifier' => NULL,
+        'search_type' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function wildlife_search_search_api_solr_query_alter(\Solarium\Core\Query\QueryInterface $solarium_query, \Drupal\search_api\Query\QueryInterface &$query) {
+  wildlife_search_location_alter($solarium_query, $query);
+  wildlife_search_uuid_alter($solarium_query, $query);
+  wildlife_search_external_alter($solarium_query, $query);
+  wildlife_search_blacklist_alter($solarium_query, $query);
+}
+
+/**
+ * Helper function for wildlife_search_search_api_solr_query_alter().
+ *
+ * @see wildlife_search_search_api_solr_query_alter()
+ */
+function wildlife_search_location_alter(\Solarium\Core\Query\QueryInterface $solarium_query, \Drupal\search_api\Query\QueryInterface &$query) {
+  // Only alter location index queries.
+  if ($query->getIndex()->getOriginalId() != 'location') {
+    return;
+  }
+
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $query->getOption('search_api_view');
+  if (empty($view) || $view->id() != 'location_search') {
+    return;
+  }
+
+  $field = 'locs_location';
+  $location_query_name = 'location';
+  $filter_by_distance = FALSE;
+  $sort_by_distance = FALSE;
+  switch ($view->id() . ':' . $view->current_display) {
+    case 'location_search:trusts';
+      $sort_by_distance = TRUE;
+      $limit = 5;
+      break;
+
+    case 'location_search:volunteering_opportunities':
+      $filter_by_distance = TRUE;
+      $sort_by_distance = FALSE;
+      break;
+
+    case 'location_search:jobs':
+      $filter_by_distance = TRUE;
+      $sort_by_distance = FALSE;
+      break;
+
+    case 'location_search:events':
+    case 'location_search:events_map':
+      $filter_by_distance = TRUE;
+      $sort_by_distance = FALSE;
+      break;
+
+    case 'location_search:reserves':
+    case 'location_search:reserves_map':
+      $filter_by_distance = TRUE;
+      $sort_by_distance = TRUE;
+      break;
+
+    case 'location_search:event_reserve':
+      $filter_by_distance = TRUE;
+      $sort_by_distance = TRUE;
+      break;
+
+    case 'location_search:event_reserve_event':
+      $filter_by_distance = TRUE;
+      $sort_by_distance = FALSE;
+      break;
+  }
+
+  $location = Drupal::request()->get($location_query_name);
+  if (empty($location)) {
+    return;
+  }
+
+  $distance = Drupal::request()->get('location_distance', 50);
+  // If we have a distance value convert it from miles to km for Solr.
+  if (!empty($distance) && is_numeric($distance)) {
+    $distance = $distance * 1.609344;
+  }
+  else {
+    $distance = 50 * 1.609344;
+  }
+
+  try {
+    $location = wildlife_search_geocode($location);
+  }
+  catch (\Geocoder\Exception\CollectionIsEmpty $e) {
+    drupal_set_message('Unfortunately, %location could not be converted to a location. Please try entering a town name or postcode.');
+    Drupal::logger('wildlife_search')->error($e->getMessage());
+  }
+  catch(Exception $e) {
+    drupal_set_message(t('There was a problem converting %location to an address. Please try submitting again or search for a different location.', ['%location' => $location]));
+    Drupal::logger('wildlife_search')->error($e->getMessage());
+  }
+
+  // If we did get a location, alter the query.
+  if ($location) {
+    if ($filter_by_distance) {
+      $helper = $solarium_query->getHelper();
+      // Filter by distance.
+      $q = $helper->geofilt($field, $location->getLatitude(), $location->getLongitude(), $distance);
+      $solarium_query->createFilterQuery('distance')->setQuery($q);
+      $solarium_query->addField('_distance_:' . $helper->geodist(
+        $field,
+        $location->getLatitude(),
+        $location->getLongitude()
+      ));
+    }
+
+    if ($sort_by_distance) {
+      $helper = $solarium_query->getHelper();
+      // Sort by distance.
+      $solarium_query->setQuery('{!func}' . $helper->geodist(
+          $field,
+          $location->getLatitude(),
+          $location->getLongitude()
+        ));
+
+      $solarium_query->addSort('score', 'asc');
+    }
+
+    if (isset($limit)) {
+      $solarium_query->setRows(5);
+    }
+  }
+}
+
+/**
+ * Helper function for wildlife_search_search_api_solr_query_alter().
+ *
+ * @see wildlife_search_search_api_solr_query_alter()
+ */
+function wildlife_search_uuid_alter(\Solarium\Core\Query\QueryInterface $solarium_query, \Drupal\search_api\Query\QueryInterface &$query) {
+  // Only alter location index queries.
+  if ($query->getIndex()->getOriginalId() != 'location') {
+    return;
+  }
+
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $query->getOption('search_api_view');
+  if (empty($view) || $view->id() != 'location_search') {
+    return;
+  }
+
+  $solarium_query->addField('ss_type');
+  $solarium_query->addField('ss_uuid');
+}
+
+/**
+ * Helper function for wildlife_search_search_api_solr_query_alter().
+ *
+ * @see wildlife_search_search_api_solr_query_alter()
+ */
+function wildlife_search_external_alter(\Solarium\Core\Query\QueryInterface $solarium_query, \Drupal\search_api\Query\QueryInterface &$query) {
+  // Only alter location index queries.
+  if ($query->getIndex()->getOriginalId() != 'location') {
+    return;
+  }
+
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $query->getOption('search_api_view');
+  if (empty($view) || $view->id() != 'location_search') {
+    return;
+  }
+
+  // If the search includes a location, show all results.
+  $location = Drupal::request()->get('location');
+  if (!empty($location)) {
+    return;
+  }
+
+  // If the search is location-less, only show results from the current site.
+  // (Unless this is the national site).
+  $domain = Drupal::request()->getHost();
+  if (strpos($domain, 'national') === FALSE) {
+    $helper = $solarium_query->getHelper();
+    $solarium_query->createFilterQuery('site')
+      ->setQuery('ss_field_external_link:*' . $helper->escapeTerm($domain) . '*');
+  }
+}
+
+/**
+ * Helper function for wildlife_search_search_api_solr_query_alter().
+ *
+ * Filters out any locally blacklisted results.
+ *
+ * @see wildlife_search_search_api_solr_query_alter()
+ */
+function wildlife_search_blacklist_alter(\Solarium\Core\Query\QueryInterface $solarium_query, \Drupal\search_api\Query\QueryInterface &$query) {
+  // Only alter location index queries.
+  if ($query->getIndex()->getOriginalId() != 'index') {
+    return;
+  }
+
+  try {
+    $entity_ids = \Drupal::entityQuery('local_customisation')
+      ->condition('field_local_blacklist', TRUE)
+      ->execute();
+  }
+  catch (PluginNotFoundException $e) {
+    // The local_customisation entity doesn't exist on this site so do nothing.
+    return NULL;
+  }
+  if (!empty($entity_ids)) {
+    $entities = Drupal::entityTypeManager()->getStorage('local_customisation')->loadMultiple($entity_ids);
+    $node_uuids = [];
+    /** @var \Drupal\wildlife_local_customisation\Entity\LocalCustomisation $entity */
+    foreach ($entities as $entity) {
+      $uuid = $entity->getAssociatedNodeUuid();
+      if (!empty($uuid) && !empty($uuid['value'])) {
+        $node_uuids[] = $uuid['value'];
+      }
+    }
+    $solarium_query->createFilterQuery('blacklist')
+      ->setQuery('-ss_uuid:(' . implode(' ', $node_uuids) . ')');
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function wildlife_search_views_query_alter(\Drupal\views\ViewExecutable $view, \Drupal\views\Plugin\views\query\QueryPluginBase $query) {
+  if ($view->id() == 'location_search') {
+    $field_names = [
+      'location',
+      'location__distance',
+    ];
+
+    switch ($view->id() . ':' . $view->current_display) {
+      case 'location_search:trusts':
+        $location = Drupal::request()->get('location');
+
+        if (isset($location) && $location != '') {
+          foreach ($query->getSort() as $sort_key => $sort_item) {
+            unset($query->getSort()[$sort_key]);
+          }
+        }
+        break;
+    }
+
+    // Find and unset the condition as the custom handling in
+    // wildlife_search_search_api_solr_query_alter() will take care of it.
+    foreach ($query->getWhere() as &$where_item) {
+      foreach ($where_item['conditions'] as $condition_key => &$condition) {
+        if (in_array($condition[0], $field_names)) {
+          unset ($where_item['conditions'][$condition_key]);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Geocode an entered address.
+ *
+ * Uses Geocoder module which handles caching of data.
+ *
+ * @param string $location
+ *   The location as entered by the user.
+ *
+ * @return \Geocoder\Model\Address|NULL
+ *   The first returned address.
+ */
+function wildlife_search_geocode($location) {
+  $address = NULL;
+  $plugins = ['googlemaps'];
+  $api_key = \Drupal::config('wildlife_google_api.settings')->get('api_key');
+  $options = [
+    'googlemaps' => [
+      'useSsl' => TRUE,
+      'apiKey' => !empty($api_key) ? $api_key : NULL,
+      'region' => 'uk',
+    ],
+  ];
+
+  /** @var \Geocoder\Model\AddressCollection $address_collection */
+  $address_collection = \Drupal::service('geocoder')->geocode($location, $plugins, $options);
+  if ($address_collection) {
+    $address = $address_collection->first();
+  }
+
+  return $address;
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function wildlife_search_preprocess_views_view(&$variables) {
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $variables['view'];
+  if (empty($view)) {
+    return;
+  }
+
+  if ($view->id() != 'location_search') {
+    return;
+  }
+
+  $variables['view']->element['#cache']['contexts'][] = 'url.query_args';
+
+  foreach ($view->result as $index => &$result) {
+    // Add distance.
+    _wildlife_search_preprocess_add_distance($variables, $result, $index, $view);
+  }
+
+  _wildlife_search_preprocess_pre_empty($variables, $view);
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function wildlife_search_preprocess_node(&$variables) {
+  /** @var \Drupal\node\Entity\Node $node */
+  $node = $variables['node'];
+
+  if (!empty($node) && $node->hasField('field_external_link')) {
+    $external_site_link = $node->get('field_external_link');
+    if (!$external_site_link->isEmpty()) {
+      $external_site_link = $external_site_link->first()->getValue();
+      $url = $external_site_link['uri'];
+    }
+  }
+  if (empty($url) && $node->remoteObject) {
+    $remote_object = $node->remoteObject;
+    $url = $remote_object->field_external_link_raw;
+  }
+  if (!empty($url)) {
+    $variables['url'] = $url;
+  }
+
+  // If this node is being loaded via /localapi View then it needs to include
+  // the external link even if it would otherwise be empty.
+  if (!isset($variables['content']['field_external_link'][0]) && empty($variables['content']['field_external_link']['#markup']) && strpos(\Drupal::request()->getPathInfo(), '/localapi') !== FALSE) {
+    $site_title = \Drupal::config('system.site')->get('name');
+
+    // URL needs to be absolute so it doesn't point to the active site when it
+    // is loaded via localapi.
+    $variables['url'] = \Drupal::request()->getSchemeAndHttpHost() . $variables['url'];
+  }
+  // If the field would be displayed anyway, reformat it to the preferred
+  // non-linking format.
+  elseif (!empty($variables['content']['field_external_link'][0])) {
+    $site_title = $variables['content']['field_external_link'][0]['#title'];
+  }
+
+  if (isset($site_title)) {
+    $icon_html = '<div class="icon-external-orange" data-grunticon-embed></div>';
+    $variables['content']['field_external_link'] = [
+      '#markup' => '<div class="node__external-link">' . $icon_html . t('This link will open on %site site.', ['%site' => $site_title]) . '</div>',
+    ];
+  }
+
+  // Dynamically add images from the JSON api if there is not one present.
+  if (in_array($node->bundle(), ['event', 'reserve']) && $variables['view_mode'] == 'teaser') {
+    $image_fields = [
+      'event' => 'field_event_photos',
+      'reserve' => 'field_reserve_photos',
+    ];
+
+    $image_field = $image_fields[$node->bundle()];
+    $external_site_domain = NULL;
+
+    if (isset($url)) {
+      $parsed_url = parse_url($url);
+      $external_site_domain = $parsed_url['scheme'] . '://' . $parsed_url['host'];
+    }
+
+    $image_content = _wildlife_search_get_remote_grid_teaser_images($node, $image_field, $external_site_domain);
+
+    if (!empty($image_content)) {
+      $variables['content'][$image_field] = $variables['content'][$image_field] + $image_content;
+    }
+  }
+}
+
+/**
+ * Add the distance markup.
+ */
+function _wildlife_search_preprocess_add_distance(&$variables, \Drupal\views\ResultRow $result, $index, \Drupal\views\ViewExecutable $view) {
+  $solr_doc = $result->_item->getExtraData('search_api_solr_document');
+  $extra_fields = $solr_doc->getFields();
+  $distance = !empty($extra_fields['_distance_']) ? $extra_fields['_distance_'] : NULL;
+
+  if (empty($distance) || !is_numeric($distance)) {
+    return;
+  }
+
+  // Convert km back to miles.
+  $distance = $distance * 0.621371;
+  $formatted_distance = number_format($distance, 1);
+  $user_input = isset($view->getExposedInput()['location']) ? t('from @search', ['@search' => $view->getExposedInput()['location']])->render() : '';
+  $distance_text = t('@mileage @user_input', [
+    '@mileage' => \Drupal::translation()->formatPlural($formatted_distance, 'mile', '@count miles'),
+    '@user_input' => $user_input,
+  ]);
+
+  $variables['rows'][0]['#rows'][$index]['distance'] = [
+    '#type' => 'markup',
+    '#markup' => '<div class="location-proximity">' . $distance_text . '</div>',
+    '#cache' => [
+      'contexts' => [
+        'url.query_args',
+      ],
+    ],
+  ];
+
+  // Adding this directly to 'distance' array does not seem to bubble up so
+  // add the cache context to the row itself.
+  $variables['rows'][0]['#rows'][$index]['#cache']['contexts'][] = 'url.query_args';
+}
+
+/**
+ * Preprocess a view to move 'empty' to 'pre_empty'.
+ */
+function _wildlife_search_preprocess_pre_empty(&$variables, $view) {
+  // Move empty text outside of columns if the empty text is showing because
+  // there is no search phrase. This prevents text wrapping.
+  $input = $view->getExposedInput();
+  if (!empty($variables['empty']) && empty($variables['rows']) && empty($input['location'])) {
+    $variables['pre_empty'] = $variables['empty'];
+    unset($variables['empty']);
+  }
+}
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function wildlife_search_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  if ($view->id() == 'location_search') {
+
+    $location = Drupal::request()->get('location');
+
+    if (in_array($display_id, ['event_reserve', 'event_reserve_event'])) {
+      if (!empty($location)) {
+        switch ($display_id) {
+          case 'event_reserve':
+            $url = Url::fromRoute('view.location_search.reserves');
+            $link_text = t('View all Reserves');
+            break;
+
+          case 'event_reserve_event':
+            $url = Url::fromRoute('view.location_search.events');
+            $link_text = t('View all Events');
+            break;
+        }
+
+        if (isset($url) && isset($link_text)) {
+          $url->setRouteParameter('location', $location);
+
+          $link_options = array(
+            'attributes' => array(
+              'class' => array(
+                'button',
+                'button--tertiary',
+              ),
+            ),
+          );
+          $url->setOptions($link_options);
+          $link = Link::fromTextAndUrl($link_text, $url);
+
+          $options = array(
+            'id' => 'area_text_custom',
+            'table' => 'views',
+            'field' => 'area_text_custom',
+            'relationship' => 'none',
+            'group_type' => 'none',
+            'admin_label' => '',
+            'empty' => TRUE,
+            'tokenize' => FALSE,
+            'content' => $link->toString(),
+            'plugin_id' => 'text_custom',
+            'provider' => 'wildlife_search',
+          );
+          $view->setHandler($display_id, 'footer', 'area_text_custom', $options);
+        }
+      }
+      else {
+        // Hide headers if the form has been submitted without a value. The value
+        // is set to TRUE in config as the headings ARE required when a value is
+        // provided but there are no results.
+        $view->display_handler->options['header']['area']['empty'] = FALSE;
+      }
+    }
+
+    // On the Trust listing, only show the "nearest five" header blurb if a
+    // location has been searched for.
+    if ($display_id == 'trusts' && empty($location)) {
+      $view->display_handler->options['css_class'] = '';
+      unset($view->display_handler->options['header']['area_text_custom']);
+    }
+  }
+}
+
+/**
+ * Implements hook_views_post_execute().
+ *
+ * Removed the "View All" footer links if there are no results. We can't remove
+ * them in pre_view() because the query hasn't executed but post_execute() is
+ * too late to add to the footer normally.
+ */
+function wildlife_search_views_post_execute(ViewExecutable $view) {
+  $display_id = $view->current_display;
+  // Only alter the right view and displays.
+  if ($view->id() == 'location_search' && ($display_id === 'event_reserve' || $display_id === 'event_reserve_event')) {
+    // Only alter if there are no results.
+    if (empty($view->result)) {
+      // Attempt to find the footer added in wildlife_search_views_pre_view()
+      // and remove it.
+      foreach ($view->footer as $index => $footer) {
+        if (!empty($footer->options['provider']) && $footer->options['provider'] == 'wildlife_search') {
+          unset($view->footer[$index]);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_form_element().
+ */
+function wildlife_search_preprocess_form_element(&$variables) {
+  $element = &$variables['element'];
+
+  // Update the description for Geocode address fields.
+  if (isset($element['#id'])) {
+    $id_parts = explode('-', $element['#id']);
+    $id_last_element = array_pop($id_parts);
+
+    if (in_array('geocode', $element['#parents']) && $id_last_element == 'geocode') {
+      $variables['description']['content'] = t('Start typing to select an address to use to generate the Latitude and Longitude.');
+    }
+  }
+}
+
+/**
+ * @param \Drupal\node\Entity\Node $node
+ * @param $image_field
+ * @return array
+ */
+function _wildlife_search_get_remote_grid_teaser_images($node, $image_field, $domain = NULL) {
+  $image_content = [];
+
+  if ($node->hasField($image_field)) {
+    $has_photos = !$node->get($image_field)->isEmpty();
+
+    if (!$has_photos) {
+      $uuid = $node->uuid();
+      $remote_field_values = \Drupal::service('wildlife_search.localapi_field_values')
+        ->getFields($uuid, $domain);
+
+      if (!empty($remote_field_values)) {
+        $item = $remote_field_values['item'];
+        $used_domain = $remote_field_values['used_domain'];
+
+        foreach ($item as $name => $value) {
+          if (strpos($name, 'photos') !== FALSE && strpos($name, 'map_thumb') === FALSE) {
+            if (!empty($value)) {
+              $image_content = [
+                '#theme' => 'image',
+                '#style_name' => 'grid_teaser',
+                '#uri' => $used_domain . $value,
+              ];
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return $image_content;
+}

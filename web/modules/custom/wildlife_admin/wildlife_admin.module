@@ -1,0 +1,464 @@
+<?php
+
+/**
+ * @file
+ * The module file for wildlife_admin.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_theme().
+ */
+function wildlife_admin_theme() {
+  return array(
+    'custom_entities_list' => array(
+      'variables' => array('content' => NULL),
+    ),
+    'spotlights_help' => array(
+      'variables' => array(),
+    ),
+  );
+}
+
+/**
+ * Prepares variables for list of available custom entities.
+ *
+ * Default template: custom-entities-list.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - content: An array of content types.
+ *
+ * @see custom_entities_list()
+ */
+function template_preprocess_custom_entities_list(&$variables) {
+  $variables['types'] = array();
+  if (!empty($variables['content'])) {
+
+    /** @var \Drupal\Core\Entity\ContentEntityType $type */
+    foreach ($variables['content'] as $type) {
+      $label = $type->getLabel()->__toString();
+      $variables['types'][$type->id()] = array(
+        'settings_link' => Link::fromTextAndUrl($label, new Url($type->id() . '.settings')),
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function wildlife_admin_preprocess_views_view(&$variables) {
+  if ($variables['view']->id() === 'media_entity_browser') {
+    $variables['view_array']['#attached']['library'][] = 'wildlife_admin/view';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wildlife_admin_form_linkit_editor_dialog_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form_state->getUserInput()['editor_object'])) {
+    $input = $form_state->getUserInput()['editor_object'];
+    $form_state->set('link_element', $input);
+    $form_state->setCached(TRUE);
+  }
+  else {
+    // Retrieve the link element's attributes from form state.
+    $input = $form_state->get('link_element') ?: [];
+  }
+
+  /*
+   * Helper to retrieve form fields' default values.
+   *
+   * @param string $attribute_name
+   * @param string $fallback
+   *
+   * @return mixed
+   *   The existing value or the fallback.
+   */
+  $get_default_value = function ($attribute_name, $fallback = '') use ($input) {
+    return !empty($input[$attribute_name]) ? $input[$attribute_name] : $fallback;
+  };
+
+  // Update the fields to make it more obvious how to add an email link.
+  $form['attributes']['href']['#title'] = t('URL or email address');
+  $form['#attached']['library'][] = 'wildlife_admin/link_widget';
+  $form['attributes']['data-email'] = array(
+    '#title' => t('Email link'),
+    '#type' => 'checkbox',
+    '#default_value' => $get_default_value('data-email', FALSE),
+    '#return_value' => 'mailto:',
+    '#group' => 'advanced',
+    '#description' => t('Check this box to add a "mailto:" prefix.'),
+  );
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+function wildlife_admin_entity_base_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type) {
+  // Alter the media name field's description.
+  if ($entity_type->id() == 'media' && !empty($fields['name'])) {
+    $fields['name']->setDescription(t('Enter a descriptive name for this media.'));
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function wildlife_admin_field_widget_form_alter(&$element, &$form_state, $context) {
+  /** @var \Drupal\field\Entity\FieldConfig $field_definition */
+  $field_definition = $context['items']->getFieldDefinition();
+  $form_build_info = $form_state->getBuildInfo();
+
+  if ($field_definition->getType() == 'link') {
+    // Update the "target" field on Link Attributes to make it more user friendly.
+    if (isset($element['options']['attributes']['target'])) {
+      $element['options']['attributes']['target']['#type'] = 'select';
+      $element['options']['attributes']['target']['#title'] = t('Target');
+      $element['options']['attributes']['target']['#description'] = t('Choose whether the link opens in the same window/tab or a new window/tab.');
+      $element['options']['attributes']['target']['#options'] = [
+        '' => t('Same window/tab'),
+        '_blank' => t('New window/tab'),
+      ];
+    }
+
+    if (isset($form_build_info['base_form_id']) && $form_build_info['base_form_id'] == 'menu_link_content_form') {
+      // Remove class and rel fields for menu links.
+      if (isset($element['options']['attributes']['class'])) {
+        unset($element['options']['attributes']['class']);
+      }
+      if (isset($element['options']['attributes']['rel'])) {
+        unset($element['options']['attributes']['rel']);
+      }
+    }
+  }
+
+  // Check if an entity has header type options and apply relevant states.
+  _wildlife_admin_node_header_form_alterations($element, $context);
+}
+
+/**
+ * Function triggered via wildlife_admin_field_widget_form_alter() to show and
+ * hide image/silhouette fields based on the value chosen for Header Type.
+ */
+function _wildlife_admin_node_header_form_alterations(&$element, $context) {
+  /** @var \Drupal\Core\Field\FieldItemList $items */
+  $items = $context['items'];
+  $field_name = $items->getName();
+  /** @var \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $parent */
+  $parent = $items->getParent();
+  $parent_entity = $parent->getValue();
+  $parent_entity_type = $parent_entity->getEntityType()->id();
+
+  $has_header_type = $parent_entity_type == 'view_header' ? !empty($parent_entity->get('field_header_type')) : $parent_entity->hasField('field_header_type');
+
+  if ($has_header_type) {
+    $states_options = ['silhouette', 'image'];
+
+    foreach ($states_options as $option) {
+      if ($field_name == 'field_header_' . $option) {
+        $element['#states'] = [
+          'visible' => [
+            [':input[name="field_header_type"]' => ['value' => $option]],
+          ],
+        ];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function wildlife_admin_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  $is_node = $entity_type->id() == 'node';
+
+  // Add Constraints for header type.
+  $has_silhouette_or_image = (!empty($fields['field_header_silhouette']) || !empty($fields['field_header_image']));
+
+  if ($has_silhouette_or_image) {
+    if (!empty($fields['field_header_silhouette'])) {
+      $fields['field_header_silhouette']->addConstraint('HeaderImage', []);
+    }
+    if (!empty($fields['field_header_image'])) {
+      $fields['field_header_image']->addConstraint('HeaderImage', []);
+    }
+  }
+
+  // Add constraint for Location/Reserve.
+  if ($is_node && in_array($bundle, ['job', 'volunteer_opportunity', 'event'])) {
+    $bundle_short = $bundle == 'volunteer_opportunity' ? 'voluntary' : $bundle;
+
+    if (!empty($fields['field_' . $bundle_short . '_location'])) {
+      $fields['field_' . $bundle_short . '_location']->addConstraint('Location');
+    }
+    if (!empty($fields['field_' . $bundle_short . '_reserve'])) {
+      $fields['field_' . $bundle_short . '_reserve']->addConstraint('Location');
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_focal_point_preview_page().
+ */
+function wildlife_admin_preprocess_focal_point_preview_page(&$variables) {
+  // We only want certain images to appear in the preview since a lot of the
+  // responsive images are just copies in different sizes.
+  $retain_derivatives = [
+    'card_desk',
+    'grid_teaser',
+    'hero_desk',
+    'menu_section_default',
+    'node_hero_desk',
+    'profile_image',
+    'spotlight_single_desk',
+    'spotlight_double_desk',
+    'spotlight_triple_desk',
+    'spotlight_quadruple_desk_wide',
+    'teaser_default',
+  ];
+
+  foreach ($variables['derivative_images'] as $key => $derivative) {
+    if (!in_array($key, $retain_derivatives)) {
+      unset($variables['derivative_images'][$key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function wildlife_admin_entity_insert(EntityInterface $entity) {
+  _wildlife_admin_entity_save_for_review_emailer($entity);
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function wildlife_admin_entity_update(EntityInterface $entity) {
+  $original_entity = $entity->original;
+  _wildlife_admin_entity_save_for_review_emailer($entity, $original_entity);
+}
+
+/**
+ * Helper function to determine if an email should be sent.
+ *
+ * @param EntityInterface $entity
+ * @param EntityInterface|bool $original_entity
+ */
+function _wildlife_admin_entity_save_for_review_emailer(EntityInterface $entity, $original_entity = FALSE) {
+  if (!\Drupal::service('workbench_moderation.moderation_information')->isModeratableEntity($entity)) {
+    return;
+  }
+
+  $moderation_state = $entity->get('moderation_state')->getString();
+
+  if ($original_entity) {
+    $original_moderation_state = $original_entity->get('moderation_state')->getString();
+    $moved_to_review = $original_moderation_state != 'needs_review' && $moderation_state == 'needs_review';
+  }
+  else {
+    $moved_to_review = $moderation_state == 'needs_review';
+  }
+
+  if ($moved_to_review) {
+    $mailManager = \Drupal::service('plugin.manager.mail');
+    $user = \Drupal::currentUser();
+    $email_addresses = _wildlife_admin_admin_user_emails();
+    $to = implode(', ', $email_addresses);
+    $langcode = $user->getPreferredLangcode();
+    $send = true;
+
+    $username = $user->getDisplayName();
+    $entity_type = \Drupal\node\Entity\NodeType::load($entity->bundle());
+
+    $params = [
+      'type' => $entity_type->label(),
+      'title' => $entity->label(),
+    ];
+
+    $params['message'] = t('<em>@type</em> <a href="@content_url">"@title"</a> has been set to <em>Needs Review</em> by <a href="@user_url">@user</a>. Log in to your <a href="@workbench_url">Workbench</a> to approve/decline this content.', [
+      '@type' => $params['type'],
+      '@title' => $params['title'],
+      '@content_url' => Url::fromRoute('entity.node.canonical', ['node' => $entity->id()], ['absolute' => TRUE])->toString(),
+      '@user' => $username,
+      '@user_url' => Url::fromRoute('entity.user.canonical', ['user' => $user->id()], ['absolute' => TRUE])->toString(),
+      '@workbench_url' => Url::fromRoute('workbench.content', [], ['absolute' => TRUE])->toString(),
+    ]);
+
+    $result = $mailManager->mail('wildlife_admin', 'needs_review', $to, $langcode, $params, NULL, $send);
+
+    if (!$result['result']) {
+      drupal_set_message(t('There was a problem sending an email alerting Admin users that this content is ready for review.'), 'error');
+    }
+    else {
+      drupal_set_message(t('An email has been sent alerting Admin users that this content is ready for review.'));
+    }
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function wildlife_admin_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+
+  switch ($key) {
+    case 'needs_review':
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $subject_vars = [
+        '@type' => $params['type'],
+        '@title' => $params['title'],
+      ];
+
+      $message['subject'] = t('@type needs review: @title', $subject_vars, $options);
+      $message['body'][] = $params['message'];
+      break;
+  }
+}
+
+/**
+ * Helper function to return an array of Admin user's email addresses.
+ *
+ * @return array
+ */
+function _wildlife_admin_admin_user_emails() {
+  $ids = \Drupal::entityQuery('user')
+    ->condition('status', 1)
+    ->condition('roles', 'admin')
+    ->execute();
+  $users = User::loadMultiple($ids);
+
+  $emails = [];
+  /** @var User $user */
+  foreach ($users as $user) {
+      $emails[] = $user->getEmail();
+  }
+
+  return $emails;
+}
+
+/**
+ * Implements hook_entity_operation_alter().
+ */
+function wildlife_admin_entity_operation_alter(array &$operations, \Drupal\Core\Entity\EntityInterface $entity) {
+  // Entities which can have true owners.
+  $owned_by_translatables = [
+    'node',
+    'author',
+    'location',
+    'node',
+  ];
+
+  $entity_type = $entity->getEntityTypeId();
+
+  if (isset($operations['translate']) && in_array($entity_type, $owned_by_translatables)) {
+
+    // Get the permissions to check based on entity type.
+    $any_permission = 'edit ' . $entity_type . ' entities';
+    $own_permission = 'edit own ' . $entity_type . ' entities';
+
+    $migrated = wildlife_sharing_is_local($entity) || wildlife_sharing_is_national($entity);
+
+    if ($entity_type == 'node') {
+      $type = $entity->bundle();
+      $any_permission = 'edit any ' . $type . ' content';
+      $own_permission = 'edit own ' . $type . ' content';
+    }
+
+    // Get the current user account.
+    $account = \Drupal::currentUser();
+
+    // Check permissions against current user and if they don't have the right
+    // permissions, remove the Translate operation.
+    $can_edit_any = $account->hasPermission($any_permission, $account);
+    $can_edit_own = $account->hasPermission($own_permission, $account) && ($account->id() == $entity->getOwnerId());
+
+    if ((!$can_edit_any && !$can_edit_own) || $migrated) {
+      unset($operations['translate']);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function wildlife_admin_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  _wildlife_admin_media_browser_duplicate_actions($form, $form_state, $form_id);
+}
+
+/**
+ * Helper function to duplicate the Add selected button in Media Browsers.
+ *
+ * @see wildlife_admin_form_alter()
+ */
+function _wildlife_admin_media_browser_duplicate_actions(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Only alter media browser forms.
+  if (strpos($form_id, 'entity_browser_media') === FALSE) {
+    return;
+  }
+
+  // Duplicate the actions and set the weight to 0 to move it above the browser.
+  $form['widget']['actions_secondary'] = $form['widget']['actions'];
+  $form['widget']['actions_secondary']['#weight'] = 0;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_admin_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Turn off client side validation on Node forms.
+  $form['#attributes']['novalidate'] = '';
+}
+
+/**
+ * Implements template_preprocess_node().
+ */
+function wildlife_admin_preprocess_node(&$variables) {
+  // Prevent users who can't edit a node from being able to see the contextual
+  // links.
+  $user = $variables['user'];
+  $edit_permission = node_node_access($variables['node'], 'update', $user);
+
+  if (!$edit_permission->isAllowed()) {
+    unset($variables['title_suffix']['contextual_links']);
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_admin_form_config_translation_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'wildlife_admin_translation_clear_cache';
+}
+
+/**
+ * Submit handler for config translation forms to invalidate entity_field_info tag.
+ *
+ * This means that submitted configuration translations are visible immediately.
+ */
+function wildlife_admin_translation_clear_cache($form, FormStateInterface $form_state) {
+  \Drupal\Core\Cache\Cache::invalidateTags(['entity_field_info']);
+}
+
+/**
+ * Implements hook_preprocess_entity_add_list().
+ */
+function wildlife_admin_preprocess_entity_add_list(&$variables) {
+  // We don't want Silhouette to appear on the Media Entity Add List page as it
+  // has its own section.
+  if (isset($variables['bundles']['silhouette'])) {
+    unset($variables['bundles']['silhouette']);
+  }
+}

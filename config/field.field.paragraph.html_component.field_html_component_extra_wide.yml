@@ -1,0 +1,23 @@
+uuid: 476db98f-1362-49cf-89d7-21935c8fad3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_html_component_extra_wide
+    - paragraphs.paragraphs_type.html_component
+id: paragraph.html_component.field_html_component_extra_wide
+field_name: field_html_component_extra_wide
+entity_type: paragraph
+bundle: html_component
+label: 'Extra wide'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

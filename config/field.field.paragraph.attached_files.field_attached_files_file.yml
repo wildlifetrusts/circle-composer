@@ -1,0 +1,28 @@
+uuid: 05a8eb3c-2f0c-4062-9da8-49669a8871af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_attached_files_file
+    - media_entity.bundle.document
+    - paragraphs.paragraphs_type.attached_files
+id: paragraph.attached_files.field_attached_files_file
+field_name: field_attached_files_file
+entity_type: paragraph
+bundle: attached_files
+label: File
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document: document
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

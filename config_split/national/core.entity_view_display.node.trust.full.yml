@@ -1,0 +1,153 @@
+uuid: 2b7c7f1f-4e26-40f4-aab1-99a64b403e0a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.trust.field_external_link
+    - field.field.node.trust.field_trust_address
+    - field.field.node.trust.field_trust_alternative_name
+    - field.field.node.trust.field_trust_city
+    - field.field.node.trust.field_trust_county
+    - field.field.node.trust.field_trust_email
+    - field.field.node.trust.field_trust_image
+    - field.field.node.trust.field_trust_lat_long
+    - field.field.node.trust.field_trust_membership_link
+    - field.field.node.trust.field_trust_phone_number
+    - field.field.node.trust.field_trust_postcode
+    - field.field.node.trust.field_trust_site_url
+    - field.field.node.trust.field_trust_sms_button_text
+    - field.field.node.trust.field_trust_sms_donation_enabled
+    - field.field.node.trust.field_trust_sms_donation_keyword
+    - field.field.node.trust.field_trust_sms_donation_number
+    - field.field.node.trust.field_trust_sms_ts_and_cs
+    - field.field.node.trust.field_trust_summary
+    - node.type.trust
+  module:
+    - fences
+    - link
+    - telephone
+    - user
+id: node.trust.full
+targetEntityType: node
+bundle: trust
+mode: full
+content:
+  field_external_link:
+    type: link
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      trim_length: null
+      target: _blank
+      url_only: false
+      url_plain: false
+      rel: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+  field_trust_email:
+    weight: 3
+    label: visually_hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: email_mailto
+    region: content
+  field_trust_image:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: grid_teaser
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_trust_membership_link:
+    weight: 5
+    label: hidden
+    settings:
+      trim_length: 80
+      target: _blank
+      url_only: false
+      url_plain: false
+      rel: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: link
+    region: content
+  field_trust_phone_number:
+    weight: 2
+    label: visually_hidden
+    settings:
+      title: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: telephone_link
+    region: content
+  field_trust_site_url:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 80
+      target: _blank
+      url_only: false
+      url_plain: false
+      rel: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: link
+    region: content
+hidden:
+  field_trust_address: true
+  field_trust_alternative_name: true
+  field_trust_city: true
+  field_trust_county: true
+  field_trust_lat_long: true
+  field_trust_postcode: true
+  field_trust_sms_button_text: true
+  field_trust_sms_donation_enabled: true
+  field_trust_sms_donation_keyword: true
+  field_trust_sms_donation_number: true
+  field_trust_sms_ts_and_cs: true
+  field_trust_summary: true
+  langcode: true
+  links: true
+  workbench_moderation_control: true

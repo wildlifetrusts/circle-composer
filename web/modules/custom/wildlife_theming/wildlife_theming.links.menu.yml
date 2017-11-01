@@ -1,0 +1,5 @@
+wildlife_theming.config:
+  title: 'Theme variation'
+  description: 'Congfigure the custom theme variation for this site.'
+  parent: system.admin_config_ui
+  route_name: 'wildlife_theming.admin'

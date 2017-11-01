@@ -1,0 +1,28 @@
+.field--type-entity-reference-revisions {
+  .field__item {
+    @extend %clearfix;
+  }
+}
+
+.paragraph {
+  .node__content & {
+    clear: both;
+  }
+
+  &:not(.paragraph--no-margin) {
+    @include spacing('large', 'bottom');
+
+    .paragraph--no-margin + & {
+      @include spacing('large', 'top');
+    }
+  }
+
+  figure {
+    margin: 0;
+  }
+}
+
+.flexible-block .paragraph {
+  width: 100%;
+  margin: 0;
+}

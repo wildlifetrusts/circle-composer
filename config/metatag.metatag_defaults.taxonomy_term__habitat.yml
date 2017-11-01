@@ -1,0 +1,8 @@
+uuid: 331f382b-241a-4a98-a497-92ebdc733ab6
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_term__habitat
+label: 'Taxonomy term: Habitat'
+tags:
+  image_src: '[node:field_habitat_image:0:entity:field_media_image:large]'

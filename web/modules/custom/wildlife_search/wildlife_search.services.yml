@@ -1,0 +1,4 @@
+services:
+  wildlife_search.localapi_field_values:
+    class: Drupal\wildlife_search\WildlifeSearchLocalApiFieldValues
+    arguments: ['@http_client']

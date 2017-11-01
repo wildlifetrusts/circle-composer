@@ -1,0 +1,9 @@
+uuid: 20071223-5f4b-4b63-af3d-67ee3f325171
+langcode: en
+status: true
+dependencies: {  }
+name: 'Local Group'
+vid: local_group
+description: 'Local Groups can be applied to Events.'
+hierarchy: 0
+weight: 0

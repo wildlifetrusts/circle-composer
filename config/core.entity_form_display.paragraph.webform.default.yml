@@ -1,0 +1,31 @@
+uuid: 521a7911-b5cc-4fdb-a9ee-5a47440a0a41
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.webform.field_webform_form
+    - paragraphs.paragraphs_type.webform
+  module:
+    - webform
+    - workbench_moderation
+id: paragraph.webform.default
+targetEntityType: paragraph
+bundle: webform
+mode: default
+content:
+  field_webform_form:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: webform_entity_reference_autocomplete
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

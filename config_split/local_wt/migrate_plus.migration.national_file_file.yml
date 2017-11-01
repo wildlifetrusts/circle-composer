@@ -1,0 +1,67 @@
+uuid: 4a49c03e-3ca5-4dce-a334-63249b0e18ca
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_sharing
+id: national_file_file
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: national
+label: 'Import files from national Wildlife Trust site'
+source:
+  plugin: wildlife_sharing_url_title
+  track_changes: true
+  data_fetcher_plugin: http
+  data_parser_plugin: wildlife_sharing_json_title
+  path: /jsonapi/file/file
+  pager:
+    type: urls
+    selector: 'links/next'
+  ids:
+    uuid:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: uuid
+      label: Uuid
+      selector: /attributes/uuid
+    -
+      name: created
+      label: Created
+      selector: /attributes/created
+    -
+      name: changed
+      label: Changed
+      selector: /attributes/changed
+    -
+      name: filename
+      label: Name
+      selector: /attributes/filename
+    -
+      name: url
+      label: URL
+      selector: /attributes/url
+    -
+      name: uri
+      label: URI
+      selector: /attributes/uri
+    -
+      name: filemime
+      label: MIME
+      selector: /attributes/filemime
+process:
+  filename: filename
+  uuid: uuid
+  uri:
+    plugin: wildlife_sharing_media_save
+    source:
+      - url
+      - uri
+destination:
+  plugin: 'entity:file'
+migration_dependencies: {  }

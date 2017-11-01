@@ -1,0 +1,20 @@
+uuid: 5322c8c4-0c08-406d-bf6d-197c6695eccb
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.document
+id: media.document.name
+field_name: name
+entity_type: media
+bundle: document
+label: 'Media name'
+description: 'Enter a descriptive name for this media.'
+required: true
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

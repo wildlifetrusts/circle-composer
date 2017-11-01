@@ -1,0 +1,52 @@
+uuid: 943d2766-78be-4a98-ba35-062bdaf1b6d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.spotlight.field_spotlight_button_type
+    - field.field.paragraph.spotlight.field_spotlight_detail
+    - field.field.paragraph.spotlight.field_spotlight_display_type
+    - field.field.paragraph.spotlight.field_spotlight_image
+    - field.field.paragraph.spotlight.field_spotlight_image_type
+    - field.field.paragraph.spotlight.field_spotlight_label
+    - field.field.paragraph.spotlight.field_spotlight_link
+    - field.field.paragraph.spotlight.field_spotlight_link_appearance
+    - field.field.paragraph.spotlight.field_spotlight_silhouette
+    - field.field.paragraph.spotlight.field_spotlight_text_colour
+    - field.field.paragraph.spotlight.field_spotlight_title
+    - field.field.paragraph.spotlight.field_spotlight_title_size
+    - paragraphs.paragraphs_type.spotlight
+  module:
+    - options
+id: paragraph.spotlight.preview
+targetEntityType: paragraph
+bundle: spotlight
+mode: preview
+content:
+  field_spotlight_display_type:
+    type: list_default
+    weight: 0
+    region: content
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+  field_spotlight_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_spotlight_button_type: true
+  field_spotlight_detail: true
+  field_spotlight_image: true
+  field_spotlight_image_type: true
+  field_spotlight_label: true
+  field_spotlight_link: true
+  field_spotlight_link_appearance: true
+  field_spotlight_silhouette: true
+  field_spotlight_text_colour: true
+  field_spotlight_title_size: true

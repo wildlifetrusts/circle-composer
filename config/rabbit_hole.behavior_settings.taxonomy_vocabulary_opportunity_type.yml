@@ -1,0 +1,9 @@
+uuid: 48fc4c64-9622-461a-ad2d-777ff17a6291
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_vocabulary_opportunity_type
+action: page_redirect_json
+allow_override: 1
+redirect: '/volunteering-opportunities?type=[term:tid]'
+redirect_code: 301

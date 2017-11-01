@@ -1,0 +1,19 @@
+uuid: 65286074-c7ad-4610-889f-c69f6163d84d
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_link_content
+    - text
+id: menu_link_content.menu_link_content.section_summary
+field_name: section_summary
+entity_type: menu_link_content
+bundle: menu_link_content
+label: 'Section summary'
+description: 'The summary for the section represented by a menu item.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

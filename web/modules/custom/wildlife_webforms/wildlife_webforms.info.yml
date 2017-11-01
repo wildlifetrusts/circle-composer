@@ -1,0 +1,8 @@
+name: Webforms
+type: module
+description: 'Webform module augmentations/removals'
+core: 8.x
+package: Wildlife
+dependencies:
+  - webform
+  - webform_ui

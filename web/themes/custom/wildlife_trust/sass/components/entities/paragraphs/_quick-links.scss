@@ -1,0 +1,43 @@
+.paragraph--type--quick-links {
+  @extend .quick-links-list;
+
+  &:not(.paragraph--wide) {
+    @extend %content-narrow-constrain;
+  }
+
+  .field--name-field-quick-links-title {
+    margin-bottom: emRhythm(4, ms(2));
+  }
+
+  ul {
+    .flexible-block & {
+      margin: 0;
+    }
+  }
+
+  li {
+    .flexible-block & {
+      display: block;
+      width: 100%;
+      margin: 0 0 round($base-vertical-unit * 4) 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  a {
+    .flexible-block & {
+      color: inherit;
+      font-weight: $font-weight-regular;
+      text-decoration: none;
+      font-size: 16px;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+}

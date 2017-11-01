@@ -1,0 +1,20 @@
+.paragraph--type--accordion-item {
+  &:not(:last-child) {
+    @include keyline();
+  }
+
+  .field--name-field-accordion-item-content {
+    padding-bottom: emRhythm(4, ms(0));
+  }
+
+  summary {
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .paragraph {
+    margin: 0;
+    width: 100%;
+  }
+}

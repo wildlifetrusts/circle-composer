@@ -1,0 +1,10 @@
+uuid: 264e03ef-5b6d-4fbe-ad9d-edf883a1f619
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.scaled_8_col_split
+label: 'Scaled 8 col split'
+targetEntityType: media
+cache: true

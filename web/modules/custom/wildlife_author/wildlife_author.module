@@ -1,0 +1,109 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_author.module.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_author_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_author module.
+    case 'help.page.wildlife_author':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Author entity and associated configuration and processing.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wildlife_author_theme() {
+  return array(
+    'author' => array(
+      'render element' => 'elements',
+    ),
+  );
+}
+
+/**
+ * Prepares variables for Author templates.
+ *
+ * Default template: author.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the user information and any
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_author(&$variables) {
+  // Helpful $content variable for templates.
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  $variables['attributes']['itemscope'] = '';
+  $variables['attributes']['itemprop'] = 'author';
+  $variables['attributes']['itemtype'] = 'http://schema.org/Person';
+
+  $social_links = [
+    'field_author_facebook',
+    'field_author_instagram',
+    'field_author_linkedin',
+    'field_author_twitter',
+  ];
+
+  foreach ($social_links as $link_name) {
+    if (isset($variables['content'][$link_name]) && isset($variables['content'][$link_name][0])) {
+      $link = &$variables['content'][$link_name][0];
+      $link['#options']['attributes']['itemprop'][] = 'sameAs';
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_access().
+ */
+function wildlife_author_entity_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  $type_id = $entity->getEntityTypeId();
+
+  if ($type_id != 'author') {
+    return;
+  }
+
+  switch ($operation) {
+    case 'update':
+      if ($account->hasPermission('edit author entities', $account)) {
+        return AccessResult::allowed()->cachePerPermissions();
+      }
+      else {
+        return AccessResult::allowedIf($account->hasPermission('edit own author entities', $account) && ($account->id() == $entity->getOwnerId()))->cachePerPermissions()->cachePerUser()->addCacheableDependency($entity);
+      }
+    default:
+      // No opinion.
+      return AccessResult::neutral();
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_author_form_author_form_alter(&$form, &$form_state, $form_id) {
+  // Add Revision and Translation information to fieldgroups.
+  $form['#fieldgroups']['group_revision']->children[] = 'new_revision';
+  $form['#fieldgroups']['group_revision']->children[] = 'revision_log_message';
+  $form['#fieldgroups']['group_revision']->children[] = 'content_translation';
+  $form['#group_children']['new_revision'] = 'group_revision';
+  $form['#group_children']['revision_log_message'] = 'group_revision';
+  $form['#group_children']['content_translation'] = 'group_translation';
+}

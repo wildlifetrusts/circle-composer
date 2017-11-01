@@ -1,0 +1,27 @@
+uuid: c966e9f2-41db-4991-82b9-f78e38584f89
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_habitat_why
+    - node.type.habitat
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.habitat.field_habitat_why
+field_name: field_habitat_why
+entity_type: node
+bundle: habitat
+label: 'Why is it like this?'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

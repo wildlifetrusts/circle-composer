@@ -1,0 +1,162 @@
+uuid: 0138180b-dd90-441f-9952-13fbdf8ee060
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_statistic_static_type
+field_name: field_statistic_static_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: bat
+      label: Bat
+    -
+      value: bee
+      label: Bee
+    -
+      value: binoculars
+      label: Binoculars
+    -
+      value: bird
+      label: Bird
+    -
+      value: birthday
+      label: Birthday
+    -
+      value: boot
+      label: Boot
+    -
+      value: butterfly
+      label: Butterfly
+    -
+      value: calendar
+      label: Calendar
+    -
+      value: clipboard
+      label: Clipboard
+    -
+      value: cup_of_coffee
+      label: 'Cup of coffee'
+    -
+      value: dawn_chorus
+      label: 'Dawn chorus'
+    -
+      value: dog_on_a_lead
+      label: 'Dog on a lead'
+    -
+      value: donate
+      label: Donate
+    -
+      value: family_activity
+      label: 'Family activity'
+    -
+      value: family_event
+      label: 'Family event'
+    -
+      value: fish
+      label: Fish
+    -
+      value: flower
+      label: Flower
+    -
+      value: foot_print
+      label: 'Foot print'
+    -
+      value: footprints
+      label: Footprints
+    -
+      value: grazing
+      label: Grazing
+    -
+      value: hand
+      label: Hand
+    -
+      value: hare
+      label: Hare
+    -
+      value: head_and_shoulders
+      label: 'Head and shoulders'
+    -
+      value: key
+      label: Key
+    -
+      value: knife_and_fork
+      label: 'Knife and fork'
+    -
+      value: lecture_series
+      label: 'Lecture series'
+    -
+      value: magnifying_glass
+      label: 'Magnifying glass'
+    -
+      value: map
+      label: Map
+    -
+      value: members_only
+      label: 'Members only'
+    -
+      value: newspaper
+      label: Newspaper
+    -
+      value: no_dogs
+      label: 'No dogs'
+    -
+      value: no_wheelchair_access
+      label: 'No wheelchair access'
+    -
+      value: paint_brush
+      label: 'Paint brush'
+    -
+      value: parking
+      label: Parking
+    -
+      value: paw_print
+      label: 'Paw print'
+    -
+      value: permit_required
+      label: 'Permit required'
+    -
+      value: petition
+      label: Petition
+    -
+      value: plane
+      label: Plane
+    -
+      value: pond_dipping_net
+      label: 'Pond dipping net'
+    -
+      value: river
+      label: River
+    -
+      value: school
+      label: School
+    -
+      value: signpost
+      label: Signpost
+    -
+      value: speech_bubble
+      label: 'Speech bubble'
+    -
+      value: toilets
+      label: Toilets
+    -
+      value: tree
+      label: Tree
+    -
+      value: visitor_centre
+      label: 'Visitor centre'
+    -
+      value: wheelchair_access
+      label: 'Wheelchair access'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

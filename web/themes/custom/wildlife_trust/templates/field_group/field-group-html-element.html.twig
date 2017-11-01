@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a fieldgroup html element.
+ *
+ * Available variables:
+ * - title: Title of the group.
+ * - title_element: Element to wrap the title.
+ * - children: The children of the group.
+ * - wrapper_element: The html element to use
+ * - attributes: A list of HTML attributes for the group wrapper.
+ *
+ * @see template_preprocess_field_group_html_element()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set no_inner_wrapper_elements = ['ul', 'details', 'span'] %}
+
+<{{ wrapper_element }} {{ attributes }}>
+{% if title %}
+  <{{ title_element }}{% if collapsible %} class="field-group-toggler"{% endif %}>{{ title }}</{{ title_element }}>
+{% endif %}
+  {% if wrapper_element not in no_inner_wrapper_elements %}
+<div class="field-group-wrapper">
+  {% endif %}
+  {{children}}
+  {% if wrapper_element not in no_inner_wrapper_elements %}
+</div>
+{% endif %}
+</{{ wrapper_element }}>

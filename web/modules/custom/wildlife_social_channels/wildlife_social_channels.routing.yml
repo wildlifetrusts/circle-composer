@@ -1,0 +1,7 @@
+wildlife_social_channels.config:
+  path: '/admin/config/user-interface/social-media-channels'
+  defaults:
+    _form: '\Drupal\wildlife_social_channels\Form\SocialMediaChannels'
+    _title: 'Social Media Channels'
+  requirements:
+    _permission: administer social media channels

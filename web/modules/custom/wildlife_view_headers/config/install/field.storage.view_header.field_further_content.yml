@@ -1,0 +1,21 @@
+uuid: a992df91-9cea-4c94-9a0e-ce86e4bb2555
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - paragraphs
+    - wildlife_view_headers
+id: view_header.field_further_content
+field_name: field_further_content
+entity_type: view_header
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

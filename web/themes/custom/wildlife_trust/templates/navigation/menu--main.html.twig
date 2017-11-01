@@ -1,0 +1,77 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+
+  {%
+  set classes = [
+  'menu',
+  'menu--level-' ~ menu_level,
+  ]
+  %}
+  {% if items %}
+    <ul class="menu {{ 'menu--level-' ~ menu_level }}">
+    {% for item in items %}
+      {%
+        set classes = [
+          'menu__item',
+          item.is_expanded ? 'menu__item--expanded',
+          item.is_collapsed ? 'menu__item--collapsed',
+          item.is_featured ? 'menu__item--featured',
+          item.in_active_trail ? 'menu__item--active-trail',
+        ]
+      %}
+      {% set custom_link_attributes = item.url.getOption('attributes') is not empty ? item.url.getOption('attributes') : [] %}
+      {% set link_attributes = create_attribute(custom_link_attributes) %}
+      {% set link_attributes = link_attributes.addClass('menu__link') %}
+      {% if item.is_expanded %}
+        {% set link_attributes = link_attributes.addClass('has--dropdown') %}
+      {% endif %}
+
+      <li{{ item.attributes.addClass(classes) }}>
+        <a href="{{ item.url }}" {{ link_attributes }}>{{ item.title }}</a>
+        {% if item.below %}
+          <div class="menu__section {{ 'menu__section--level-' ~ menu_level }} {% if item.section_image is not empty or item.section_summary is not empty %} {{ 'has--intro' }} {% endif %}">
+            <div class="menu__section__wrapper {% if menu_level == 0 %}menu__section__wrapper--main{% endif %}">
+              {% if item.section_image is not empty or item.section_summary is not empty %}
+                <div class="menu__section__intro">
+                  {{ drupal_entity('media', item.section_image, 'menu_section') }}
+                  {{ item.section_summary }}
+                </div>
+              {% endif %}
+              {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+            </div>
+          </div>
+
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

@@ -1,0 +1,157 @@
+// Default layout styles.
+.l-page {
+}
+
+.l-header {
+  position: relative;
+  z-index: 5;
+}
+
+.l-region--branding {
+  @extend %clearfix;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  border-bottom: 1px solid palette(mono, mid-light);
+
+  @include add-breakpoint('desk-and-up') {
+    border-bottom: 0;
+    background-color: palette(mono, x-light);
+    z-index: 4;
+  }
+}
+
+.l-region--navigation {
+  @include add-breakpoint('desk-and-up') {
+    display: flex;
+    align-items: stretch;
+  }
+}
+
+.l-bottom-bar {
+  @include add-breakpoint('desk-and-up') {
+    border-bottom: 1px solid palette(mono, mid-light);
+    transition: padding $quick_rollover_effect;
+
+    html:not(.js) &,
+    .is--search-open & {
+      padding-top: 61px;
+    }
+  }
+
+  &.has--wide-menu {
+    @include add-breakpoint('desk-and-up') {
+      border-bottom: 0;
+      flex-direction: column;
+    }
+
+    .l-region--navigation {
+      @include add-breakpoint('desk-and-up') {
+        border-top: 1px solid palette(mono, mid-light);
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.l-region--topbar-nav,
+.l-region--topbar-social {
+  .js & {
+    @include add-breakpoint('up-to-desk') {
+      @include element-invisible;
+    }
+  }
+
+  .js .is--menu-open & {
+    @include add-breakpoint('up-to-desk') {
+      @include element-visible;
+    }
+  }
+}
+
+.l-region--topbar-nav {
+  .block {
+    @include add-breakpoint('desk-and-up') {
+      float: left;
+    }
+  }
+}
+
+.l-region--topbar-social {
+  .l-region--topbar-nav ~ & {
+    @include keyline('top', palette(mono, dark));
+
+    @include add-breakpoint('desk-and-up') {
+      border-top: none;
+    }
+  }
+}
+
+.l-region--breadcrumb {
+  position: relative;
+  z-index: 4;
+}
+
+.l-main {
+  @extend %constrain;
+  position: relative;
+  z-index: 3;
+  @include spacing('x-large', 'bottom');
+
+  .page--title-visible & {
+    @include spacing('x-large', 'top');
+  }
+}
+
+.l-highlighted {
+  position: relative;
+  z-index: 2;
+
+  .l-region--highlighted {
+    @extend %constrain;
+  }
+}
+
+.l-footer {
+  z-index: 1;
+}
+
+.l-footer__top,
+.l-region--footer-fifth {
+  @extend %constrain;
+}
+
+.l-footer__top {
+  @extend %clearfix;
+  overflow: hidden;
+}
+
+.l-region--footer-first {
+  @include add-breakpoint('desk-and-up') {
+    @include float-span(9);
+  }
+}
+
+.l-region--footer-second {
+
+  @include add-breakpoint('desk-and-up') {
+    @include float-span(3, 'last');
+  }
+}
+
+.l-region--footer-third {
+  @extend %constrain;
+  @extend %clearfix;
+  padding-top: $spacing-unit-vertical;
+  padding-bottom: $spacing-unit-vertical;
+
+  .block {
+    font-size: 14px;
+  }
+}
+
+
+.l-region--footer-fifth {
+  @include spacing('small', 'top');
+  @include spacing('small', 'bottom');
+}

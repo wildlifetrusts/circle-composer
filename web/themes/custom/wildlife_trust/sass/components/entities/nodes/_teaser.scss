@@ -1,0 +1,101 @@
+.node--view-mode-teaser {
+  @include setType(6, 16px);
+  @extend %clearfix;
+
+  .location-proximity {
+    @include setType(6, 16px);
+    margin-bottom: emRhythm(4, ms(0));
+    color: palette(orange);
+  }
+
+  .node__title {
+    margin-bottom: emRhythm(4, ms(2));
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .node__media {
+    display: block;
+    position: relative;
+    margin-bottom: 1em;
+
+    @include add-breakpoint('palm-and-up') {
+      margin-bottom: 0;
+    }
+
+    @include add-breakpoint('palm-to-lap') {
+      max-width: percentage(1/3);
+      float: left;
+      margin-right: 1em;
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      @include float-span(4, $grid: 10);
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .node__media + .node__detail {
+    margin-top: emRhythm(2, ms(0));
+
+    @include add-breakpoint('palm-to-lap') {
+      overflow: hidden;
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      @include float-span(6, 'last', $grid: 10);
+    }
+
+    .field {
+      margin-bottom: emRhythm(3, ms(0));
+    }
+  }
+
+  .node__external-link {
+    margin-bottom: emRhythm(3, ms(0));
+  }
+
+  &:not(.node--view-mode-grid-teaser) {
+    @extend %teaser-preview;
+  }
+}
+
+.node--view-mode-grid-teaser {
+  > a {
+    text-decoration: none;
+  }
+
+  .node__title {
+    @extend .gamma;
+    margin-top: emRhythm(1, ms(1));
+    margin-bottom: 0;
+  }
+
+  .media-image {
+    margin-bottom: emRhythm(2, ms(0));
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &.node--preview {
+    display: block;
+
+    @include add-breakpoint('palm-to-lap') {
+      @include float-span(2);
+      float: none;
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      @include float-span(4);
+      float: none;
+    }
+  }
+}

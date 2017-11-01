@@ -1,0 +1,18 @@
+uuid: f90f56cb-af93-4fb2-a867-cfc1145dc7e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trust
+id: node.trust.title
+field_name: title
+entity_type: node
+bundle: trust
+label: 'Trust name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

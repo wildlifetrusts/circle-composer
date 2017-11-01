@@ -1,0 +1,12 @@
+uuid: 4c1dbecb-0332-4903-b64f-5617266d8981
+langcode: en
+status: true
+dependencies:
+  config:
+    - workbench_moderation.moderation_state.published
+    - workbench_moderation.moderation_state.ready_to_be_published
+id: ready_for_publishing_published
+label: 'Publish approved content'
+stateFrom: ready_to_be_published
+stateTo: published
+weight: -3

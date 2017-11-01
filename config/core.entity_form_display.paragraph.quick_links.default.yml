@@ -1,0 +1,54 @@
+uuid: 829a23ac-5070-4a35-b106-bb06c5a1a40f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.quick_links.field_quick_links_extra_wide
+    - field.field.paragraph.quick_links.field_quick_links_title
+    - field.field.paragraph.quick_links.field_quick_links_url_and_text
+    - paragraphs.paragraphs_type.quick_links
+  module:
+    - link_attributes
+    - workbench_moderation
+id: paragraph.quick_links.default
+targetEntityType: paragraph
+bundle: quick_links
+mode: default
+content:
+  field_quick_links_extra_wide:
+    weight: 1
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_quick_links_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_quick_links_url_and_text:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

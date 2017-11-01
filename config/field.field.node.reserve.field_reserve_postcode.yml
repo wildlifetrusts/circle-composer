@@ -1,0 +1,19 @@
+uuid: 559cb6e7-83b4-4934-8d2c-98606aed25d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_postcode
+    - node.type.reserve
+id: node.reserve.field_reserve_postcode
+field_name: field_reserve_postcode
+entity_type: node
+bundle: reserve
+label: Postcode
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

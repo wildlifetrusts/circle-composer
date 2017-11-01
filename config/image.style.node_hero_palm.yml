@@ -1,0 +1,16 @@
+uuid: 56aee8d8-01b5-4df6-9071-480d10772742
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: node_hero_palm
+label: 'Node hero palm'
+effects:
+  a21f5654-7b99-4b4f-a7f6-76b486029a5a:
+    uuid: a21f5654-7b99-4b4f-a7f6-76b486029a5a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 300

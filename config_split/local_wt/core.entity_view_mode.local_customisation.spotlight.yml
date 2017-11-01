@@ -1,0 +1,10 @@
+uuid: 4ba3226b-da88-4ed5-b8d5-6e0c3c51255a
+langcode: en
+status: false
+dependencies:
+  module:
+    - wildlife_local_customisation
+id: local_customisation.spotlight
+label: Spotlight
+targetEntityType: local_customisation
+cache: true

@@ -1,0 +1,9 @@
+uuid: e279d334-0aea-4f62-b811-27f4244722be
+langcode: en
+status: true
+dependencies: {  }
+id: media_bundle_audio
+action: access_denied
+allow_override: 0
+redirect: ''
+redirect_code: 301

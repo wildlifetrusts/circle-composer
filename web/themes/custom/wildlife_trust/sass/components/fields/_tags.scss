@@ -1,0 +1,15 @@
+.reserve__tags,
+.event__tags {
+  @include quick-links-list(false);
+
+  a {
+    @include button();
+    @include button--secondary();
+    @include button--small();
+
+    .view-display--event_reserve & {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+  }
+}

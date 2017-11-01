@@ -1,0 +1,5 @@
+entity.view_header.add_form:
+  route_name: entity.view_header.add_form
+  title: 'Add View header'
+  appears_on:
+    - entity.view_header.collection

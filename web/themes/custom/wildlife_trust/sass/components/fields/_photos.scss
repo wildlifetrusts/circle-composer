@@ -1,0 +1,12 @@
+.field--name-field-habitat-photos,
+.field--name-field-species-photos {
+  html:not(.js) & {
+    .field__item:not(:first-child) {
+      display: none;
+    }
+  }
+
+  picture, img {
+    display: block;
+  }
+}

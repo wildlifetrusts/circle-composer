@@ -1,0 +1,26 @@
+.node--type-species {
+  h3.node__title {
+    @include setType(6, ms(0));
+  }
+
+  .field--name-field-species-watch,
+  .field--name-field-species-listen {
+    @extend %clearfix;
+
+    > .field__label {
+      @extend .gamma;
+      @extend %content-narrow-constrain;
+      padding-top: emRhythm(2, ms(0));
+    }
+
+    .paragraph {
+      @include keyline('bottom');
+      padding-bottom: emRhythm(8, ms(0));
+      margin-bottom: emRhythm(2, ms(0)) !important;
+
+      @include add-breakpoint('lap-and-up') {
+        padding-bottom: emRhythm(12, ms(0));
+      }
+    }
+  }
+}

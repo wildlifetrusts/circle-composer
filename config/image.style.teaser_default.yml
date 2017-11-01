@@ -1,0 +1,16 @@
+uuid: eb651aef-4904-4f4a-aff6-fabd89901e22
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: teaser_default
+label: 'Teaser default'
+effects:
+  7175c11f-3280-49a4-848b-f1f1e78489a9:
+    uuid: 7175c11f-3280-49a4-848b-f1f1e78489a9
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 280
+      height: 190

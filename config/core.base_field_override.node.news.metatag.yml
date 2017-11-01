@@ -1,0 +1,18 @@
+uuid: b17c3286-0680-4c83-b4dd-995fa673137c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.news
+id: node.news.metatag
+field_name: metatag
+entity_type: node
+bundle: news
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

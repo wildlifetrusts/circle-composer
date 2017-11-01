@@ -1,0 +1,309 @@
+uuid: 14ebfdc5-f14b-4eb7-b0d4-292e0da46784
+langcode: en
+status: true
+id: initial_events
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: initial
+label: 'Import initial events from JSON'
+source:
+  plugin: url
+  track_changes: false
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+  ids:
+    title:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: title
+      label: Title
+      selector: /title
+    -
+      name: created
+      label: Created
+      selector: /created
+    -
+      name: changed
+      label: Changed
+      selector: /changed
+    -
+      name: path
+      label: Path
+      selector: /path
+    -
+      name: colour_scheme
+      label: 'Colour scheme'
+      selector: /colour_scheme
+    -
+      name: uid
+      label: Uid
+      selector: /uid
+    -
+      name: field_event_about_value
+      label: 'About value'
+      selector: /field_event_about_value
+    -
+      name: field_event_about_format
+      label: 'About format'
+      selector: /field_event_about_format
+    -
+      name: field_event_additional_info
+      label: 'Additional info'
+      selector: /field_event_additional_info
+    -
+      name: field_event_baby_changing
+      label: 'Baby changing'
+      selector: /field_event_baby_changing
+    -
+      name: field_event_bicycle_parking
+      label: 'Bicycle parking'
+      selector: /field_event_bicycle_parking
+    -
+      name: field_event_booking_embed
+      label: 'Booking embed'
+      selector: /field_event_booking_embed
+    -
+      name: field_event_booking_status
+      label: 'Booking status'
+      selector: /field_event_booking_status
+    -
+      name: field_event_cafe_refreshments
+      label: Cafe/Refreshments
+      selector: /field_event_cafe_refreshments
+    -
+      name: field_event_capacity
+      label: Capacity
+      selector: /field_event_capacity
+    -
+      name: field_event_car_charging
+      label: 'Car charging'
+      selector: /field_event_car_charging
+    -
+      name: field_event_contact_email
+      label: 'Contact email'
+      selector: /field_event_contact_email
+    -
+      name: field_event_contact_name
+      label: 'Contact name'
+      selector: /field_event_contact_name
+    -
+      name: field_event_contact_number
+      label: 'Contact number'
+      selector: /field_event_contact_number
+    -
+      name: field_event_disabled_toilet
+      label: 'Disabled toilet'
+      selector: /field_event_disabled_toilet
+    -
+      name: field_event_dogs
+      label: Dogs
+      selector: /field_event_dogs
+    -
+      name: field_event_dogs_additional
+      label: 'Dogs additional'
+      selector: /field_event_dogs_additional
+    -
+      name: field_event_email
+      label: Email
+      selector: /field_event_email
+    -
+      name: field_event_hearing_loop
+      label: 'Hearing loop'
+      selector: /field_event_hearing_loop
+    -
+      name: field_event_meeting_point
+      label: 'Meeting point'
+      selector: /field_event_meeting_point
+    -
+      name: field_event_mobility
+      label: Mobility
+      selector: /field_event_mobility
+    -
+      name: field_event_parking_info
+      label: 'Parking info'
+      selector: /field_event_parking_info
+    -
+      name: field_event_phone_number
+      label: 'Phone number'
+      selector: /field_event_phone_number
+    -
+      name: field_event_picnic_area
+      label: 'Picnic area'
+      selector: /field_event_picnic_area
+    -
+      name: field_event_price_donation
+      label: 'Price donation'
+      selector: /field_event_price_donation
+    -
+      name: field_event_shop
+      label: Shop
+      selector: /field_event_shop
+    -
+      name: field_event_suitable_for
+      label: 'Suitable for'
+      selector: /field_event_suitable_for
+    -
+      name: field_event_summary
+      label: Summary
+      selector: /field_event_summary
+    -
+      name: field_event_time
+      label: Time
+      selector: /field_event_time
+    -
+      name: field_event_toilets
+      label: Toilets
+      selector: /field_event_toilets
+    -
+      name: field_event_what_to_bring
+      label: 'What to bring'
+      selector: /field_event_what_to_bring
+    -
+      name: field_event_wheelchair
+      label: Wheelchair
+      selector: /field_event_wheelchair
+    -
+      name: field_event_reserve
+      label: Reserve
+      selector: /field_event_reserve
+    -
+      name: field_event_booking_url
+      label: 'Booking URL'
+      selector: /field_event_booking_url_uri
+    -
+      name: field_event_date_start
+      label: 'Start date'
+      selector: /field_event_date_value
+    -
+      name: field_event_date_end
+      label: 'End date'
+      selector: /field_event_date_end_value
+    -
+      name: field_event_local_group
+      label: 'Local group'
+      selector: /field_event_local_group
+    -
+      name: field_event_location
+      label: Location
+      selector: /field_event_location
+    -
+      name: field_event_tags
+      labeL: Tags
+      selector: /field_event_tags
+    -
+      name: field_event_theme
+      labeL: Theme
+      selector: /field_event_theme
+    -
+      name: field_event_type
+      label: 'Event type'
+      selector: /field_event_type
+process:
+  type:
+    plugin: default_value
+    default_value: event
+  status:
+    plugin: default_value
+    default_value: 1
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  title: title
+  created: created
+  changed: changed
+  default_langcode: default_langcode
+  path: path
+  colour_scheme: colour_scheme
+  field_event_about/value: field_event_about_value
+  field_event_about/format: field_event_about_format
+  field_event_additional_info: field_event_additional_info
+  field_event_baby_changing: field_event_baby_changing
+  field_event_bicycle_parking: field_event_bicycle_parking
+  field_event_booking_embed: field_event_booking_embed
+  field_event_booking_status: field_event_booking_status
+  field_event_booking_url: field_event_booking_url
+  field_event_cafe_refreshments: field_event_cafe_refreshments
+  field_event_capacity: field_event_capacity
+  field_event_car_charging: field_event_car_charging
+  field_event_contact_email: field_event_contact_email
+  field_event_contact_name: field_event_contact_name
+  field_event_contact_number: field_event_contact_number
+  field_event_disabled_toilet: field_event_disabled_toilet
+  field_event_dogs: field_event_dogs
+  field_event_dogs_additional: field_event_dogs_additional
+  field_event_email: field_event_email
+  field_event_hearing_loop: field_event_hearing_loop
+  field_event_local_group:
+    plugin: entity_generate
+    source: field_event_local_group
+    value_key: name
+    bundle_key: vid
+    bundle: local_group
+    entity_type: taxonomy_term
+    ignore_case: true
+  field_event_meeting_point: field_event_meeting_point
+  field_event_mobility: field_event_mobility
+  field_event_parking_info: field_event_parking_info
+  field_event_phone_number: field_event_phone_number
+  field_event_picnic_area: field_event_picnic_area
+  field_event_price_donation: field_event_price_donation
+  field_event_shop: field_event_shop
+  field_event_suitable_for: field_event_suitable_for
+  field_event_summary: field_event_summary
+  field_event_time: field_event_time
+  field_event_toilets: field_event_toilets
+  field_event_what_to_bring: field_event_what_to_bring
+  field_event_wheelchair: field_event_wheelchair
+  field_event_reserve:
+    plugin: entity_generate
+    source: field_event_reserve
+    value_key: title
+    bundle_key: type
+    bundle: reserve
+    entity_type: node
+    ignore_case: true
+  field_event_booking_url/uri: field_event_booking_url
+  field_event_date/value: field_event_date_start
+  field_event_date/end_value: field_event_date_end
+  field_event_type:
+    plugin: entity_generate
+    source: field_event_type
+    value_key: name
+    bundle_key: vid
+    bundle: event_type
+    entity_type: taxonomy_term
+    ignore_case: true
+  field_event_tags:
+    plugin: entity_generate
+    source: field_event_tags
+    value_key: name
+    bundle_key: vid
+    bundle: event_tags
+    entity_type: taxonomy_term
+    ignore_case: true
+  field_event_theme:
+    plugin: entity_generate
+    source: field_event_theme
+    value_key: name
+    bundle_key: vid
+    bundle: event_theme
+    entity_type: taxonomy_term
+    ignore_case: true
+  field_event_location:
+    plugin: entity_generate
+    source: field_event_location
+    value_key: name
+    bundle: location
+    entity_type: location
+    ignore_case: true
+  field_external_link:
+    plugin: wildlife_sharing_site_link
+  uid:
+    plugin: wildlife_sharing_user
+destination:
+  plugin: 'entity:node'

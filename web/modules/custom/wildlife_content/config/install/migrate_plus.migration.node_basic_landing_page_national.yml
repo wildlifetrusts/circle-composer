@@ -1,0 +1,78 @@
+uuid: 6fd01cf8-5171-435d-9c6e-c7ecf006eae1
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: node_basic_landing_page_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Basic/Landing Page data from a CSV source to nodes: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/node_basic_landing_page_national.csv
+  header_row_count: 1
+  keys:
+    - nid
+  constants:
+    mod_state: published
+process:
+  type:
+    plugin: default_value
+    default_value: basic_landing_page
+  moderation_state: constants/mod_state
+  title: title
+  field_hide_title: hide_title
+  field_basic_landing_summary: summary
+  field_components:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: components
+    -
+      plugin: migration
+      migration:
+        - paragraph_rich_text_national
+        - paragraph_image_national
+        - paragraph_image_gallery_national
+        - paragraph_video_national
+        - paragraph_attached_files_national
+        - paragraph_accordion_national
+        - paragraph_section_national
+        - paragraph_quick_links_national
+        - paragraph_spotlight_group_national
+        - paragraph_headline_hero_national
+        - paragraph_statistics_national
+        - paragraph_testimonial_national
+        - paragraph_html_component_national
+        - paragraph_webform_national
+        - paragraph_audio_national
+      no_stub: true
+    -
+      plugin: iterator
+      process:
+        target_id: '0'
+        target_revision_id: '1'
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - paragraph_rich_text_national
+    - paragraph_image_national
+    - paragraph_image_gallery_national
+    - paragraph_video_national
+    - paragraph_attached_files_national
+    - paragraph_accordion_national
+    - paragraph_section_national
+    - paragraph_quick_links_national
+    - paragraph_spotlight_group_national
+    - paragraph_headline_hero_national
+    - paragraph_statistics_national
+    - paragraph_testimonial_national
+    - paragraph_html_component_national
+    - paragraph_webform_national
+    - paragraph_audio_national

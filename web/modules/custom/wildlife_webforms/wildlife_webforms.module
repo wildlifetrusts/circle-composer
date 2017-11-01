@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_webforms.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_webforms_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_webforms module.
+    case 'help.page.wildlife_webforms':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Webform module augmentations/removals') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Update the Webform Settings form.
+ */
+function wildlife_webforms_form_webform_settings_form_alter(&$form, &$form_state, $form_id) {
+  // Hide some settings.
+  $form['page_settings']['page']['#default_value'] = FALSE;
+  $form['page_settings']['#access'] = FALSE;
+  $form['ajax_settings']['#access'] = FALSE;
+  $form['draft_settings']['#access'] = FALSE;
+  $form['third_party_settings']['#access'] = FALSE;
+  $form['wizard_settings']['#access'] = FALSE;
+  unset($form['confirmation_settings']['ajax_confirmation']);
+  $form['form_settings']['attributes']['#access'] = FALSE;
+  $form['confirmation_settings']['confirmation_page']['confirmation_attributes']['#access'] = FALSE;
+  $form['preview_settings']['preview_container']['preview_attributes']['#access'] = FALSE;
+}
+
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Update the Webform UI Element form.
+ */
+function wildlife_webforms_form_webform_ui_element_form_alter(&$form, &$form_state, $form_id) {
+  // Remove some of the clutter/unhelpful/confusing elements from the UI.
+  $form['properties']['wrapper_attributes']['#access'] = FALSE;
+  $form['properties']['element_attributes']['#access'] = FALSE;
+
+  // Unset iCheck.
+  if (isset($form['properties']['form']['icheck'])) {
+    $form['properties']['form']['icheck']['#access'] = FALSE;
+  }
+}

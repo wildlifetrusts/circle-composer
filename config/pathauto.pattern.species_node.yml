@@ -1,0 +1,22 @@
+uuid: a91c02c6-c130-412e-8c91-950eb5ad02e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: species_node
+label: 'Species (Node)'
+type: 'canonical_entities:node'
+pattern: 'wildlife-explorer/[node:field_species_species:entity:parents:join-path]/[node:field_species_species:entity:name]/[node:title]'
+selection_criteria:
+  a0ccf1c7-bfc3-40a8-9930-2c08d60d9bb5:
+    id: node_type
+    bundles:
+      species: species
+    negate: false
+    context_mapping:
+      node: node
+    uuid: a0ccf1c7-bfc3-40a8-9930-2c08d60d9bb5
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,21 @@
+uuid: f98136d4-ade1-41bf-bf86-60b7e2d00805
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_dogs
+    - node.type.reserve
+  module:
+    - options
+id: node.reserve.field_reserve_dogs
+field_name: field_reserve_dogs
+entity_type: node
+bundle: reserve
+label: Dogs
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

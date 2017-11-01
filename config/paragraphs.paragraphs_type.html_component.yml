@@ -1,0 +1,9 @@
+uuid: 54477f3e-7349-4b4d-afab-ff4c4c48bd49
+langcode: en
+status: true
+dependencies: {  }
+id: html_component
+label: 'HTML Component'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

@@ -1,0 +1,5 @@
+services:
+  wildlife_content.event_subscriber:
+    class: '\Drupal\wildlife_content\EventSubscriber\WildlifeContentEventSubscriber'
+    tags:
+      - { name: 'event_subscriber' }

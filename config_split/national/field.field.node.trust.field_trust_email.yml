@@ -1,0 +1,19 @@
+uuid: 2b682581-c08a-42d0-be2a-377cd4fa2db5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_email
+    - node.type.trust
+id: node.trust.field_trust_email
+field_name: field_trust_email
+entity_type: node
+bundle: trust
+label: Email
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

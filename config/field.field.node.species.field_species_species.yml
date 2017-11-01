@@ -1,0 +1,28 @@
+uuid: d73367e3-c106-4735-a49b-36d6962cf24a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_species_species
+    - node.type.species
+    - taxonomy.vocabulary.species
+id: node.species.field_species_species
+field_name: field_species_species
+entity_type: node
+bundle: species
+label: Category
+description: 'The species category hierarchy this Species belongs to.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      species: species
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

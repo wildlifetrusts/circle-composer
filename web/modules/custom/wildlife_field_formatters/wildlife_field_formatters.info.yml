@@ -1,0 +1,8 @@
+name: Wildlife Trust Field Formatters
+type: module
+description: 'Additional Field Formatters for the Wildlife Trust project.'
+core: 8.x
+package: Wildlife
+
+dependencies:
+  - entity_reference_revisions

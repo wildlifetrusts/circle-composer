@@ -1,0 +1,23 @@
+uuid: 8726c4e0-5e0b-422a-a52f-d717b03ea496
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.author.field_author_twitter
+  module:
+    - link
+    - wildlife_author
+id: author.author.field_author_twitter
+field_name: field_author_twitter
+entity_type: author
+bundle: author
+label: 'Twitter URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

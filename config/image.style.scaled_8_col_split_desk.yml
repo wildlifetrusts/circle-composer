@@ -1,0 +1,15 @@
+uuid: d95c3a77-3b3f-4428-899c-3d3859e042a9
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_8_col_split_desk
+label: 'Scaled 8 col split desk'
+effects:
+  d1632d23-cc65-46c4-8e24-63a78400352a:
+    uuid: d1632d23-cc65-46c4-8e24-63a78400352a
+    id: image_scale
+    weight: 1
+    data:
+      width: 332
+      height: null
+      upscale: false

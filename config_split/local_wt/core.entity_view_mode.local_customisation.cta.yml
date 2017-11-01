@@ -1,0 +1,10 @@
+uuid: 2a3aabc8-fc6c-4397-b85d-365f4abd7f49
+langcode: en
+status: false
+dependencies:
+  module:
+    - wildlife_local_customisation
+id: local_customisation.cta
+label: 'Call to action'
+targetEntityType: local_customisation
+cache: true

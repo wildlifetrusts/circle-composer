@@ -1,0 +1,41 @@
+uuid: b96f0a85-eb34-4bb8-bcdd-84542cd9065f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.spotlight_double
+    - field.field.media.image.field_media_caption
+    - field.field.media.image.field_media_image
+    - media_entity.bundle.image
+    - responsive_image.styles.spotlight_double
+  module:
+    - fences
+    - responsive_image
+id: media.image.spotlight_double
+targetEntityType: media
+bundle: image
+mode: spotlight_double
+content:
+  field_media_image:
+    weight: 0
+    label: hidden
+    settings:
+      responsive_image_style: spotlight_double
+      image_link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: responsive_image
+    region: content
+hidden:
+  created: true
+  field_media_caption: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

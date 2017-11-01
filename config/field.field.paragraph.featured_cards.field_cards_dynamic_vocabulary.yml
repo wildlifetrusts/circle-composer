@@ -1,0 +1,23 @@
+uuid: 8f3f72b7-5c85-4923-8fe1-fc4ae90926ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cards_dynamic_vocabulary
+    - paragraphs.paragraphs_type.featured_cards
+id: paragraph.featured_cards.field_cards_dynamic_vocabulary
+field_name: field_cards_dynamic_vocabulary
+entity_type: paragraph
+bundle: featured_cards
+label: 'Taxonomy vocabulary'
+description: 'Choosing a Taxonomy Vocabulary will filter content so only that which is tagged with a term from the chosen vocabularies is shown.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_vocabulary'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

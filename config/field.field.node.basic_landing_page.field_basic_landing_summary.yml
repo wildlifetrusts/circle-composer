@@ -1,0 +1,19 @@
+uuid: 78703097-05ae-4e14-b4a0-60c6374e9a83
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_basic_landing_summary
+    - node.type.basic_landing_page
+id: node.basic_landing_page.field_basic_landing_summary
+field_name: field_basic_landing_summary
+entity_type: node
+bundle: basic_landing_page
+label: Summary
+description: 'This text will is used for the search result view of this page as well as its meta description.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

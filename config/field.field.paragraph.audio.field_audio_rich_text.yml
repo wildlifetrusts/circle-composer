@@ -1,0 +1,27 @@
+uuid: 7a0e8e44-8b57-4ee1-b6c8-ebb21b174626
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_audio_rich_text
+    - paragraphs.paragraphs_type.audio
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: paragraph.audio.field_audio_rich_text
+field_name: field_audio_rich_text
+entity_type: paragraph
+bundle: audio
+label: 'Rich text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

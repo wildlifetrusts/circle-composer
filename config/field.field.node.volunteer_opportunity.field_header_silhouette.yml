@@ -1,0 +1,28 @@
+uuid: 8647b773-6023-4976-9444-7d497802482a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_silhouette
+    - media_entity.bundle.silhouette
+    - node.type.volunteer_opportunity
+id: node.volunteer_opportunity.field_header_silhouette
+field_name: field_header_silhouette
+entity_type: node
+bundle: volunteer_opportunity
+label: 'Header silhouette'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      silhouette: silhouette
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

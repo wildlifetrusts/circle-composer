@@ -1,0 +1,23 @@
+uuid: 9e4bf364-96b6-4b64-9223-653d0d909220
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_bird_hides
+    - node.type.reserve
+id: node.reserve.field_reserve_bird_hides
+field_name: field_reserve_bird_hides
+entity_type: node
+bundle: reserve
+label: 'Bird hides'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Bird hides'
+  off_label: 'Off'
+field_type: boolean

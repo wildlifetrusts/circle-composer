@@ -1,0 +1,7 @@
+wildlife_theming.admin:
+  path: '/admin/config/user-interface/theme-variation'
+  defaults:
+    _form: '\Drupal\wildlife_theming\Form\ThemeVariationAdmin'
+    _title: 'Theme Variation'
+  requirements:
+    _permission: administer theme variation

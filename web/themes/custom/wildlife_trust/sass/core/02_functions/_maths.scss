@@ -1,0 +1,63 @@
+////
+/// @group Maths
+////
+
+/// Divide a value by 4 and round the result.
+/// @param {Number} $input - Numeric value (can have units)
+/// @return {Number}
+/// @example scss - Quarter function
+/// quarter(20) // 5
+/// quarter(13px) // 3px
+@function quarter($input) {
+  @return round($input / 4);
+}
+
+/// Divide a value by 3 and round the result.
+/// @param {Number} $input - Numeric value (can have units)
+/// @return {Number}
+/// @example scss - Third function
+/// third(18) // 6
+/// third(13px) // 4px
+@function third($input) {
+  @return round($input / 3);
+}
+
+/// Divide a value by 2 and round the result.
+/// @param {Number} $input - Numeric value (can have units)
+/// @return {Number}
+/// @example scss - Halve function
+/// halve(20) // 10
+/// halve(13px) // 7px
+@function halve($input) {
+  @return round($input / 2);
+}
+
+/// Multiply a value by 2 and round the result.
+/// @param {Number} $input - Numeric value (can have units)
+/// @return {Number}
+/// @example scss - Double function
+/// double(20) // 40
+/// double(13px) // 26px
+@function double($input) {
+  @return round($input * 2);
+}
+
+/// Multiply a value by 3 and round the result.
+/// @param {Number} $input - Numeric value (can have units)
+/// @return {Number}
+/// @example scss - Double function
+/// triple(20) // 60
+/// triple(13px) // 39px
+@function triple($input) {
+  @return round($input * 3);
+}
+
+/// Multiply a value by 4 and round the result.
+/// @param {Number} $input - Numeric value (can have units)
+/// @return {Number}
+/// @example scss - Double function
+/// quadruple(20) // 80
+/// quadruple(13px) // 52px
+@function quadruple($input) {
+  @return round($input * 4);
+}

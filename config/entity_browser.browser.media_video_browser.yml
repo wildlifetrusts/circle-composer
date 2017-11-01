@@ -1,0 +1,42 @@
+uuid: b12b9f3e-e30f-4422-a1c0-0b79b57ab451
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.media_entity_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: media_video_browser
+label: 'Media video browser'
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Add video'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  cf042d9d-31ca-4b1e-88a7-c87d1516228b:
+    settings:
+      view: media_entity_browser
+      view_display: entity_browser_video
+      submit_text: 'Use selection'
+      auto_select: false
+    uuid: cf042d9d-31ca-4b1e-88a7-c87d1516228b
+    weight: 1
+    label: Browse
+    id: view
+  0e8f8aa5-87e2-4c45-9957-31189d06925e:
+    settings:
+      entity_type: media
+      bundle: video
+      form_mode: default
+      submit_text: 'Save video'
+    uuid: 0e8f8aa5-87e2-4c45-9957-31189d06925e
+    weight: 2
+    label: Add
+    id: entity_form

@@ -1,0 +1,20 @@
+uuid: 2cdf7ea1-e415-4799-a2c8-59ad51d4ef06
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - wildlife_author
+id: node.field_blog_author
+field_name: field_blog_author
+entity_type: node
+type: entity_reference
+settings:
+  target_type: author
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

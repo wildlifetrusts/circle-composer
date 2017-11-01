@@ -1,0 +1,133 @@
+uuid: f20cb4ab-12a5-41cc-9cd7-521006fa35eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_further_content
+    - node.type.species
+    - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.attached_files
+    - paragraphs.paragraphs_type.audio
+    - paragraphs.paragraphs_type.featured_cards
+    - paragraphs.paragraphs_type.flickr_album
+    - paragraphs.paragraphs_type.headline_hero
+    - paragraphs.paragraphs_type.html_component
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.image_gallery
+    - paragraphs.paragraphs_type.newsletter_sign_up
+    - paragraphs.paragraphs_type.quick_links
+    - paragraphs.paragraphs_type.rich_text
+    - paragraphs.paragraphs_type.section
+    - paragraphs.paragraphs_type.spotlight_group
+    - paragraphs.paragraphs_type.statistics
+    - paragraphs.paragraphs_type.testimonial
+    - paragraphs.paragraphs_type.video
+    - paragraphs.paragraphs_type.webform
+  module:
+    - entity_reference_revisions
+id: node.species.field_further_content
+field_name: field_further_content
+entity_type: node
+bundle: species
+label: 'Further content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      accordion: accordion
+      attached_files: attached_files
+      audio: audio
+      featured_cards: featured_cards
+      flickr_album: flickr_album
+      headline_hero: headline_hero
+      html_component: html_component
+      image: image
+      image_gallery: image_gallery
+      newsletter_sign_up: newsletter_sign_up
+      quick_links: quick_links
+      rich_text: rich_text
+      section: section
+      spotlight_group: spotlight_group
+      statistics: statistics
+      testimonial: testimonial
+      video: video
+      webform: webform
+    target_bundles_drag_drop:
+      accordion:
+        enabled: true
+        weight: 0
+      accordion_item:
+        weight: 1
+        enabled: false
+      attached_files:
+        enabled: true
+        weight: 2
+      audio:
+        enabled: true
+        weight: 3
+      featured_cards:
+        enabled: true
+        weight: 4
+      flickr_album:
+        enabled: true
+        weight: 5
+      headline_hero:
+        enabled: true
+        weight: 6
+      html_component:
+        enabled: true
+        weight: 7
+      image:
+        enabled: true
+        weight: 8
+      image_gallery:
+        enabled: true
+        weight: 9
+      image_gallery_item:
+        weight: 10
+        enabled: false
+      linked_logo_item:
+        weight: 11
+        enabled: false
+      linked_logos:
+        weight: 12
+        enabled: false
+      newsletter_sign_up:
+        enabled: true
+        weight: 13
+      quick_links:
+        enabled: true
+        weight: 14
+      rich_text:
+        enabled: true
+        weight: 15
+      section:
+        enabled: true
+        weight: 16
+      spotlight:
+        weight: 17
+        enabled: false
+      spotlight_group:
+        enabled: true
+        weight: 18
+      statistic_item:
+        weight: 19
+        enabled: false
+      statistics:
+        enabled: true
+        weight: 20
+      testimonial:
+        enabled: true
+        weight: 21
+      video:
+        enabled: true
+        weight: 22
+      webform:
+        enabled: true
+        weight: 23
+field_type: entity_reference_revisions

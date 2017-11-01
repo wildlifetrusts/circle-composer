@@ -1,0 +1,23 @@
+uuid: 4007868b-02cb-4314-9ce6-2865685462a8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_twitter
+    - node.type.reserve
+  module:
+    - link
+id: node.reserve.field_reserve_twitter
+field_name: field_reserve_twitter
+entity_type: node
+bundle: reserve
+label: Twitter
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

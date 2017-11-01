@@ -1,0 +1,10 @@
+%teaser-preview {
+  &.node--preview {
+    @include add-breakpoint('lap-and-up') {
+      @include isolation-span(10, 2, 'both');
+      float: none;
+    }
+  }
+}
+
+

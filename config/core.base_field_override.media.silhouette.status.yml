@@ -1,0 +1,22 @@
+uuid: addeece0-79fe-4376-b9c2-5a9d7956dc05
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.silhouette
+id: media.silhouette.status
+field_name: status
+entity_type: media
+bundle: silhouette
+label: 'Publishing status'
+description: 'A boolean indicating whether the media is published.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

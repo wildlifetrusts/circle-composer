@@ -1,0 +1,8 @@
+name: SEO
+type: module
+description: Useful SEO related functions and processing
+core: 8.x
+package: Wildlife
+dependencies:
+  - token
+  - taxonomy

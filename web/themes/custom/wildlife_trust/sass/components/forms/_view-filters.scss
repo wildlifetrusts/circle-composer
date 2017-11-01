@@ -1,0 +1,101 @@
+@mixin form-actions-styles() {
+  padding: 0;
+  border: none;
+  margin-bottom: 0;
+  width: 100%;
+  clear: both;
+
+  .form-submit[id$="-submit"],
+  .form-submit[id^="edit-reset"] {
+    display: flex;
+  }
+
+  .form-submit[id$="-submit"] {
+    order: 2;
+    flex: none;
+  }
+
+  .form-submit[id^="edit-reset"] {
+    order: 1;
+    margin-right: 1em;
+    flex: none;
+  }
+}
+
+.views-filter-form,
+.has-visible-filters .view__filters {
+  @include keyline();
+  @extend %breakout;
+  background-color: palette(mono, x-light);
+
+  .form {
+    @extend %clearfix;
+    padding-top: $spacing-unit-vertical;
+    padding-bottom: $spacing-unit-vertical;
+
+    .form__item {
+      .form__item--type-uniform-select,
+      .form__item--type-uniform-select > span,
+      .form-select,
+      .form-text {
+        max-width: 100%;
+        width: 100% !important;
+      }
+
+      @include add-breakpoint('palm-to-lap') {
+        @include float-span(2);
+
+        &:nth-child(2n) {
+          @include float-span(2, 'last');
+        }
+      }
+
+      @include add-breakpoint('lap-to-desk') {
+        @include float-span(4);
+
+        &:nth-child(3n) {
+          @include float-span(4, 'last');
+        }
+      }
+
+      @include add-breakpoint('desk-and-up') {
+        @include float-span(3);
+
+        &:nth-child(4n) {
+          @include float-span(3, 'last');
+        }
+      }
+    }
+  }
+
+  label {
+    @include font-size(16px);
+  }
+}
+
+.views-filter-form .form-wrapper.form__actions .fieldset-wrapper,
+.has-visible-filters .view__filters .form-wrapper.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.views-filter-form .form-wrapper.form__actions,
+.has-visible-filters .view__filters .form-wrapper.form-actions {
+  @include form-actions-styles;
+}
+
+.view__filters  > .view__filters__wrapper,
+.views-filter-form  > .block__content {
+  @extend %constrain;
+}
+
+.view--location-search.view-display--trusts.has-visible-filters .view__filters {
+  .form-wrapper.form-actions {
+    text-align: center;
+
+    .button--tertiary {
+      float: none;
+    }
+  }
+}

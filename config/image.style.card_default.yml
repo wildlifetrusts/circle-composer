@@ -1,0 +1,16 @@
+uuid: d258922b-41ad-4558-8f65-05b9579fcf1c
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: card_default
+label: 'Card default'
+effects:
+  d69125e7-3efb-4d28-9e78-4e3526f6919c:
+    uuid: d69125e7-3efb-4d28-9e78-4e3526f6919c
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 280
+      height: 158

@@ -1,0 +1,173 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\wildlife_theming\ThemeVariation;
+
+/**
+ * Implements hook_theme().
+ */
+function wildlife_theming_theme($existing, $type, $theme, $path) {
+  $theme_implementations = [];
+
+  $theme_implementations['block__wildlife_theming_branding_block'] = [
+    'render element' => 'elements',
+    'base hook' => 'block',
+  ];
+
+  return $theme_implementations;
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function wildlife_theming_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = array();
+
+  // Add a 'Colour Scheme' base field to all node types.
+  if ($entity_type->id() === 'node' || $entity_type->id() == 'view_header') {
+    $container = \Drupal::getContainer();
+    $schemes = ThemeVariation::create($container)->getColourSchemes();
+
+    $fields['colour_scheme'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Colour scheme'))
+      ->setDescription(t('The colour scheme for this node.'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(FALSE)
+      ->setSetting('allowed_values', $schemes)
+      ->setDisplayOptions('form', array(
+        'type' => 'options_select',
+        'weight' => -2,
+      ))
+      ->setDisplayConfigurable('form', TRUE);
+  }
+
+  return $fields;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\node\NodeForm.
+ */
+function wildlife_theming_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  $form['colour'] = array(
+    '#type' => 'details',
+    '#title' => t('Colour scheme'),
+    '#open' => FALSE,
+    '#group' => 'advanced',
+    '#weight' => 30,
+  );
+
+  $form['colour_scheme']['#group'] = 'colour';
+  $form['colour_scheme']['widget']['#empty_option'] = t('Use site colour scheme');
+  $form['colour_scheme']['widget']['#empty_value'] = '_none';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wildlife_theming_form_view_header_form_alter(&$form, FormStateInterface $form_state) {
+  $form['colour_scheme']['widget']['#empty_option'] = t('Use site colour scheme');
+  $form['colour_scheme']['widget']['#empty_value'] = '_none';
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function wildlife_theming_preprocess_page(&$variables) {
+  $route = \Drupal::routeMatch()->getRouteObject();
+  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute($route);
+  $has_node_operation_option = $route->getOption('_node_operation_route');
+  $is_admin = ($is_admin_route || $has_node_operation_option);
+  if (!$is_admin) {
+    $current_scheme = theme_get_setting('colour_scheme');
+    $variables['#cache']['tags'][] = 'theme_variation';
+    $variables['#cache']['tags'][] = 'node_list';
+
+    // Node page.
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      $node_colour_scheme = $node->get('colour_scheme')->getString();
+    }
+
+    // Preview page.
+    if ($preview = \Drupal::routeMatch()->getParameter('node_preview')) {
+      $node_colour_scheme = $preview->get('colour_scheme')->getString();
+    }
+
+    // Check for ViewHeader entities.
+    if ($view_header_colour_scheme = _wildlife_theming_view_header_colour_scheme()) {
+      $node_colour_scheme = $view_header_colour_scheme;
+    }
+
+    // Set the attached library for the page.
+    if (!empty($node_colour_scheme) && $node_colour_scheme != 'default') {
+      $variables['#attached']['library'][] = 'wildlife_trust/colours-' . $node_colour_scheme;
+    }
+    else {
+      $variables['#attached']['library'][] = 'wildlife_trust/colours-' . $current_scheme;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for block templates.
+ */
+function wildlife_theming_preprocess_block(&$variables) {
+  switch ($variables['base_plugin_id']) {
+    case 'wildlife_theming_branding_block':
+      $variables['site_header_logo'] = '';
+      if ($variables['content']['site_header_logo']['#access'] && $variables['content']['site_header_logo']['#uri']) {
+        $variables['site_header_logo'] = $variables['content']['site_header_logo']['#uri'];
+      }
+      $variables['site_footer_logo'] = '';
+      if ($variables['content']['site_footer_logo']['#access'] && $variables['content']['site_footer_logo']['#uri']) {
+        $variables['site_footer_logo'] = $variables['content']['site_footer_logo']['#uri'];
+      }
+      $variables['site_strapline'] = '';
+      if (isset($variables['content']['site_strapline']) && $variables['content']['site_strapline']['#access'] && $variables['content']['site_strapline']['#markup']) {
+        $variables['site_strapline'] = [
+          '#markup' => t($variables['content']['site_strapline']['#markup']),
+        ];
+
+        $variables['site_strapline_size'] = $variables['content']['site_strapline_size'];
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function wildlife_theming_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface &$form_state, $form_id = NULL) {
+  // Update the default logo text.
+  $form['logo']['#title'] = t('Header logo');
+
+  // Add instruction about how to change further theme variation.
+  $theme_variation = \Drupal\Core\Link::createFromRoute('Theme variation', 'wildlife_theming.admin')->toString();
+
+  $form['theme_variation'] = [
+    '#type' => 'details',
+    '#title' => t('Theme Variation'),
+    '#description' => t('To make further alteration to theme, please see the @theme_variation page.', ['@theme_variation' => $theme_variation]),
+    '#open' => TRUE,
+  ];
+}
+
+/**
+ * Helper function to check for a ViewHeader and find its colour scheme.
+ *
+ * @return string|null
+ *   The colour scheme (or NULL if no ViewHeader's found).
+ */
+function _wildlife_theming_view_header_colour_scheme() {
+  $node_colour_scheme = NULL;
+
+  $view_header = \Drupal\wildlife_view_headers\Plugin\Block\ViewHeaderBlock::findViewHeader();
+
+  // If we have a ViewHeader ID then load it and return its colour scheme.
+  if (!empty($view_header)) {
+    $node_colour_scheme = $view_header->get('colour_scheme')->getString();
+  }
+
+  return $node_colour_scheme;
+}

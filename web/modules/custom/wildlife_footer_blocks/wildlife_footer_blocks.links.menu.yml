@@ -1,0 +1,10 @@
+wildlife_footer_blocks.custom_block_library:
+  title: 'Custom block library'
+  parent: system.admin_structure
+  description: 'Configure custom content blocks.'
+  route_name: entity.block_content.collection
+wildlife_footer_blocks.footer_information_config:
+  title: 'Footer Information'
+  description: 'Configure the footer information for this site.'
+  parent: system.admin_config_ui
+  route_name: 'wildlife_footer_blocks.footer_information_block_config'

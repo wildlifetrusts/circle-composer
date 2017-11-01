@@ -1,0 +1,82 @@
+uuid: e6a879aa-8d70-47cd-bbca-3da41cb88126
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.view_header.field_further_content
+    - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.attached_files
+    - paragraphs.paragraphs_type.headline_hero
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.quick_links
+    - paragraphs.paragraphs_type.rich_text
+    - paragraphs.paragraphs_type.section
+    - paragraphs.paragraphs_type.spotlight_group
+    - paragraphs.paragraphs_type.video
+  module:
+    - entity_reference_revisions
+    - wildlife_view_headers
+id: view_header.view_header.field_further_content
+field_name: field_further_content
+entity_type: view_header
+bundle: view_header
+label: 'Further content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      accordion: accordion
+      attached_files: attached_files
+      headline_hero: headline_hero
+      image: image
+      quick_links: quick_links
+      rich_text: rich_text
+      section: section
+      spotlight_group: spotlight_group
+      video: video
+    target_bundles_drag_drop:
+      accordion:
+        enabled: true
+        weight: 14
+      accordion_item:
+        weight: 15
+        enabled: false
+      attached_files:
+        enabled: true
+        weight: 16
+      headline_hero:
+        enabled: true
+        weight: 17
+      image:
+        enabled: true
+        weight: 18
+      linked_logos:
+        weight: 19
+        enabled: false
+      linked_logo_item:
+        weight: 20
+        enabled: false
+      quick_links:
+        enabled: true
+        weight: 21
+      rich_text:
+        enabled: true
+        weight: 22
+      section:
+        enabled: true
+        weight: 23
+      spotlight:
+        weight: 24
+        enabled: false
+      spotlight_group:
+        enabled: true
+        weight: 25
+      video:
+        enabled: true
+        weight: 26
+field_type: entity_reference_revisions

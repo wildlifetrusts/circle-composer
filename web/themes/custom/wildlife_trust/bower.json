@@ -1,0 +1,13 @@
+{
+  "name": "wildlife_trust",
+  "version": "1.0.0",
+  "dependencies": {
+    "jquery.uniform": "pixelmatrix/uniform",
+    "matchHeight": "liabru/jquery-match-height",
+    "details-polyfill": "javan/details-element-polyfill",
+    "enquire": "2.1.6",
+    "slick-carousel": "1.6.0",
+    "colorbox": "jackmoore/colorbox",
+    "waypoints": "imakewebthings/waypoints"
+  }
+}

@@ -1,0 +1,28 @@
+uuid: 4f458dfb-9b64-4def-baf8-cf8044ca61d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_great_for
+    - node.type.reserve
+    - taxonomy.vocabulary.great_for
+id: node.reserve.field_reserve_great_for
+field_name: field_reserve_great_for
+entity_type: node
+bundle: reserve
+label: 'Great for...'
+description: 'Choose up to five items to say what this Reserve is great for!'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      great_for: great_for
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

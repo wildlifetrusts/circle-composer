@@ -1,0 +1,18 @@
+uuid: c6384433-eab6-48df-ac8f-a981fae01f82
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flexible_block
+id: block_content.flexible_block.info
+field_name: info
+entity_type: block_content
+bundle: flexible_block
+label: 'Block description'
+description: 'A brief description of your block.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

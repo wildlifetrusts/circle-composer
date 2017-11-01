@@ -1,0 +1,10 @@
+uuid: 7788d463-b34b-4502-a57a-fd5113b86561
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.scaled_8_col
+label: 'Scaled 8 col'
+targetEntityType: media
+cache: true

@@ -1,0 +1,39 @@
+// List margins, font-size and line-heights are all defined by the vertical
+// rhythm and can be overwritten in core/04_typesettings/_typesettings.scss
+// Only visual (not sizing or margin) should be dealt with in this stylesheet.
+$ul-bullet-size: 4px;
+
+/* Unordered Lists */
+ul {
+  li {
+    position: relative;
+    list-style: none;
+
+    &:not([class])::before {
+      position: absolute;
+      content: '';
+      top: 0.65em;
+      right: 100%;
+      margin-right: halve($spacing-unit-horizontal);
+      width: $ul-bullet-size;
+      height: $ul-bullet-size;
+      background-color: palette(mono, x-dark);
+      border-radius: $ul-bullet-size;
+    }
+  }
+}
+
+/* Ordered Lists */
+ol {
+
+}
+
+/* Definition Lists */
+dl {
+  dt {
+
+  }
+  dd {
+
+  }
+}

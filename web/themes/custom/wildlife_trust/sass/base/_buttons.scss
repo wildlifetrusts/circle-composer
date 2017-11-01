@@ -1,0 +1,179 @@
+// Buttons
+//
+// .button--full - These buttons will fill the entirety of their container.
+// .button--secondary - Secondary button style
+// .button--tertiary - Tertiary button style
+// .button--inactive - An inactive button, this style could be extended to
+// :disabled.
+//
+// Markup: ../../docs/kss-helpers/buttons.hbs
+//
+// Styleguide 2.0.0
+@mixin button() {
+  /** Base button styles **/
+  display: inline-block;
+  vertical-align: middle;
+  font-family: $adelle-font-family;
+  font-size: 100%;
+  cursor: pointer;
+  border: 1px solid palette(mono, x-dark);
+  margin: 0;
+  border-radius: 10em;
+  overflow: visible;
+  text-align: center;
+  text-shadow: none;
+
+  /** Theme specific styles **/
+  padding: 0.5em 1.75em;
+  background-color: palette(mono, x-dark);
+  @include setType(5, ms(0));
+
+  &,
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited {
+    text-decoration: none;
+    color: palette(mono, x-light);
+  }
+
+  &:hover,
+  &:active {
+    box-shadow: none;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+    background-color: palette(mono, x-light);
+    color: palette(mono, x-dark);
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  &:focus {
+    @extend %fake-focus-outline;
+  }
+}
+
+.button {
+  @include button();
+}
+
+/**
+ * Button size modifiers.
+ *
+ * These all follow the same sizing rules as above; text is 1em, space around it
+ * remains uniform.
+ */
+@mixin button--small() {
+  padding: 0.5em 1.75em;
+  font-size: 14px;
+  font-family: $base-font-family;
+}
+
+.button--small {
+  @include button--small();
+}
+
+@mixin button--large() {
+  padding: 2em 2.5em;
+}
+
+.button--large {
+  @include button--large();
+}
+
+/**
+ * These buttons will fill the entirety of their container.
+ */
+.button--full {
+  width: 100%;
+}
+
+/**
+ * Button function modifiers.
+ */
+@mixin button--secondary() {
+  /** Theme specific styles **/
+  background-color: palette(mono, x-light);
+  border-color: palette(mono, x-dark);
+
+  &,
+  &:visited {
+    color: palette(mono, x-dark);
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: palette(mono, x-dark);
+    color: palette(mono, x-light);
+  }
+}
+
+.button--secondary {
+  @include button--secondary();
+}
+
+@mixin button--tertiary() {
+  border-color: palette(orange);
+  background-color: palette(orange);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: palette(mono, x-light);
+    color: palette(mono, x-dark);
+  }
+}
+
+.button--tertiary {
+  @include button--tertiary();
+}
+
+@mixin button--contrast() {
+  border: 1px solid palette(mono, x-light);
+}
+
+.button--contrast {
+  @include button--contrast();
+}
+
+/**
+ * Inactive, disabled buttons.
+ *
+ * 1. Make the button look like normal text when hovered.
+ */
+.button--inactive,
+.button--inactive:hover,
+.button--inactive:active,
+.button--inactive:focus{
+  background-color: palette(mono);
+  border-color: palette(mono);
+  color: palette(mono, x-light);
+  cursor: default;
+}
+
+/**
+ * Button style modifiers.
+ */
+.button--soft {
+  border-radius: 10em;
+}
+
+.button--soft-start {
+  border-radius: 10em 0 0 10em;
+}
+
+.button--soft-end {
+  border-radius: 0 10em 10em 0;
+}
+
+.button--hard {
+  border-radius: 0;
+}

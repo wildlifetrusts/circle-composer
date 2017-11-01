@@ -1,0 +1,54 @@
+uuid: 6120df85-9bc2-4e7d-8b3f-6fed25fa9310
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.paragraph.linked_logo_item.field_linked_logo_item_link
+    - field.field.paragraph.linked_logo_item.field_linked_logo_item_logo
+    - paragraphs.paragraphs_type.linked_logo_item
+  module:
+    - entity_browser
+    - link_attributes
+    - workbench_moderation
+id: paragraph.linked_logo_item.default
+targetEntityType: paragraph
+bundle: linked_logo_item
+mode: default
+content:
+  field_linked_logo_item_link:
+    weight: 1
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_linked_logo_item_logo:
+    weight: 0
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

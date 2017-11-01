@@ -1,0 +1,19 @@
+uuid: 8fdeb289-44f9-4c86-8847-2778b35be2aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+    - media_entity_document
+third_party_settings:
+  crop:
+    image_field: field_media_document_file
+id: document
+label: Document
+description: 'Add a document or other file items.'
+type: document
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  source_field: field_media_document_file
+field_map: {  }

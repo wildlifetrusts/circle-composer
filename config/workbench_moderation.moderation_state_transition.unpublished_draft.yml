@@ -1,0 +1,12 @@
+uuid: 23c7ccd7-29ee-4f5b-84c4-fa895ba24922
+langcode: en
+status: true
+dependencies:
+  config:
+    - workbench_moderation.moderation_state.draft
+    - workbench_moderation.moderation_state.unpublished
+id: unpublished_draft
+label: 'Create New Draft'
+stateFrom: unpublished
+stateTo: draft
+weight: 4

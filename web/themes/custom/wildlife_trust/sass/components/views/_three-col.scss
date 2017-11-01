@@ -1,0 +1,22 @@
+.view--three-col {
+  .views-row {
+    margin-bottom: $spacing-unit-vertical;
+
+    @include add-breakpoint('palm-to-lap') {
+      @include float-span(2);
+
+      &:nth-child(2n) {
+        @include float-span(2, 'last');
+      }
+    }
+
+    @include add-breakpoint('lap-and-up') {
+      @include float-span(4);
+
+      &:nth-child(3n) {
+        @include float-span(4, 'last');
+      }
+    }
+  }
+}
+

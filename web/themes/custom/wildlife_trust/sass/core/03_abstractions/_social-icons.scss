@@ -1,0 +1,15 @@
+%social-icons {
+  display: inline-block;
+  margin-right: 0.5em;
+  margin-bottom: 0 !important;
+
+  a {
+    display: block;
+    overflow: hidden;
+    text-indent: -9999px;
+    width: 30px;
+    height: 30px;
+    background-size: 24px auto;
+    background-position: 50% 50%;
+  }
+}

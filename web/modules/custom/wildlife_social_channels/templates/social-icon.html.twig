@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a social icon.
+ *
+ * Available variables:
+ * - icon_name: The icon name.
+ * - channel_name: The channel's name.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_social_icon()
+ *
+ * @ingroup themeable
+ */
+#}
+<span class="default">
+  <span class="icon-social-{{ icon_name }}-lightgrey"></span>
+</span>
+<span class="active">
+  <span class="icon-social-{{ icon_name }}"></span>
+</span>
+<span class="description">{{ channel_name }}</span>

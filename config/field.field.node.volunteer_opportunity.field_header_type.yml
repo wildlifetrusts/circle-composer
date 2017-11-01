@@ -1,0 +1,21 @@
+uuid: 2151c79b-b654-4057-b5ee-3a176f864626
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_type
+    - node.type.volunteer_opportunity
+  module:
+    - options
+id: node.volunteer_opportunity.field_header_type
+field_name: field_header_type
+entity_type: node
+bundle: volunteer_opportunity
+label: 'Header type'
+description: 'Choose the appearance of this page''s header. If <i>None</i> is chosen, the header will be black. If <i>Colour</i> is chosen, the current colour scheme''s primary colour will be used.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

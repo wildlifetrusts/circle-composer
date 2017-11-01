@@ -1,0 +1,23 @@
+uuid: 1ee4ef6a-fe8b-407d-ac64-e2d84907966c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_deep_link
+    - node.type.reserve
+  module:
+    - link
+id: node.reserve.field_reserve_deep_link
+field_name: field_reserve_deep_link
+entity_type: node
+bundle: reserve
+label: 'Reserve deep link'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

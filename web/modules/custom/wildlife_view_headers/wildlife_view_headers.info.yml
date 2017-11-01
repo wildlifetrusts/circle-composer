@@ -1,0 +1,9 @@
+name: View headers
+type: module
+description: View Headers
+core: 8.x
+package: Wildlife
+dependencies:
+  - text
+  - views
+  - wildlife_admin

@@ -1,0 +1,20 @@
+uuid: a0c552a0-fa5c-4568-9778-3f3dad6cc6aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+    - node
+id: node.field_habitat_photos
+field_name: field_habitat_photos
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

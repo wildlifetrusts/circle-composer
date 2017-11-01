@@ -1,0 +1,35 @@
+uuid: a7d20bdb-dcad-4734-a4dc-5b1b42091b11
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search
+  module:
+    - system
+    - views
+    - wildlife_conditions
+  theme:
+    - wildlife_trust
+id: global_search
+theme: wildlife_trust
+region: navigation
+weight: 0
+provider: null
+plugin: 'views_exposed_filter_block:search-global'
+settings:
+  id: 'views_exposed_filter_block:search-global'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: true
+    context_mapping: {  }
+  node_allows_social_sharing:
+    id: node_allows_social_sharing
+    display_on_social_sharing_nodes: 0
+    negate: false
+    context_mapping: {  }

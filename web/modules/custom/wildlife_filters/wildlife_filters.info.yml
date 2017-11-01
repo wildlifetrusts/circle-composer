@@ -1,0 +1,7 @@
+name: Filters
+type: module
+description: Filters
+core: 8.x
+package: Wildlife
+dependencies:
+  - views

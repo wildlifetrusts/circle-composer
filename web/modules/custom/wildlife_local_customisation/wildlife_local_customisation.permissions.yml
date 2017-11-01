@@ -1,0 +1,37 @@
+add local customisation entities:
+  title: 'Create new Local customisation entities'
+
+administer local customisation entities:
+  title: 'Administer Local customisation entities'
+  description: 'Allow to access the administration form to configure Local customisation entities.'
+  restrict access: true
+
+delete local customisation entities:
+  title: 'Delete Local customisation entities'
+
+edit local customisation entities:
+  title: 'Edit Local customisation entities'
+
+access local customisation overview:
+  title: 'Access the Local customisation overview page'
+
+view published local customisation entities:
+  title: 'View published Local customisation entities'
+
+view unpublished local customisation entities:
+  title: 'View unpublished Local customisation entities'
+
+view all local customisation revisions:
+  title: 'View all Local customisation revisions'
+
+revert all local customisation revisions:
+  title: 'Revert all Local customisation revisions'
+  description: 'Role requires permission <em>view Local customisation revisions</em> and <em>edit rights</em> for local customisation entities in question or <em>administer local customisation entities</em>.'
+
+delete all local customisation revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Local customisation revisions</em> and <em>delete rights</em> for local customisation entities in question or <em>administer local customisation entities</em>.'
+
+view blacklisted pages:
+  title: 'View blacklisted pages'
+  description: 'Access blacklisted pages.'

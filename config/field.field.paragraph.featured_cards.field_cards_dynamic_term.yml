@@ -1,0 +1,42 @@
+uuid: 2dc5c371-e89c-4baa-b9ba-6ca460ca5207
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cards_dynamic_term
+    - paragraphs.paragraphs_type.featured_cards
+    - taxonomy.vocabulary.blog_category
+    - taxonomy.vocabulary.environmental_designation
+    - taxonomy.vocabulary.event_theme
+    - taxonomy.vocabulary.event_type
+    - taxonomy.vocabulary.great_for
+    - taxonomy.vocabulary.local_group
+    - taxonomy.vocabulary.news_category
+    - taxonomy.vocabulary.tag_categories
+id: paragraph.featured_cards.field_cards_dynamic_term
+field_name: field_cards_dynamic_term
+entity_type: paragraph
+bundle: featured_cards
+label: 'Taxonomy term'
+description: 'Choosing a Taxonomy Term will filter content so content tagged with any of the terms selected is shown.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      blog_category: blog_category
+      environmental_designation: environmental_designation
+      event_theme: event_theme
+      event_type: event_type
+      great_for: great_for
+      local_group: local_group
+      news_category: news_category
+      tag_categories: tag_categories
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: blog_category
+field_type: entity_reference

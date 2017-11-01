@@ -1,0 +1,19 @@
+uuid: 265f34e0-a7a6-432d-81fc-f9ddd3e98f51
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_reserve_grazing_animals
+field_name: field_reserve_grazing_animals
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,19 @@
+uuid: 7a1dfa3e-f0f9-42af-be84-77ae6e8bb769
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_species_identify
+    - node.type.species
+id: node.species.field_species_identify
+field_name: field_species_identify
+entity_type: node
+bundle: species
+label: 'How to identify'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

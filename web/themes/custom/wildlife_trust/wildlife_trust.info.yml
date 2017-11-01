@@ -1,0 +1,49 @@
+name: Wildlife Trust
+type: theme
+description: The Wildlife Trust theme based on Jackdaw.
+core: 8.x
+base theme: jackdaw
+regions:
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  branding: 'Branding'
+  navigation: 'Navigation'
+  topbar_nav: 'Top bar navigation'
+  topbar_social: 'Top bar social'
+  highlighted: 'Highlighted'
+  breadcrumb: 'Breadcrumb'
+  content: 'Content'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+
+libraries:
+  - wildlife_trust/global-js
+
+libraries-override:
+  # Replace the version of Modernizr that comes with core.
+  core/modernizr: wildlife_trust/modernizr
+  core/jquery.ui:
+    css:
+      theme:
+        assets/vendor/jquery.ui/themes/base/theme.css: false
+  rrssb/main:
+    js:
+      /libraries/rrssb-plus/js/rrssb.min.js: js/wildlife_trust.behavior.rrssb.min.js
+    dependencies:
+      - core/jquery
+  webform/webform.progress.tracker:
+    css:
+      theme:
+        css/webform.progress.tracker.css: false
+  wildlife_social_channels/icons:
+    css:
+      theme:
+        assets/css/wildlife-social-channels.icons.css: false
+
+libraries-extend:
+  rrssb/main:
+    - wildlife_trust/rrssb-sticky
+
+ckeditor_stylesheets:
+  - css/wildlife_trust.wysiwyg.styles.css

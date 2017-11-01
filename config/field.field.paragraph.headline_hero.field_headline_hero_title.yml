@@ -1,0 +1,19 @@
+uuid: 96d63b67-f0e1-4adf-9029-cfbb8a432e0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_headline_hero_title
+    - paragraphs.paragraphs_type.headline_hero
+id: paragraph.headline_hero.field_headline_hero_title
+field_name: field_headline_hero_title
+entity_type: paragraph
+bundle: headline_hero
+label: Title
+description: 'This will display in large text at the top of the Headline Hero component.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

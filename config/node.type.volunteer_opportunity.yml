@@ -1,0 +1,30 @@
+uuid: 524a5c23-64ea-4be2-bd46-fb1789da78f2
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - rrssb
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  rrssb:
+    show: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - draft
+      - needs_review
+      - ready_to_be_published
+      - unpublished
+    default_moderation_state: draft
+name: 'Volunteer Opportunity'
+type: volunteer_opportunity
+description: 'Advertise volunteer opportunities to attract people to fill volunteering posts.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

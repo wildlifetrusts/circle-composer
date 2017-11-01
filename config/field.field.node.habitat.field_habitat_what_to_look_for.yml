@@ -1,0 +1,27 @@
+uuid: ac18f307-727e-4cc1-888e-3be3b8bd750e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_habitat_what_to_look_for
+    - node.type.habitat
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.habitat.field_habitat_what_to_look_for
+field_name: field_habitat_what_to_look_for
+entity_type: node
+bundle: habitat
+label: 'What to look for'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

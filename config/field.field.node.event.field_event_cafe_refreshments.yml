@@ -1,0 +1,23 @@
+uuid: 6a159ae4-c799-42bd-a952-4be0c89d337c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_cafe_refreshments
+    - node.type.event
+id: node.event.field_event_cafe_refreshments
+field_name: field_event_cafe_refreshments
+entity_type: node
+bundle: event
+label: Cafe/refreshments
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Cafe/refreshments
+  off_label: 'Off'
+field_type: boolean

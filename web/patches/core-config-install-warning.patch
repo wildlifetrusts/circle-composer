@@ -1,0 +1,17 @@
+diff --git a/core/modules/system/system.install b/core/modules/system/system.install
+index a93459d..526ddfe 100644
+--- a/core/modules/system/system.install
++++ b/core/modules/system/system.install
+@@ -43,9 +43,9 @@ function system_requirements($phase) {
+       $requirements['install_profile'] = [
+         'title' => t('Installation profile'),
+         'value' => t('%profile_name (%profile-%version)', [
+-          '%profile_name' => $info['name'],
+-          '%profile' => $profile,
+-          '%version' => $info['version']
++          '%profile_name' => !empty($info['name']) ? $info['name'] : '',
++          '%profile' => !empty($profile) ? $profile : '',
++          '%version' => !empty($info['version']) ? $info['version'] : '',
+         ]),
+         'severity' => REQUIREMENT_INFO,
+         'weight' => -9

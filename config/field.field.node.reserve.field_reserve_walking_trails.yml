@@ -1,0 +1,27 @@
+uuid: 8eb45fe2-290a-461e-a35e-a683edfb7e2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_walking_trails
+    - node.type.reserve
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.reserve.field_reserve_walking_trails
+field_name: field_reserve_walking_trails
+entity_type: node
+bundle: reserve
+label: 'Walking trails'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

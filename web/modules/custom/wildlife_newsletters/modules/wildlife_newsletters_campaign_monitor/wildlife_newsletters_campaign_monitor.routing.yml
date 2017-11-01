@@ -1,0 +1,32 @@
+campaign_monitor_signup.admin:
+  path: '/admin/config/services/campaign_monitor'
+  defaults:
+    _entity_list: 'campaign_monitor_signup'
+    _title: 'Campaign Monitor Signup Forms'
+  requirements:
+    _permission: 'administer campaign monitor signup entities'
+    _campaign_monitor_configuration_access_check: 'TRUE'
+
+campaign_monitor_signup.add:
+  path: '/admin/config/services/campaign_monitor/add'
+  defaults:
+    _entity_form: 'campaign_monitor_signup.add'
+    _title: 'Add Signup Form'
+  requirements:
+    _permission: 'administer campaign monitor signup entities'
+
+entity.campaign_monitor_signup.edit_form:
+  path: '/admin/config/services/campaign_monitor/{campaign_monitor_signup}'
+  defaults:
+    _entity_form: 'campaign_monitor_signup.edit'
+    _title: 'Edit Signup Form'
+  requirements:
+    _permission: 'administer campaign monitor signup entities'
+
+entity.campaign_monitor_signup.delete_form:
+  path: '/admin/config/services/campaign_monitor/{campaign_monitor_signup}/delete'
+  defaults:
+    _entity_form: 'campaign_monitor_signup.delete'
+    _title: 'Delete Signup Form'
+  requirements:
+    _permission: 'administer campaign monitor signup entities'

@@ -1,0 +1,14 @@
+uuid: b182df57-0dae-4232-9be0-8f89bf8a386d
+langcode: en
+status: true
+dependencies: {  }
+name: card_lap
+label: 'Card lap'
+effects:
+  512e537f-ede8-465e-90aa-5abdd7d1c9b9:
+    uuid: 512e537f-ede8-465e-90aa-5abdd7d1c9b9
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 314
+      height: 214

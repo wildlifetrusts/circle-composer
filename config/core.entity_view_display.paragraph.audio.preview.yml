@@ -1,0 +1,46 @@
+uuid: edc0f57c-36c3-4353-82f6-d81125a75955
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.audio.field_audio
+    - field.field.paragraph.audio.field_audio_accompanying_text
+    - field.field.paragraph.audio.field_audio_position
+    - field.field.paragraph.audio.field_audio_rich_text
+    - field.field.paragraph.audio.field_audio_title
+    - paragraphs.paragraphs_type.audio
+  module:
+    - fences
+id: paragraph.audio.preview
+targetEntityType: paragraph
+bundle: audio
+mode: preview
+content:
+  field_audio:
+    weight: 1
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_audio_title:
+    weight: 0
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: string
+    region: content
+hidden:
+  field_audio_accompanying_text: true
+  field_audio_position: true
+  field_audio_rich_text: true

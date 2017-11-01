@@ -1,0 +1,86 @@
+uuid: 95b6e2f5-1bb3-414c-8649-c9d7ac40b6ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.volunteer_opportunity.field_external_link
+    - field.field.node.volunteer_opportunity.field_further_content
+    - field.field.node.volunteer_opportunity.field_header_image
+    - field.field.node.volunteer_opportunity.field_header_silhouette
+    - field.field.node.volunteer_opportunity.field_header_type
+    - field.field.node.volunteer_opportunity.field_meta_tags
+    - field.field.node.volunteer_opportunity.field_voluntary_application_link
+    - field.field.node.volunteer_opportunity.field_voluntary_commitment
+    - field.field.node.volunteer_opportunity.field_voluntary_contact_details
+    - field.field.node.volunteer_opportunity.field_voluntary_duration
+    - field.field.node.volunteer_opportunity.field_voluntary_frequency
+    - field.field.node.volunteer_opportunity.field_voluntary_location
+    - field.field.node.volunteer_opportunity.field_voluntary_opportunity_type
+    - field.field.node.volunteer_opportunity.field_voluntary_reference
+    - field.field.node.volunteer_opportunity.field_voluntary_reserve
+    - field.field.node.volunteer_opportunity.field_voluntary_summary
+    - node.type.volunteer_opportunity
+  module:
+    - fences
+    - link
+    - user
+    - wildlife_field_formatters
+id: node.volunteer_opportunity.search_result
+targetEntityType: node
+bundle: volunteer_opportunity
+mode: search_result
+content:
+  field_external_link:
+    type: link
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+  field_voluntary_summary:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: '200'
+      word_boundary: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+hidden:
+  field_further_content: true
+  field_header_image: true
+  field_header_silhouette: true
+  field_header_type: true
+  field_meta_tags: true
+  field_voluntary_application_link: true
+  field_voluntary_commitment: true
+  field_voluntary_contact_details: true
+  field_voluntary_duration: true
+  field_voluntary_frequency: true
+  field_voluntary_location: true
+  field_voluntary_opportunity_type: true
+  field_voluntary_reference: true
+  field_voluntary_reserve: true
+  langcode: true
+  links: true
+  workbench_moderation_control: true

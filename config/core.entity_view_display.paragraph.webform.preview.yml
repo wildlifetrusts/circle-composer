@@ -1,0 +1,32 @@
+uuid: 32e17116-3b7d-43f2-87da-6ca68d6dc6fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.webform.field_webform_form
+    - paragraphs.paragraphs_type.webform
+  module:
+    - fences
+    - webform
+id: paragraph.webform.preview
+targetEntityType: paragraph
+bundle: webform
+mode: preview
+content:
+  field_webform_form:
+    weight: 0
+    label: hidden
+    settings:
+      label: '[webform:title]'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: webform_entity_reference_link
+    region: content
+hidden: {  }

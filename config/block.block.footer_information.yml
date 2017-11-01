@@ -1,0 +1,20 @@
+uuid: 72a66e1c-4849-40a9-9103-75e61efbd438
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_footer_blocks
+  theme:
+    - wildlife_trust
+id: footer_information
+theme: wildlife_trust
+region: footer_third
+weight: 0
+provider: null
+plugin: footer_information
+settings:
+  label: 'Footer information'
+  label_display: '0'
+  provider: wildlife_footer_blocks
+  footer_information: '<p>The Wildlife Trusts: Protection Wildlife for the Future Registered charity number 207238</p>'
+visibility: {  }

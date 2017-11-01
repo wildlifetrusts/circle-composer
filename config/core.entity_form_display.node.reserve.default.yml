@@ -1,0 +1,713 @@
+uuid: 8e19059a-4196-4e42-bebd-b02d9a4464bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.node.reserve.field_disqus_comments
+    - field.field.node.reserve.field_disqus_comments_title
+    - field.field.node.reserve.field_external_link
+    - field.field.node.reserve.field_further_content
+    - field.field.node.reserve.field_meta_tags
+    - field.field.node.reserve.field_reserve_about
+    - field.field.node.reserve.field_reserve_access
+    - field.field.node.reserve.field_reserve_address
+    - field.field.node.reserve.field_reserve_baby_changing
+    - field.field.node.reserve.field_reserve_best_time_to_visit
+    - field.field.node.reserve.field_reserve_bicycle_parking
+    - field.field.node.reserve.field_reserve_bird_hides
+    - field.field.node.reserve.field_reserve_boundary
+    - field.field.node.reserve.field_reserve_cafe_refreshments
+    - field.field.node.reserve.field_reserve_car_charging
+    - field.field.node.reserve.field_reserve_contact_email
+    - field.field.node.reserve.field_reserve_contact_name
+    - field.field.node.reserve.field_reserve_contact_number
+    - field.field.node.reserve.field_reserve_county
+    - field.field.node.reserve.field_reserve_deep_link
+    - field.field.node.reserve.field_reserve_disabled_toilet
+    - field.field.node.reserve.field_reserve_display_map
+    - field.field.node.reserve.field_reserve_dogs
+    - field.field.node.reserve.field_reserve_dogs_additional
+    - field.field.node.reserve.field_reserve_entry_fee
+    - field.field.node.reserve.field_reserve_env_designation
+    - field.field.node.reserve.field_reserve_facebook
+    - field.field.node.reserve.field_reserve_flickr
+    - field.field.node.reserve.field_reserve_grazing_animals
+    - field.field.node.reserve.field_reserve_great_for
+    - field.field.node.reserve.field_reserve_habitat
+    - field.field.node.reserve.field_reserve_lat_long
+    - field.field.node.reserve.field_reserve_map_layer
+    - field.field.node.reserve.field_reserve_map_ref
+    - field.field.node.reserve.field_reserve_map_zoom
+    - field.field.node.reserve.field_reserve_notice
+    - field.field.node.reserve.field_reserve_opening_times
+    - field.field.node.reserve.field_reserve_outdoor_play_area
+    - field.field.node.reserve.field_reserve_parking_info
+    - field.field.node.reserve.field_reserve_photos
+    - field.field.node.reserve.field_reserve_picnic_area
+    - field.field.node.reserve.field_reserve_postcode
+    - field.field.node.reserve.field_reserve_shop
+    - field.field.node.reserve.field_reserve_species
+    - field.field.node.reserve.field_reserve_summary
+    - field.field.node.reserve.field_reserve_toilets
+    - field.field.node.reserve.field_reserve_town
+    - field.field.node.reserve.field_reserve_twitter
+    - field.field.node.reserve.field_reserve_visitor_centre
+    - field.field.node.reserve.field_reserve_walking_trails
+    - field.field.node.reserve.field_reserve_wifi
+    - node.type.reserve
+  module:
+    - disqus
+    - entity_browser
+    - field_group
+    - file
+    - geofield_map
+    - link
+    - metatag
+    - path
+    - telephone
+    - text
+    - wildlife_admin
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_general_information
+        - group_location
+        - group_know_before_you_go
+        - group_when_to_visit
+        - group_about
+        - group_contact_us
+        - group_other
+        - group_further_content
+      parent_name: ''
+      weight: 7
+      format_type: tabs
+      format_settings:
+        label: Tabs
+        direction: vertical
+        id: ''
+        classes: ''
+      label: Tabs
+    group_general_information:
+      children:
+        - field_reserve_photos
+        - field_reserve_great_for
+        - field_reserve_summary
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'General information'
+    group_location:
+      children:
+        - field_reserve_address
+        - field_reserve_town
+        - field_reserve_county
+        - field_reserve_postcode
+        - field_reserve_map_ref
+        - field_reserve_lat_long
+        - group_interactive_map
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Location
+    group_know_before_you_go:
+      children:
+        - field_reserve_entry_fee
+        - field_reserve_parking_info
+        - field_reserve_bicycle_parking
+        - field_reserve_grazing_animals
+        - field_reserve_walking_trails
+        - field_reserve_access
+        - field_reserve_dogs
+        - field_reserve_dogs_additional
+        - field_reserve_visitor_centre
+        - field_reserve_bird_hides
+        - field_reserve_toilets
+        - field_reserve_shop
+        - field_reserve_cafe_refreshments
+        - field_reserve_picnic_area
+        - field_reserve_disabled_toilet
+        - field_reserve_baby_changing
+        - field_reserve_outdoor_play_area
+        - field_reserve_car_charging
+        - field_reserve_wifi
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Know before you go'
+    group_when_to_visit:
+      children:
+        - field_reserve_opening_times
+        - field_reserve_best_time_to_visit
+      parent_name: group_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'When to visit'
+    group_about:
+      children:
+        - field_reserve_about
+        - field_reserve_species
+        - field_reserve_habitat
+        - field_reserve_env_designation
+      parent_name: group_tabs
+      weight: 24
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: About
+    group_contact_us:
+      children:
+        - field_reserve_contact_name
+        - field_reserve_contact_number
+        - field_reserve_contact_email
+        - field_reserve_twitter
+        - field_reserve_facebook
+        - field_reserve_flickr
+      parent_name: group_tabs
+      weight: 25
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Contact us'
+    group_other:
+      children:
+        - field_reserve_deep_link
+        - field_reserve_notice
+      parent_name: group_tabs
+      weight: 26
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Other
+    group_further_content:
+      children:
+        - field_further_content
+      parent_name: group_tabs
+      weight: 27
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Further content'
+    group_interactive_map:
+      children:
+        - field_reserve_display_map
+        - field_reserve_boundary
+        - field_reserve_map_zoom
+        - field_reserve_map_layer
+      parent_name: group_location
+      weight: 41
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Interactive map'
+id: node.reserve.default
+targetEntityType: node
+bundle: reserve
+mode: default
+content:
+  colour_scheme:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_disqus_comments:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: disqus_comment
+    region: content
+  field_disqus_comments_title:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_further_content:
+    weight: 75
+    settings:
+      title: Component
+      title_plural: Components
+      edit_mode: preview
+      add_mode: select
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: tweaked_entity_reference_paragraphs
+    region: content
+  field_meta_tags:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_reserve_about:
+    weight: 63
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_reserve_access:
+    weight: 47
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_reserve_address:
+    weight: 35
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_reserve_baby_changing:
+    weight: 57
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_best_time_to_visit:
+    weight: 62
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reserve_bicycle_parking:
+    weight: 44
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reserve_bird_hides:
+    weight: 51
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_boundary:
+    weight: 44
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_reserve_cafe_refreshments:
+    weight: 54
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_car_charging:
+    weight: 59
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_contact_email:
+    weight: 69
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_reserve_contact_name:
+    weight: 67
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reserve_contact_number:
+    weight: 68
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_reserve_county:
+    weight: 37
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reserve_deep_link:
+    weight: 73
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_reserve_disabled_toilet:
+    weight: 56
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_display_map:
+    weight: 43
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_dogs:
+    weight: 48
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_reserve_dogs_additional:
+    weight: 49
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reserve_entry_fee:
+    weight: 42
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reserve_env_designation:
+    weight: 67
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_reserve_facebook:
+    weight: 71
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_reserve_flickr:
+    weight: 72
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_reserve_grazing_animals:
+    weight: 45
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_reserve_great_for:
+    weight: 33
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_reserve_habitat:
+    weight: 66
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_reserve_lat_long:
+    weight: 40
+    settings:
+      map_library: gmap
+      map_type_google: roadmap
+      map_type_leaflet: OpenStreetMap_Mapnik
+      map_type_selector: '1'
+      zoom:
+        start: '5'
+        focus: '14'
+        min: '1'
+        max: '17'
+      geoaddress_field:
+        field: '0'
+        disabled: '1'
+        hidden: 0
+      map_google_api_key: AIzaSyCfsYG-uXxdZdGYt0mp2i0Z4fw5VJ4uLCY
+      click_to_find_marker: 0
+      click_to_place_marker: 0
+      html5_geolocation: 0
+      zoom_level: 5
+      map_dimensions:
+        width: 100%
+        height: 450px
+    third_party_settings: {  }
+    type: geofield_map
+    region: content
+  field_reserve_map_layer:
+    weight: 46
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_reserve_map_ref:
+    weight: 39
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_reserve_map_zoom:
+    weight: 45
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_reserve_notice:
+    weight: 74
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_reserve_opening_times:
+    weight: 61
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_reserve_outdoor_play_area:
+    weight: 58
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_parking_info:
+    weight: 43
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reserve_photos:
+    weight: 31
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_reserve_picnic_area:
+    weight: 55
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_postcode:
+    weight: 38
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reserve_shop:
+    weight: 53
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_species:
+    weight: 64
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_reserve_summary:
+    weight: 34
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_reserve_toilets:
+    weight: 52
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_town:
+    weight: 36
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reserve_twitter:
+    weight: 70
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_reserve_visitor_centre:
+    weight: 50
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_reserve_walking_trails:
+    weight: 46
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_reserve_wifi:
+    weight: 60
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  path:
+    type: path
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 6
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden:
+  field_external_link: true
+  langcode: true

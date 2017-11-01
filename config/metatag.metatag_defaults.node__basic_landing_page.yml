@@ -1,0 +1,8 @@
+uuid: b412d97d-9251-46d3-a4dc-710e6d917d37
+langcode: en
+status: true
+dependencies: {  }
+id: node__basic_landing_page
+label: 'Content: Basic/Landing Page'
+tags:
+  description: '[node:field_basic_landing_summary]'

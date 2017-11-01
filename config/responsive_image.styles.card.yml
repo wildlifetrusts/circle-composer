@@ -1,0 +1,35 @@
+uuid: 291669a3-78b6-471e-89d2-23789b93d320
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.card_default
+    - image.style.card_desk
+    - image.style.card_lap
+  theme:
+    - wildlife_trust
+id: card
+label: Card
+image_style_mappings:
+  -
+    breakpoint_id: wildlife_trust.desk_wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: card_desk
+  -
+    breakpoint_id: wildlife_trust.desk
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: card_desk
+  -
+    breakpoint_id: wildlife_trust.lap
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: card_lap
+  -
+    breakpoint_id: wildlife_trust.default
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: card_default
+breakpoint_group: wildlife_trust
+fallback_image_style: card_default

@@ -1,0 +1,19 @@
+uuid: 80ffa782-5cd6-4f8b-8676-186f473ce7b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_sms_donation_number
+    - node.type.trust
+id: node.trust.field_trust_sms_donation_number
+field_name: field_trust_sms_donation_number
+entity_type: node
+bundle: trust
+label: 'SMS Donation number'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

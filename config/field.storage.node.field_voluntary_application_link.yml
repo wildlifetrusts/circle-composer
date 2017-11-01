@@ -1,0 +1,19 @@
+uuid: 8091876c-ce80-43b0-93f4-1a15893808ed
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_voluntary_application_link
+field_name: field_voluntary_application_link
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

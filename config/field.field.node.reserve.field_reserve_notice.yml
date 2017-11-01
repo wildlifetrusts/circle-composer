@@ -1,0 +1,27 @@
+uuid: 398d2321-bf78-4a94-bc48-b57ea92776f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_notice
+    - node.type.reserve
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.reserve.field_reserve_notice
+field_name: field_reserve_notice
+entity_type: node
+bundle: reserve
+label: Notice
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

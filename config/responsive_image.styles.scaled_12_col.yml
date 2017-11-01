@@ -1,0 +1,41 @@
+uuid: fc25ad8a-97ef-43d7-a6b1-fab64b4abc85
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.scaled_12_col_desk
+    - image.style.scaled_12_col_lap
+    - image.style.scaled_12_col_palm
+    - image.style.scaled_default
+  theme:
+    - wildlife_trust
+id: scaled_12_col
+label: 'Scaled 12 col'
+image_style_mappings:
+  -
+    breakpoint_id: wildlife_trust.desk_wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: scaled_12_col_desk
+  -
+    breakpoint_id: wildlife_trust.desk
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: scaled_12_col_desk
+  -
+    breakpoint_id: wildlife_trust.lap
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: scaled_12_col_lap
+  -
+    breakpoint_id: wildlife_trust.palm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: scaled_12_col_palm
+  -
+    breakpoint_id: wildlife_trust.default
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: scaled_default
+breakpoint_group: wildlife_trust
+fallback_image_style: scaled_default

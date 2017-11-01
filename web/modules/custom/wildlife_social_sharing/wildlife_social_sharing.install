@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function wildlife_social_sharing_install() {
+  // Create field storage for the 'Social Sharing' base field.
+  $entity_manager = \Drupal::entityManager();
+  $definition = $entity_manager->getFieldStorageDefinitions('node')['social_sharing'];
+  $entity_manager->onFieldStorageDefinitionCreate($definition);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function wildlife_social_sharing_uninstall() {
+  // Delete field storage for the 'Social Sharing' base field.
+  $entity_manager = \Drupal::entityManager();
+  $definition = $entity_manager->getLastInstalledFieldStorageDefinitions('node')['social_sharing'];
+  $entity_manager->onFieldStorageDefinitionDelete($definition);
+}

@@ -1,0 +1,27 @@
+uuid: 0acaa846-338c-4979-bc1f-fc767b9a23ee
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_spotlight_text_colour
+field_name: field_spotlight_text_colour
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: black
+      label: Black
+    -
+      value: white
+      label: White
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

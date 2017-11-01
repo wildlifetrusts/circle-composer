@@ -1,0 +1,10 @@
+uuid: 577247d3-51ed-4e70-bfec-41fb540dab26
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.js_gallery
+label: 'JS Gallery'
+targetEntityType: paragraph
+cache: true

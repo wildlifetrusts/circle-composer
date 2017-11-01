@@ -1,0 +1,21 @@
+uuid: 7c468b13-bd80-407b-99b9-ace29d0b6437
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_phone_number
+    - node.type.trust
+  module:
+    - telephone
+id: node.trust.field_trust_phone_number
+field_name: field_trust_phone_number
+entity_type: node
+bundle: trust
+label: 'Phone number'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

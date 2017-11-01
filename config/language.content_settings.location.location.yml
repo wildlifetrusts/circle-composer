@@ -1,0 +1,15 @@
+uuid: 6b74633a-e0b3-4dc4-9966-0a5a3d4ba2cc
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_translation
+    - wildlife_location
+third_party_settings:
+  content_translation:
+    enabled: true
+id: location.location
+target_entity_type_id: location
+target_bundle: location
+default_langcode: site_default
+language_alterable: true

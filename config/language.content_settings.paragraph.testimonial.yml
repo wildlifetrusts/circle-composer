@@ -1,0 +1,16 @@
+uuid: 84c48618-02c1-4778-82cc-3afe5739bb54
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.testimonial
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.testimonial
+target_entity_type_id: paragraph
+target_bundle: testimonial
+default_langcode: site_default
+language_alterable: true

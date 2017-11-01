@@ -1,0 +1,16 @@
+uuid: de76c831-d37f-4f40-bf07-d55e900a785c
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: node_hero_desk_wide
+label: 'Node hero desk wide'
+effects:
+  9d1e8d4b-b094-4a16-ad08-dd6e6c98504c:
+    uuid: 9d1e8d4b-b094-4a16-ad08-dd6e6c98504c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 556

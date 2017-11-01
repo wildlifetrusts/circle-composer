@@ -1,0 +1,18 @@
+.paragraph--type--section {
+  @extend %content-narrow-constrain;
+  text-align: center;
+
+  .field--name-field-section-heading {
+    padding-left: emRhythm(1, ms(2));
+    padding-right: emRhythm(1, ms(2));
+    padding-bottom: emRhythm(1, ms(2));
+    margin-bottom: emRhythm(6, ms(2));
+    border-bottom: 2px solid palette(mono, x-dark);
+    display: inline-block;
+
+    @include add-breakpoint('lap-and-up') {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}

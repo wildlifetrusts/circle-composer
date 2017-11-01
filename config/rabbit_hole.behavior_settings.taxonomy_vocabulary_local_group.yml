@@ -1,0 +1,9 @@
+uuid: 530969c2-efc3-4140-90a0-4da0acd7448d
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_vocabulary_local_group
+action: page_redirect_json
+allow_override: 0
+redirect: '/events?local_group=[term:tid]'
+redirect_code: 301

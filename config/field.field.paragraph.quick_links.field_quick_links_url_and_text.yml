@@ -1,0 +1,23 @@
+uuid: 264c1d96-9986-4170-a733-515063240a78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_quick_links_url_and_text
+    - paragraphs.paragraphs_type.quick_links
+  module:
+    - link
+id: paragraph.quick_links.field_quick_links_url_and_text
+field_name: field_quick_links_url_and_text
+entity_type: paragraph
+bundle: quick_links
+label: 'Link URL and Text'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

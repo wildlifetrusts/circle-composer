@@ -1,0 +1,20 @@
+uuid: 00bef658-9e09-4b59-a51a-3873ab149fc7
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_author
+id: author.author.user_id
+field_name: user_id
+entity_type: author
+bundle: author
+label: 'Authored by'
+description: 'The user ID of author of the Author entity.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

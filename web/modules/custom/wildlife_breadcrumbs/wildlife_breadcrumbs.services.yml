@@ -1,0 +1,19 @@
+services:
+  wildlife_breadcrumbs.general_breadcrumb:
+    class: Drupal\wildlife_breadcrumbs\WildlifeBreadcrumbsGeneralBreadcrumbBuilder
+    arguments: ['@router.request_context', '@access_manager', '@router', '@path_processor_manager', '@config.factory',  '@title_resolver', '@current_user', '@path.current', '@menu.active_trail', '@plugin.manager.menu.link']
+    tags:
+     - { name: breadcrumb_builder, priority: 1003 }
+  wildlife_breadcrumbs.blog_news_breadcrumb:
+    class: Drupal\wildlife_breadcrumbs\WildlifeBreadcrumbsBlogNewsBreadcrumbBuilder
+    tags:
+     - { name: breadcrumb_builder, priority: 1004 }
+  wildlife_breadcrumbs.content_translation_breadcrumb:
+    class: Drupal\wildlife_breadcrumbs\WildlifeBreadcrumbsContentTranslationBreadcrumbBuilder
+    arguments: ['@router.request_context', '@access_manager', '@router', '@path_processor_manager', '@config.factory',  '@title_resolver', '@current_user', '@path.current', '@menu.active_trail', '@plugin.manager.menu.link']
+    tags:
+     - { name: breadcrumb_builder, priority: 1005 }
+  wildlife_breadcrumbs.content_preview_breadcrumb:
+    class: Drupal\wildlife_breadcrumbs\WildlifeBreadcrumbsContentPreviewBreadcrumbBuilder
+    tags:
+     - { name: breadcrumb_builder, priority: 1006 }

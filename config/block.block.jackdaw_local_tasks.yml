@@ -1,0 +1,22 @@
+uuid: b90d4c36-8a36-40aa-89a7-2e7e746cbe36
+langcode: en
+status: true
+dependencies:
+  theme:
+    - jackdaw
+_core:
+  default_config_hash: c-06bbElRY5sKmglk74ppgTW93Et4-EJFyNiUZMb8JY
+id: jackdaw_local_tasks
+theme: jackdaw
+region: content
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

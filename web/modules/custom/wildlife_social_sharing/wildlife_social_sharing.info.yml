@@ -1,0 +1,8 @@
+name: Social sharing
+type: module
+description: Social Sharing
+core: 8.x
+package: Provides social sharing toggle
+dependencies:
+  - node
+  - rrssb

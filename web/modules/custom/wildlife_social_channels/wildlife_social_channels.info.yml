@@ -1,0 +1,7 @@
+name: Social channels
+type: module
+description: Provides social media link iconset and extra configuration
+core: 8.x
+package: Wildlife
+dependencies:
+  - social_media_links

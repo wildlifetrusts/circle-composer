@@ -1,0 +1,7 @@
+wildlife_footer_blocks.footer_information_block_config:
+  path: '/admin/config/user-interface/footer-information'
+  defaults:
+    _form: 'Drupal\wildlife_footer_blocks\Form\WildlifeFooterInformationForm'
+    _title: 'Manage the Footer Information block settings'
+  requirements:
+    _permission: 'manage footer information'

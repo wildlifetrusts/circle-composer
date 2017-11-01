@@ -1,0 +1,15 @@
+uuid: cbb19b4f-5dda-4bd0-83ae-6ddb6ccc1ffd
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_12_col_palm
+label: 'Scaled 12 col palm'
+effects:
+  d3900d61-cc85-422f-acfe-797286d9f493:
+    uuid: d3900d61-cc85-422f-acfe-797286d9f493
+    id: image_scale
+    weight: 1
+    data:
+      width: 735
+      height: null
+      upscale: false

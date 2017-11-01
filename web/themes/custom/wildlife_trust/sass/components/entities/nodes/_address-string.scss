@@ -1,0 +1,21 @@
+.node--view-mode-address-string {
+  &,
+  .node__title {
+    display: inline;
+  }
+
+  .node__title {
+    font-family: $base-font-family;
+    font-weight: $font-weight-light;
+    @include setType();
+  }
+
+  .node__title,
+  .field {
+    &:not(:last-child) {
+      &::after {
+        content: ', ';
+      }
+    }
+  }
+}

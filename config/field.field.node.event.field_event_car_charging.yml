@@ -1,0 +1,23 @@
+uuid: 3f315e21-66cb-44d2-bba3-38997765445a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_car_charging
+    - node.type.event
+id: node.event.field_event_car_charging
+field_name: field_event_car_charging
+entity_type: node
+bundle: event
+label: 'Electric car charging point'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Electric car charging point'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,21 @@
+uuid: d49f44dd-aa7c-4b01-8666-6c778803ed2e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_voluntary_reference
+field_name: field_voluntary_reference
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

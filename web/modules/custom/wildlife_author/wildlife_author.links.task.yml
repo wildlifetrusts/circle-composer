@@ -1,0 +1,27 @@
+# Author routing definition
+author.settings_tab:
+  route_name: author.settings
+  title: 'Settings'
+  base_route: author.settings
+
+entity.author.canonical:
+  route_name: entity.author.canonical
+  base_route: entity.author.canonical
+  title: 'View'
+
+entity.author.edit_form:
+  route_name: entity.author.edit_form
+  base_route: entity.author.canonical
+  title: 'Edit'
+
+entity.author.version_history:
+  route_name: entity.author.version_history
+  base_route: entity.author.canonical
+  title: 'Revisions'
+
+entity.author.delete_form:
+  route_name:  entity.author.delete_form
+  base_route:  entity.author.canonical
+  title: Delete
+  weight: 10
+

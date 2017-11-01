@@ -1,0 +1,32 @@
+{#
+/**
+ * @file location.html.twig
+ * Default theme implementation to present Location data.
+ *
+ * This template is used when viewing Location pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_location()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+set classes = [
+'location',
+view_mode ? 'location--viewmode--' ~ view_mode|clean_class,
+]
+%}
+<span{{ attributes.addClass(classes) }}>
+  {% if content %}
+    {{- content.field_location_name -}}
+    <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+      {{- content|without('field_location_name', 'geo_coordinates') -}}
+    </span>
+    {{- content.geo_coordinates -}}
+  {% endif %}
+</span>

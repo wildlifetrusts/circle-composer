@@ -1,0 +1,10 @@
+details:not([open]).form-wrapper {
+  padding-bottom: 0 !important;
+}
+
+summary {
+  details.form-wrapper & {
+    @extend .gamma;
+    margin-bottom: 0;
+  }
+}

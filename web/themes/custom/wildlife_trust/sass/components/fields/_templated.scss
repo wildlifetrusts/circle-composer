@@ -1,0 +1,84 @@
+.group--templated-fields,
+.field--templated {
+  @extend %clearfix;
+  clear: both;
+  padding-bottom: emRhythm(8, ms(0));
+  margin-bottom: emRhythm(2, ms(0)) !important;
+
+  @include add-breakpoint('lap-and-up') {
+    padding-bottom: emRhythm(12, ms(0));
+  }
+}
+
+.group--templated-fields {
+  position: relative;
+  overflow: hidden;
+  padding-top: emRhythm(2, ms(0));
+  @include keyline('bottom');
+
+  > h2 {
+    @extend .gamma;
+
+    @include add-breakpoint('lap-and-up') {
+      @include isolation-span(4, 1, 'left', $grid: 8);
+    }
+  }
+
+  > .field-group-wrapper {
+    margin-top: emRhythm(1, ms(0));
+
+    @include add-breakpoint('lap-and-up') {
+      @include isolation-span(4, 5, 'right', $grid: 8);
+    }
+
+    .field-group-wrapper {
+      margin-bottom: emRhythm(6, ms(0));
+
+      .field {
+        margin-bottom: 0;
+      }
+    }
+
+    > div {
+      &:last-child {
+        .field-group-wrapper {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .field {
+    @include setType(6, 16px);
+    margin-bottom: emRhythm(6, ms(0));
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .field__label,
+  > .field-group-wrapper > div > h3 {
+    font-family: $base-font-family;
+    font-weight: $font-weight-regular;
+    @include setType(5, ms(0));
+  }
+}
+
+.field--templated {
+  @extend %clearfix;
+  @extend %content-narrow-constrain;
+  @include keyline('bottom');
+  padding-bottom: emRhythm(8, ms(0));
+  margin-bottom: emRhythm(2, ms(0)) !important;
+
+  @include add-breakpoint('lap-and-up') {
+    padding-bottom: emRhythm(12, ms(0));
+  }
+
+  > .field__label,
+  > h2 {
+    @extend .gamma;
+    padding-top: emRhythm(2, ms(0));
+  }
+}

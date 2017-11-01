@@ -1,0 +1,123 @@
+.node--type-reserve {
+  .node__header {
+    .quick-links-list {
+      a {
+        @include button();
+        @include button--contrast();
+        @include button--small();
+      }
+    }
+  }
+
+  .reserve__dogs {
+    position: relative;
+  }
+
+  .field--name-field-reserve-entry-fee,
+  .field--name-field-reserve-parking-info,
+  .field--name-field-reserve-bicycle-parking,
+  .field--name-field-reserve-grazing-animals,
+  .field--name-field-reserve-walking-trails,
+  .field--name-field-reserve-access,
+  .field--name-field-reserve-dogs,
+  .reserve__facilities {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 100%;
+      width: 32px;
+      height: 32px;
+      background-size: 32px auto;
+      margin-right: 1em;
+    }
+  }
+
+  .reserve__address {
+    .field {
+      margin-bottom: 0;
+    }
+  }
+
+  .field--name-field-reserve-dogs {
+    position: inherit;
+  }
+
+  .group--templated-fields{
+    .field--name-field-reserve-contact-name,
+    .field--name-field-reserve-contact-number {
+      margin-bottom: 0;
+    }
+
+    .field--name-field-reserve-contact-name {
+      font-weight: $font-weight-regular;
+    }
+
+    .field--name-field-reserve-contact-name,
+    .field--name-field-reserve-contact-number,
+    .field--name-field-reserve-contact-email {
+      @include setType(6, ms(0));
+    }
+  }
+  
+  .field--name-field-reserve-twitter,
+  .field--name-field-reserve-facebook,
+  .field--name-field-reserve-flickr {
+    @extend %social-icons;
+  }
+
+  .flag {
+    @extend %clearfix;
+    font-size: 1rem;
+
+    .field-group-wrapper {
+      @extend %constrain;
+      @extend %clearfix;
+    }
+
+    .field__items {
+      @extend %content-narrow-constrain;
+    }
+
+    .field__item {
+      @include setType(4, ms(-1));
+    }
+  }
+
+  .reserve__location-map {
+    clear: both;
+    overflow: hidden;
+    padding-top: emRhythm(4, ms(0));
+
+    h2 {
+      @extend .gamma;
+      text-align: center;
+    }
+  }
+
+  .reserve-interactive-map {
+    > div {
+      @include keyline(all);
+      width: 100%;
+      height: 400px;
+      max-height: 100vh;
+      box-sizing: content-box;
+
+      @include add-breakpoint('lap-and-up') {
+        height: 500px;
+      }
+    }
+  }
+
+  &.node--view-mode-teaser {
+    @extend %teaser-preview;
+  }
+
+  &.node--view-mode-address-string {
+    br {
+      display: none;
+    }
+  }
+}

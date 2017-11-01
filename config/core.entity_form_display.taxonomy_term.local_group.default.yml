@@ -1,0 +1,28 @@
+uuid: be5b031f-6818-4818-a63c-f4cf8cfd609e
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.local_group
+id: taxonomy_term.local_group.default
+targetEntityType: taxonomy_term
+bundle: local_group
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true

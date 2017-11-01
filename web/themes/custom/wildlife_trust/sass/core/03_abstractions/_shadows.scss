@@ -1,0 +1,3 @@
+@mixin text-shadow($horizontal_length: 0, $vertical_length: 0, $blur_radius: 7px, $color: palette(mono, x-dark)) {
+  text-shadow: $horizontal_length $vertical_length $blur_radius $color;
+}

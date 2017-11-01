@@ -1,0 +1,4 @@
+services:
+  wildlife_featured_cards.dynamic_cards:
+    class: Drupal\wildlife_featured_cards\DynamicCards
+    arguments: ['@database','@entity.manager']

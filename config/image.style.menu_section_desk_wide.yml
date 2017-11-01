@@ -1,0 +1,16 @@
+uuid: 9e77b3d9-488d-4248-806e-97ce415529d4
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: menu_section_desk_wide
+label: 'Menu section desk wide'
+effects:
+  1834164a-d115-405d-a7cf-dd1a658535e0:
+    uuid: 1834164a-d115-405d-a7cf-dd1a658535e0
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 407
+      height: 271

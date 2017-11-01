@@ -1,0 +1,184 @@
+.paragraph--type--statistics {
+  @extend .breakout;
+  background-color: palette(mono, light);
+
+  .field--name-field-statistic-item {
+    @extend %constrain;
+    overflow: hidden;
+
+    @include add-breakpoint('up-to-desk') {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    @include add-breakpoint('palm-and-up') {
+      flex-direction: row;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.paragraph--type--statistic-item {
+  position: relative;
+  height: 80px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  @include keyline;
+
+  @include add-breakpoint('palm-and-up') {
+    min-height: 135px;
+    height: 135px;
+    text-align: center;
+  }
+
+  @include add-breakpoint('palm-to-desk') {
+    flex: 1 0 50%;
+    min-width: 50%;
+  }
+
+  @include add-breakpoint('desk-and-up') {
+    border-bottom: none;
+    flex: 1 0 25%;
+    min-width: 25%;
+  }
+
+  &::before {
+    content: '';
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    @include keyline('right');
+
+    @include add-breakpoint('palm-and-up') {
+      display: block;
+    }
+  }
+
+  &::after {
+    content: '';
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    @include keyline('right');
+
+  }
+
+  &:nth-child(2n) {
+    @include add-breakpoint('palm-to-desk') {
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  &:last-child {
+    @include add-breakpoint('palm-and-up') {
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  .statistic__content {
+    width: 100%;
+    padding-left: 75px;
+    padding-right: 35px;
+
+    @include add-breakpoint('palm-and-up') {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
+  .statistic__icon {
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+    width: 40px;
+
+    @include add-breakpoint('up-to-palm') {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      margin-top: -20px;
+    }
+
+    @include add-breakpoint('palm-and-up') {
+      margin-bottom: emRhythm(2, ms(0));
+    }
+
+    > span {
+      height: 40px;
+      background-size: auto 40px;
+      background-position: center center;
+
+      &,
+      > svg {
+        display: block;
+      }
+    }
+  }
+
+  .statistic__text {
+    display: inline-block;
+    font-family: $adelle-font-family;
+    font-weight: $font-weight-semi-bold;
+  }
+}
+
+a.paragraph--type--statistic-item {
+  text-decoration: none;
+  @include mouseover-transition(background-color, $quick_rollover_effect);
+
+  &:hover,
+  &:focus {
+    background-color: palette(mono, mid-light-light);
+
+    .statistic__text::after {
+      margin-right: 0;
+    }
+  }
+
+  .statistic__text {
+    padding-right: 24px;
+
+    @include add-breakpoint('palm-and-up') {
+      position: relative;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      display: block;
+      width: 14px;
+      height: 9px;
+      background-size: 14px auto;
+      margin-top: -3px;
+      margin-right: 6px;
+      @include mouseover-transition(margin, $quick_rollover_effect);
+      transform: rotate(-90deg);
+
+      @include add-breakpoint('palm-and-up') {
+        top: auto;
+        right: 0;
+        margin-top: 0;
+        bottom: 8px;
+      }
+
+      @include add-breakpoint('lap-and-up') {
+        bottom: 10px;
+      }
+    }
+  }
+}

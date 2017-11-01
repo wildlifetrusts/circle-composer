@@ -1,0 +1,9 @@
+uuid: cb080db6-ad66-45e7-9eb5-5c3977dd4a16
+langcode: en
+status: true
+dependencies: {  }
+name: 'Opportunity type'
+vid: opportunity_type
+description: 'The type of opportunity a Volunteer Opportunity is.'
+hierarchy: 0
+weight: 0

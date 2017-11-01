@@ -1,0 +1,68 @@
+uuid: ba980963-555f-40f5-9076-e2fcd99dee22
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_cards.field_cards_curated_items
+    - field.field.paragraph.featured_cards.field_cards_dynamic_term
+    - field.field.paragraph.featured_cards.field_cards_dynamic_type
+    - field.field.paragraph.featured_cards.field_cards_dynamic_vocabulary
+    - field.field.paragraph.featured_cards.field_cards_number
+    - field.field.paragraph.featured_cards.field_cards_type
+    - paragraphs.paragraphs_type.featured_cards
+  module:
+    - workbench_moderation
+id: paragraph.featured_cards.default
+targetEntityType: paragraph
+bundle: featured_cards
+mode: default
+content:
+  field_cards_curated_items:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_cards_dynamic_term:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_cards_dynamic_type:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_cards_dynamic_vocabulary:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_cards_number:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_cards_type:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  translation:
+    weight: 10
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

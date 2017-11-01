@@ -1,0 +1,21 @@
+uuid: 9460b42c-9645-4407-beb7-023c45122b44
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_disqus_comments_title
+    - node.type.news
+id: node.news.field_disqus_comments_title
+field_name: field_disqus_comments_title
+entity_type: node
+bundle: news
+label: 'Comments title'
+description: 'This title will appear above the Disqus comments if comments are enabled for the node.'
+required: false
+translatable: true
+default_value:
+  -
+    value: Comments
+default_value_callback: ''
+settings: {  }
+field_type: string

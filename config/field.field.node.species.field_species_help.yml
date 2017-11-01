@@ -1,0 +1,19 @@
+uuid: 29b46c63-9cfe-4d73-b823-5e99f91d2e3b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_species_help
+    - node.type.species
+id: node.species.field_species_help
+field_name: field_species_help
+entity_type: node
+bundle: species
+label: 'How people can help'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

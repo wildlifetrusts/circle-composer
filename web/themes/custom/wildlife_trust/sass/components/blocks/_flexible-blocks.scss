@@ -1,0 +1,71 @@
+.flexible-block {
+  margin-bottom: round($base-vertical-unit * 6);
+}
+  .flexible-blocks-title {
+    @include setLeading(6);
+    font-size: 18px;
+    margin-bottom: 0;
+    position: relative;
+    padding-right: 35px;
+    font-family: $adelle-font-family;
+
+    .js & {
+      cursor: pointer;
+
+      @include add-breakpoint('lap-and-up') {
+        cursor: auto;
+      }
+
+      &::after {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 10px;
+        position: absolute;
+        top: calc(50% - 5px);
+        right: 0;
+        // Background image set in grunticon.js.
+        background-size: 100% auto;
+        background-position: center center;
+        transition: transform 0.4s ease-in-out;
+
+        @include add-breakpoint('lap-and-up') {
+          display: none;
+        }
+      }
+
+      &.is--open {
+        &::after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  [class*="field--name-field-flexible-block-content"] {
+    font-size: 16px;
+    margin-top: round($base-vertical-unit * 4);
+  }
+
+
+.block__content {
+  @extend %clearfix;
+}
+
+.flexible-block--first {
+  @include add-breakpoint('lap-and-up') {
+    @include grid-span(3, 1, 9);
+  }
+}
+
+.flexible-block--middle {
+  @include add-breakpoint('lap-and-up') {
+    @include grid-span(3, 4, 9);
+  }
+}
+
+.flexible-block--last {
+  @include add-breakpoint('lap-and-up') {
+    @include grid-span(3, 7, 9);
+  }
+}

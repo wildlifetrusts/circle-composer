@@ -1,0 +1,27 @@
+# Local customisation routing definition
+local_customisation.settings_tab:
+  route_name: local_customisation.settings
+  title: 'Settings'
+  base_route: local_customisation.settings
+
+entity.local_customisation.canonical:
+  route_name: entity.local_customisation.canonical
+  base_route: entity.local_customisation.canonical
+  title: 'View'
+
+entity.local_customisation.edit_form:
+  route_name: entity.local_customisation.edit_form
+  base_route: entity.local_customisation.canonical
+  title: 'Edit'
+
+entity.local_customisation.version_history:
+  route_name: entity.local_customisation.version_history
+  base_route: entity.local_customisation.canonical
+  title: 'Revisions'
+
+entity.local_customisation.delete_form:
+  route_name:  entity.local_customisation.delete_form
+  base_route:  entity.local_customisation.canonical
+  title: Delete
+  weight: 10
+

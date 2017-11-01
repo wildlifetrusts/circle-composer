@@ -1,0 +1,23 @@
+uuid: 82b5af4d-7fe5-427c-9244-cf8852b5636b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_cafe_refreshments
+    - node.type.reserve
+id: node.reserve.field_reserve_cafe_refreshments
+field_name: field_reserve_cafe_refreshments
+entity_type: node
+bundle: reserve
+label: Cafe/refreshments
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Cafe/refreshments
+  off_label: 'Off'
+field_type: boolean

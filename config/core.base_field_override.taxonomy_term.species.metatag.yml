@@ -1,0 +1,18 @@
+uuid: d98aaaf8-d815-40b7-81fc-c70864b1ef0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.species
+id: taxonomy_term.species.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: species
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

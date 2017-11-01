@@ -1,0 +1,9 @@
+uuid: 5e863c75-376e-4073-990f-39c31997ba6a
+langcode: en
+status: true
+dependencies: {  }
+id: node_type_habitat
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301

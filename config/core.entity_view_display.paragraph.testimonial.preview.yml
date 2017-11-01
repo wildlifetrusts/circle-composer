@@ -1,0 +1,65 @@
+uuid: 2a56e6e1-96e9-469a-abeb-565c6953e178
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.testimonial.field_testimonial_author
+    - field.field.paragraph.testimonial.field_testimonial_organisation
+    - field.field.paragraph.testimonial.field_testimonial_quote
+    - paragraphs.paragraphs_type.testimonial
+  module:
+    - fences
+    - wildlife_field_formatters
+id: paragraph.testimonial.preview
+targetEntityType: paragraph
+bundle: testimonial
+mode: preview
+content:
+  field_testimonial_author:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: span
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_testimonial_organisation:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: span
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_testimonial_quote:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: '140'
+      word_boundary: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: intelligent_text_trimmed
+    region: content
+hidden: {  }

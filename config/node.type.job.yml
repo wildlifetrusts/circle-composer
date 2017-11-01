@@ -1,0 +1,31 @@
+uuid: b1547890-39f7-49d3-a29c-91720f9eceed
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - rrssb
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  rrssb:
+    show: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+      - ready_to_be_published
+      - unpublished
+    default_moderation_state: draft
+name: Job
+type: job
+description: 'Advertise a job vacancy so users can easily find and apply for a job.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

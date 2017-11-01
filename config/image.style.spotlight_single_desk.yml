@@ -1,0 +1,16 @@
+uuid: 0d57084e-f399-4159-9863-4f796adb7710
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_single_desk
+label: 'Spotlight single desk'
+effects:
+  0821386e-a453-489c-a7a6-7412955a62aa:
+    uuid: 0821386e-a453-489c-a7a6-7412955a62aa
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1199
+      height: 600

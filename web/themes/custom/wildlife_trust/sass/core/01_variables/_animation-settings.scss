@@ -1,0 +1,6 @@
+$image_zoom_duration_effect: 1.5s ease-in-out;
+$quick_rollover_effect: 250ms ease-in-out;
+
+@mixin mouseover-transition($property, $animation: $image_zoom_duration_effect) {
+  transition: $property $animation;
+}

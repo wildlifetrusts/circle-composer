@@ -1,0 +1,16 @@
+uuid: 991617a4-3d0a-49ae-a933-6f3b5cc07b3a
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: spotlight_double_desk_wide
+label: 'Spotlight double desk wide'
+effects:
+  49ad4269-5ebb-411b-9279-b889ba46f007:
+    uuid: 49ad4269-5ebb-411b-9279-b889ba46f007
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 960
+      height: 768

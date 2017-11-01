@@ -1,0 +1,9 @@
+uuid: 9baa3860-edc5-455e-b80b-226e5805a73c
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event theme'
+vid: event_theme
+description: 'The theme of an Event.'
+hierarchy: 0
+weight: 0

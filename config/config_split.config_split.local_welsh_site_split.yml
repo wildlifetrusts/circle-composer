@@ -1,0 +1,21 @@
+uuid: 45bdc67f-66a4-45ea-a206-0b8546d3333f
+langcode: en
+status: false
+dependencies: {  }
+id: local_welsh_site_split
+label: 'Local Welsh site split'
+folder: ../config_split/local_wt_welsh
+module: {  }
+theme: {  }
+blacklist:
+  - block.block.lang_switcher
+  - language.entity.cy
+graylist:
+  - user.role.admin
+  - user.role.author
+  - user.role.contributor
+  - user.role.editor
+  - views.view.content
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 1

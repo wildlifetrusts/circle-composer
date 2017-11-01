@@ -1,0 +1,20 @@
+uuid: 50d71bb6-3e6d-41b2-ae7e-d4c512734ec3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.habitat
+  module:
+    - path
+id: node.habitat.path
+field_name: path
+entity_type: node
+bundle: habitat
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

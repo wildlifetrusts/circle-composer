@@ -1,0 +1,76 @@
+uuid: 850b640e-2a26-4660-a245-ddd054310ea6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.headline_hero.field_headline_hero_background
+    - field.field.paragraph.headline_hero.field_headline_hero_cta
+    - field.field.paragraph.headline_hero.field_headline_hero_image
+    - field.field.paragraph.headline_hero.field_headline_hero_search
+    - field.field.paragraph.headline_hero.field_headline_hero_silhouette
+    - field.field.paragraph.headline_hero.field_headline_hero_title
+    - field.field.paragraph.headline_hero.field_headline_hero_video
+    - paragraphs.paragraphs_type.headline_hero
+  module:
+    - fences
+    - link
+    - options
+id: paragraph.headline_hero.default
+targetEntityType: paragraph
+bundle: headline_hero
+mode: default
+content:
+  field_headline_hero_cta:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_headline_hero_search:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_headline_hero_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: h2
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  field_headline_hero_video:
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  field_headline_hero_background: true
+  field_headline_hero_image: true
+  field_headline_hero_silhouette: true

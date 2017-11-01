@@ -1,0 +1,34 @@
+uuid: d63831b9-14db-4d0c-bcc9-1bfa8928fd2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.image_gallery_item.field_gallery_image
+    - field.field.paragraph.image_gallery_item.field_gallery_image_caption
+    - paragraphs.paragraphs_type.image_gallery_item
+  module:
+    - fences
+id: paragraph.image_gallery_item.preview
+targetEntityType: paragraph
+bundle: image_gallery_item
+mode: preview
+content:
+  field_gallery_image:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: gallery_thumbnail
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  field_gallery_image_caption: true

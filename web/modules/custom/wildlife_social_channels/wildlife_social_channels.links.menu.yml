@@ -1,0 +1,5 @@
+wildlife_social_channels.config:
+  title: 'Social Media Channels'
+  description: 'Configure the social media channel links for this site.'
+  parent: system.admin_config_ui
+  route_name: 'wildlife_social_channels.config'

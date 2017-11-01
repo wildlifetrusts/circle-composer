@@ -1,0 +1,23 @@
+uuid: d10721cc-2dc8-4503-96b7-3456e1d26324
+langcode: en
+status: true
+dependencies: {  }
+name: linked_logo
+label: 'Linked Logo'
+effects:
+  d8f67de8-5d7e-4726-bc56-a847f83f6918:
+    uuid: d8f67de8-5d7e-4726-bc56-a847f83f6918
+    id: image_scale
+    weight: 1
+    data:
+      width: 240
+      height: null
+      upscale: false
+  a66fb86b-852b-4912-a572-e5dc32039e92:
+    uuid: a66fb86b-852b-4912-a572-e5dc32039e92
+    id: image_scale
+    weight: 2
+    data:
+      width: null
+      height: 100
+      upscale: false

@@ -1,0 +1,13 @@
+.node--type-job {
+  &.node--view-mode-teaser {
+    .field--name-field-job-location,
+    .field--name-field-job-salary,
+    .field--name-field-job-closing-date {
+      font-weight: $font-weight-regular;
+    }
+
+    .field--name-field-job-closing-date {
+      margin-bottom: emRhythm(4);
+    }
+  }
+}

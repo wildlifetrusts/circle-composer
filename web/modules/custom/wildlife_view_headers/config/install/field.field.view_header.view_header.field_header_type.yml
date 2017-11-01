@@ -1,0 +1,23 @@
+uuid: 602742e9-7d3d-4c7a-8306-b863c0b04474
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.view_header.field_header_type
+  module:
+    - options
+    - wildlife_view_headers
+id: view_header.view_header.field_header_type
+field_name: field_header_type
+entity_type: view_header
+bundle: view_header
+label: 'Header type'
+description: 'Choose the appearance of this page''s header. If <i>None</i> is chosen, the header will be black. If <i>Colour</i> is chosen, the current colour scheme''s primary colour will be used.'
+required: true
+translatable: false
+default_value:
+  -
+    value: none
+default_value_callback: ''
+settings: {  }
+field_type: list_string

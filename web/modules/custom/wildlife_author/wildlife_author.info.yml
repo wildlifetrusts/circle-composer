@@ -1,0 +1,5 @@
+name: Author
+type: module
+description: Author entity and associated configuration and processing.
+core: 8.x
+package: Wildlife

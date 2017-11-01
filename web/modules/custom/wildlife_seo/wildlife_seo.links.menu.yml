@@ -1,0 +1,5 @@
+wildlife_seo.gtm_admin:
+  title: 'Google Tag Manager'
+  description: 'Configure Google Tag Manager ID.'
+  parent: system.admin_config_system
+  route_name: 'wildlife_seo.gtm_admin'

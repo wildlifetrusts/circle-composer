@@ -1,0 +1,19 @@
+.standfirst {
+  @extend %clearfix;
+  @extend .breakout;
+  @include spacing('medium', 'bottom');
+  overflow: hidden;
+  background-color: palette(mono, light);
+
+  > div {
+    @extend %constrain;
+    @extend %clearfix;
+
+    > div {
+      @extend %content-narrow-constrain;
+      @extend .gamma;
+      @include spacing('medium', 'top');
+      @include spacing('medium', 'bottom');
+    }
+  }
+}

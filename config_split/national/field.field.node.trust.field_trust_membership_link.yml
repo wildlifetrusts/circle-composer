@@ -1,0 +1,23 @@
+uuid: b7cf3350-7e44-476e-a8e5-8c95ffe5f7dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_membership_link
+    - node.type.trust
+  module:
+    - link
+id: node.trust.field_trust_membership_link
+field_name: field_trust_membership_link
+entity_type: node
+bundle: trust
+label: 'Membership link'
+description: 'This link will open in a new browser tab/window.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

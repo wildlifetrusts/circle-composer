@@ -1,0 +1,15 @@
+.view--location-search {
+  &.view-display--trusts {
+    .views-row {
+      margin-bottom: $spacing-unit-vertical;
+    }
+  }
+}
+
+.view--search.view-display--global {
+  overflow: hidden;
+
+  .views-row {
+    @extend %keyline-separated-rows;
+  }
+}

@@ -1,0 +1,18 @@
+uuid: 63eb36a8-6f92-4ab9-aae9-70d60fe24878
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.habitat
+id: node.habitat.title
+field_name: title
+entity_type: node
+bundle: habitat
+label: 'Name of habitat'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

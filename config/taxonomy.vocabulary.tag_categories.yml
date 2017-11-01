@@ -1,0 +1,9 @@
+uuid: c9541b90-5835-48cd-b281-e02688008b13
+langcode: en
+status: true
+dependencies: {  }
+name: 'Tag categories'
+vid: tag_categories
+description: 'Free tagging for content types so that they can be filtered universally in listings.'
+hierarchy: 0
+weight: 0

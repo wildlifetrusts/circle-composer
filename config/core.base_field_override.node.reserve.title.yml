@@ -1,0 +1,18 @@
+uuid: 6183e033-62c0-40eb-8cf7-182fdf950bb3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.reserve
+id: node.reserve.title
+field_name: title
+entity_type: node
+bundle: reserve
+label: 'Name of reserve'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

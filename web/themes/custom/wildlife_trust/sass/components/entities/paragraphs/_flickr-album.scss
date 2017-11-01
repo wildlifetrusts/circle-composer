@@ -1,0 +1,13 @@
+.paragraph--type--flickr-album {
+  @extend %content-narrow-constrain;
+}
+
+.field--name-field-flickr-embed-code {
+  .field__item {
+    text-align: center;
+  }
+
+  iframe {
+    display: inline-block;
+  }
+}

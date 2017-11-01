@@ -1,0 +1,7 @@
+name: Local Customisation
+type: module
+description: Local Customisation
+core: 8.x
+package: Wildlife
+dependencies:
+  - wildlife_admin

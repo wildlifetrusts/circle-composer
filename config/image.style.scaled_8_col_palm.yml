@@ -1,0 +1,15 @@
+uuid: 4159391a-01a5-4694-82a1-3a9c8baf6aba
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_8_col_palm
+label: 'Scaled 8 col palm'
+effects:
+  297e4d1f-f172-49b9-a009-d7f6ea174f96:
+    uuid: 297e4d1f-f172-49b9-a009-d7f6ea174f96
+    id: image_scale
+    weight: 1
+    data:
+      width: 549
+      height: null
+      upscale: false

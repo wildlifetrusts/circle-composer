@@ -1,0 +1,20 @@
+uuid: 87ae1e61-70d4-42de-8c9c-acabd0d970c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trust
+  module:
+    - path
+id: node.trust.path
+field_name: path
+entity_type: node
+bundle: trust
+label: 'URL alias'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

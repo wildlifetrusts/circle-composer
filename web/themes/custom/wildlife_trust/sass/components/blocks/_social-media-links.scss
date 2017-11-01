@@ -1,0 +1,89 @@
+
+.block--social-media-links {
+  @extend %clearfix;
+
+  .block__title,
+  .block__content {
+    @include add-breakpoint('desk-and-up') {
+      float: left;
+    }
+  }
+
+  .block__title {
+    @include element-invisible;
+    padding-left: 12px;
+    padding-right: 1em;
+    margin-bottom: 0;
+    font-family: $base-font-family;
+    font-weight: $font-weight-regular;
+    @include setType(5, ms(-1));
+    line-height: 45px;
+    color: palette(mono);
+    @include keyline('right', palette(mono, dark));
+
+    @include add-breakpoint('desk-and-up') {
+      @include element-visible;
+    }
+  }
+}
+
+.social-media-links--platforms {
+  @extend %clean-list;
+  height: 45px;
+  overflow: hidden;
+  text-align: center;
+
+  &.horizontal {
+    font-size: 0;
+
+    li {
+      padding: 0;
+      @include keyline('right', palette(mono, dark));
+
+      @include add-breakpoint('up-to-desk') {
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 45px;
+    height: 45px;
+    background-position: 50% 50%;
+    background-size: 20px auto;
+  }
+
+  a {
+    position: relative;
+    display: block;
+    width: 45px;
+    height: 45px;
+
+    .active {
+      opacity: 0;
+    }
+
+    .description {
+      @extend %element-invisible;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: palette(mono, x-light);
+
+      .default {
+        opacity: 0;
+      }
+
+      .active {
+        opacity: 1;
+      }
+    }
+  }
+}

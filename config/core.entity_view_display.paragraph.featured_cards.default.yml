@@ -1,0 +1,42 @@
+uuid: 6258282d-c6a9-4a34-927c-add22f7f3517
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_cards.field_cards_curated_items
+    - field.field.paragraph.featured_cards.field_cards_dynamic_term
+    - field.field.paragraph.featured_cards.field_cards_dynamic_type
+    - field.field.paragraph.featured_cards.field_cards_dynamic_vocabulary
+    - field.field.paragraph.featured_cards.field_cards_number
+    - field.field.paragraph.featured_cards.field_cards_type
+    - paragraphs.paragraphs_type.featured_cards
+  module:
+    - fences
+    - wildlife_field_formatters
+id: paragraph.featured_cards.default
+targetEntityType: paragraph
+bundle: featured_cards
+mode: default
+content:
+  field_cards_curated_items:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: card
+      field: field_cards_number
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: entity_reference_limit_by_field_entity_view
+    region: content
+hidden:
+  field_cards_dynamic_term: true
+  field_cards_dynamic_type: true
+  field_cards_dynamic_vocabulary: true
+  field_cards_number: true
+  field_cards_type: true

@@ -1,0 +1,27 @@
+uuid: b5bb4e06-3d9d-47ea-a0bc-2f05302e2e23
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_access
+    - node.type.reserve
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: node.reserve.field_reserve_access
+field_name: field_reserve_access
+entity_type: node
+bundle: reserve
+label: Access
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

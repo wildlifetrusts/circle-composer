@@ -1,0 +1,20 @@
+uuid: 8c44289c-3f92-4fc2-88fb-44e3a19b81df
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.reserve
+  module:
+    - path
+id: node.reserve.path
+field_name: path
+entity_type: node
+bundle: reserve
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

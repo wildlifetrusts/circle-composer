@@ -1,0 +1,3 @@
+'administer mailchimp sign up forms':
+  title: Administer Mailchimp sign-up forms
+  description: Permissions override to allow users to create, edit and delete Mailchimp sign up forms.

@@ -1,0 +1,23 @@
+uuid: 1a8f532c-3ab5-4754-a0df-0e4e69317bcf
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - media_entity
+id: media.field_silhouette
+field_name: field_silhouette
+entity_type: media
+type: file
+settings:
+  display_field: false
+  display_default: false
+  uri_scheme: public
+  target_type: file
+module: file
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

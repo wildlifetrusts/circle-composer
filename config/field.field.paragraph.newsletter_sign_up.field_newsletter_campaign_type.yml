@@ -1,0 +1,21 @@
+uuid: 857a613e-41fe-49f8-86a3-a85332007902
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_newsletter_campaign_type
+    - paragraphs.paragraphs_type.newsletter_sign_up
+  module:
+    - options
+id: paragraph.newsletter_sign_up.field_newsletter_campaign_type
+field_name: field_newsletter_campaign_type
+entity_type: paragraph
+bundle: newsletter_sign_up
+label: 'Campaign type'
+description: 'Choose the type of newsletter provider.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

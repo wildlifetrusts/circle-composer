@@ -1,0 +1,1137 @@
+<?php
+/**
+ * @file
+ * Functions to support theming in the Wildlife Trust theme.
+ */
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function wildlife_trust_page_attachments_alter(array &$attachments) {
+  // Attach Grunticon related javascript to the <head> region.
+  wildlife_trust_attach_grunticon($attachments);
+
+  // Add favicons/touchicons to the <head> region, only if Responsive Favicons
+  // are not in place.
+  $responsive_favicons = FALSE;
+
+  if (isset($attachments['#attached']['html_head'])) {
+    foreach ($attachments['#attached']['html_head'] as $head_item) {
+      $responsive_favicons = array_search('responsive_favicons', $head_item);
+
+      if ($responsive_favicons) {
+        break;
+      }
+    }
+  }
+
+  if (!$responsive_favicons) {
+    wildlife_trust_attach_touchicons($attachments);
+  }
+}
+
+/**
+ * Helper function to attach Grunticon related javascript to the <head> region.
+ *
+ * @param array $attachments
+ *   All attachments provided by hook_page_attachments() implementations.
+ */
+function wildlife_trust_attach_grunticon(array &$attachments) {
+  // Get the path to the theme for later.
+  $theme = drupal_get_path('theme', 'wildlife_trust');
+
+  // If the theme is using icons generated from Grunticon a js snippet will be
+  // added along with a nojs fallback.
+  if (file_exists($theme . '/icons')) {
+    $icon_css_folder = '/' . $theme . '/css/';
+    $icon_folder = '/' . $theme . '/icons/';
+    $png_fallback_css = $icon_css_folder . 'grunticon-png-fallback.css';
+    // Create an array of the 3 CSS files for use with Grunticon.
+    $grunticon_css_file = array(
+      $icon_css_folder . 'grunticon-data-svg.css',
+      $icon_css_folder . 'grunticon-data-png.css',
+      $png_fallback_css,
+    );
+
+    // Set up the Grunticon js script for inserting in the <head> region.
+    $grunticon_js_script = array(
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#attributes' => array(
+        'type' => 'text/javascript',
+        'src' => $icon_folder . 'grunticon.loader.js',
+      ),
+      '#value' => '',
+      '#weight' => 999,
+    );
+
+    $attachments['#attached']['html_head'][] = [$grunticon_js_script, 'grunticon_js_script'];
+
+    // Set up the Grunticon inline snippet for inserting in the <head> region.
+    $grunticon_js_snippet = 'grunticon([\'' . implode('\',\'', $grunticon_css_file) . '\'], grunticon.svgLoadedCallback);';
+    $grunticon_js_inline = array(
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#attributes' => array(
+        'type' => 'text/javascript',
+      ),
+      '#value' => $grunticon_js_snippet,
+      '#weight' => 1000,
+    );
+
+    $attachments['#attached']['html_head'][] = [$grunticon_js_inline, 'grunticon_js_snippet'];
+
+    // Attach the PNG Fallback css to the page in a noscript element so the
+    // icons will still appear even if a user has javascript disabled.
+    if (file_exists($theme . '/css/grunticon-png-fallback.css')) {
+      $fallback_icons_css = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#attributes' => array(
+          'href' => $png_fallback_css,
+          'rel' => 'stylesheet',
+        ),
+        '#value' => '',
+        '#noscript' => TRUE,
+      );
+
+      $attachments['#attached']['html_head'][] = [$fallback_icons_css, 'fallback_icons_css'];
+    }
+  }
+}
+
+/**
+ * Helper function to attach Touchicons to the <head> region.
+ *
+ * @param array $attachments
+ *   All attachments provided by hook_page_attachments() implementations.
+ */
+function wildlife_trust_attach_touchicons(&$attachments) {
+  // Get the path to the theme for later.
+  $theme = drupal_get_path('theme', 'wildlife_trust');
+  $icon_folder = '/' . $theme . '/touchicons';
+  $version = 'LbGnkRyNBN';
+
+  $links = [
+    'apple_touch_icon' => [
+      'rel' => 'apple-touch-icon',
+      'sizes' => '180x180',
+      'href' => $icon_folder . '/apple-touch-icon.png?v=' . $version,
+    ],
+    'icon32' => [
+      'rel' => 'icon',
+      'type' => 'image/png',
+      'href' => $icon_folder . '/favicon-32x32.png?v=' . $version,
+      'sizes' => '32x32',
+    ],
+    'icon16' => [
+      'rel' => 'icon',
+      'type' => 'image/png',
+      'href' => $icon_folder . '/favicon-16x16.png?v=' . $version,
+      'sizes' => '16x16',
+    ],
+    'manifest' => [
+      'rel' => 'manifest',
+      'href' => $icon_folder . '/manifest.json?v=' . $version,
+    ],
+    'mask_icon' => [
+      'rel' => 'mask-icon',
+      'href' => $icon_folder . '/safari-pinned-tab.svg?v=' . $version,
+      'color' => '#000000',
+    ],
+  ];
+
+  foreach ($links as $link_key => $link_attributes) {
+    $link = array(
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => $link_attributes,
+      '#value' => '',
+    );
+
+    $attachments['#attached']['html_head'][] = [$link, $link_key];
+  }
+
+  $meta_tags = [
+    'theme_colour' => [
+      'name' => 'theme-color',
+      'content' => '#000000'
+    ],
+    'msapplication_config' => [
+      'name' => 'msapplication-config',
+      'content' => $icon_folder . '/browserconfig.xml?v=' . $version,
+    ],
+  ];
+
+  foreach ($meta_tags as $tag_key => $tag_attributes) {
+    $tag = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => $tag_attributes,
+      '#value' => '',
+    );
+
+    $attachments['#attached']['html_head'][] = [$tag, $tag_key];
+  }
+}
+
+/**
+ * Implements hook_css_alter().
+ *
+ * Disables @import CSS tags for compatibility with BrowserSync.
+ */
+function wildlife_trust_css_alter(&$css) {
+  if (\Drupal::config('system.performance')->get('css.preprocess') === FALSE) {
+    foreach ($css as &$item) {
+      if (file_exists($item['data'])) {
+        $item['preprocess'] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_table().
+ *
+ * Add attributes for responsive table.
+ */
+function wildlife_trust_preprocess_table(&$variables) {
+  $variables['attributes']['class'][] = 'table--responsive';
+}
+
+/**
+ * Implements hook_preprocess_input().
+ */
+function wildlife_trust_preprocess_input(&$variables) {
+  $element = $variables['element'];
+
+  switch ($element['#type']) {
+    case 'file':
+      // Add the uniform library to File upload fields.
+      $element['#attached']['library'][] = 'wildlife_trust/uniform';
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function wildlife_trust_preprocess_paragraph(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+
+  switch ($bundle) {
+    case 'audio':
+    case 'image':
+    case 'video':
+      // Add a class if the paragraph has accompanying text.
+      $accompanying_text = $paragraph->get('field_' . $bundle . '_accompanying_text')->first()->getValue();
+
+      if ($accompanying_text['value']) {
+        $variables['attributes']['class'][] = 'paragraph--split';
+
+        // Add a class to indicate which side the media sits on.
+        $position = $paragraph->get('field_' . $bundle . '_position')->first()->getString();
+        $variables['attributes']['class'][] = 'paragraph--media-' . $position;
+      }
+      break;
+
+    case 'accordion':
+      // Add relevant JS.
+      $variables['#attached']['library'][] = 'wildlife_trust/accordion';
+
+      // Get the default open accordion item and set a data attribute for the JS.
+      $default_item = !empty($paragraph->get('field_accordion_default_item')->getValue())
+        ? $paragraph->get('field_accordion_default_item')->first()->getValue()
+        : 1;
+      $variables['attributes']['data-default-open-item'] = $default_item;
+      break;
+
+    case 'headline_hero':
+    case 'spotlight':
+      // Add responsive images library to spotlight.
+      $variables['attributes']['class'][] = 'responsive-component';
+      $variables['#attached']['library'][] = 'wildlife_trust/responsive-background-images';
+      break;
+
+    case 'image_gallery':
+      $variables['#attached']['library'][] = 'wildlife_trust/image-gallery';
+      $variables['attributes']['class'][] = 'paragraph--wide';
+      break;
+
+    case 'html_component':
+      if (!$paragraph->get('field_html_component_hide_narrow')->isEmpty()) {
+        $hide_on_narrow = $paragraph->get('field_html_component_hide_narrow')->first()->getValue();
+
+        if ($hide_on_narrow['value']) {
+          $variables['attributes']['class'][] = 'paragraph--hide-on-narrow';
+        }
+      }
+      break;
+  }
+
+  // Check if a paragraph has an "Extra Wide" field and add a class if it's
+  // been ticked.
+  if ($paragraph->hasField('field_' . $bundle . '_extra_wide')) {
+    // Add a class if the paragraph is set to be wide.
+    $extra_wide = $paragraph->get('field_' . $bundle . '_extra_wide')->first()->getValue();
+
+    if ($extra_wide['value']) {
+      $variables['attributes']['class'][] = 'paragraph--wide';
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_block().
+ */
+function wildlife_trust_preprocess_block(&$variables) {
+  $block = $variables['elements'];
+
+  switch ($block['#id']) {
+    case 'footer_flexible_blocks':
+      // Add relevant JS.
+      $variables['#attached']['library'][] = 'wildlife_trust/flexible-blocks';
+      break;
+
+    case 'wildlife_trust_page_title':
+      // Add a 'visually-hidden' class if the title is hidden.
+      $title_hidden = _wildlife_trust_check_title_hidden();
+      if ($title_hidden) {
+        $variables['attributes']['class'][] = 'visually-hidden';
+      }
+      break;
+
+    case 'global_search':
+      // Add relevant JS.
+      $variables['#attached']['library'][] = 'wildlife_trust/global-search';
+      break;
+  }
+
+  if (!$variables['user']->hasPermission('bypass node access') && isset($variables['title_suffix']['contextual_links'])) {
+    unset($variables['title_suffix']['contextual_links']);
+  }
+}
+
+/**
+ * Implements template_preprocess_page().
+ */
+function wildlife_trust_preprocess_page(&$variables) {
+  // Add breakpoints as a js setting for use in js files.
+  $breakpoints = \Drupal::service('breakpoint.manager')->getBreakpointsByGroup('wildlife_trust');
+
+  /** @var \Drupal\breakpoint\Breakpoint $breakpoint */
+  foreach ($breakpoints as $breakpoint) {
+    $media_query = $breakpoint->getMediaQuery();
+    $label = str_replace(' ', '_', $breakpoint->getLabel()->__toString());
+    $variables['#attached']['drupalSettings']['breakpoints'][$label] = $media_query;
+  }
+
+  // Add a class if the title is not hidden.
+  $title_hidden = _wildlife_trust_check_title_hidden();
+  if (!$title_hidden) {
+    $variables['attributes']['class'][] = 'page--title-visible';
+  }
+
+  // Add indicator class to differentiate between node edit pages and
+  // front-end pages.
+  $variables['attributes']['class'][] = 'is--front-end';
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+function wildlife_trust_preprocess_views_view(&$variables) {
+  $view_full_id = $variables['id'] . '-' . $variables['display_id'];
+
+  // Add a class to views which will have 3 columns at desktop width.
+  $three_col_views = [
+    'explorer-species',
+    'explorer-habitat',
+    'search-species',
+    'search-habitat',
+    'taxonomy_term_children-default',
+    'taxonomy_term-listing',
+  ];
+
+  if (in_array($view_full_id, $three_col_views)) {
+    $variables['attributes']['class'][] = 'view--three-col';
+  }
+
+  if ($view_full_id == 'location_search-reserves') {
+    $variables['#attached']['library'][] = 'wildlife_trust/reserve-search-checkboxes';
+  }
+}
+
+/**
+ * Checks if a node has a "hide_title" field and if it is set to TRUE.
+ *
+ * @return bool
+ *   Whether or not the title is hidden.
+ */
+function _wildlife_trust_check_title_hidden() {
+  $title_hidden = FALSE;
+  $node_check = FALSE;
+
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $node_check = TRUE;
+  }
+  else if ($preview = \Drupal::routeMatch()->getParameter('node_preview')) {
+    if (in_array($preview->preview_view_mode, ['full', 'default'])) {
+      $node_check = TRUE;
+      $node = $preview;
+    }
+    else {
+      $title_hidden = TRUE;
+    }
+  }
+  else if ($view_id = \Drupal::routeMatch()->getParameter('view_id')) {
+    $title_hidden = TRUE;
+  }
+
+  if ($node_check) {
+    if ($node->hasField('field_hide_title') && !empty($node->get('field_hide_title')->getValue())) {
+      if (boolval($node->get('field_hide_title')->first()->getString())) {
+        $title_hidden = TRUE;
+      }
+    }
+
+    $nodes_with_no_title = [
+      'job',
+      'habitat',
+      'species',
+      'volunteer_opportunity',
+      'reserve',
+      'event',
+      'blog',
+      'news',
+      'trust',
+    ];
+
+    if (in_array($node->getType(), $nodes_with_no_title)) {
+      $title_hidden = TRUE;
+    }
+  }
+
+  return $title_hidden;
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ *
+ * Workaround for randomly lost menu item options: load link entities and
+ * restore lost link attributes.
+ */
+function wildlife_trust_preprocess_menu(&$variables) {
+  foreach ($variables['items'] as &$item) {
+    /** @var \Drupal\menu_link_content\Entity\MenuLinkContent $menuLinkEntity */
+    $menuLinkEntity = _wildlife_trust_load_link_entity_by_link($item['original_link']);
+
+    if (!empty($menuLinkEntity)) {
+      $featured = !empty($menuLinkEntity->get('featured')->first()) ? $menuLinkEntity->get('featured')->first()->getString() : FALSE;
+      $item['is_featured'] = boolval($featured);
+      $parent = $menuLinkEntity->getParentId();
+      $expanded = $menuLinkEntity->isExpanded();
+
+      if (empty($parent) && $expanded) {
+        $section_image = !empty($menuLinkEntity->get('section_image')->first()) ? $menuLinkEntity->get('section_image')->first()->getValue() : FALSE;
+        if ($section_image) {
+          $item['section_image'] = $section_image['target_id'];
+        }
+
+        $section_summary = !empty($menuLinkEntity->get('section_summary')->first()) ? $menuLinkEntity->get('section_summary')->first()->getValue() : FALSE;
+        if ($section_summary) {
+          $item['section_summary'] = [
+            '#type' => 'markup',
+            '#markup' => $section_summary['value'],
+          ];
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to load link entity from the 'original_link' element.
+ */
+function _wildlife_trust_load_link_entity_by_link(\Drupal\Core\Menu\MenuLinkInterface $menuLinkContentPlugin) {
+  $entity = NULL;
+  if ($menuLinkContentPlugin instanceof \Drupal\menu_link_content\Plugin\Menu\MenuLinkContent) {
+    list($entity_type, $uuid) = explode(':', $menuLinkContentPlugin->getPluginId(), 2);
+    $entity = \Drupal::entityManager()->loadEntityByUuid($entity_type, $uuid);
+  }
+  return $entity;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function wildlife_trust_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  $elements = $variables['elements'];
+  /** @var \Drupal\node\Entity\Node $node */
+  $node = $elements['#node'];
+
+  // Set grid teaser template suggestion.
+  $grid_teasers = [
+    'habitat',
+    'species',
+  ];
+
+  if (in_array($node->getType(), $grid_teasers) && $elements['#view_mode'] == 'teaser') {
+    $suggestions[] = 'node__grid_teaser';
+  }
+
+  // Set Card without image template to use Card template.
+  if ($elements['#view_mode'] == 'card_without_image') {
+    $suggestions[] = 'node__card';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function wildlife_trust_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  $field = $variables['element'];
+
+  $comma_separated_fields = [
+    'field_voluntary_commitment',
+    'field_event_suitable_for',
+  ];
+
+  if (in_array($field['#field_name'], $comma_separated_fields)) {
+    $suggestions[] = 'field__field_comma_separated';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function wildlife_trust_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+  $elements = $variables['elements'];
+
+  if ($elements['#view_mode'] == 'teaser') {
+    $suggestions[] = 'taxonomy_term__teaser';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function wildlife_trust_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $variables['view'];
+
+  if ($view->id() == 'location_search') {
+    $map_views = [
+      'reserves',
+      'events',
+    ];
+
+    if (in_array($view->current_display, $map_views)) {
+      $suggestions[] = 'views_view__map_view';
+    }
+
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function wildlife_trust_preprocess_field(&$variables) {
+  $field_name = $variables['field_name'];
+
+  // Add JS to handle responsive tables within long text fields.
+  if ($variables['field_type'] == 'text_long') {
+    $variables['#attached']['library'][] = 'wildlife_trust/responsive_tables';
+  }
+
+  // Updated Reserve reference label.
+  _wildlife_trust_field_reserve_reference_preprocessing($variables, $field_name);
+
+  // Add a colon to some field labels.
+  _wildlife_trust_field_colonise_preprocessing($variables, $field_name);
+
+  // Preprocessing for Dogs fields.
+  _wildlife_trust_field_dogs_preprocessing($variables, $field_name);
+
+  // Preprocessing for Reserve social fields.
+  _wildlife_trust_field_reserve_social_preprocessing($variables, $field_name);
+
+  // Preprocessing for Author fields.
+  _wildlife_trust_field_author_preprocessing($variables, $field_name);
+
+  // Preprocessing for Accordion fields.
+  _wildlife_trust_field_responsive_accordion_preprocessing($variables, $field_name);
+
+  // Preprocessing for Flickr field.
+  _wildlife_trust_field_flickr_embed_preprocessing($variables, $field_name);
+
+  // Preprocessing for Tags fields.
+  _wildlife_trust_field_tags_preprocessing($variables, $field_name);
+
+  // Preprocessing for Publication date fields.
+  _wildlife_trust_field_publication_date_preprocessing($variables, $field_name);
+}
+
+
+/**
+ * Helper function to preprocess fields for a colon following a field label.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_trust_field_colonise_preprocessing(&$variables, $field_name) {
+  // Determine whether or not to add a colon after the label.
+  $variables['label_colon'] = FALSE;
+
+  $colon_fields = [
+    'field_job_closing_date',
+    'field_job_salary',
+    'field_job_contract_type',
+    'field_job_working_hours',
+    'field_job_reference',
+    'field_job_location',
+    'field_job_reserve',
+    'field_species_scientific_name',
+    'field_voluntary_reference',
+    'field_voluntary_location',
+    'field_voluntary_reserve',
+    'field_reserve_contact_number',
+    'field_reserve_contact_email',
+    'field_reserve_grid_ref',
+    'field_event_contact_number',
+    'field_event_contact_email',
+    'field_event_location',
+    'field_event_reserve',
+  ];
+
+  if (in_array($field_name, $colon_fields)) {
+    $variables['label_colon'] = TRUE;
+  }
+
+  // Duration on Volunteer Opportunity teaser.
+  if ($field_name == 'field_voluntary_duration' && $variables['element']['#view_mode'] == 'teaser') {
+    $variables['label_colon'] = TRUE;
+  }
+}
+
+/**
+ * Helper function to preprocess Reserve dogs fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_trust_field_dogs_preprocessing(&$variables, $field_name) {
+  $dogs_fields = [
+    'field_reserve_dogs',
+    'field_event_dogs',
+  ];
+
+  if (in_array($field_name, $dogs_fields)) {
+    $items = $variables['element']['#items'];
+    $dogs_field = $items->first()->getValue();
+
+    if ($dogs_field['value'] != 'no_dogs_permitted') {
+      $variables['attributes']['class'] = 'dogs--allowed';
+    }
+    else {
+      $variables['attributes']['class'] = 'dogs--not-allowed';
+    }
+  }
+}
+
+/**
+ * Helper function to preprocess Reserve social fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_trust_field_reserve_social_preprocessing(&$variables, $field_name) {
+  // Reserve social.
+  $reserve_social = [
+    'field_reserve_twitter' => 'Twitter',
+    'field_reserve_facebook' => 'Facebook',
+    'field_reserve_flickr' => 'Flickr',
+  ];
+
+  if (in_array($field_name, array_keys($reserve_social))) {
+    if (isset($variables['element'][0])) {
+      $social_name = $reserve_social[$field_name];
+      $variables['items'][0]['content']['#title'] = t('See Reserve\'s @social', ['@social' => $social_name])->render();
+      $variables['items'][0]['content']['#options']['attributes']['title'] = t('@social', ['@social' => $social_name])->render();
+    }
+  }
+}
+
+/**
+ * Helper function to preprocess Author related fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_trust_field_author_preprocessing(&$variables, $field_name) {
+  if ($variables['element']['#bundle'] != 'author') {
+    return;
+  }
+
+  switch($field_name) {
+    case 'name':
+    case 'field_author_profile_image':
+      /** @var \Drupal\wildlife_author\Entity\Author $author */
+      $author = $variables['element']['#object'];
+
+      $blog_id = $author->get('blog_id')->getString();
+      $variables['blog_path'] = \Drupal\Core\Url::fromRoute('view.blog.listing', ['arg_0' => $blog_id])->toString();
+      break;
+  }
+}
+
+/**
+ * Helper function to preprocess Accordion fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_trust_field_responsive_accordion_preprocessing(&$variables, $field_name) {
+  $title = 'field_flexible_block_title_';
+  if (strpos($field_name, $title) !== FALSE) {
+    $variables['attributes']['class'][] = 'flexible-blocks-title';
+  }
+}
+
+/**
+ * Helper function to preprocess Flickr Embed fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_trust_field_flickr_embed_preprocessing(&$variables, $field_name) {
+  if ($field_name == 'field_flickr_embed_code') {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    $paragraph = $variables['element']['#object'];
+    $variables['#attached']['drupalSettings']['flickr_embed'][$paragraph->id()] = $variables['items'][0]['content']['#text'];
+    $variables['#attached']['library'][] = 'wildlife_trust/responsive-flickr';
+    $variables['attributes']['data-id'] = $paragraph->id();
+  }
+}
+
+/**
+ * Helper function to preprocess Tags fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_trust_field_tags_preprocessing(&$variables, $field_name) {
+  $tags_fields = [
+    'field_tags',
+    'field_event_tags'
+  ];
+
+  $tags_bundles = [
+    'blog',
+    'event',
+    'news',
+  ];
+
+  $bundle = $variables['element']['#bundle'];
+
+  if (in_array($field_name, $tags_fields) && in_array($bundle, $tags_bundles)) {
+    // Update the links of Tag fields to go to the appropriate view for the
+    // content type.
+    switch ($bundle) {
+      case 'event':
+        $use_view_id = 'location_search';
+        $use_view_display = 'events';
+        break;
+
+      default:
+        $use_view_id = $bundle;
+        $use_view_display = 'by_tag';
+    }
+
+    foreach ($variables['items'] as $delta => &$item) {
+      $term = NULL;
+      /** @var \Drupal\taxonomy\Entity\Term $term */
+      if (!empty($item['content']['#options'])) {
+        $term = $item['content']['#options']['entity'];
+      }
+
+      // The term might not exist if this is a preview.
+      if (empty($term)) {
+        if (!empty($item['content']['#plain_text'])) {
+          $term_name = $item['content']['#plain_text'];
+          $url = \Drupal\Core\Url::fromUserInput('#');
+          $link = \Drupal\Core\Link::fromTextAndUrl($term_name, $url);
+          $item['content'] = $link->toRenderable();
+          // Don't do anymore processing.
+          continue;
+        }
+        // There was no term or plain text so give up.
+        continue;
+      }
+
+      if ($bundle == 'event') {
+        $options = ['tags' => $term->id()];      }
+      else {
+        $views_safe_name = strtolower(str_replace(' ', '-', $term->getName()));
+        $options = ['arg_0' => $views_safe_name];
+
+      }
+
+      $url = \Drupal\Core\Url::fromRoute('view.' . $use_view_id . '.' . $use_view_display, $options);
+      $item['content']['#url'] = $url;
+    }
+  }
+}
+
+/**
+ * Helper function to preprocess Publication Date fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_trust_field_publication_date_preprocessing(&$variables, $field_name) {
+  $bundle = $variables['element']['#bundle'];
+
+  switch ($field_name) {
+    case 'field_blog_publication_date':
+    case 'field_news_publication_date':
+      if (isset($variables['items'][0]['content']['#attributes'])) {
+        /** @var \Drupal\node\Entity\Node $node */
+        $node = $variables['element']['#object'];
+        if ($node->hasField('field_' . $bundle . '_display_pub_date')) {
+          $display_published_date = $node->get('field_' . $bundle . '_display_pub_date')
+            ->first()
+            ->getValue();
+
+          if (!$display_published_date['value']) {
+            $variables['items'][0]['content']['#attributes']['class'][] = 'hidden';
+          }
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Helper function to preprocess Reserve reference fields.
+ *
+ * @param $variables
+ *   The variables array from field preprocess.
+ * @param $field_name
+ *   The machine name of the field.
+ */
+function _wildlife_trust_field_reserve_reference_preprocessing(&$variables, $field_name) {
+  $reserve_reference_fields = [
+    'field_job_reserve',
+    'field_voluntary_reserve',
+    'field_event_reserve',
+  ];
+
+  if (in_array($field_name, $reserve_reference_fields)) {
+    $variables['label'] = t('Location')->render();
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function wildlife_trust_preprocess_node(&$variables) {
+  /** @var \Drupal\node\Entity\Node $node */
+  $node = $variables['node'];
+  $view_mode = $variables['view_mode'];
+
+  switch ($node->bundle()) {
+    case 'event':
+      _wildlife_trust_event_node_preprocessing($variables, $node);
+      break;
+
+    case 'job':
+      _wildlife_trust_job_node_preprocessing($variables, $node);
+      break;
+
+    case 'habitat':
+      _wildlife_trust_habitat_related_preprocessing($variables, $node);
+      break;
+  }
+
+  // Apply Grid Teaser template and preprocessing if applicable.
+  _wildlife_trust_grid_teasers_preprocessing($variables, $node, $view_mode);
+
+  // Apply Photos preprocessing if applicable.
+  _wildlife_trust_photos_preprocessing($variables, $node);
+
+  // Apply Header preprocessing if applicable.
+  _wildlife_trust_node_header_preprocessing($variables, $node);
+
+  // Add preview class.
+  if ($node->in_preview) {
+    $variables['attributes']['class'][] = 'node--preview';
+  }
+
+  // Add Bundle name to cards.
+  if (in_array($view_mode, ['card', 'card_without_image'])) {
+    $bundle_label = \Drupal::entityTypeManager()
+      ->getStorage('node_type')
+      ->load($node->bundle())
+      ->label();
+    $variables['bundle_label'] = $bundle_label;
+  }
+}
+
+/**
+ * Job node preprocessing called from wildlife_trust_preprocess_node().
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_trust_job_node_preprocessing(&$variables, $node) {
+  $timestamp = $node->getCreatedTime();
+  $formatted_date = \Drupal::service('date.formatter')->format($timestamp, 'display_long_date');
+  $iso_date = \Drupal::service('date.formatter')->format($timestamp, 'custom', 'Y-m-d\TH:i:s') . 'Z';
+  // Display the date using theme datetime.
+  $variables['date'] = [
+    '#cache' => [
+      'contexts' => [
+        'timezone',
+      ],
+    ],
+    '#theme' => 'time',
+    '#text' => $formatted_date,
+    '#html' => FALSE,
+    '#attributes' => [
+      'datetime' => $iso_date,
+    ],
+  ];
+}
+
+/**
+ * Event node preprocessing called from wildlife_trust_preprocess_node().
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_trust_event_node_preprocessing(&$variables, $node) {
+  $variables['event_booking_link'] = '';
+
+  /** @var \Drupal\field\Entity\FieldConfig $booking_status */
+  $booking_status_field = $node->get('field_event_booking_status');
+  $variables['show_booking_link'] = TRUE;
+
+  if (!$booking_status_field->isEmpty()) {
+    $booking_status = $booking_status_field->first()->getString();
+
+    if (in_array($booking_status, ['cancelled', 'fully_booked'])) {
+      $variables['show_booking_link'] = FALSE;
+      $variables['content']['field_event_booking_url'] = [];
+    }
+  }
+
+  if ($variables['show_booking_link'] && isset($variables['content']['field_event_booking_url']) && isset($variables['content']['field_event_booking_url'][0])) {
+    $link = &$variables['content']['field_event_booking_url'][0];
+    $link['#title'] = t('Book')->render();
+    $link['#options']['attributes']['itemprop'] = 'url';
+    $link['#options']['attributes']['class'][] = 'button';
+    $link['#options']['attributes']['class'][] = 'event__book';
+    $variables['event_booking_link'] = $link;
+  }
+}
+
+/**
+ * Habitat node preprocessing called from wildlife_trust_preprocess_node().
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_trust_habitat_related_preprocessing(&$variables, $node) {
+  // If either related habitats view isn't present then do nothing.
+  if (empty($variables['content']['related_habitats_child_eva']) || empty($variables['content']['related_habitats_sibling_eva'])) {
+    return;
+  }
+
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $variables['content']['related_habitats_child_eva'][0]['#view'];
+  // Execute the View to see if there are any results.
+  $view->preExecute();
+  $view->execute($view->current_display);
+  // If there are results for child habitats, remove the sibling habitats view.
+  if (!empty($view->result)) {
+    $variables['content']['related_habitats_sibling_eva']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Helper function to preprocess nodes with a photos field.
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_trust_photos_preprocessing(&$variables, $node) {
+  $bundle = $node->bundle();
+  $photos_field = 'field_' . $bundle . '_photos';
+
+  // Only continue if there is more than one value and the node has this field.
+  if ($node->hasField($photos_field) && $node->get($photos_field)->count() > 1) {
+    $variables['#attached']['library'] = 'wildlife_trust/slick-field-default';
+  }
+}
+
+/**
+ * Helper function to preprocess grid teaser nodes.
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ * @param $view_mode
+ *   The view mode of the current node.
+ */
+function _wildlife_trust_grid_teasers_preprocessing(&$variables, $node, $view_mode) {
+  $grid_teasers = [
+    'habitat',
+    'species',
+  ];
+
+  if (in_array($node->getType(), $grid_teasers) && $view_mode == 'teaser') {
+    // Add the Grid Teaser class.
+    if ($variables['view_mode'] == 'teaser') {
+      $variables['attributes']['class'][] = 'node--view-mode-grid-teaser';
+    }
+
+    // Decide which heading tag to use.
+    $variables['header_tag'] = 'h2';
+
+    if (isset($variables['view'])) {
+      /** @var \Drupal\views\ViewExecutable $view */
+      $view = $variables['view'];
+      if ($view->id() == 'related_habitats') {
+        $variables['header_tag'] = 'h3';
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to preprocess nodes with header fields.
+ *
+ * @param $variables
+ *   The variables array from node preprocess.
+ * @param \Drupal\node\Entity\Node $node
+ */
+function _wildlife_trust_node_header_preprocessing(&$variables, $node) {
+  if ($node->hasField('field_header_type') && !empty($node->get('field_header_type')->first())) {
+    $header_type = $node->get('field_header_type')->first()->getValue();
+    $variables['node_header_attributes'] = ['class' => ['node__header']];
+    $variables['node_header_attributes']['class'][] = 'node__header--' . $header_type['value'];
+
+    if (in_array($header_type['value'], ['image', 'silhouette'])) {
+      $backgrounds_service = Drupal::service('wildlife_backgrounds.backgrounds_service');
+
+      switch ($header_type['value']) {
+        case 'image':
+          $background_image = $node->get('field_header_image');
+          if ($background_image->isEmpty()) {
+            return;
+          }
+          $backgrounds = $backgrounds_service->getResponsiveBackgroundImages($background_image);
+
+          if (!empty($backgrounds)) {
+            // Add responsive images library to spotlight.
+            $variables['node_header_attributes']['class'][] = 'responsive-component';
+            $variables['#attached']['library'][] = 'wildlife_trust/responsive-background-images';
+
+            // Add the default background style and loop through the other
+            // backgrounds to add those.
+            $variables['node_header_attributes']['style'] = 'background-image: url(' . $backgrounds['default'] . ');';
+
+            foreach ($backgrounds as $viewport => $background) {
+              $variables['node_header_attributes']['data-background-' . $viewport] = $background;
+            }
+          }
+          break;
+
+        case 'silhouette':
+          $silhouette_image = $node->get('field_header_silhouette');
+          $variables['header_silhouette'] = $backgrounds_service->getSilhouetteUrl($silhouette_image);
+          break;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_ENTITY().
+ */
+function wildlife_trust_preprocess_author(&$variables) {
+  $variables['#attached']['library'][] = 'wildlife_trust/author';
+}
+
+/**
+ * Implements hook_preprocess_ENTITY().
+ */
+function wildlife_trust_preprocess_media(&$variables) {
+  /** @var \Drupal\media_entity\Entity\Media $media */
+  $media = $variables['elements']['#media'];
+
+  switch ($media->bundle()) {
+    case 'audio':
+      $mp3_field = $media->get('field_audio_mp3');
+      $ogg_field = $media->get('field_audio_ogg');
+
+      if (!$mp3_field->isEmpty()) {
+        $mp3_values = $mp3_field->first()->getValue();
+        $variables['mp3'] = $mp3_values['uri'];
+      }
+
+      if (!$ogg_field->isEmpty()) {
+        $ogg_values = $mp3_field->first()->getValue();
+        $variables['ogg'] = $ogg_values['uri'];
+      }
+      break;
+
+    case 'video':
+      $media_label = $media->label();
+      $title = t('@provider video "@label"',
+        [
+          '@provider' => ucfirst($variables['content']['field_media_video'][0]['children']['#provider']),
+          '@label' => $media_label,
+        ]);
+      $variables['content']['field_media_video'][0]['children']['#attributes']['title'] = $title;
+      break;
+
+    case 'image':
+      if (!empty($variables['elements']['#link_uri'])) {
+        $url = \Drupal\Core\Url::fromUri($variables['elements']['#link_uri']);
+        $image = $variables['content']['field_media_image'];
+
+        // Replace the image with a link-wrapped version of the image.
+        $variables['content']['field_media_image'] = [
+          '#type' => 'link',
+          '#title' => $image,
+          '#url' => $url,
+          '#options' => array('html' => TRUE),
+        ];
+      }
+      break;
+  }
+}

@@ -1,0 +1,28 @@
+uuid: d44b9f23-ae22-4db5-aa94-bc2880f2c7a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_role_type
+    - node.type.job
+    - taxonomy.vocabulary.job_type
+id: node.job.field_job_role_type
+field_name: field_job_role_type
+entity_type: node
+bundle: job
+label: 'Role type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      job_type: job_type
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

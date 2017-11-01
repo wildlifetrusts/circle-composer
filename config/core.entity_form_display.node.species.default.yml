@@ -1,0 +1,332 @@
+uuid: 1e58a6a6-fbdd-4ccc-b273-909989349f88
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_image_browser
+    - field.field.node.species.field_further_content
+    - field.field.node.species.field_meta_tags
+    - field.field.node.species.field_species_about
+    - field.field.node.species.field_species_conservation
+    - field.field.node.species.field_species_did_you_know
+    - field.field.node.species.field_species_distribution
+    - field.field.node.species.field_species_habitats
+    - field.field.node.species.field_species_help
+    - field.field.node.species.field_species_identify
+    - field.field.node.species.field_species_listen
+    - field.field.node.species.field_species_photos
+    - field.field.node.species.field_species_scientific_name
+    - field.field.node.species.field_species_species
+    - field.field.node.species.field_species_statistics
+    - field.field.node.species.field_species_summary
+    - field.field.node.species.field_species_watch
+    - field.field.node.species.field_species_when_to_see
+    - node.type.species
+  module:
+    - entity_browser
+    - field_group
+    - metatag
+    - paragraphs
+    - path
+    - wildlife_admin
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_header
+        - group_main_content
+        - group_further_content
+      parent_name: ''
+      weight: 8
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_header:
+      children:
+        - field_species_photos
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Header
+    group_main_content:
+      children:
+        - field_species_scientific_name
+        - field_species_summary
+        - field_species_about
+        - field_species_identify
+        - field_species_distribution
+        - field_species_help
+        - field_species_statistics
+        - field_species_conservation
+        - field_species_did_you_know
+        - field_species_when_to_see
+        - group_listen
+        - group_watch
+        - field_species_habitats
+        - field_species_species
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Main content'
+    group_further_content:
+      children:
+        - field_further_content
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Further content'
+    group_listen:
+      children:
+        - field_species_listen
+      parent_name: group_main_content
+      weight: 18
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Listen
+    group_watch:
+      children:
+        - field_species_watch
+      parent_name: group_main_content
+      weight: 19
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Watch
+id: node.species.default
+targetEntityType: node
+bundle: species
+mode: default
+content:
+  colour_scheme:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_further_content:
+    weight: 19
+    settings:
+      title: Component
+      title_plural: Components
+      edit_mode: preview
+      add_mode: select
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: tweaked_entity_reference_paragraphs
+    region: content
+  field_meta_tags:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_species_about:
+    weight: 10
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_species_conservation:
+    weight: 15
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_species_did_you_know:
+    weight: 16
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_species_distribution:
+    type: string_textarea
+    weight: 12
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_species_habitats:
+    weight: 21
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_species_help:
+    type: string_textarea
+    weight: 13
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_species_identify:
+    type: string_textarea
+    weight: 11
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_species_listen:
+    type: entity_reference_paragraphs
+    weight: 19
+    settings:
+      title: 'Audio component'
+      title_plural: 'Audio components'
+      edit_mode: preview
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_species_photos:
+    weight: 7
+    settings:
+      entity_browser: media_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: teaser
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_species_scientific_name:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_species_species:
+    weight: 22
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_species_statistics:
+    type: string_textarea
+    weight: 14
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_species_summary:
+    weight: 9
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_species_watch:
+    type: entity_reference_paragraphs
+    weight: 20
+    settings:
+      title: 'Video component'
+      title_plural: 'Video components'
+      edit_mode: preview
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_species_when_to_see:
+    weight: 17
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  path:
+    type: path
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden:
+  langcode: true

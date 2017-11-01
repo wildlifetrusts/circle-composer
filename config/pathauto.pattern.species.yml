@@ -1,0 +1,23 @@
+uuid: 9fe35056-ea55-4588-ad8c-ba15465d8ad6
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: species
+label: 'Species (Term)'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'wildlife-explorer/[term:parents:join-path]/[term:name]'
+selection_criteria:
+  8c84fa62-37b0-4bd0-9817-03a2cef643f0:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      species: species
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: 8c84fa62-37b0-4bd0-9817-03a2cef643f0
+selection_logic: and
+weight: -5
+relationships: {  }

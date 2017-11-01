@@ -1,0 +1,19 @@
+uuid: d6930e43-ef69-487c-a86c-4f71f01390ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_sms_ts_and_cs
+    - node.type.trust
+id: node.trust.field_trust_sms_ts_and_cs
+field_name: field_trust_sms_ts_and_cs
+entity_type: node
+bundle: trust
+label: 'SMS terms and conditions'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

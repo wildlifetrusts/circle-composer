@@ -1,0 +1,19 @@
+uuid: e465f4f4-227b-4a2f-b440-bca54a15faeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_newsletter_title
+    - paragraphs.paragraphs_type.newsletter_sign_up
+id: paragraph.newsletter_sign_up.field_newsletter_title
+field_name: field_newsletter_title
+entity_type: paragraph
+bundle: newsletter_sign_up
+label: Title
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

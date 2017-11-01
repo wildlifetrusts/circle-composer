@@ -1,0 +1,15 @@
+uuid: 0fe7ac78-5973-438d-ae48-f2e22f65020c
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: example_wildlife_national
+label: 'Wildlife Example Content: National'
+description: 'Example content for the Wildlife Trusts National site.'
+source_type: csv
+module: null
+shared_configuration:
+  source:
+    key: default

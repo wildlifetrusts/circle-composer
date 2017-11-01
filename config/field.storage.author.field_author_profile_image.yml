@@ -1,0 +1,20 @@
+uuid: f6a23f18-0050-4e00-986f-76c71014e4a1
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+    - wildlife_author
+id: author.field_author_profile_image
+field_name: field_author_profile_image
+entity_type: author
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

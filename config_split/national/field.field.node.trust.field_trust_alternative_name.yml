@@ -1,0 +1,19 @@
+uuid: d6c85bae-a07a-454f-adc3-5ed2f2fd45fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trust_alternative_name
+    - node.type.trust
+id: node.trust.field_trust_alternative_name
+field_name: field_trust_alternative_name
+entity_type: node
+bundle: trust
+label: 'Alternative name'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

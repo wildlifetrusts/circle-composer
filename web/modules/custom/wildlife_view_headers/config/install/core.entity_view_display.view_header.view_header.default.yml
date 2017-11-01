@@ -1,0 +1,56 @@
+uuid: 22cc733e-a8fe-4c1b-82f2-184411f64ed8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.view_header.view_header.field_further_content
+    - field.field.view_header.view_header.field_header_image
+    - field.field.view_header.view_header.field_header_silhouette
+    - field.field.view_header.view_header.field_header_type
+    - field.field.view_header.view_header.field_header_view_title
+  module:
+    - entity_reference_revisions
+    - fences
+    - wildlife_view_headers
+id: view_header.view_header.default
+targetEntityType: view_header
+bundle: view_header
+mode: default
+content:
+  field_further_content:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_header_view_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: h2
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  field_header_image: true
+  field_header_silhouette: true
+  field_header_type: true
+  user_id: true

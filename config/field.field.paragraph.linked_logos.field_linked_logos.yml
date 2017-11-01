@@ -1,0 +1,51 @@
+uuid: 6523c707-b130-4ea9-ba22-34d4d4bea9e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_linked_logos
+    - paragraphs.paragraphs_type.linked_logo_item
+    - paragraphs.paragraphs_type.linked_logos
+  module:
+    - entity_reference_revisions
+id: paragraph.linked_logos.field_linked_logos
+field_name: field_linked_logos
+entity_type: paragraph
+bundle: linked_logos
+label: 'Linked logos'
+description: 'Add up to 5 logos.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      linked_logo_item: linked_logo_item
+    target_bundles_drag_drop:
+      attached_files:
+        weight: 9
+        enabled: false
+      image:
+        weight: 10
+        enabled: false
+      linked_logo_item:
+        enabled: true
+        weight: 11
+      linked_logos:
+        weight: 12
+        enabled: false
+      quick_links:
+        weight: 13
+        enabled: false
+      rich_text:
+        weight: 14
+        enabled: false
+      section:
+        weight: 15
+        enabled: false
+      video:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

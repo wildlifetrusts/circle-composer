@@ -1,0 +1,51 @@
+////
+/// @group Typesetting
+////
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500');
+
+/// The base font size for the site.
+$base-font-size:    18px;
+/// The base line height for the site.
+$base-line-height:  1.5rem;
+
+/// The font families for the site.
+$base-font-family:  'Rubik', sans-serif;
+$adelle-font-family:  'Adelle', serif;
+
+/// The base font color, to be used as the default throughout the site.
+$base-font-color: black;
+
+/// Font weights.
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+
+/// Modular scale base size.
+/// @link https://github.com/modularscale/modularscale-sass
+$ms-base: 1rem;
+/// Modular scale ratio.
+/// @link https://github.com/modularscale/modularscale-sass
+$ms-ratio: 1.25;
+@import "modularscale-sass/stylesheets/modular-scale";
+
+// Typesetting setup for vertical rhythm (see core/04_typesettings).
+// To turn on debugging us @include debug-vertical-alignment;
+
+/// The vertical grid unit. Margin, padding, and line-height are set to multiples
+/// of this value. This is the value that determines the baseline for our vertical
+/// rhythm. The default value of 8px allows more fine tuned designs that still
+/// obey vertical rhythm.
+$base-vertical-unit: 4px;
+
+/// The value that multiplies the $base-vertical-unit to get the $base-line-height.
+/// This gives type an ideal line-height.
+$base-line-multi: 7;
+
+/// Paragraph setting that you can turn on or off the indent of the first line
+/// of a new paragraph.
+$paragraph-indent: false;
+
+///  Paragraph setting that you can turn on or off to have your paragraphs ragged
+/// right or justified.
+$paragraph-justify: false;

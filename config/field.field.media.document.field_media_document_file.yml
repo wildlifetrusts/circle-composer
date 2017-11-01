@@ -1,0 +1,27 @@
+uuid: 30107a02-f40d-4f93-9c95-a5d16de86d75
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_document_file
+    - media_entity.bundle.document
+  module:
+    - file
+id: media.document.field_media_document_file
+field_name: field_media_document_file
+entity_type: media
+bundle: document
+label: File
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt rtf pdf doc xls ppt docx xlsx pptx pps odf kml zip png jpg gif'
+  max_filesize: '50 MB'
+  description_field: true
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

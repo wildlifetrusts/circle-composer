@@ -1,0 +1,19 @@
+uuid: d47211c5-241f-4aad-8b41-e365c744b0b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - wildlife_author
+id: author.field_author_twitter
+field_name: field_author_twitter
+entity_type: author
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

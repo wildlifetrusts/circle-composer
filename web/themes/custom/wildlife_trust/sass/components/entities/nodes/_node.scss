@@ -1,0 +1,119 @@
+.node__content {
+  @extend %clearfix;
+
+  .views-element-container {
+    clear: both;
+    overflow: hidden;
+  }
+}
+
+.node__header {
+  @extend .breakout;
+  overflow: hidden;
+  text-align: center;
+  background-color: palette(mono, x-dark);
+  color: palette(mono, x-light);
+  @include setType(10, 16px);
+
+  h1 {
+    margin-bottom: emRhythm(5, ms(3));
+  }
+
+  &--colour,
+  &--silhouette {
+    background-color: palette(primary);
+  }
+
+  &--silhouette {
+    position: relative;
+  }
+
+  &__silhouette {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-position: 50% 100%;
+    opacity: 0.15;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+  }
+
+  &--image {
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include text-shadow;
+  }
+
+  &--silhouette,
+  &--image {
+    .node--type-blog &,
+    .node--type-job &,
+    .node--type-news &,
+    .node--type-volunteer-opportunity & {
+      @include add-breakpoint('palm-and-up') {
+        min-height: 430px;
+        position: relative;
+
+        .inner {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+      }
+      @include add-breakpoint('lap-and-up') {
+        min-height: 564px;
+      }
+
+      @include add-breakpoint('desk-and-up') {
+        min-height: 651px;
+      }
+
+      @include add-breakpoint('desk-wide-and-up') {
+        min-height: 526px;
+      }
+    }
+  }
+
+}
+
+.node__header_inner {
+  @extend %constrain;
+  @include spacing('x-large', 'top');
+  @include spacing('x-large', 'bottom');
+  position: relative;
+  z-index: 2;
+}
+
+.node--view-mode-full {
+  .node__content {
+    > div:not(.is-unconstrained) {
+      @extend %content-narrow-constrain;
+    }
+  }
+}
+
+.node--preview:not(.node--view-mode-full) {
+  @include spacing('x-large', 'top');
+}
+
+.icon-external-orange {
+  width: 0.9em;
+  height: 1em;
+  display: inline-block;
+  margin-right: 0.5em;
+  background-size: 100% auto;
+
+  .node:not(.node--view-mode-map) & {
+    background-image: none;
+  }
+}

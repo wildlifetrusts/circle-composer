@@ -1,0 +1,27 @@
+name: Wildlife trust admin
+type: theme
+description: Admin theme for the Wildlife Trust website based on Seven.
+core: 8.x
+base theme: seven
+regions:
+  header: 'Header'
+  pre_content: 'Pre-content'
+  breadcrumb: Breadcrumb
+  highlighted: Highlighted
+  help: Help
+  content: Content
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  sidebar_first: 'First sidebar'
+regions_hidden:
+  - sidebar_first
+
+libraries:
+- wildlife_trust/admin-styles
+- wildlife_trust/admin-javascript
+
+libraries-override:
+  workbench/workbench.content:
+    css:
+      theme:
+        css/workbench.my-workbench.css: css/wildlife_trust_admin.my-workbench.css

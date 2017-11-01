@@ -1,0 +1,21 @@
+uuid: 8d28c16f-a68e-4067-a712-ac6bc91938aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_location
+id: location.field_location_grid_ref
+field_name: field_location_grid_ref
+entity_type: location
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

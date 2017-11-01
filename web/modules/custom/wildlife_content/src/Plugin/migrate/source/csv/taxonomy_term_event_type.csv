@@ -1,0 +1,7 @@
+tid,name,weight
+4001,Walk,0
+4002,Talk,1
+4003,Indoor Activity,2
+4004,Outdoor Activity,3
+4005,Volunteering,4
+4006,"Courses & Education",5

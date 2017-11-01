@@ -1,0 +1,75 @@
+uuid: 2080cb56-db43-43ed-a051-4ac2ce2868a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.video.field_media_caption
+    - field.field.media.video.field_media_video
+    - media_entity.bundle.video
+  module:
+    - fences
+    - field_group
+    - text
+    - video_embed_field
+third_party_settings:
+  field_group:
+    group_figure:
+      children:
+        - field_media_video
+        - field_media_caption
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: figure
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Figure
+id: media.video.default
+targetEntityType: media
+bundle: video
+mode: default
+content:
+  field_media_caption:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: figcaption
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: text_default
+    region: content
+  field_media_video:
+    weight: 1
+    label: hidden
+    settings:
+      responsive: true
+      width: 854
+      height: 480
+      autoplay: false
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: video_embed_field_video
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

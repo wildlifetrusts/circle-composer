@@ -1,0 +1,8 @@
+type: module
+name: Wildlife Silhouettes
+description: 'Provides useful form alterations and menu items for Silhouettes.'
+package: Wildlife
+core: 8.x
+dependencies:
+  - views
+  - media_entity

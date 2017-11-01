@@ -1,0 +1,18 @@
+uuid: c4843840-28db-46e6-ba8e-bf37af058fcc
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_author
+id: author.author.metatag
+field_name: metatag
+entity_type: author
+bundle: author
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

@@ -1,0 +1,42 @@
+uuid: f5c8b2f0-d4ec-4d12-a0ac-2f39c9e12404
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.media_entity_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: media_document_browser
+label: 'Media document browser'
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Add document'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  16d00e8c-5c20-4a60-b87c-fb50b5e8d3fe:
+    settings:
+      view: media_entity_browser
+      view_display: entity_browser_document
+      submit_text: 'Use selected'
+      auto_select: false
+    uuid: 16d00e8c-5c20-4a60-b87c-fb50b5e8d3fe
+    weight: 1
+    label: Browse
+    id: view
+  74debeb3-2fc7-4ed5-a36c-6d455fd4b3c1:
+    settings:
+      entity_type: media
+      bundle: document
+      form_mode: default
+      submit_text: 'Save document'
+    uuid: 74debeb3-2fc7-4ed5-a36c-6d455fd4b3c1
+    weight: 2
+    label: Upload
+    id: entity_form

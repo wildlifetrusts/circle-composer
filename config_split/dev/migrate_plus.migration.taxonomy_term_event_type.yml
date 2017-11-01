@@ -1,0 +1,29 @@
+uuid: b11006d2-42e4-4cce-8de2-57a78c348588
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: taxonomy_term_event_type
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Event Type (tags) from a source to taxonomy terms'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/taxonomy_term_event_type.csv
+  header_row_count: 1
+  keys:
+    - tid
+process:
+  vid:
+    plugin: default_value
+    default_value: event_type
+  name: name
+  weight: weight
+destination:
+  plugin: 'entity:taxonomy_term'
+migration_dependencies: {  }

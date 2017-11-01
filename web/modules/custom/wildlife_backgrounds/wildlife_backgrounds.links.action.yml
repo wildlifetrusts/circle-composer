@@ -1,0 +1,7 @@
+wildlife_backgrounds.add:
+  route_name: entity.media.add_form
+  route_parameters: { media_bundle: 'silhouette' }
+  title: 'Add silhouette'
+  weight: 10
+  appears_on:
+    - view.silhouettes.silhouettes_page_list

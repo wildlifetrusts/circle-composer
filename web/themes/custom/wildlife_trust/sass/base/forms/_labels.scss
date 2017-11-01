@@ -1,0 +1,10 @@
+label {
+  .form__item > & {
+    @at-root .form-wrapper > legend,
+    & {
+      display: block;
+      font-weight: $font-weight-regular;
+      margin-bottom: emRhythm(1, ms(0));
+    }
+  }
+}

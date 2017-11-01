@@ -1,0 +1,45 @@
+$top-bar-height: 45px;
+
+.l-header {
+  @extend %clearfix;
+  position: relative;
+  background-color: palette(mono, x-light);
+
+  @include add-breakpoint('desk-and-up') {
+    margin-top: $top-bar-height;
+  }
+}
+
+.l-top-bar {
+  @extend %clearfix;
+  background-color: palette(mono, x-dark);
+
+  @include add-breakpoint('desk-and-up') {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: $top-bar-height;
+
+    .l-region--topbar-social {
+      float: left;
+    }
+
+    .l-region--topbar-nav {
+      float: right;
+    }
+  }
+}
+
+.l-bottom-bar {
+  @include add-breakpoint('desk-and-up') {
+    display: flex;
+    align-items: stretch;
+  }
+}
+
+.l-region--branding {
+  @include add-breakpoint('desk-and-up') {
+    flex-grow: 1;
+  }
+}

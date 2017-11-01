@@ -1,0 +1,98 @@
+uuid: 98781b4c-5e75-4980-a8d3-d3beea2b802b
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: node_job_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Job data from a CSV source to nodes: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/node_job_national.csv
+  header_row_count: 1
+  keys:
+    - nid
+  constants:
+    text_format: rich_text
+    mod_state: published
+process:
+  type:
+    plugin: default_value
+    default_value: job
+  title: title
+  moderation_state: constants/mod_state
+  field_header_type: header_type
+  field_header_image/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: image
+    -
+      plugin: migration
+      migration:
+        - media_images_national
+  field_header_silhouette/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: silhouette
+    -
+      plugin: migration
+      migration:
+        - media_silhouettes_national
+  field_job_reference: ref
+  field_job_role_type:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: role_type
+    -
+      plugin: migration
+      migration: taxonomy_term_job_type
+  field_job_location/target_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: location
+    -
+      plugin: migration
+      migration:
+        - location_national
+  field_job_closing_date: closing_date
+  field_job_salary: salary
+  field_job_contract_type: contract
+  field_job_working_hours: hours
+  field_job_application_link/title: link_title
+  field_job_application_link/uri: link_url
+  field_job_summary: summary
+  field_job_contact_details/value: details
+  field_job_contact_details/format: constants/text_format
+  field_further_content:
+    -
+      plugin: explode
+      delimiter: '|'
+      source: components
+    -
+      plugin: migration
+      migration:
+        - paragraph_attached_files_national
+      no_stub: true
+    -
+      plugin: iterator
+      process:
+        target_id: '0'
+        target_revision_id: '1'
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - location_national
+    - media_images_national
+    - media_silhouettes_national
+    - paragraph_attached_files_national

@@ -1,0 +1,21 @@
+uuid: 7fd52a3d-3d7d-4bc1-8e2c-ae87f6fcf37f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voluntary_frequency
+    - node.type.volunteer_opportunity
+  module:
+    - options
+id: node.volunteer_opportunity.field_voluntary_frequency
+field_name: field_voluntary_frequency
+entity_type: node
+bundle: volunteer_opportunity
+label: Frequency
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

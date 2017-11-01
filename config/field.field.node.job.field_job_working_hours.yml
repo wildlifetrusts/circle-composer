@@ -1,0 +1,21 @@
+uuid: 92112e4e-c059-40e3-9f32-cf6a093beecd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_working_hours
+    - node.type.job
+  module:
+    - options
+id: node.job.field_job_working_hours
+field_name: field_job_working_hours
+entity_type: node
+bundle: job
+label: 'Working hours'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,16 @@
+uuid: 91a77e64-99de-4a79-8f8f-b6f4d798779c
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.silhouette
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: media.silhouette
+target_entity_type_id: media
+target_bundle: silhouette
+default_langcode: site_default
+language_alterable: false

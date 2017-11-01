@@ -1,0 +1,41 @@
+uuid: f82d6062-7e8b-4e01-9ab0-cc19d23ca92b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.node_hero
+    - field.field.media.image.field_media_caption
+    - field.field.media.image.field_media_image
+    - media_entity.bundle.image
+    - responsive_image.styles.node_hero
+  module:
+    - fences
+    - responsive_image
+id: media.image.node_hero
+targetEntityType: media
+bundle: image
+mode: node_hero
+content:
+  field_media_image:
+    weight: 0
+    label: hidden
+    settings:
+      responsive_image_style: node_hero
+      image_link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: responsive_image
+    region: content
+hidden:
+  created: true
+  field_media_caption: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

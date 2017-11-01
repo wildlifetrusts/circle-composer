@@ -1,0 +1,15 @@
+form {
+  @include setType(6, ms(0));
+
+  .description {
+    @include setType(4, ms(-1));
+    margin-top: emRhythm(2, ms(-1));
+  }
+}
+
+.container-inline {
+  div,
+  label {
+    display: inline-block;
+  }
+}

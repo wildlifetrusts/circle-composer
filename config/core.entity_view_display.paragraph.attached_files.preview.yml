@@ -1,0 +1,48 @@
+uuid: d0adb365-032a-411d-9f5d-aad6fc3fbf19
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.attached_files.field_attached_files_file
+    - field.field.paragraph.attached_files.field_attached_files_title
+    - paragraphs.paragraphs_type.attached_files
+  module:
+    - fences
+id: paragraph.attached_files.preview
+targetEntityType: paragraph
+bundle: attached_files
+mode: preview
+content:
+  field_attached_files_file:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: ul
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: entity_reference_entity_view
+    region: content
+  field_attached_files_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: string
+    region: content
+hidden: {  }

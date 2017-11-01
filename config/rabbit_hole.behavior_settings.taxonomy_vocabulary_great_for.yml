@@ -1,0 +1,9 @@
+uuid: 0b1cd8fa-e0ce-4c30-a6c1-86e72c55e8e9
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_vocabulary_great_for
+action: page_redirect_json
+allow_override: 0
+redirect: /events
+redirect_code: 301

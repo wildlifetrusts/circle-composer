@@ -1,0 +1,16 @@
+uuid: 4d6955ea-eff0-4270-8989-1b822e8a82af
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.great_for
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.great_for
+target_entity_type_id: taxonomy_term
+target_bundle: great_for
+default_langcode: site_default
+language_alterable: true

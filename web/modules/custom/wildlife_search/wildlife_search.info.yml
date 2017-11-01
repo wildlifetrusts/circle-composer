@@ -1,0 +1,7 @@
+name: Search
+type: module
+description: Provides search related enhancements and code.
+core: 8.x
+package: Wildlife
+dependencies:
+  - wildlife_google_api

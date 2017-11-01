@@ -1,0 +1,10 @@
+uuid: cffb8e70-238f-48a5-9948-5e50bb1e9de4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.map
+label: Map
+targetEntityType: node
+cache: true

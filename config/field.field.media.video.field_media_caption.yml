@@ -1,0 +1,27 @@
+uuid: fa4baa9d-3227-4abf-b1d8-cb50c3a81027
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_caption
+    - media_entity.bundle.video
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    rich_text: rich_text
+    full_html: '0'
+    plain_text: '0'
+id: media.video.field_media_caption
+field_name: field_media_caption
+entity_type: media
+bundle: video
+label: Credit/caption
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

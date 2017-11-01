@@ -1,0 +1,8 @@
+uuid: 769c7e2a-424d-4f7a-9bb0-49d69760a836
+langcode: en
+status: true
+dependencies: {  }
+id: flexible_block
+label: 'Flexible block'
+revision: 1
+description: 'A flexible block for use in the footer which has 3 sets of editable field groups: Quick links, rich text and Linked logos'

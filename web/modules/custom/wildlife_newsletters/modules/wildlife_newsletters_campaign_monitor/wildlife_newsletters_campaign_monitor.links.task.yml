@@ -1,0 +1,4 @@
+wildlife_newsletters_campaign_monitor.admin_task:
+  route_name: campaign_monitor_signup.admin
+  title: 'Campaign Monitor Signup Forms'
+  weight: 10

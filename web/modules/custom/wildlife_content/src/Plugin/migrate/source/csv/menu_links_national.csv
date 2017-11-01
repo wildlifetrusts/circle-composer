@@ -1,0 +1,26 @@
+mlid,link_title,description,menu_name,link_path,options,external,weight,expanded,enabled,plid,parent_link_path,updated,summary,image,featured
+1,"Wildlife","Learn more about Wildlife","main",/wildlife-explorer,"",0,0,1,1,,,,"<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>","103",0
+2,"Get Involved","Get involved with the Wildlife Trust","main","/","",0,1,1,1,,,,"<p>At vero eos et accusam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing elitr. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </p>","104",0
+3,"Explore","Explore the Wildlife Trust","main","/","",0,2,1,1,,,,"<p>Lorem ipsum dolor sit amet. Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>","104",0
+4,"About","About the Wildlife Trust","main","/","",0,3,1,1,,,,,,0
+5,"Support us","Support the Wildlife Trust","main","/","",0,4,1,1,,,,,,1
+6,Search for Wildlife,Search for Wildlife,"main",/wildlife-explorer/search,"",0,0,1,1,1,/wildlife-explorer,,,,0
+7,"Dolor sit ame","Example menu link","main","/","",0,1,1,1,1,/,,,,0
+8,"Sed diam nonumy","Example menu link","main","/","",0,2,1,1,1,/,,,,0
+9,"Consetetur sadipscing","Example menu link","main","/","",0,3,1,1,1,/,,,,0
+10,"Lorem ipsum","Example menu link","main","/","",0,0,1,1,2,/,,,,0
+11,"Dolor sit ame","Example menu link","main","/","",0,1,1,1,2,/,,,,0
+12,News,The latest news,"main",/news,"",0,0,1,1,4,/,,,,0
+13,Blog,Blog posts,"main",/blog,"",0,1,1,1,4,/,,,,0
+14,"Find a Trust","Locate your nearest Trust","auxiliary",/wildlife-trusts,"",0,0,0,1,,,,,,0
+15,"Events","Find an event","auxiliary",/events,"",0,1,0,1,,,,,,0
+16,"Shop","Buy things!","auxiliary","/","",0,2,0,1,,,,,,0
+17,"Accessibility","Find out about site accessibility","footer","/","",0,0,0,1,,,,,,0
+18,"Privacy Policy","Read the site Privacy Policy","footer","/","",0,1,0,1,,,,,,0
+19,"Terms & Conditions","Read the site Terms and conditions","footer","/","",0,2,0,1,,,,,,0
+20,"Contact Us","Get in Touch","footer","/","",0,3,0,1,,,,,,0
+21,Habitats,Habitats,main,/habitats,,0,3,1,1,1,/wildlife-explorer,,,,
+22,Jobs,Jobs,main,/jobs,,0,2,1,1,4,/,,,,0
+23,Volunteering Opportunities,Volunteering Opportunities,main,/volunteering-opportunities,,0,3,1,1,4,/,,,,0
+24,Habitat Search,Search for Habitats by keyword,main,/habitats/search,,0,0,1,1,21,/habitats,,,,
+25,Nature Reserves,Find a Reserve,main,/nature-reserves,,0,0,1,1,1,,,,,

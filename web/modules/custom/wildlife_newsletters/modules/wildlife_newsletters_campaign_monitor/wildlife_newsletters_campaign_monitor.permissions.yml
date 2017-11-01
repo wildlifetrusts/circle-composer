@@ -1,0 +1,4 @@
+administer campaign monitor signup entities:
+  title: 'Administer Campaign Monitor Signup Entities.'
+  description: 'Access the campaign_monitor signup configuration options.'
+  restrict access: TRUE

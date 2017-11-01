@@ -1,0 +1,4 @@
+services:
+  wildlife_paragraphs.statistics_count:
+    class: Drupal\wildlife_paragraphs\StatisticsCount
+    arguments: ['@database','@entity.manager','@current_route_match']

@@ -1,0 +1,178 @@
+uuid: 52ebc04d-5662-4105-b8c6-a35317df9609
+langcode: en
+status: true
+id: initial_species
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: initial
+label: 'Import initial species from JSON'
+source:
+  plugin: url
+  track_changes: false
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+  ids:
+    title:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: title
+      label: Title
+      selector: /title
+    -
+      name: created
+      label: Created
+      selector: /created
+    -
+      name: changed
+      label: Changed
+      selector: /changed
+    -
+      name: sticky
+      label: Sticky
+      selector: /sticky
+    -
+      name: promote
+      label: Promote
+      selector: /promote
+    -
+      name: default_langcode
+      label: 'Default Langcode'
+      selector: /default_langcode
+    -
+      name: path
+      label: Path
+      selector: /path
+    -
+      name: uid
+      label: Uid
+      selector: /uid
+    -
+      name: field_species_about
+      label: About
+      selector: /field_species_about
+    -
+      name: field_species_did_you_know
+      label: 'Did you know'
+      selector: /field_species_did_you_know
+    -
+      name: field_species_distribution
+      label: Distribution
+      selector: /field_species_distribution
+    -
+      name: field_species_help
+      label: Help
+      selector: /field_species_help
+    -
+      name: field_species_identify
+      label: Identify
+      selector: /field_species_identify
+    -
+      name: field_species_scientific_name
+      label: 'Scientific name'
+      selector: /field_species_scientific_name
+    -
+      name: field_species_statistics
+      label: Statistics
+      selector: /field_species_statistics
+    -
+      name: field_species_summary
+      label: Summary
+      selector: /field_species_summary
+    -
+      name: field_species_when_to_see
+      label: 'When to see'
+      selector: /field_species_when_to_see
+    -
+      name: field_species_habitats
+      label: Habitats
+      selector: /field_species_habitats
+    -
+      name: field_species_conservation
+      label: Conservation
+      selector: /field_species_conservation
+    -
+      name: field_species_species
+      label: Species
+      selector: /field_species_species
+    -
+      name: field_further_content
+      label: 'Further content'
+      selector: /field_further_content
+    -
+      name: field_species_listen
+      label: Listen
+      selector: /field_species_listen
+    -
+      name: field_species_watch
+      label: Watch
+      selector: /field_species_watch
+    -
+      name: field_species_photos
+      label: Photos
+      selector: /field_species_photos
+process:
+  type:
+    plugin: default_value
+    default_value: species
+  uuid: uuid
+  title: title
+  created: created
+  changed: changed
+  status:
+    plugin: default_value
+    default_value: 1
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  sticky: sticky
+  promote: promote
+  default_langcode: default_langcode
+  path: path
+  field_species_about: field_species_about
+  field_species_did_you_know: field_species_did_you_know
+  field_species_distribution: field_species_distribution
+  field_species_help: field_species_help
+  field_species_identify: field_species_identify
+  field_species_scientific_name: field_species_scientific_name
+  field_species_statistics: field_species_statistics
+  field_species_summary: field_species_summary
+  field_species_when_to_see: field_species_when_to_see
+  field_species_conservation: field_species_conservation
+  field_species_species:
+    plugin: entity_generate
+    source: field_species_species
+    value_key: name
+    bundle_key: vid
+    bundle: species
+    entity_type: taxonomy_term
+    ignore_case: true
+  field_species_habitats:
+    plugin: entity_generate
+    source: field_species_habitats
+    value_key: title
+    bundle_key: type
+    bundle: habitat
+    entity_type: node
+    ignore_case: true
+  field_further_content:
+    plugin: wildlife_sharing_paragraph_lookup
+    source: field_further_content
+  field_species_listen:
+    plugin: wildlife_sharing_paragraph_lookup
+    source: field_species_listen
+  field_species_watch:
+    plugin: wildlife_sharing_paragraph_lookup
+    source: field_species_watch
+  field_species_photos:
+    plugin: wildlife_sharing_id_entity_lookup
+    value_key: uuid
+    source: field_species_photos
+  uid:
+    plugin: wildlife_sharing_user
+destination:
+  plugin: 'entity:node'

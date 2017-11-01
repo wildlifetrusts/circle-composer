@@ -1,0 +1,242 @@
+<?php
+
+/**
+ * @file
+ * The module file for wildlife_paragraphs.
+ */
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+module_load_include('inc', 'wildlife_paragraphs', 'wildlife_paragraphs.form_alter');
+module_load_include('inc', 'wildlife_paragraphs', 'wildlife_paragraphs.preprocess_paragraph');
+module_load_include('inc', 'wildlife_paragraphs', 'wildlife_paragraphs.preprocess_field');
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function wildlife_paragraphs_field_widget_form_alter(&$element, &$form_state, $context) {
+  /** @var \Drupal\Core\Field\FieldItemList $items */
+  $items = $context['items'];
+
+  /** @var \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $parent */
+  $parent = $items->getParent();
+  $field_name = $items->getName();
+  $parent_entity = $parent->getValue();
+
+  if ($parent && $parent_entity->getEntityTypeId() == 'paragraph') {
+    $field_parents = $context['form']['#parents'];
+    $parent_entity_type = $parent->getValue()->getType();
+
+    switch ($parent_entity_type) {
+      case 'quick_links':
+        // Quick links - remove Title field if it's part of a Footer flexible block.
+        _wildlife_paragraphs_quick_links_widget_form_alterations($element, $form_state, $context, $field_parents, $field_name);
+        break;
+
+      case 'audio':
+      case 'image':
+      case 'video':
+        // Only add the states if we are looking at paragraph children of types
+        // image or video and they are one of the two fields being targeted.
+        _wildlife_paragraphs_image_video_widget_form_alterations($element, $form_state, $context, $field_parents, $field_name, $items, $parent);
+        break;
+
+      case 'spotlight':
+        // Adds states for the Spotlight widget.
+        _wildlife_paragraphs_spotlight_widget_form_alterations($element, $form_state, $context, $field_parents, $field_name);
+        break;
+
+      case 'headline_hero':
+        // Show and/or hide image, silhouette and call to action fields on headline
+        // hero paragraphs based on which options have been selected.
+        _wildlife_paragraphs_headline_hero_form_alterations($element, $form_state, $context, $field_parents, $field_name);
+        break;
+
+      case 'statistic_item':
+        // Adds states for the Statistics widget.
+        _wildlife_paragraphs_statistics_widget_form_alterations($element, $form_state, $context, $field_parents, $field_name);
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function wildlife_paragraphs_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  if ($entity_type->id() == 'paragraph') {
+    switch ($bundle) {
+      case 'audio':
+      case 'image':
+      case 'video':
+        // Add constraint to accompanying text checkbox.
+        $fields['field_' . $bundle . '_accompanying_text']->addConstraint('AccompanyingText', []);
+        break;
+
+      case 'spotlight':
+        // Add constraint to Spotlight Image field.
+        $fields['field_spotlight_image']->addConstraint('SpotlightImage', []);
+        $fields['field_spotlight_silhouette']->addConstraint('SpotlightImage', []);
+        break;
+
+      case 'statistic_item':
+        // Add constraint to Spotlight Image field.
+        $fields['field_statistic_static_type']->addConstraint('StatisticStatic', []);
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_view_mode_alter().
+ */
+function wildlife_paragraphs_entity_view_mode_alter(&$view_mode, EntityInterface $entity, $context) {
+  $type = $entity->getEntityTypeId();
+  $bundle = $entity->bundle();
+
+  if ($type == 'paragraph' && $view_mode == 'default') {
+    switch ($bundle) {
+      // Swap the view modes for Image paragraphs depending on the whether the extra
+      // wide or accompanying text fields have been checked (this is important for
+      // the user of responsive images).
+      case 'image':
+        $extra_wide = $entity->get('field_' . $bundle . '_extra_wide')->first()->getValue();
+        $accompanying_text = $entity->get('field_' . $bundle . '_accompanying_text')->first()->getValue();
+
+        if ($extra_wide['value'] && ($accompanying_text['value'])) {
+          $view_mode = 'wide_split';
+        }
+        else if ($extra_wide['value']) {
+          $view_mode = 'wide';
+        }
+        else if ($accompanying_text['value']) {
+          $view_mode = 'split';
+        }
+        break;
+
+      // For cases where there are more than 2 images in a gallery, us the JS
+      // gallery view mode.
+      case 'image_gallery':
+        $gallery_items_count = $entity->get('field_gallery_items')->count();
+
+        if ($gallery_items_count > 2) {
+          $view_mode = 'js_gallery';
+        }
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function wildlife_paragraphs_paragraph_view(&$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  $bundle = $entity->bundle();
+
+  // Video and Audio paragraphs only have one view mode (as opposed to images)
+  // so when the "accompanying text" field is unchecked, the rich text field is
+  // unset manually here.
+  if (in_array($bundle, ['audio', 'video'])) {
+    $accompanying_text = $entity->get('field_' . $bundle . '_accompanying_text');
+
+    if ($accompanying_text->isEmpty()) {
+      unset($build['field_' . $bundle . '_rich_text']);
+    }
+    else {
+      $accompanying_text = $accompanying_text->first()->getValue();
+      if (!$accompanying_text['value']) {
+        unset($build['field_' . $bundle . '_rich_text']);
+      }
+    }
+  }
+
+  if ($bundle == 'statistic_item') {
+    $statistic_type = $entity->get('field_statistic_type')->first()->getString();
+
+    if ($statistic_type == 'static') {
+      unset($build['field_statistic_dynamic_type']);
+    }
+    else {
+      unset($build['field_statistic_static_type']);
+      unset($build['field_statistic_static_number']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function wildlife_paragraphs_preprocess_paragraph(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+
+  switch ($bundle) {
+    case 'linked_logo_item':
+      _wildlife_paragraphs_preprocess_linked_logo_item($variables, $paragraph);
+      break;
+
+    case 'headline_hero':
+      _wildlife_paragraphs_preprocess_headline_hero($variables, $paragraph);
+      break;
+
+    case 'spotlight_group':
+      _wildlife_paragraphs_preprocess_spotlight_group($variables, $paragraph);
+      break;
+
+    case 'spotlight':
+      _wildlife_paragraphs_preprocess_spotlight($variables, $paragraph);
+      break;
+
+    case 'statistic_item':
+      _wildlife_paragraphs_preprocess_statistic_item($variables, $paragraph);
+      break;
+
+    case 'image_gallery_item':
+      _wildlife_paragraphs_preprocess_image_gallery_item($variables, $paragraph);
+      break;
+
+    case 'image':
+      _wildlife_paragraphs_preprocess_image($variables, $paragraph);
+      break;
+  }
+
+  $paragraphs_with_no_margins = [
+    'headline_hero',
+    'spotlight_group',
+    'spotlight',
+    'accordion_item',
+    'statistics',
+    'statistic_item',
+    'image_gallery_item',
+  ];
+
+  if (in_array($bundle, $paragraphs_with_no_margins)) {
+    $variables['attributes']['class'][] = 'paragraph--no-margin';
+  }
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function wildlife_paragraphs_preprocess_field(&$variables, $hook) {
+  $element = $variables['element'];
+  $field_name = $element['#field_name'];
+
+  switch ($field_name) {
+    case 'field_headline_hero_search':
+      _wildlife_paragraphs_preprocess_field_headline_hero_search($variables, $element);
+      break;
+
+    case 'field_spotlight_title':
+      _wildlife_paragraphs_preprocess_field_spotlight_title($variables, $element);
+      break;
+
+    case 'field_gallery_items':
+      _wildlife_paragraphs_preprocess_field_gallery_items($variables, $element);
+      break;
+  }
+}

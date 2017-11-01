@@ -1,0 +1,20 @@
+uuid: ef61b401-096e-40e8-a2f3-e5765685efe9
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_hierarchy
+    - node
+id: node.field_habitat_parent
+field_name: field_habitat_parent
+entity_type: node
+type: entity_reference_hierarchy
+settings:
+  target_type: node
+module: entity_hierarchy
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

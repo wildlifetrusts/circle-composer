@@ -1,0 +1,42 @@
+uuid: c9ab5747-1e1f-4e27-a9a5-fb0de91bb42f
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.media_entity_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: media_audio_browser
+label: 'Media audio browser'
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Add audio'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  c0c83afd-b61e-4abb-bf95-1c01022aa038:
+    settings:
+      view: media_entity_browser
+      view_display: entity_browser_audio
+      submit_text: 'Add selected'
+      auto_select: false
+    uuid: c0c83afd-b61e-4abb-bf95-1c01022aa038
+    weight: 1
+    label: Browse
+    id: view
+  18c7d8dd-8599-47d0-968f-8031b4a4f0ef:
+    settings:
+      entity_type: media
+      bundle: audio
+      form_mode: default
+      submit_text: 'Save audio'
+    uuid: 18c7d8dd-8599-47d0-968f-8031b4a4f0ef
+    weight: 2
+    label: Add
+    id: entity_form

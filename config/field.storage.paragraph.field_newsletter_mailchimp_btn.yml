@@ -1,0 +1,21 @@
+uuid: 9681605d-0cec-4a92-bee5-6fcb57ce0596
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_newsletter_mailchimp_btn
+field_name: field_newsletter_mailchimp_btn
+entity_type: paragraph
+type: string
+settings:
+  max_length: 100
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

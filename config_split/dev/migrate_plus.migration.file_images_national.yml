@@ -1,0 +1,42 @@
+uuid: 84d9807a-8293-4370-a1c6-6e27d42cdb0f
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildlife_content
+id: file_images_national
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: example_wildlife_national
+label: 'Migrate Images: National'
+source:
+  plugin: csv
+  path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/csv/media_images_national.csv
+  constants:
+    source_base_path: ./modules/custom/wildlife_content/src/Plugin/migrate/source/files/images
+  header_row_count: 1
+  keys:
+    - fid
+process:
+  source_full_path:
+    -
+      plugin: concat
+      delimiter: /
+      source:
+        - constants/source_base_path
+        - filepath
+    -
+      plugin: urlencode
+  fid: fid
+  filename: filename
+  uri:
+    plugin: file_copy
+    source:
+      - '@source_full_path'
+      - uri
+destination:
+  plugin: 'entity:file'
+migration_dependencies: null

@@ -1,0 +1,4990 @@
+uuid: c5220ba1-191c-4921-9899-d989c0995315
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.location.field_location_lat_long
+    - field.storage.node.field_reserve_lat_long
+    - search_api.index.location
+    - taxonomy.vocabulary.event_type
+    - taxonomy.vocabulary.job_type
+    - taxonomy.vocabulary.local_group
+    - taxonomy.vocabulary.opportunity_type
+    - taxonomy.vocabulary.tag_categories
+  module:
+    - node
+    - search_api
+    - search_api_views_taxonomy
+    - user
+    - views_infinite_scroll
+    - wildlife_field_formatters
+    - wildlife_location
+    - wildlife_search
+id: location_search
+label: 'Location Search'
+module: views
+description: 'Various location based searched.'
+tag: ''
+base_table: search_api_index_location
+base_field: search_api_id
+core: 8.x
+display:
+  default:
+    display_plugin: default
+    id: default
+    display_title: Master
+    position: 0
+    display_options:
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: none
+        options: {  }
+      query:
+        type: views_query
+        options:
+          bypass_access: false
+          skip_access: true
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: 'See all'
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 10
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Load More'
+            automatically_load_content: false
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: remote_search_api
+        options:
+          view_modes:
+            'entity:node':
+              event: teaser
+              job: teaser
+              reserve: teaser
+              trust: full
+              volunteer_opportunity: teaser
+      fields:
+        title:
+          id: title
+          table: search_api_datasource_location_entity_node
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+          entity_type: node
+          plugin_id: search_api_field
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            trust: trust
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+        location_1:
+          id: location_distance
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_distance_op
+            label: 'Location (distance)'
+            description: ''
+            use_operator: false
+            operator: location_distance_op
+            identifier: location_distance
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: true
+          group_info:
+            label: 'Distance from search location'
+            description: ''
+            identifier: location_distance
+            optional: false
+            widget: select
+            multiple: false
+            remember: false
+            default_group: '50'
+            default_group_multiple: {  }
+            group_items:
+              5:
+                title: '5 miles'
+                operator: '='
+                value:
+                  value: '5'
+                  min: ''
+                  max: ''
+              10:
+                title: '10 miles'
+                operator: '='
+                value:
+                  value: '10'
+                  min: ''
+                  max: ''
+              25:
+                title: '25 miles'
+                operator: '='
+                value:
+                  value: '25'
+                  min: ''
+                  max: ''
+              50:
+                title: '50 miles'
+                operator: '='
+                value:
+                  value: '50'
+                  min: ''
+                  max: ''
+              100:
+                title: '100 miles'
+                operator: '='
+                value:
+                  value: '100'
+                  min: ''
+                  max: ''
+          plugin_id: search_api_numeric
+      sorts: {  }
+      title: Trusts
+      header: {  }
+      footer: {  }
+      empty: {  }
+      relationships: {  }
+      arguments: {  }
+      display_extenders: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      css_class: has-visible-filters
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
+      tags: {  }
+  event_reserve:
+    display_plugin: page
+    id: event_reserve
+    display_title: 'Things to do near me: Reserves'
+    position: 6
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'Things to do near me'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        pager: false
+        exposed_form: false
+        sorts: false
+        header: false
+        css_class: false
+        empty: false
+        style: false
+        row: false
+        fields: false
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            reserve: reserve
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      pager:
+        type: some
+        options:
+          items_per_page: 10
+          offset: 0
+      path: explore-near-me
+      exposed_form:
+        type: input_required_not_empty
+        options:
+          submit_button: Filter
+          reset_button: false
+          reset_button_label: 'See all'
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: '<p>Enter your location to find Events and Nature Reserves near you.</p>'
+          text_input_required_format: rich_text
+      sorts: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<h2>Visit a Nature Reserve</h2>'
+            format: rich_text
+          plugin_id: text
+      css_class: ''
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<p>Unfortunately, no reserves could be found for your search.</p>'
+            format: rich_text
+          plugin_id: text
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: remote_search_api
+        options:
+          view_modes:
+            'entity:node':
+              event: teaser
+              job: teaser
+              reserve: teaser
+              trust: full
+              volunteer_opportunity: teaser
+      fields: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - user.permissions
+      tags: {  }
+  event_reserve_event:
+    display_plugin: attachment
+    id: event_reserve_event
+    display_title: 'Things to do near me: Events'
+    position: 7
+    display_options:
+      display_extenders: {  }
+      displays:
+        event_reserve: event_reserve
+      attachment_position: after
+      inherit_exposed_filters: true
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+        field_event_date_end:
+          id: field_event_date_end
+          table: search_api_index_location
+          field: field_event_date_end
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: today
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_date
+      defaults:
+        filters: false
+        filter_groups: false
+        exposed_form: false
+        sorts: false
+        header: false
+        css_class: false
+        footer: false
+        empty: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      exposed_form:
+        type: input_required_not_empty
+        options:
+          submit_button: Filter
+          reset_button: false
+          reset_button_label: 'See all'
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: ''
+          text_input_required_format: rich_text
+      display_description: ''
+      sorts:
+        field_event_date:
+          id: field_event_date
+          table: search_api_index_location
+          field: field_event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<h2>Attend an Event</h2>'
+            format: rich_text
+          plugin_id: text
+      css_class: ''
+      footer: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<p>Unfortunately, no events could be found for your search.</p>'
+            format: rich_text
+          plugin_id: text
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user.permissions
+      tags: {  }
+  events:
+    display_plugin: page
+    id: events
+    display_title: Events
+    position: 2
+    display_options:
+      display_extenders: {  }
+      title: Events
+      defaults:
+        title: false
+        pager: true
+        filters: false
+        filter_groups: false
+        relationships: false
+        css_class: true
+        empty: false
+        sorts: false
+      display_description: ''
+      path: events
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_event_type:
+          id: field_event_type
+          table: search_api_index_location
+          field: field_event_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_type_op
+            label: Category
+            description: ''
+            use_operator: false
+            operator: field_event_type_op
+            identifier: type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: event_type
+          hierarchy: false
+          error_message: true
+          plugin_id: search_api_term
+        field_event_tags:
+          id: field_event_tags
+          table: search_api_index_location
+          field: field_event_tags
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_tags_op
+            label: 'Event type'
+            description: ''
+            use_operator: false
+            operator: field_event_tags_op
+            identifier: tags
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: tag_categories
+          hierarchy: false
+          error_message: true
+          plugin_id: search_api_term
+        field_event_suitable_for:
+          id: field_event_suitable_for
+          table: search_api_index_location
+          field: field_event_suitable_for
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_suitable_for_op
+            label: 'Suitable for'
+            description: ''
+            use_operator: false
+            operator: field_event_suitable_for_op
+            identifier: suitable_for
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_event_local_group:
+          id: field_event_local_group
+          table: search_api_index_location
+          field: field_event_local_group
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_local_group_op
+            label: 'Local group'
+            description: ''
+            use_operator: false
+            operator: field_event_local_group_op
+            identifier: local_group
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: local_group
+          hierarchy: false
+          error_message: true
+          plugin_id: search_api_term
+        field_event_date_end:
+          id: field_event_date_end
+          table: search_api_index_location
+          field: field_event_date_end
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_date_end_op
+            label: 'From date'
+            description: ''
+            use_operator: false
+            operator: field_event_date_end_op
+            identifier: date_from
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_date
+        field_event_date:
+          id: field_event_date
+          table: search_api_index_location
+          field: field_event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_date_op
+            label: 'To date'
+            description: ''
+            use_operator: false
+            operator: field_event_date_op
+            identifier: date_to
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_date
+        location_1:
+          id: location_distance
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_distance_op
+            label: 'Location (distance)'
+            description: ''
+            use_operator: false
+            operator: location_distance_op
+            identifier: location_distance
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: true
+          group_info:
+            label: 'Distance from search location'
+            description: ''
+            identifier: location_distance
+            optional: false
+            widget: select
+            multiple: false
+            remember: false
+            default_group: '50'
+            default_group_multiple: {  }
+            group_items:
+              5:
+                title: '5 miles'
+                operator: '='
+                value:
+                  value: '5'
+                  min: ''
+                  max: ''
+              10:
+                title: '10 miles'
+                operator: '='
+                value:
+                  value: '10'
+                  min: ''
+                  max: ''
+              25:
+                title: '25 miles'
+                operator: '='
+                value:
+                  value: '25'
+                  min: ''
+                  max: ''
+              50:
+                title: '50 miles'
+                operator: '='
+                value:
+                  value: '50'
+                  min: ''
+                  max: ''
+              100:
+                title: '100 miles'
+                operator: '='
+                value:
+                  value: '100'
+                  min: ''
+                  max: ''
+          plugin_id: search_api_numeric
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+        field_event_date_end_1:
+          id: field_event_date_end_1
+          table: search_api_index_location
+          field: field_event_date_end
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: today
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_date
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      relationships: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<p>Sorry, there are no events which match your search criteria or filters.</p>'
+            format: rich_text
+          plugin_id: text
+      sorts:
+        field_event_date:
+          id: field_event_date
+          table: search_api_index_location
+          field: field_event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - user.permissions
+      tags: {  }
+  events_map:
+    display_plugin: attachment
+    id: events_map
+    display_title: 'Events Map'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      title: 'Events Map'
+      defaults:
+        title: false
+        pager: false
+        filters: false
+        filter_groups: false
+        relationships: false
+        css_class: false
+        empty: false
+        sorts: false
+        style: false
+        row: false
+        fields: false
+      display_description: ''
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_event_type:
+          id: field_event_type
+          table: search_api_index_location
+          field: field_event_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_type_op
+            label: 'Event type'
+            description: ''
+            use_operator: false
+            operator: field_event_type_op
+            identifier: type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: event_type
+          hierarchy: false
+          error_message: true
+          plugin_id: search_api_term
+        field_event_suitable_for:
+          id: field_event_suitable_for
+          table: search_api_index_location
+          field: field_event_suitable_for
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_suitable_for_op
+            label: 'Suitable for'
+            description: ''
+            use_operator: false
+            operator: field_event_suitable_for_op
+            identifier: suitable_for
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_event_local_group:
+          id: field_event_local_group
+          table: search_api_index_location
+          field: field_event_local_group
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_local_group_op
+            label: 'Local group'
+            description: ''
+            use_operator: false
+            operator: field_event_local_group_op
+            identifier: local_group
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: local_group
+          hierarchy: false
+          error_message: true
+          plugin_id: search_api_term
+        field_event_tags:
+          id: field_event_tags
+          table: search_api_index_location
+          field: field_event_tags
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_tags_op
+            label: Tags
+            description: ''
+            use_operator: false
+            operator: field_event_tags_op
+            identifier: tags
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: tag_categories
+          hierarchy: false
+          error_message: true
+          plugin_id: search_api_term
+        field_event_date_end:
+          id: field_event_date_end
+          table: search_api_index_location
+          field: field_event_date_end
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_date_end_op
+            label: 'From date'
+            description: ''
+            use_operator: false
+            operator: field_event_date_end_op
+            identifier: date_from
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_date
+        field_event_date:
+          id: field_event_date
+          table: search_api_index_location
+          field: field_event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_event_date_op
+            label: 'To date'
+            description: ''
+            use_operator: false
+            operator: field_event_date_op
+            identifier: date_to
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_date
+        location_1:
+          id: location_distance
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_distance_op
+            label: 'Location (distance)'
+            description: ''
+            use_operator: false
+            operator: location_distance_op
+            identifier: location_distance
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: true
+          group_info:
+            label: 'Distance from search location'
+            description: ''
+            identifier: location_distance
+            optional: false
+            widget: select
+            multiple: false
+            remember: false
+            default_group: '50'
+            default_group_multiple: {  }
+            group_items:
+              5:
+                title: '5 miles'
+                operator: '='
+                value:
+                  value: '5'
+                  min: ''
+                  max: ''
+              10:
+                title: '10 miles'
+                operator: '='
+                value:
+                  value: '10'
+                  min: ''
+                  max: ''
+              25:
+                title: '25 miles'
+                operator: '='
+                value:
+                  value: '25'
+                  min: ''
+                  max: ''
+              50:
+                title: '50 miles'
+                operator: '='
+                value:
+                  value: '50'
+                  min: ''
+                  max: ''
+              100:
+                title: '100 miles'
+                operator: '='
+                value:
+                  value: '100'
+                  min: ''
+                  max: ''
+          plugin_id: search_api_numeric
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+        field_event_date_end_1:
+          id: field_event_date_end_1
+          table: search_api_index_location
+          field: field_event_date_end
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: today
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_date
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      relationships:
+        field_event_reserve:
+          id: field_event_reserve
+          table: search_api_datasource_location_entity_node
+          field: field_event_reserve
+          relationship: none
+          group_type: group
+          admin_label: 'Event Reserve'
+          required: false
+          skip_access: false
+          entity_type: node
+          plugin_id: search_api
+        field_event_location:
+          id: field_event_location
+          table: search_api_datasource_location_entity_node
+          field: field_event_location
+          relationship: none
+          group_type: group
+          admin_label: 'Event Location'
+          required: false
+          skip_access: false
+          entity_type: node
+          plugin_id: search_api
+      empty: {  }
+      sorts:
+        field_event_date:
+          id: field_event_date
+          table: search_api_index_location
+          field: field_event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+      displays:
+        events: events
+      inherit_exposed_filters: true
+      inherit_arguments: false
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: remote_search_api
+        options:
+          view_modes:
+            'entity:node':
+              event: gmap_point
+              job: default
+              reserve: default
+              trust: default
+              volunteer_opportunity: default
+      pager:
+        type: none
+        options:
+          offset: 0
+      fields:
+        type:
+          id: type
+          table: search_api_datasource_location_entity_node
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: div
+          element_class: content-type
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: false
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+            display_methods:
+              node_type:
+                display_method: id
+          entity_type: node
+          plugin_id: search_api_field
+        nid:
+          id: nid
+          table: search_api_datasource_location_entity_node
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: div
+          element_class: nid
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: false
+          fallback_handler: search_api_numeric
+          fallback_options:
+            set_precision: false
+            precision: 0
+            decimal: .
+            format_plural: false
+            format_plural_string: "1\x03@count"
+            prefix: ''
+            suffix: ''
+            link_to_item: false
+            multi_separator: ', '
+            format_plural_values:
+              - '1'
+              - '@count'
+          entity_type: node
+          plugin_id: search_api_field
+        field_reserve_lat_long:
+          id: field_reserve_lat_long
+          table: search_api_entity_node
+          field: field_reserve_lat_long
+          relationship: field_event_reserve
+          group_type: group
+          admin_label: 'Reserve Lat'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: geofield_latlon_single
+          settings:
+            output_format: decimal
+            single_value: lat
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+          entity_type: node
+          plugin_id: search_api_field
+        field_reserve_lat_long_1:
+          id: field_reserve_lat_long_1
+          table: search_api_entity_node
+          field: field_reserve_lat_long
+          relationship: field_event_reserve
+          group_type: group
+          admin_label: 'Reserve Lon'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: geofield_latlon_single
+          settings:
+            output_format: decimal
+            single_value: lng
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+          entity_type: node
+          plugin_id: search_api_field
+        field_location_lat_long:
+          id: field_location_lat_long
+          table: search_api_entity_location
+          field: field_location_lat_long
+          relationship: field_event_location
+          group_type: group
+          admin_label: 'Location Lat'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: '0'
+          element_class: ''
+          element_label_type: '0'
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: '0'
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: geofield_latlon_single
+          settings:
+            output_format: decimal
+            single_value: lat
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+          entity_type: location
+          plugin_id: search_api_field
+        field_location_lat_long_1:
+          id: field_location_lat_long_1
+          table: search_api_entity_location
+          field: field_location_lat_long
+          relationship: field_event_location
+          group_type: group
+          admin_label: 'Location Lon'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: geofield_latlon_single
+          settings:
+            output_format: decimal
+            single_value: lng
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+          entity_type: location
+          plugin_id: search_api_field
+        title:
+          id: title
+          table: search_api_datasource_location_entity_node
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+          entity_type: node
+          plugin_id: search_api_field
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<span class="map-data__item" data-lat="{{ field_reserve_lat_long }}{{ field_location_lat_long }}" data-lng="{{ field_reserve_lat_long_1 }}{{ field_location_lat_long_1 }}" data-type="{{ type }}" data-nid="{{ nid }}" data-title="{{ title }}" />'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: '0'
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: '0'
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
+      css_class: ''
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
+        - user.permissions
+      tags:
+        - 'config:field.storage.location.field_location_lat_long'
+        - 'config:field.storage.node.field_reserve_lat_long'
+  jobs:
+    display_plugin: page
+    id: jobs
+    display_title: Jobs
+    position: 3
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      path: jobs
+      defaults:
+        pager: true
+        filters: false
+        filter_groups: false
+        css_class: true
+        title: false
+        sorts: false
+        empty: false
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            job: job
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_job_contract_type:
+          id: field_job_contract_type
+          table: search_api_index_location
+          field: field_job_contract_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_job_contract_type_op
+            label: Contract
+            description: ''
+            use_operator: false
+            operator: field_job_contract_type_op
+            identifier: contract
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_job_working_hours:
+          id: field_job_working_hours
+          table: search_api_index_location
+          field: field_job_working_hours
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_job_working_hours_op
+            label: Hours
+            description: ''
+            use_operator: false
+            operator: field_job_working_hours_op
+            identifier: hours
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_job_role_type:
+          id: field_job_role_type
+          table: search_api_index_location
+          field: field_job_role_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_job_role_type_op
+            label: 'Job Category'
+            description: ''
+            use_operator: false
+            operator: field_job_role_type_op
+            identifier: type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: job_type
+          hierarchy: false
+          error_message: true
+          plugin_id: search_api_term
+        field_job_closing_date:
+          id: field_job_closing_date
+          table: search_api_index_location
+          field: field_job_closing_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: today
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_date
+        location_1:
+          id: location_distance
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_distance_op
+            label: 'Location (distance)'
+            description: ''
+            use_operator: false
+            operator: location_distance_op
+            identifier: location_distance
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: true
+          group_info:
+            label: 'Distance from search location'
+            description: ''
+            identifier: location_distance
+            optional: false
+            widget: select
+            multiple: false
+            remember: false
+            default_group: '50'
+            default_group_multiple: {  }
+            group_items:
+              5:
+                title: '5 miles'
+                operator: '='
+                value:
+                  value: '5'
+                  min: ''
+                  max: ''
+              10:
+                title: '10 miles'
+                operator: '='
+                value:
+                  value: '10'
+                  min: ''
+                  max: ''
+              25:
+                title: '25 miles'
+                operator: '='
+                value:
+                  value: '25'
+                  min: ''
+                  max: ''
+              50:
+                title: '50 miles'
+                operator: '='
+                value:
+                  value: '50'
+                  min: ''
+                  max: ''
+              100:
+                title: '100 miles'
+                operator: '='
+                value:
+                  value: '100'
+                  min: ''
+                  max: ''
+          plugin_id: search_api_numeric
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      title: Jobs
+      sorts:
+        field_job_closing_date:
+          id: field_job_closing_date
+          table: search_api_index_location
+          field: field_job_closing_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<p>Sorry, there are no jobs which match your search criteria or filters.</p>'
+            format: rich_text
+          plugin_id: text
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - user.permissions
+      tags: {  }
+  reserves:
+    display_plugin: page
+    id: reserves
+    display_title: 'Nature Reserves'
+    position: 5
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'Nature Reserves'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        exposed_form: true
+        empty: false
+        sorts: false
+        pager: true
+      path: nature-reserves
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            reserve: reserve
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_reserve_baby_changing:
+          id: field_reserve_baby_changing
+          table: search_api_index_location
+          field: field_reserve_baby_changing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Baby changing facilities'
+            description: ''
+            use_operator: false
+            operator: field_reserve_baby_changing_op
+            identifier: baby_changing
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_bird_hides:
+          id: field_reserve_bird_hides
+          table: search_api_index_location
+          field: field_reserve_bird_hides
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Bird hides'
+            description: ''
+            use_operator: false
+            operator: field_reserve_bird_hides_op
+            identifier: bird_hides
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_cafe_refreshments:
+          id: field_reserve_cafe_refreshments
+          table: search_api_index_location
+          field: field_reserve_cafe_refreshments
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Cafe/refreshments
+            description: ''
+            use_operator: false
+            operator: field_reserve_cafe_refreshments_op
+            identifier: cafe
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_disabled_toilet:
+          id: field_reserve_disabled_toilet
+          table: search_api_index_location
+          field: field_reserve_disabled_toilet
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Disabled toilet'
+            description: ''
+            use_operator: false
+            operator: field_reserve_disabled_toilet_op
+            identifier: disabled_toilet
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_dogs:
+          id: field_reserve_dogs
+          table: search_api_index_location
+          field: field_reserve_dogs
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: not
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_reserve_dogs_op
+            label: Dogs
+            description: ''
+            use_operator: false
+            operator: field_reserve_dogs_op
+            identifier: dogs_not
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: Dogs
+            description: ''
+            identifier: dogs
+            optional: true
+            widget: radios
+            multiple: false
+            remember: false
+            default_group: '1'
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Dogs permitted'
+                operator: not
+                value:
+                  no_dogs_permitted: no_dogs_permitted
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_reserve_outdoor_play_area:
+          id: field_reserve_outdoor_play_area
+          table: search_api_index_location
+          field: field_reserve_outdoor_play_area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Outdoor play area'
+            description: ''
+            use_operator: false
+            operator: field_reserve_outdoor_play_area_op
+            identifier: outdoor_play_area
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_picnic_area:
+          id: field_reserve_picnic_area
+          table: search_api_index_location
+          field: field_reserve_picnic_area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Picnic area'
+            description: ''
+            use_operator: false
+            operator: field_reserve_picnic_area_op
+            identifier: picnic_area
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_shop:
+          id: field_reserve_shop
+          table: search_api_index_location
+          field: field_reserve_shop
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Shop
+            description: ''
+            use_operator: false
+            operator: field_reserve_shop_op
+            identifier: shop
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_toilets:
+          id: field_reserve_toilets
+          table: search_api_index_location
+          field: field_reserve_toilets
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Toilets
+            description: ''
+            use_operator: false
+            operator: field_reserve_toilets_op
+            identifier: toilets
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_visitor_centre:
+          id: field_reserve_visitor_centre
+          table: search_api_index_location
+          field: field_reserve_visitor_centre
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Visitor centre'
+            description: ''
+            use_operator: false
+            operator: field_reserve_visitor_centre_op
+            identifier: visitor_centre
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        location_1:
+          id: location_distance
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_distance_op
+            label: 'Location (distance)'
+            description: ''
+            use_operator: false
+            operator: location_distance_op
+            identifier: location_distance
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: true
+          group_info:
+            label: 'Distance from search location'
+            description: ''
+            identifier: location_distance
+            optional: false
+            widget: select
+            multiple: false
+            remember: false
+            default_group: '50'
+            default_group_multiple: {  }
+            group_items:
+              5:
+                title: '5 miles'
+                operator: '='
+                value:
+                  value: '5'
+                  min: ''
+                  max: ''
+              10:
+                title: '10 miles'
+                operator: '='
+                value:
+                  value: '10'
+                  min: ''
+                  max: ''
+              25:
+                title: '25 miles'
+                operator: '='
+                value:
+                  value: '25'
+                  min: ''
+                  max: ''
+              50:
+                title: '50 miles'
+                operator: '='
+                value:
+                  value: '50'
+                  min: ''
+                  max: ''
+              100:
+                title: '100 miles'
+                operator: '='
+                value:
+                  value: '100'
+                  min: ''
+                  max: ''
+          plugin_id: search_api_numeric
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<p>Sorry, there are no nature reserves which match your search criteria or filters.</p>'
+            format: rich_text
+          plugin_id: text
+      sorts:
+        title:
+          id: title
+          table: search_api_index_location
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
+      tags: {  }
+  reserves_map:
+    display_plugin: attachment
+    id: reserves_map
+    display_title: 'Nature Reserves Map'
+    position: 5
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'Nature Reserves'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        exposed_form: true
+        empty: false
+        sorts: false
+        style: false
+        row: false
+        fields: false
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            reserve: reserve
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_reserve_baby_changing:
+          id: field_reserve_baby_changing
+          table: search_api_index_location
+          field: field_reserve_baby_changing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Baby changing facilities'
+            description: ''
+            use_operator: false
+            operator: field_reserve_baby_changing_op
+            identifier: baby_changing
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_bird_hides:
+          id: field_reserve_bird_hides
+          table: search_api_index_location
+          field: field_reserve_bird_hides
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Bird hides'
+            description: ''
+            use_operator: false
+            operator: field_reserve_bird_hides_op
+            identifier: bird_hides
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_cafe_refreshments:
+          id: field_reserve_cafe_refreshments
+          table: search_api_index_location
+          field: field_reserve_cafe_refreshments
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Cafe/refreshments
+            description: ''
+            use_operator: false
+            operator: field_reserve_cafe_refreshments_op
+            identifier: cafe
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_disabled_toilet:
+          id: field_reserve_disabled_toilet
+          table: search_api_index_location
+          field: field_reserve_disabled_toilet
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Disabled toilet'
+            description: ''
+            use_operator: false
+            operator: field_reserve_disabled_toilet_op
+            identifier: disabled_toilet
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_dogs:
+          id: field_reserve_dogs
+          table: search_api_index_location
+          field: field_reserve_dogs
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: not
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_reserve_dogs_op
+            label: Dogs
+            description: ''
+            use_operator: false
+            operator: field_reserve_dogs_op
+            identifier: dogs_not
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: Dogs
+            description: ''
+            identifier: dogs
+            optional: true
+            widget: radios
+            multiple: false
+            remember: false
+            default_group: '1'
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Dogs permitted'
+                operator: not
+                value:
+                  no_dogs_permitted: no_dogs_permitted
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_reserve_outdoor_play_area:
+          id: field_reserve_outdoor_play_area
+          table: search_api_index_location
+          field: field_reserve_outdoor_play_area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Outdoor play area'
+            description: ''
+            use_operator: false
+            operator: field_reserve_outdoor_play_area_op
+            identifier: outdoor_play_area
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_picnic_area:
+          id: field_reserve_picnic_area
+          table: search_api_index_location
+          field: field_reserve_picnic_area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Picnic area'
+            description: ''
+            use_operator: false
+            operator: field_reserve_picnic_area_op
+            identifier: picnic_area
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_shop:
+          id: field_reserve_shop
+          table: search_api_index_location
+          field: field_reserve_shop
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Shop
+            description: ''
+            use_operator: false
+            operator: field_reserve_shop_op
+            identifier: shop
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_toilets:
+          id: field_reserve_toilets
+          table: search_api_index_location
+          field: field_reserve_toilets
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Toilets
+            description: ''
+            use_operator: false
+            operator: field_reserve_toilets_op
+            identifier: toilets
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_reserve_visitor_centre:
+          id: field_reserve_visitor_centre
+          table: search_api_index_location
+          field: field_reserve_visitor_centre
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Visitor centre'
+            description: ''
+            use_operator: false
+            operator: field_reserve_visitor_centre_op
+            identifier: visitor_centre
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        location_1:
+          id: location_distance
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_distance_op
+            label: 'Location (distance)'
+            description: ''
+            use_operator: false
+            operator: location_distance_op
+            identifier: location_distance
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: true
+          group_info:
+            label: 'Distance from search location'
+            description: ''
+            identifier: location_distance
+            optional: false
+            widget: select
+            multiple: false
+            remember: false
+            default_group: '50'
+            default_group_multiple: {  }
+            group_items:
+              5:
+                title: '5 miles'
+                operator: '='
+                value:
+                  value: '5'
+                  min: ''
+                  max: ''
+              10:
+                title: '10 miles'
+                operator: '='
+                value:
+                  value: '10'
+                  min: ''
+                  max: ''
+              25:
+                title: '25 miles'
+                operator: '='
+                value:
+                  value: '25'
+                  min: ''
+                  max: ''
+              50:
+                title: '50 miles'
+                operator: '='
+                value:
+                  value: '50'
+                  min: ''
+                  max: ''
+              100:
+                title: '100 miles'
+                operator: '='
+                value:
+                  value: '100'
+                  min: ''
+                  max: ''
+          plugin_id: search_api_numeric
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      empty: {  }
+      sorts:
+        title:
+          id: title
+          table: search_api_index_location
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+      displays:
+        reserves: reserves
+      inherit_exposed_filters: true
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: remote_search_api
+        options:
+          view_modes:
+            'entity:node':
+              event: default
+              job: default
+              reserve: gmap_point
+              trust: default
+              volunteer_opportunity: default
+      pager:
+        type: none
+        options:
+          offset: 0
+      inherit_arguments: false
+      fields:
+        field_reserve_lat_long:
+          id: field_reserve_lat_long
+          table: search_api_datasource_location_entity_node
+          field: field_reserve_lat_long
+          relationship: none
+          group_type: group
+          admin_label: 'Reserve Lon'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: geofield_latlon_single
+          settings:
+            output_format: decimal
+            single_value: lng
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            multi_separator: ','
+          entity_type: node
+          plugin_id: search_api_field
+        field_reserve_lat_long_1:
+          id: field_reserve_lat_long_1
+          table: search_api_datasource_location_entity_node
+          field: field_reserve_lat_long
+          relationship: none
+          group_type: group
+          admin_label: 'Reserve Lat'
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: geofield_latlon_single
+          settings:
+            output_format: decimal
+            single_value: lat
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+          entity_type: node
+          plugin_id: search_api_field
+        nid:
+          id: nid
+          table: search_api_datasource_location_entity_node
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: div
+          element_class: nid
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: false
+          fallback_handler: search_api_numeric
+          fallback_options:
+            set_precision: false
+            precision: 0
+            decimal: .
+            format_plural: false
+            format_plural_string: "1\x03@count"
+            prefix: ''
+            suffix: ''
+            link_to_item: false
+            multi_separator: ', '
+            format_plural_values:
+              - '1'
+              - '@count'
+          entity_type: node
+          plugin_id: search_api_field
+        type:
+          id: type
+          table: search_api_datasource_location_entity_node
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: div
+          element_class: content-type
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: false
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+            display_methods:
+              node_type:
+                display_method: id
+          entity_type: node
+          plugin_id: search_api_field
+        title:
+          id: title
+          table: search_api_datasource_location_entity_node
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            multi_separator: ', '
+          entity_type: node
+          plugin_id: search_api_field
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<span class="map-data__item" data-lat="{{ field_reserve_lat_long_1 }}" data-lng="{{ field_reserve_lat_long }}" data-type="{{ type }}" data-nid="{{ nid }}" data-title="{{ title }}" />'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: '0'
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: '0'
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_reserve_lat_long'
+  trusts:
+    display_plugin: page
+    id: trusts
+    display_title: Trusts
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: wildlife-trusts
+      display_description: ''
+      pager:
+        type: none
+        options:
+          offset: 0
+      defaults:
+        pager: false
+        filters: false
+        filter_groups: false
+        sorts: false
+        empty: false
+        title: false
+        header: false
+        css_class: false
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            trust: trust
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      sorts:
+        title:
+          id: title
+          table: search_api_index_location
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<p>Sorry, there are no trusts which match your search criteria.</p>'
+            format: rich_text
+          plugin_id: text
+      title: 'Wildlife Trusts'
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content: '<div class=''view-subtitle''>Your 5 nearest Wildlife Trusts</div>'
+          plugin_id: text_custom
+      css_class: has-subtitle
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user.permissions
+      tags: {  }
+  volunteering_opportunities:
+    display_plugin: page
+    id: volunteering_opportunities
+    display_title: 'Volunteering Opportunities'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      path: volunteering-opportunities
+      defaults:
+        filters: false
+        filter_groups: false
+        title: false
+        fields: false
+        empty: false
+        sorts: false
+      title: 'Volunteering Opportunities'
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<p>Sorry, there are no volunteering opportunities which match your search criteria or filters.</p>'
+            format: rich_text
+          plugin_id: text
+      sorts:
+        changed:
+          id: changed
+          table: search_api_index_location
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+      filters:
+        type:
+          id: type
+          table: search_api_index_location
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            volunteer_opportunity: volunteer_opportunity
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_voluntary_opportunity_type:
+          id: field_voluntary_opportunity_type
+          table: search_api_index_location
+          field: field_voluntary_opportunity_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_voluntary_opportunity_type_op
+            label: 'Opportunity type'
+            description: ''
+            use_operator: false
+            operator: field_voluntary_opportunity_type_op
+            identifier: type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: opportunity_type
+          hierarchy: false
+          error_message: true
+          plugin_id: search_api_term
+        location_1:
+          id: location_distance
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_distance_op
+            label: 'Location (distance)'
+            description: ''
+            use_operator: false
+            operator: location_distance_op
+            identifier: location_distance
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: true
+          group_info:
+            label: 'Distance from search location'
+            description: ''
+            identifier: location_distance
+            optional: false
+            widget: select
+            multiple: false
+            remember: false
+            default_group: '50'
+            default_group_multiple: {  }
+            group_items:
+              5:
+                title: '5 miles'
+                operator: '='
+                value:
+                  value: '5'
+                  min: ''
+                  max: ''
+              10:
+                title: '10 miles'
+                operator: '='
+                value:
+                  value: '10'
+                  min: ''
+                  max: ''
+              25:
+                title: '25 miles'
+                operator: '='
+                value:
+                  value: '25'
+                  min: ''
+                  max: ''
+              50:
+                title: '50 miles'
+                operator: '='
+                value:
+                  value: '50'
+                  min: ''
+                  max: ''
+              100:
+                title: '100 miles'
+                operator: '='
+                value:
+                  value: '100'
+                  min: ''
+                  max: ''
+          plugin_id: search_api_numeric
+        location:
+          id: location
+          table: search_api_index_location
+          field: location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: location_op
+            label: Location
+            description: ''
+            use_operator: false
+            operator: location_op
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              admin: '0'
+              editor: '0'
+              author: '0'
+              contributor: '0'
+              trust: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - user.permissions
+      tags: {  }

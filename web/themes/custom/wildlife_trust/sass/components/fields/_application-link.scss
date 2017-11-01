@@ -1,0 +1,18 @@
+.field--name-field-job-application-link,
+.field--name-field-voluntary-application-link {
+  text-align: center;
+
+  a {
+    @include button();
+
+    .node__header & {
+      @include spacing('medium', 'top');
+      @include button--secondary();
+      @include button--contrast();
+    }
+
+    .node__content & {
+      @include button--tertiary();
+    }
+  }
+}

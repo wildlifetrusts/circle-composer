@@ -1,0 +1,18 @@
+uuid: 480133e8-999e-4065-a0e2-d513596abf1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.environmental_designation
+id: taxonomy_term.environmental_designation.name
+field_name: name
+entity_type: taxonomy_term
+bundle: environmental_designation
+label: Name
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

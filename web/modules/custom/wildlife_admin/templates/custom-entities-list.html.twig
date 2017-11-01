@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Default theme implementation to list custom entity types.
+ *
+ * This list is displayed on the Custom Entities admin page.
+ *
+ * Available variables:
+ * - types: A list of entity types, each with the following properties:
+ *   - settings_link: Link to change the settings of this entity type.
+ *
+ * @see template_preprocess_custom_entities_list()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if content %}
+  <ul class="admin-list">
+    {% for type in types %}
+      <li class="clearfix">{{ type.settings_link }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}

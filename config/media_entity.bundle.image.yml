@@ -1,0 +1,20 @@
+uuid: cbd803a1-0366-49ce-9b2d-b90c49f4555a
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+    - media_entity_image
+third_party_settings:
+  crop:
+    image_field: field_media_image
+id: image
+label: Image
+description: 'Add an image media item.'
+type: image
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  source_field: field_media_image
+  gather_exif: false
+field_map: {  }

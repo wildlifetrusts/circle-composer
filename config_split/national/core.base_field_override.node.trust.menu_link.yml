@@ -1,0 +1,20 @@
+uuid: 9d933032-0c2b-491a-a5ad-51c82e9a6077
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trust
+id: node.trust.menu_link
+field_name: menu_link
+entity_type: node
+bundle: trust
+label: 'Menu link'
+description: 'Computed menu link for the node (only available during node saving).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

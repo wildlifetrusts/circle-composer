@@ -1,0 +1,18 @@
+uuid: 9ef6b10d-59fa-471b-a2c2-04599963f54e
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.document
+id: media.document.created
+field_name: created
+entity_type: media
+bundle: document
+label: Created
+description: 'The time that the media was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

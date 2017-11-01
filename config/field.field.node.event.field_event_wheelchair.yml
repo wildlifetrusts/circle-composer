@@ -1,0 +1,19 @@
+uuid: 00eafcaf-73a8-4cf2-8220-35b87e56bdf2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_wheelchair
+    - node.type.event
+id: node.event.field_event_wheelchair
+field_name: field_event_wheelchair
+entity_type: node
+bundle: event
+label: 'Wheelchair access'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

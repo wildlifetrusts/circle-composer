@@ -1,0 +1,19 @@
+uuid: 3ac84d95-3084-46dd-a56c-a6ef94a6f16b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_species_distribution
+    - node.type.species
+id: node.species.field_species_distribution
+field_name: field_species_distribution
+entity_type: node
+bundle: species
+label: Distribution
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

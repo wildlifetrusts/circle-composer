@@ -1,0 +1,26 @@
+uuid: 865cdac5-64e2-4672-bbb4-9583bdee65b8
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - wildlife_conditions
+  theme:
+    - wildlife_trust_admin
+id: admin_breadcrumbs
+theme: wildlife_trust_admin
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility:
+  node_allows_social_sharing:
+    id: node_allows_social_sharing
+    display_on_social_sharing_nodes: 0
+    negate: false
+    context_mapping: {  }

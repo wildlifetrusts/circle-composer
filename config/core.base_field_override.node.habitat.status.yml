@@ -1,0 +1,22 @@
+uuid: f83dce12-3acd-4e93-bd24-a074387da9bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.habitat
+id: node.habitat.status
+field_name: status
+entity_type: node
+bundle: habitat
+label: 'Publishing status'
+description: 'A boolean indicating the published state.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

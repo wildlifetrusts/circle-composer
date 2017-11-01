@@ -1,0 +1,61 @@
+.l-region--content > .views-element-container .view {
+  &:not(.has-subtitle) .view__content,
+  &:not(.has-subtitle) .view__empty,
+  &:not(.has-subtitle) .view__pre_empty,
+  .view__header {
+    @include spacing('large', 'top');
+    overflow: hidden;
+  }
+
+  .view__header .view-subtitle {
+    @extend .beta;
+    margin-bottom: emRhythm(6, ms(4));
+  }
+}
+
+.l-region--content > .views-element-container .view.view--location-search .views-columns .view__empty {
+  margin-top: 0;
+  @include spacing('small', 'bottom');
+}
+
+.view--location-search {
+  &:not(.view-display--trusts) .views-row {
+    @extend %keyline-separated-rows;
+  }
+
+  &.view-display--events,
+  &.view-display--reserves,
+  &.view-display--jobs,
+  &.view-display--volunteering_opportunities {
+    .view__content {
+      overflow: hidden;
+
+      .views-row {
+        @include add-breakpoint('lap-and-up') {
+          @include isolation-span(10, 2, 'both');
+        }
+      }
+    }
+  }
+
+  &.view-display--trusts {
+    @include add-breakpoint('palm-and-up') {
+      position: relative;
+
+      .view__header {
+        padding-right: 30%;
+      }
+
+      .view__filters {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+
+    .view__filters__wrapper {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}

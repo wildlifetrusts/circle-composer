@@ -1,0 +1,23 @@
+uuid: 270b9f66-e176-4480-b7cf-62496354526d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_video_position
+    - paragraphs.paragraphs_type.video
+  module:
+    - options
+id: paragraph.video.field_video_position
+field_name: field_video_position
+entity_type: paragraph
+bundle: video
+label: 'Video position'
+description: "Choose the side you wish the video to appear on.\r\nNote that the video will appear above the text on viewports too narrow to accommodate text and video side by side."
+required: true
+translatable: true
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,18 @@
+uuid: b4fd54e7-83e0-44be-bcf1-05e15c36d043
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trust
+id: node.trust.created
+field_name: created
+entity_type: node
+bundle: trust
+label: 'Authored on'
+description: 'The time that the node was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

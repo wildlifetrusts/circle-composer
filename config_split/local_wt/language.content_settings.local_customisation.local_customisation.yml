@@ -1,0 +1,15 @@
+uuid: 5ac579b9-5d50-47a6-a7f8-f14cf558b597
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_translation
+    - wildlife_local_customisation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: local_customisation.local_customisation
+target_entity_type_id: local_customisation
+target_bundle: local_customisation
+default_langcode: site_default
+language_alterable: true

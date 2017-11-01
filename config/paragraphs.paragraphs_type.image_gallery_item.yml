@@ -1,0 +1,9 @@
+uuid: a4102d90-a602-496e-b7f6-38a868dd9fc6
+langcode: en
+status: true
+dependencies: {  }
+id: image_gallery_item
+label: 'Image Gallery Item'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

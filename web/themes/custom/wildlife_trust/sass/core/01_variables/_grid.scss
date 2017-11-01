@@ -1,0 +1,51 @@
+////
+/// @group Grid
+////
+
+// Set consistent vertical and horizontal spacing units.
+$spacing-unit-vertical    : 20px;
+$spacing-unit-horizontal  : 24px;
+
+// Define breakpoints for use with the breakpoint mixin.
+
+/// A breakpoint for devices that fit in the palm, e.g. phones, small tablets.
+$palm:       480px;
+/// A breakpoint for devices that fit in the lap, e.g. tablets, small laptops.
+$lap:        768px;
+/// A breakpoint for devices that fit on a desktop, e.g. small/medium monitors.
+$desk:       1025px;
+/// A breakpoint for widescreen devices that would fit on a desktop.
+$desk-wide:  1200px;
+
+$breakpoints: (
+  'up-to-palm': 0 ($palm - 1),
+  'palm-and-up': $palm,
+  'palm-to-lap': $palm ($lap - 1),
+  'up-to-lap': 0 ($lap - 1),
+  'lap-and-up': $lap,
+  'palm-to-desk': $palm ($desk - 1),
+  'lap-to-desk': $lap ($desk - 1),
+  'up-to-desk': 0 ($desk - 1),
+  'desk-and-up': $desk,
+  'palm-to-desk-wide': $palm ($desk-wide - 1),
+  'lap-to-desk-wide': $lap ($desk-wide - 1),
+  'desk-to-desk-wide': $desk ($desk-wide - 1),
+  'up-to-desk-wide': 0 ($desk-wide - 1),
+  'desk-wide-and-up': $desk-wide,
+);
+
+$hdpi:      min-resolution 1.5dppx; // Min 1.5dppx for higher resolution displays.
+
+// Set up Singularity grid variables.
+@include add-grid(4);
+@include add-gutter(1/8);
+@include add-grid(12 at $lap);
+@include add-gutter(5/13 at $lap);
+
+/// For use when the site has a constrained region - sets the maximum width
+/// this region should be.
+$max-container-width: 60em;
+
+/// For use for large full-background style components, stops their width
+// extending to be over-large.
+$max-component-width: 1920px;

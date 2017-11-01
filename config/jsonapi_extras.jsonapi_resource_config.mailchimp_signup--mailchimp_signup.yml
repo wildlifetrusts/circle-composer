@@ -1,0 +1,45 @@
+uuid: 3660f8d5-238d-4841-b50e-cefa7dc49679
+langcode: en
+status: true
+dependencies: {  }
+id: mailchimp_signup--mailchimp_signup
+disabled: true
+path: mailchimp_signup/mailchimp_signup
+resourceType: mailchimp_signup--mailchimp_signup
+resourceFields:
+  id:
+    fieldName: id
+    publicName: id
+    enhancer:
+      id: ''
+    disabled: false
+  uuid:
+    fieldName: uuid
+    publicName: uuid
+    enhancer:
+      id: ''
+    disabled: false
+  revision:
+    fieldName: revision
+    publicName: revision
+    enhancer:
+      id: ''
+    disabled: false
+  bundle:
+    fieldName: bundle
+    publicName: bundle
+    enhancer:
+      id: ''
+    disabled: false
+  langcode:
+    fieldName: langcode
+    publicName: langcode
+    enhancer:
+      id: ''
+    disabled: false
+  default_langcode:
+    fieldName: default_langcode
+    publicName: default_langcode
+    enhancer:
+      id: ''
+    disabled: false

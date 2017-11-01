@@ -1,0 +1,19 @@
+uuid: 34c8781c-504e-4532-9916-f00d02fb8e93
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - telephone
+id: node.field_reserve_contact_number
+field_name: field_reserve_contact_number
+entity_type: node
+type: telephone
+settings: {  }
+module: telephone
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

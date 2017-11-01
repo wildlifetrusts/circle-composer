@@ -1,0 +1,18 @@
+.taxonomy-term--view-mode-teaser {
+  text-decoration: none;
+
+  .term__title {
+    @extend .gamma;
+    margin-top: emRhythm(1, ms(1));
+    margin-bottom: 0;
+  }
+
+  .media-image {
+    margin-bottom: emRhythm(2, ms(0));
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+}

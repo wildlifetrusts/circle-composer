@@ -1,0 +1,92 @@
+uuid: 604d1a4a-528b-45f5-9c66-d505851be088
+langcode: en
+status: true
+id: initial_locations
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: initial
+label: 'Import initial locations from JSON'
+source:
+  plugin: url
+  track_changes: false
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+  ids:
+    name:
+      type: string
+  item_selector: data/
+  fields:
+    -
+      name: name
+      label: 'Admin name'
+      selector: /name
+    -
+      name: created
+      label: Created
+      selector: /created
+    -
+      name: changed
+      label: Changed
+      selector: /changed
+    -
+      name: status
+      label: Status
+      selector: /status
+    -
+      name: default_langcode
+      label: 'Default Langcode'
+      selector: /default_langcode
+    -
+      name: field_location_name
+      label: Name
+      selector: /name
+    -
+      name: field_location_address
+      label: Address
+      selector: /field_location_address
+    -
+      name: field_location_county
+      label: Country
+      selector: /field_location_county
+    -
+      name: field_location_grid_ref
+      label: 'Grid ref'
+      selector: /field_location_grid_ref
+    -
+      name: field_location_postcode
+      label: Postcode
+      selector: /field_location_postcode
+    -
+      name: field_location_town
+      label: Town
+      selector: /field_location_town
+    -
+      name: field_location_lat_long_value
+      label: Value
+      selector: /field_location_lat_long_value
+    -
+      name: field_location_lat_long_type
+      label: Type
+      selector: /field_location_lat_long_type
+process:
+  type:
+    plugin: default_value
+    default_value: location
+  name: name
+  created: created
+  changed: changed
+  status: status
+  default_language: default_language
+  field_location_name: field_location_name
+  field_location_address: field_location_address
+  field_location_county: field_location_county
+  field_location_grid_ref: field_location_grid_ref
+  field_location_postcode: field_location_postcode
+  field_location_town: field_location_town
+  field_location_lat_long/value: field_location_lat_long_value
+  field_location_lat_long/type: field_location_lat_long_type
+destination:
+  plugin: 'entity:location'

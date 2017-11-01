@@ -1,0 +1,42 @@
+uuid: 95936860-5783-4415-9d88-1541c4df1c45
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.node_hero_default
+    - image.style.node_hero_desk
+    - image.style.node_hero_desk_wide
+    - image.style.node_hero_lap
+    - image.style.node_hero_palm
+  theme:
+    - wildlife_trust
+id: node_hero
+label: 'Node hero'
+image_style_mappings:
+  -
+    breakpoint_id: wildlife_trust.desk_wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: node_hero_desk_wide
+  -
+    breakpoint_id: wildlife_trust.desk
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: node_hero_desk
+  -
+    breakpoint_id: wildlife_trust.lap
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: node_hero_lap
+  -
+    breakpoint_id: wildlife_trust.palm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: node_hero_palm
+  -
+    breakpoint_id: wildlife_trust.default
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: node_hero_default
+breakpoint_group: wildlife_trust
+fallback_image_style: node_hero_default

@@ -1,0 +1,19 @@
+uuid: ba433dd0-8522-42a6-84f4-fbb9783ef603
+langcode: en
+status: true
+dependencies:
+  module:
+    - wildlife_author
+id: author.field_author_bio
+field_name: field_author_bio
+entity_type: author
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

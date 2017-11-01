@@ -1,0 +1,12 @@
+ul.entity-moderation-form {
+  @extend %clean-list;
+  margin-bottom: $spacing-unit-vertical;
+  padding: $spacing-unit-vertical $spacing-unit-horizontal;
+  background-color: palette(mono, x-light);
+  @include keyline(all);
+  align-items: flex-start;
+
+  li:last-child {
+    align-self: flex-end;
+  }
+}

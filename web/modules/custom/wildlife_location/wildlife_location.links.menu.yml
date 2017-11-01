@@ -1,0 +1,14 @@
+
+# Location menu items definition
+entity.location.collection:
+  title: 'Locations'
+  route_name: entity.location.collection
+  description: 'List Location entities'
+  parent: system.admin_content
+  weight: 100
+
+location.admin.structure.settings:
+  title: Location settings
+  description: 'Configure Location entities'
+  route_name: location.settings
+  parent: wildlife_admin.custom_entities.list

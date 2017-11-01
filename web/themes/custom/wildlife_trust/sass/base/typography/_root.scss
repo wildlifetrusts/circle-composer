@@ -1,0 +1,13 @@
+// Typography
+//
+// Styleguide 1.0.0
+body {
+  font-family: $base-font-family;
+  font-weight: $font-weight-light;
+  line-height: $base-line-height;
+  color: $base-font-color;
+}
+
+b, strong {
+  font-weight: $font-weight-regular;
+}

@@ -1,0 +1,22 @@
+uuid: 11adf680-6cd8-4ae5-99b7-82ef5b790fc3
+langcode: en
+status: false
+dependencies:
+  module:
+    - user
+  theme:
+    - jackdaw
+_core:
+  default_config_hash: 4QlSnWBcxxKMIFRM8sbu_MjSkcp3NjGgnVrc-lynQHI
+id: jackdaw_login
+theme: jackdaw
+region: header
+weight: -2
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'User login'
+  provider: user
+  label_display: visible
+visibility: {  }

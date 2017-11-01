@@ -1,0 +1,28 @@
+uuid: f8de5c3d-48a1-4fe6-acb5-67857e18b1c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reserve_env_designation
+    - node.type.reserve
+    - taxonomy.vocabulary.environmental_designation
+id: node.reserve.field_reserve_env_designation
+field_name: field_reserve_env_designation
+entity_type: node
+bundle: reserve
+label: 'Environmental designation'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      environmental_designation: environmental_designation
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

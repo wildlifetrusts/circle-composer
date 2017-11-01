@@ -1,0 +1,15 @@
+uuid: 6062088c-569d-4d85-a048-392299471313
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_8_col_lap
+label: 'Scaled 8 col lap'
+effects:
+  47dcd1a0-d0b0-4c50-8aaa-f1c4b920e1b8:
+    uuid: 47dcd1a0-d0b0-4c50-8aaa-f1c4b920e1b8
+    id: image_scale
+    weight: 1
+    data:
+      width: 651
+      height: null
+      upscale: false

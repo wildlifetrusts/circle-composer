@@ -1,0 +1,14 @@
+uuid: 8af7cadd-5ca2-4e5c-a443-ef9ff250382e
+langcode: en
+status: true
+dependencies: {  }
+name: grid_teaser
+label: 'Grid teaser'
+effects:
+  be899afb-0ea0-4f31-bd84-ce5ab374f5b7:
+    uuid: be899afb-0ea0-4f31-bd84-ce5ab374f5b7
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 330
+      height: 220

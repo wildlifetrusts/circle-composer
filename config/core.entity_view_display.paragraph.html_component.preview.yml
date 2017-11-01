@@ -1,0 +1,19 @@
+uuid: a3be3a08-e5bb-4a7b-b064-cc9e1f5b0c7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.html_component.field_html_component_extra_wide
+    - field.field.paragraph.html_component.field_html_component_hide_narrow
+    - field.field.paragraph.html_component.field_html_component_html
+    - paragraphs.paragraphs_type.html_component
+id: paragraph.html_component.preview
+targetEntityType: paragraph
+bundle: html_component
+mode: preview
+content: {  }
+hidden:
+  field_html_component_extra_wide: true
+  field_html_component_hide_narrow: true
+  field_html_component_html: true

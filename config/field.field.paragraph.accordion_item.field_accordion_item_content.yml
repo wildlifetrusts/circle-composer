@@ -1,0 +1,111 @@
+uuid: c9fb549c-319f-4930-a71f-0f13c70a25eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accordion_item_content
+    - paragraphs.paragraphs_type.accordion_item
+    - paragraphs.paragraphs_type.attached_files
+    - paragraphs.paragraphs_type.audio
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.quick_links
+    - paragraphs.paragraphs_type.rich_text
+    - paragraphs.paragraphs_type.testimonial
+    - paragraphs.paragraphs_type.video
+  module:
+    - entity_reference_revisions
+id: paragraph.accordion_item.field_accordion_item_content
+field_name: field_accordion_item_content
+entity_type: paragraph
+bundle: accordion_item
+label: 'Accordion Item Content'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      attached_files: attached_files
+      audio: audio
+      image: image
+      quick_links: quick_links
+      rich_text: rich_text
+      testimonial: testimonial
+      video: video
+    target_bundles_drag_drop:
+      accordion:
+        weight: -49
+        enabled: false
+      accordion_item:
+        weight: -48
+        enabled: false
+      attached_files:
+        enabled: true
+        weight: -47
+      audio:
+        enabled: true
+        weight: -46
+      featured_cards:
+        weight: -45
+        enabled: false
+      flickr_album:
+        weight: -44
+        enabled: false
+      headline_hero:
+        weight: -43
+        enabled: false
+      html_component:
+        weight: -42
+        enabled: false
+      image:
+        enabled: true
+        weight: -41
+      image_gallery:
+        weight: -40
+        enabled: false
+      image_gallery_item:
+        weight: -39
+        enabled: false
+      linked_logo_item:
+        weight: -38
+        enabled: false
+      linked_logos:
+        weight: -37
+        enabled: false
+      newsletter_sign_up:
+        weight: -36
+        enabled: false
+      quick_links:
+        enabled: true
+        weight: -35
+      rich_text:
+        enabled: true
+        weight: -34
+      section:
+        weight: -33
+        enabled: false
+      spotlight:
+        weight: -32
+        enabled: false
+      spotlight_group:
+        weight: -31
+        enabled: false
+      statistic_item:
+        weight: -30
+        enabled: false
+      statistics:
+        weight: -29
+        enabled: false
+      testimonial:
+        enabled: true
+        weight: -28
+      video:
+        enabled: true
+        weight: -27
+      webform:
+        weight: -26
+        enabled: false
+field_type: entity_reference_revisions

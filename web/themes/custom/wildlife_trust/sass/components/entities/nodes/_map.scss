@@ -1,0 +1,45 @@
+.node--view-mode-map {
+  @extend %clearfix;
+  width: 300px;
+  max-width: 100%;
+  font-family: $base-font-family;
+  font-weight: $font-weight-light;
+  @include setType(5, ms(-1));
+  margin-top: emRhythm(2, ms(-1));
+  margin-bottom: emRhythm(2, ms(-1));
+
+  .location-proximity {
+    @include setType(5, ms(-1));
+    margin-bottom: emRhythm(2, ms(-1));
+    color: palette(orange);
+  }
+
+  .node__title {
+    @include setType(5, ms(0));
+    font-family: $base-font-family;
+    font-weight: $font-weight-regular;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .node__content {
+    margin-bottom: emRhythm(2, ms(-1));
+  }
+
+  .node__image {
+    float: left;
+    margin-right: halve($spacing-unit-horizontal);
+
+    img {
+      display: block;
+    }
+  }
+
+  .field--name-field-event-reserve,
+  .field--name-field-event-location {
+    font-weight: $font-weight-regular;
+    margin-bottom: 0;
+  }
+}

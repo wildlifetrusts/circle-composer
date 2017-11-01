@@ -1,0 +1,62 @@
+uuid: 020ef821-99d3-4bc2-90b0-1ac0424dbba0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.habitat.field_further_content
+    - field.field.node.habitat.field_habitat_conservation
+    - field.field.node.habitat.field_habitat_distribution
+    - field.field.node.habitat.field_habitat_parent
+    - field.field.node.habitat.field_habitat_photos
+    - field.field.node.habitat.field_habitat_summary
+    - field.field.node.habitat.field_habitat_what_is_it
+    - field.field.node.habitat.field_habitat_what_to_look_for
+    - field.field.node.habitat.field_habitat_why
+    - field.field.node.habitat.field_meta_tags
+    - node.type.habitat
+  module:
+    - fences
+    - user
+    - wildlife_field_formatters
+id: node.habitat.teaser
+targetEntityType: node
+bundle: habitat
+mode: teaser
+content:
+  field_habitat_photos:
+    type: first_of_type_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: grid_teaser
+      type: any
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+hidden:
+  field_further_content: true
+  field_habitat_conservation: true
+  field_habitat_distribution: true
+  field_habitat_parent: true
+  field_habitat_summary: true
+  field_habitat_what_is_it: true
+  field_habitat_what_to_look_for: true
+  field_habitat_why: true
+  field_meta_tags: true
+  langcode: true
+  links: true
+  local_customisation_cta: true
+  local_customisation_in_our_area: true
+  local_customisation_spotlight: true
+  related_habitats: true
+  related_habitats_related_habitats: true
+  related_species_habitat_wildlife: true
+  workbench_moderation_control: true

@@ -1,0 +1,223 @@
+uuid: 9ea3403c-7375-4ef0-9b6f-5ead7d0a2e6b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.reserve.field_disqus_comments
+    - field.field.node.reserve.field_disqus_comments_title
+    - field.field.node.reserve.field_external_link
+    - field.field.node.reserve.field_further_content
+    - field.field.node.reserve.field_meta_tags
+    - field.field.node.reserve.field_reserve_about
+    - field.field.node.reserve.field_reserve_access
+    - field.field.node.reserve.field_reserve_address
+    - field.field.node.reserve.field_reserve_baby_changing
+    - field.field.node.reserve.field_reserve_best_time_to_visit
+    - field.field.node.reserve.field_reserve_bicycle_parking
+    - field.field.node.reserve.field_reserve_bird_hides
+    - field.field.node.reserve.field_reserve_boundary
+    - field.field.node.reserve.field_reserve_cafe_refreshments
+    - field.field.node.reserve.field_reserve_car_charging
+    - field.field.node.reserve.field_reserve_contact_email
+    - field.field.node.reserve.field_reserve_contact_name
+    - field.field.node.reserve.field_reserve_contact_number
+    - field.field.node.reserve.field_reserve_county
+    - field.field.node.reserve.field_reserve_deep_link
+    - field.field.node.reserve.field_reserve_disabled_toilet
+    - field.field.node.reserve.field_reserve_display_map
+    - field.field.node.reserve.field_reserve_dogs
+    - field.field.node.reserve.field_reserve_dogs_additional
+    - field.field.node.reserve.field_reserve_entry_fee
+    - field.field.node.reserve.field_reserve_env_designation
+    - field.field.node.reserve.field_reserve_facebook
+    - field.field.node.reserve.field_reserve_flickr
+    - field.field.node.reserve.field_reserve_grazing_animals
+    - field.field.node.reserve.field_reserve_great_for
+    - field.field.node.reserve.field_reserve_habitat
+    - field.field.node.reserve.field_reserve_lat_long
+    - field.field.node.reserve.field_reserve_map_layer
+    - field.field.node.reserve.field_reserve_map_ref
+    - field.field.node.reserve.field_reserve_map_zoom
+    - field.field.node.reserve.field_reserve_notice
+    - field.field.node.reserve.field_reserve_opening_times
+    - field.field.node.reserve.field_reserve_outdoor_play_area
+    - field.field.node.reserve.field_reserve_parking_info
+    - field.field.node.reserve.field_reserve_photos
+    - field.field.node.reserve.field_reserve_picnic_area
+    - field.field.node.reserve.field_reserve_postcode
+    - field.field.node.reserve.field_reserve_shop
+    - field.field.node.reserve.field_reserve_species
+    - field.field.node.reserve.field_reserve_summary
+    - field.field.node.reserve.field_reserve_toilets
+    - field.field.node.reserve.field_reserve_town
+    - field.field.node.reserve.field_reserve_twitter
+    - field.field.node.reserve.field_reserve_visitor_centre
+    - field.field.node.reserve.field_reserve_walking_trails
+    - field.field.node.reserve.field_reserve_wifi
+    - node.type.reserve
+  module:
+    - fences
+    - field_group
+    - link
+    - user
+    - wildlife_field_formatters
+third_party_settings:
+  field_group:
+    group_teaser_tags:
+      children:
+        - group_links_wrapper
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: reserve__tags
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Teaser tags'
+    group_links_wrapper:
+      children:
+        - field_reserve_great_for
+      parent_name: group_teaser_tags
+      weight: 20
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: ul
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Links wrapper'
+id: node.reserve.teaser
+targetEntityType: node
+bundle: reserve
+mode: teaser
+content:
+  field_external_link:
+    type: link
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      trim_length: null
+      target: _blank
+      url_only: false
+      url_plain: false
+      rel: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+  field_reserve_great_for:
+    type: entity_reference_label
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_reserve_photos:
+    type: first_of_type_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: grid_teaser
+      type: any
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_reserve_summary:
+    type: intelligent_text_trimmed
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: '200'
+      word_boundary: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+hidden:
+  field_disqus_comments: true
+  field_disqus_comments_title: true
+  field_further_content: true
+  field_meta_tags: true
+  field_reserve_about: true
+  field_reserve_access: true
+  field_reserve_address: true
+  field_reserve_baby_changing: true
+  field_reserve_best_time_to_visit: true
+  field_reserve_bicycle_parking: true
+  field_reserve_bird_hides: true
+  field_reserve_boundary: true
+  field_reserve_cafe_refreshments: true
+  field_reserve_car_charging: true
+  field_reserve_contact_email: true
+  field_reserve_contact_name: true
+  field_reserve_contact_number: true
+  field_reserve_county: true
+  field_reserve_deep_link: true
+  field_reserve_disabled_toilet: true
+  field_reserve_display_map: true
+  field_reserve_dogs: true
+  field_reserve_dogs_additional: true
+  field_reserve_entry_fee: true
+  field_reserve_env_designation: true
+  field_reserve_facebook: true
+  field_reserve_flickr: true
+  field_reserve_grazing_animals: true
+  field_reserve_habitat: true
+  field_reserve_lat_long: true
+  field_reserve_map_layer: true
+  field_reserve_map_ref: true
+  field_reserve_map_zoom: true
+  field_reserve_notice: true
+  field_reserve_opening_times: true
+  field_reserve_outdoor_play_area: true
+  field_reserve_parking_info: true
+  field_reserve_picnic_area: true
+  field_reserve_postcode: true
+  field_reserve_shop: true
+  field_reserve_species: true
+  field_reserve_toilets: true
+  field_reserve_town: true
+  field_reserve_twitter: true
+  field_reserve_visitor_centre: true
+  field_reserve_walking_trails: true
+  field_reserve_wifi: true
+  interactive_map: true
+  langcode: true
+  links: true
+  static_map: true
+  workbench_moderation_control: true

@@ -1,0 +1,16 @@
+uuid: 27632f67-8c16-4d15-84f3-4f108fb9b60a
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.linked_logo_item
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.linked_logo_item
+target_entity_type_id: paragraph
+target_bundle: linked_logo_item
+default_langcode: site_default
+language_alterable: true

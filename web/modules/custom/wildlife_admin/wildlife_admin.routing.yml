@@ -1,0 +1,16 @@
+wildlife_admin.custom_entities_page:
+  path: '/admin/structure/custom-entities'
+  defaults:
+    _title: 'Custom Entities'
+    _controller: '\Drupal\wildlife_admin\Controller\CustomEntitiesController::customEntitiesList'
+  requirements:
+    _permission: 'administer custom entity settings'
+wildlife_admin.spotlight_help_page:
+  path: '/admin/help/spotlights'
+  defaults:
+    _controller: '\Drupal\wildlife_admin\Controller\WildlifeAdminHelp::spotlights'
+    _title: 'Spotlight guidance'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: FALSE

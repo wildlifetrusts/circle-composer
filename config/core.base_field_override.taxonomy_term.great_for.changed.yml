@@ -1,0 +1,18 @@
+uuid: 9d23a627-440f-4fe6-a00b-192405b08ec5
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.great_for
+id: taxonomy_term.great_for.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: great_for
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

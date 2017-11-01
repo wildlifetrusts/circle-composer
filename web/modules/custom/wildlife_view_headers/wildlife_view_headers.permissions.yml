@@ -1,0 +1,33 @@
+add view header entities:
+  title: 'Create new View header entities'
+
+administer view header entities:
+  title: 'Administer View header entities'
+  description: 'Allow to access the administration form to configure View header entities.'
+  restrict access: true
+
+delete view header entities:
+  title: 'Delete View header entities'
+
+edit view header entities:
+  title: 'Edit View header entities'
+
+access view header overview:
+  title: 'Access the View header overview page'
+
+view published view header entities:
+  title: 'View published View header entities'
+
+view unpublished view header entities:
+  title: 'View unpublished View header entities'
+
+view all view header revisions:
+  title: 'View all View header revisions'
+
+revert all view header revisions:
+  title: 'Revert all View header revisions'
+  description: 'Role requires permission <em>view View header revisions</em> and <em>edit rights</em> for view header entities in question or <em>administer view header entities</em>.'
+
+delete all view header revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view View header revisions</em> and <em>delete rights</em> for view header entities in question or <em>administer view header entities</em>.'

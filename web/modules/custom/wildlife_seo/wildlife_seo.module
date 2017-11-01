@@ -1,0 +1,377 @@
+<?php
+
+/**
+ * @file
+ * Contains wildlife_seo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wildlife_seo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wildlife_seo module.
+    case 'help.page.wildlife_seo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Useful SEO related functions and processing') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function wildlife_seo_token_info() {
+  $type = [
+    'name' => t('Term views helper'),
+    'needs-data' => 'term',
+  ];
+
+  $token['views_name'] = [
+    'name' => t('Views safe name'),
+    'description' => t('The Taxonomy name set to lowercase and spaces converted to dashes.'),
+  ];
+
+  return [
+    'types' => ['term_views_helper' => $type],
+    'tokens' => ['term_views_helper' => $token],
+  ];
+}
+
+/**
+ * Implements hook_token_info_alter().
+ */
+function wildlife_seo_token_info_alter(&$data) {
+  $data['tokens']['term']['name']['type'] = 'term_views_helper';
+
+  // Add entity parents (from entity_hierarchy) tokens.
+  $data['tokens']['node']['parents'] = [
+    'name' => t('Entity Parents'),
+    'description' => t('An array of all the node\'s parents, starting with the root'),
+    'type' => 'array',
+  ];
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function wildlife_seo_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+
+  if ($type == 'term' && !empty($data['term'])) {
+    $term = $data['term'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'name:views_name':
+          $replacements[$original] = strtolower(str_replace(' ', '-', $term->getName()));
+          break;
+      }
+    }
+  }
+
+  if ($type == 'node' && !empty($data['node'])) {
+    $replacements += _wildlife_seo_hierarchy_parent_tokens($type, $tokens, $data, $options, $bubbleable_metadata);
+  }
+
+  return $replacements;
+}
+
+/**
+ * Helper function to add entity_hierarchy parents tokens.
+ *
+ * @see wildlife_seo_tokens().
+ */
+function _wildlife_seo_hierarchy_parent_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+  // Get the current langcode.
+  $language_manager = \Drupal::languageManager();
+  if (isset($options['langcode'])) {
+    $url_options['language'] = $language_manager->getLanguage($options['langcode']);
+    $langcode = $options['langcode'];
+  }
+  else {
+    $langcode = $language_manager->getCurrentLanguage()->getId();
+  }
+
+  $replacements = array();
+  if ($type == 'node' && !empty($data['node'])) {
+    $node = $data['node'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'parents':
+          if ($parents = wildlife_seo_entity_hierarchy_parents($node, $langcode)) {
+            $replacements[$original] = token_render_array($parents, $options);
+          }
+          break;
+      }
+    }
+
+    if ($parents_tokens = \Drupal::token()->findWithPrefix($tokens, 'parents')) {
+      if ($parents = wildlife_seo_entity_hierarchy_parents($node, $langcode)) {
+        $replacements += \Drupal::token()->generate('array', $parents_tokens, array('array' => $parents), $options, $bubbleable_metadata);
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
+ * @param \Drupal\node\Entity\Node $node
+ * @param $langcode
+ *
+ * @return array
+ */
+function wildlife_seo_entity_hierarchy_parents(\Drupal\node\Entity\Node $node, $langcode) {
+  /** @var \Drupal\entity_hierarchy\Storage\NestedSetNodeKeyFactory $set_factory */
+  $set_factory = Drupal::service('entity_hierarchy.nested_set_node_factory');
+  /** @var \Drupal\entity_hierarchy\Storage\NestedSetStorageFactory $storage_factory */
+  $storage_factory = \Drupal::service('entity_hierarchy.nested_set_storage_factory');
+  // Hardcode field name as this is Wildlife specific and finding the field
+  // in a generic way is difficult.
+  $field_name = 'field_habitat_parent';
+
+  // Get NestedSet Tree Storage to run operations on.
+  $stub = $set_factory->fromEntity($node);
+  $nested_prefix = Drupal::database()->tablePrefix();
+  $table_name = $storage_factory->getTableName($field_name, $node->getEntityTypeId(), FALSE);
+  $tree_storage = $storage_factory->fromTableName($nested_prefix . $table_name);
+
+  // Find and process ancestors into translated node titles.
+  if ($ancestors = $tree_storage->findAncestors($stub)) {
+    $ids = [];
+    /** @var \PNX\NestedSet\Node $ancestor **/
+    foreach ($ancestors as $ancestor) {
+      $id = $ancestor->getNodeKey()->getId();
+      // Don't include the current Drupal node.
+      if ($id != $node->id()) {
+        $ids[] = $id;
+      }
+    }
+
+    // Load the Drupal nodes and get translated titles.
+    $parents = \Drupal\node\Entity\Node::loadMultiple($ids);
+    $parent_string = [];
+    foreach ($parents as $id => $parent) {
+      $translation = \Drupal::service('entity.repository')->getTranslationFromContext($parent, $langcode);
+      $parent_string[$id] = $translation->getTitle();
+    }
+    return $parent_string;
+  }
+  return [];
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_seo_form_taxonomy_term_form_alter(&$form, &$form_state, $form_id) {
+  _wildlife_seo_remove_keyword_field($form);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function wildlife_seo_form_node_form_alter(&$form, &$form_state, $form_id) {
+  _wildlife_seo_remove_keyword_field($form);
+}
+
+/**
+ * Unset keywords since we don't use them anywhere.
+ *
+ * @param $form
+ *   The form object.
+ */
+function _wildlife_seo_remove_keyword_field(&$form) {
+  // Unset keywords since we don't use them anywhere.
+  if (isset($form['field_meta_tags'])) {
+    $widget = &$form['field_meta_tags']['widget'][0];
+    unset($widget['basic']['keywords']);
+  }
+}
+
+/**
+ * Implements hook_page_top().
+ */
+function wildlife_seo_page_top(array &$page) {
+  $google_tag_manager_id = _wildlife_seo_get_tag_manager_id();
+
+  if ($google_tag_manager_id) {
+    // Add the Google Tags iFrame.
+    $page['google_tags_iframe'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'iframe',
+      '#value' => '',
+      '#noscript' => TRUE,
+      '#attributes' => [
+        'src' => '//www.googletagmanager.com/ns.html?id=' . $google_tag_manager_id,
+        'height' => 0,
+        'width' => 0,
+        'style' => 'display:none;visibility:hidden',
+      ],
+      '#cache' => [
+        'tags' => [
+          'wildlife_seo_gtm',
+        ],
+        'contexts' => [
+          'user.roles',
+        ],
+      ],
+    ];
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function wildlife_seo_page_attachments_alter(&$attachments) {
+  $google_tag_manager_id = _wildlife_seo_get_tag_manager_id();
+
+  if ($google_tag_manager_id) {
+    $snippet = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','" . $google_tag_manager_id . "');";
+
+    $google_tag_manager_snippet = array(
+      '#type' => 'html_tag',
+      '#tag' => 'script',
+      '#value' => $snippet,
+      '#weight' => 1000,
+    );
+
+    $attachments['#attached']['html_head'][] = [
+      $google_tag_manager_snippet,
+      'google_tag_manager_snippet'
+    ];
+  }
+}
+
+/**
+ * Helper function to retrieve the Google Tag Manager ID from config.
+ */
+function _wildlife_seo_get_tag_manager_id() {
+  $google_tag_manager_id = FALSE;
+
+  $config = \Drupal::config('wildlife_seo.settings');
+  if ($config->get('gtm.id')) {
+    $google_tag_manager_id = $config->get('gtm.id');
+  }
+
+  return $google_tag_manager_id;
+}
+
+/**
+ * Implements hook_entity_insert().
+ * https://www.drupal.org/node/2689459
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function wildlife_seo_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
+  $is_multilingual = _wildlife_seo_check_for_multilingual_site();
+
+  if ($is_multilingual && $entity instanceof \Drupal\Core\Entity\FieldableEntityInterface && $entity->getFieldDefinition('path') && !$entity->getFieldDefinition('path')->isTranslatable()) {
+    $path = $entity->get('path')->first();
+    $source = '/' . $entity->toUrl()->getInternalPath(); //Source in $path will be null until the insert is complete.
+    if(isset($path)) {
+      $langcode = $entity->language()->getId();
+      $alias = \Drupal::service('path.alias_manager')->getAliasByPath($source, $langcode);
+      $path = $path->getValue();
+      if($alias !== $source) {
+        $alias_storage = \Drupal::service('path.alias_storage');
+        $language_manager = \Drupal::service('language_manager');
+        foreach ($language_manager->getLanguages() as $langcode => $language) {
+          if ($path['langcode'] != $langcode) {
+            if ($translation_path = $alias_storage->load([
+              'source' => $source,
+              'langcode' => $langcode
+            ])
+            ) {
+              $alias_storage->save($source, $alias, $langcode, $translation_path['pid']);
+            }
+            else {
+              $alias_storage->save($source, $alias, $langcode);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ * https://www.drupal.org/node/2689459
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function wildlife_seo_entity_update(\Drupal\Core\Entity\EntityInterface $entity) {
+  $is_multilingual = _wildlife_seo_check_for_multilingual_site();
+
+  if ($is_multilingual && $entity instanceof \Drupal\Core\Entity\FieldableEntityInterface && $entity->getFieldDefinition('path') && !$entity->getFieldDefinition('path')->isTranslatable()) {
+    $path = $entity->get('path')->first();
+    if(isset($path)) {
+      $path = $path->getValue();
+      if(isset($path) && !empty($path['alias'])) {
+        $alias = $path['alias'];
+      } else {
+        $alias = $entity->toUrl()->toString();
+      }
+    } else {
+      $alias = $entity->toUrl()->toString();
+    }
+    $source = '/' . $entity->toUrl()->getInternalPath();
+    $alias_storage = \Drupal::service('path.alias_storage');
+    $language_manager = \Drupal::service('language_manager');
+    foreach ($language_manager->getLanguages() as $langcode => $language) {
+      if ($translation_path = $alias_storage->load([
+        'source' => $source,
+        'langcode' => $langcode
+      ])
+      ) {
+        $alias_storage->save($source, $alias, $langcode, $translation_path['pid']);
+      }
+      else {
+        $alias_storage->save($source, $alias, $langcode);
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements hook_entity_delete().
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function wildlife_seo_entity_delete(\Drupal\Core\Entity\EntityInterface $entity) {
+  $is_multilingual = _wildlife_seo_check_for_multilingual_site();
+
+  if ($is_multilingual && $entity instanceof \Drupal\Core\Entity\FieldableEntityInterface && $entity->getFieldDefinition('path') && !$entity->getFieldDefinition('path')->isTranslatable()) {
+    $alias_storage = \Drupal::service('path.alias_storage');
+    $language_manager = \Drupal::service('language_manager');
+    $source = '/' . $entity->toUrl()->getInternalPath();
+    foreach ($language_manager->getLanguages() as $langcode => $language) {
+      if ($translation_path = $alias_storage->load(['source' => $source, 'langcode' => $langcode])) {
+        $alias_storage->delete(['source' => $source, 'langcode' => $langcode]);
+      }
+    }
+  }
+}
+
+/**
+ * Check to see if the site is using the Welsh site config split.
+ *
+ * @return bool
+ */
+function _wildlife_seo_check_for_multilingual_site() {
+  $active_filters = \Drupal::service('plugin.manager.config_filter')->getDefinitions();
+  $active_filters = array_filter($active_filters, function ($filter) {
+    return $filter['status'];
+  });
+
+  return isset($active_filters['config_split:local_welsh_site_split']);
+}

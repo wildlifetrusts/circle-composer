@@ -1,0 +1,141 @@
+.block--views-exposed-filter-blocksearch-global {
+  .js & {
+    @include add-breakpoint('up-to-desk') {
+      @include element-invisible;
+    }
+  }
+
+  .js .is--menu-open & {
+    @include add-breakpoint('up-to-desk') {
+      @include element-visible;
+    }
+  }
+
+  @include add-breakpoint('up-to-desk') {
+    @include keyline();
+  }
+
+  @include add-breakpoint('desk-and-up') {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include keyline();
+  }
+
+  .form {
+    position: relative;
+    @extend %clearfix;
+  }
+
+  label {
+    @extend %element-invisible;
+  }
+
+  .form__item.form__item--search {
+    @include add-breakpoint('desk-and-up') {
+      float: right;
+      max-width: 495px;
+      @include keyline('left');
+    }
+  }
+
+  .form__item.form__item--search,
+  .form-actions {
+    margin-bottom: 0;
+  }
+
+  input[name="search"] {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background-color: palette(mono, light);
+    border: 0;
+    height: 60px;
+    padding-left: 1.625em;
+    padding-right: calc(1.625em + 70px);
+  }
+
+  .form-submit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    font-size: 0;
+    background-color: palette(mono, light);
+    background-size: 22px auto;
+    background-position: 50% 50%;
+    width: 70px;
+    height: 60px;
+    border: 0;
+
+    &:hover,
+    &:focus {
+      background-color: palette(mono, mid-light);
+      box-shadow: none;
+    }
+  }
+}
+
+.search-toggle {
+  position: relative;
+  display: none;
+  float: right;
+  background-color: palette(mono, x-dark);
+  background-size: 18px 18px;
+  background-position: 50% 50%;
+  border: none;
+  outline: none;
+  border-radius: 0;
+  height: 45px;
+  width: 45px;
+  padding: 0;
+  @include keyline('left', palette(mono, dark));
+
+  @include add-breakpoint('desk-and-up') {
+    display: block;
+  }
+
+  &:not(.is--search-active) {
+    &:hover,
+    &:focus {
+      background-color: palette(mono, dark);
+    }
+  }
+
+  &__text {
+    @extend %text-invisible;
+  }
+
+  &.is--search-active {
+    background-color: palette(mono, x-light);
+
+    .search-toggle__icon {
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      top: calc(50% - 9px);
+      left: calc(50% - 9px);
+
+      &__line {
+        width: 100%;
+        height: 3px;
+        left: 0;
+        position: absolute;
+        background-color: palette(mono, x-dark);
+
+        &--top {
+          margin-top: -1px;
+          top: 50%;
+          transform: rotate(45deg);
+        }
+
+        &--bottom {
+          margin-top: -1px;
+          top: 50%;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+}

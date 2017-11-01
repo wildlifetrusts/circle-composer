@@ -1,0 +1,25 @@
+uuid: 83a9a3bc-f57d-429b-a720-b6269d7a945c
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - wildlife_trust
+_core:
+  default_config_hash: fRKXNB91UxDvEMkzCR8ZBsawfC6Fqbme2gtobei3gu4
+id: wildlife_trust_branding
+theme: wildlife_trust
+region: branding
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

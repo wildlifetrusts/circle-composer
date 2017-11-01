@@ -1,0 +1,158 @@
+uuid: 3fd7a525-bc17-4624-b436-d6f54fa1cba0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.news.field_disqus_comments
+    - field.field.node.news.field_disqus_comments_title
+    - field.field.node.news.field_further_content
+    - field.field.node.news.field_header_image
+    - field.field.node.news.field_header_silhouette
+    - field.field.node.news.field_header_type
+    - field.field.node.news.field_meta_tags
+    - field.field.node.news.field_news_category
+    - field.field.node.news.field_news_display_pub_date
+    - field.field.node.news.field_news_publication_date
+    - field.field.node.news.field_news_summary
+    - field.field.node.news.field_representative_image
+    - field.field.node.news.field_tags
+    - node.type.news
+  module:
+    - datetime
+    - fences
+    - field_group
+    - user
+    - wildlife_field_formatters
+third_party_settings:
+  field_group:
+    group_tags:
+      children:
+        - group_links_wrapper
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        label: Tags
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: news__tags
+      label: Tags
+    group_links_wrapper:
+      children:
+        - field_news_category
+        - field_tags
+      parent_name: group_tags
+      weight: 20
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: ul
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Links wrapper'
+id: node.news.teaser
+targetEntityType: node
+bundle: news
+mode: teaser
+content:
+  field_news_category:
+    type: entity_reference_label
+    weight: 21
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_news_publication_date:
+    type: datetime_default
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: display_long_date
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_news_summary:
+    type: intelligent_text_trimmed
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: '200'
+      word_boundary: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_representative_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: grid_teaser
+      link: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: none
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+  field_tags:
+    type: entity_reference_label
+    weight: 22
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: li
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+hidden:
+  field_disqus_comments: true
+  field_disqus_comments_title: true
+  field_further_content: true
+  field_header_image: true
+  field_header_silhouette: true
+  field_header_type: true
+  field_meta_tags: true
+  field_news_display_pub_date: true
+  langcode: true
+  links: true
+  related_news_and_blogs_related_news: true
+  workbench_moderation_control: true

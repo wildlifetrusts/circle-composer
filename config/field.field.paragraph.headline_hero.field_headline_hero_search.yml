@@ -1,0 +1,21 @@
+uuid: 21df198b-2d98-452f-a2b2-556e068d6099
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_headline_hero_search
+    - paragraphs.paragraphs_type.headline_hero
+  module:
+    - options
+id: paragraph.headline_hero.field_headline_hero_search
+field_name: field_headline_hero_search
+entity_type: paragraph
+bundle: headline_hero
+label: Search
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

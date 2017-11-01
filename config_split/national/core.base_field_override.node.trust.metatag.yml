@@ -1,0 +1,18 @@
+uuid: 37ba0e6e-3f5f-4fc8-92e2-77a5fcf11e43
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trust
+id: node.trust.metatag
+field_name: metatag
+entity_type: node
+bundle: trust
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

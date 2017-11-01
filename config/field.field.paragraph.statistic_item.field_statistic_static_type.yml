@@ -1,0 +1,21 @@
+uuid: ba2274ce-a82d-4b44-9459-c67089ae3e57
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_statistic_static_type
+    - paragraphs.paragraphs_type.statistic_item
+  module:
+    - options
+id: paragraph.statistic_item.field_statistic_static_type
+field_name: field_statistic_static_type
+entity_type: paragraph
+bundle: statistic_item
+label: Type
+description: 'This will determine the icon used and the text displayed (unless the text is overridden below).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
