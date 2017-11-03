@@ -151,20 +151,20 @@
     "patches": {
       "drupal/core": {
         "Number widget validation can break AJAX actions": "https://www.drupal.org/files/issues/2614250-36.patch",
-        "Temporary patch to remove config_installer caused warnings. https://www.drupal.org/node/2670282 suggests watching https://www.drupal.org/node/2156401.": "./www/patches/core-config-install-warning.patch",
+        "Temporary patch to remove config_installer caused warnings. https://www.drupal.org/node/2670282 suggests watching https://www.drupal.org/node/2156401.": "./web/patches/core-config-install-warning.patch",
         "Incorrect field name is used in views integration for multi-value base fields": "https://www.drupal.org/files/issues/2846614-112.patch",
-        "Make $term->parent behave like any other entity reference field. Altered patch from https://www.drupal.org/node/2543726": "./www/patches/drupal-term_parent_entity_reference-2543726-130-no-tests.patch",
+        "Make $term->parent behave like any other entity reference field. Altered patch from https://www.drupal.org/node/2543726": "./web/patches/drupal-term_parent_entity_reference-2543726-130-no-tests.patch",
         "Node revision routes don't convert {node} param": "https://www.drupal.org/files/issues/2730631-13.patch",
         "Migrate support for deleting items no longer in the incoming data": "https://www.drupal.org/files/issues/migrate-support-for-deletion-of-missing-items-2809433-29.patch",
         "mkdir throws a warning when creating a twig cache file": "https://www.drupal.org/files/issues/warning_mkdir_file-2685957-46.patch",
         "Programmatically created translatable entity does not get translation fields added to DB": "https://www.drupal.org/files/issues/2599228-31.patch",
         "Title for details form elements is not set as #markup and it will be escaped": "https://www.drupal.org/files/issues/title_for_details_form-2652850-30.patch",
         "Form items inside multiple value tables not scaling correctly": "https://www.drupal.org/files/issues/seven-field-scaling-inside-multiple-tables-2808705-2.patch",
-        "Clearing cache via UI in translated language resets config translation of field labels to default language. This is a local patch because it has been committed to 8.4 but differently to the most recent patch.": "./www/patches/core-2650434-committed-cache-languages.patch",
+        "Clearing cache via UI in translated language resets config translation of field labels to default language. This is a local patch because it has been committed to 8.4 but differently to the most recent patch.": "./web/patches/core-2650434-committed-cache-languages.patch",
         "Fix regression in the link widget where help text does not show": "https://www.drupal.org/files/issues/2421001-97.patch",
-        "Prevent undefined index warning when singular translation is provided but plural is not.": "./www/patches/translate-plural-warning.patch",
+        "Prevent undefined index warning when singular translation is provided but plural is not.": "./web/patches/translate-plural-warning.patch",
         "dropbutton with a single option missing its rounded corners": "https://www.drupal.org/files/issues/single-dropbutton-rouded-mobile-2700521-12.patch",
-        "Prevent download of Welsh .po file during installation. This is to avoid translating any parts of the admin UI unintentionally.": "./www/patches/core-prevent-translation-download-install.patch",
+        "Prevent download of Welsh .po file during installation. This is to avoid translating any parts of the admin UI unintentionally.": "./web/patches/core-prevent-translation-download-install.patch",
         "Telephone Link field formatter breaks Drupal with 5 digits or less in the number": "https://www.drupal.org/files/issues/2484693-54.patch",
         "[PP-1] Error 'Column langcode in field list is ambiguous' thrown due to TranslationLanguageRenderer not rendering a field from a relationship": "https://www.drupal.org/files/issues/2446681-22.patch"
       },
@@ -211,7 +211,7 @@
         "Entity reference value gets removed when using preview and not saving IEF": "https://www.drupal.org/files/issues/2500993-8.patch"
       },
       "drupal/migrate_plus": {
-        "Support paging through multiple requests": "./www/patches/migrate_plus-support_paging-2640516-16-reroll.patch"
+        "Support paging through multiple requests": "./web/patches/migrate_plus-support_paging-2640516-16-reroll.patch"
       }
     },
     "build-env": {
